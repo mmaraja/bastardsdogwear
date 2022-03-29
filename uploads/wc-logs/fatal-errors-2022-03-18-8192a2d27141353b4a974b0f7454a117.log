@@ -1,0 +1,39 @@
+2022-03-18T13:48:58+00:00 CRITICAL Uncaught Error: Call to a member function get_type() on string in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:165
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 165
+
+2022-03-18T14:19:17+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 275
+
+2022-03-18T14:19:33+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 277
+
+2022-03-18T14:20:13+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 277
+
+2022-03-18T14:20:19+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 277
+
+2022-03-18T14:59:03+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function get_selected_variation_stock(), 0 passed in C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php on line 305 and exactly 1 expected in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:123
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(305): get_selected_variation_stock()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(331): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(474): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\single-product\add-to-cart\variation-add-to-cart-button.php(15): do_action('woocommerce_bef...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-template-functions.php(3042): wc_get_t in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 123
+
+2022-03-18T14:59:38+00:00 CRITICAL Uncaught ArgumentCountError: Too few arguments to function get_selected_variation_stock(), 0 passed in C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php on line 305 and exactly 2 expected in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:123
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(305): get_selected_variation_stock()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(331): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(474): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\single-product\add-to-cart\variation-add-to-cart-button.php(15): do_action('woocommerce_bef...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-template-functions.php(3042): wc_get_t in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 123
+
+2022-03-18T19:10:58+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 301
+

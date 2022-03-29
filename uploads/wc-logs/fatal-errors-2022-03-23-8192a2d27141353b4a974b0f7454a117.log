@@ -1,0 +1,33 @@
+2022-03-23T09:10:36+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:51
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 51
+
+2022-03-23T09:12:44+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:51
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 51
+
+2022-03-23T09:14:29+00:00 CRITICAL Uncaught Error: Call to a member function get_variation_id() on null in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:46
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 46
+
