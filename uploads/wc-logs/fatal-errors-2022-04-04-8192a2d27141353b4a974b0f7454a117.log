@@ -1,0 +1,29 @@
+2022-04-04T12:17:20+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Simple::get_available_variations() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:49
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 49
+
+2022-04-04T12:43:43+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:496
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(307): my_product_block('<li class="wc-b...', Object(stdClass), NULL)
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(189): WP_Hook->apply_filters('<li class="wc-b...', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\packages\woocommerce-blocks\src\BlockTypes\AbstractProductGrid.php(497): apply_filters('woocommerce_blo...', '<li class="wc-b...', Object(stdClass), Object(WC_Product_Variable))
+#3 [internal function]: Automattic\WooCommerce\Blocks\BlockTypes\AbstractProductGrid->render_product(Object(WC_Product_Variable))
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\packages\woocommerce-blocks\src\BlockTypes\AbstractProductGrid.php(121): array_map(Array, Array)
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\packages\w in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 496
+
+2022-04-04T13:18:53+00:00 CRITICAL Uncaught Error: Call to a member function get_cart() on null in C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\includes\class-xoo-wsc-cart.php:181
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\templates\side-cart-woocommerce\xoo-wsc-container.php(28): Xoo_Wsc_Cart->get_cart_count()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\includes\xoo-framework\class-xoo-helper.php(57): include('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\templates\xoo-wsc-markup.php(24): Xoo_Helper->get_template('xoo-wsc-contain...')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\includes\xoo-framework\class-xoo-helper.php(57): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\includes\class-xoo-wsc-frontend.php(109): Xoo_Helper->get_template('xoo-wsc-markup....')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-includ in C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\side-cart-woocommerce\includes\class-xoo-wsc-cart.php on line 181
+

@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" integrity="sha512-+4zCK9k+qNFUR5X+cKL9EIR+ZOhtIloNl9GIKS57V1MyNsYpYcUrUeQc9vNfzsWfV28IaLL3i96P9sdNyeRssA==" crossorigin="anonymous" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
+      
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.5.1/js/swiper.min.js"></script>
 	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 
     <?php wp_head(); ?>
@@ -22,7 +22,7 @@
 </head>
 
 <body <?php body_class(); ?> >
-<header class="d-flex flex-wrap align-items-center border-bottom border-dark position-fixed bg-white justify-content-between justify-content-lg-start w-100">
+<header class="d-flex flex-wrap align-items-center border-bottom border-dark position-fixed bg-white justify-content-between justify-content-lg-start w-100 top-0">
     <div class="col-4 col-sm-4 col-md-4 col-xl-3">
         <div class="logo-wrapper">
         <a href="<?php echo esc_url( home_url( '/' )); ?>" class="navbar-brand ms-2 ms-md-4 ms-lg-5">
@@ -30,7 +30,7 @@
         </a>
         </div>
     </div>
-    <div class="col-lg-5 col-xl-6 screen-menu">
+    <div class="ps-6 col-lg-5 col-xl-6 screen-menu">
         <?php wp_nav_menu(
             array(
                 'theme_location' => 'primary-menu',

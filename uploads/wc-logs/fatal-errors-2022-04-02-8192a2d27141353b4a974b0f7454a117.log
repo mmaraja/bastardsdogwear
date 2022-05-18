@@ -1,0 +1,30 @@
+2022-04-02T14:04:09+00:00 CRITICAL Uncaught Error: Call to undefined function get_cart_subtotal() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:426
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(307): cart_items_data('')
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(331): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(474): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\checkout\form-checkout.php(50): do_action('woocommerce_che...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(293): wc_get_template('checkout/form-c...', Array)
+#6 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(67): WC_Sh in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 426
+
+2022-04-02T14:14:45+00:00 CRITICAL Uncaught Error: Call to a member function get_price() on null in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:426
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(307): cart_items_data('')
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(331): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(474): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\checkout\form-checkout.php(50): do_action('woocommerce_che...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(293): wc_get_template('checkout/form-c...', Array)
+#6 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(67): WC_Sho in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 426
+
+2022-04-02T14:29:10+00:00 CRITICAL Uncaught Error: Call to a member function get_attributes() on null in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:424
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(307): cart_items_data('')
+#1 C:\xampp\htdocs\bastardsdogwear\wp-includes\class-wp-hook.php(331): WP_Hook->apply_filters('', Array)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-includes\plugin.php(474): WP_Hook->do_action(Array)
+#3 C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\checkout\form-checkout.php(50): do_action('woocommerce_che...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(345): include('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(293): wc_get_template('checkout/form-c...', Array)
+#6 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\shortcodes\class-wc-shortcode-checkout.php(67): W in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 424
+

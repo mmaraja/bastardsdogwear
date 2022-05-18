@@ -34,7 +34,7 @@ if ( post_password_required() ) {
 ?>
 <div class="container-fluid" id="product-<?php the_ID(); ?>" <?php wc_product_class( '', $product ); ?>>
 <div class="row">
-	<div class="col-sm-12 col-md-8 col-lg-8 p-0">
+	<div class="col-12 col-sm-12 col-md-6 col-lg-8 p-0">
 		<?php
 		/**
 		 * Hook: woocommerce_before_single_product_summary.
@@ -43,41 +43,67 @@ if ( post_password_required() ) {
 		 * @hooked woocommerce_show_product_images - 20
 		 */
 		
-		$attachment_ids = $product->get_gallery_image_ids();
+		if ( $product->is_type('variable') ) {
+			$image = wp_get_attachment_image_src( get_post_thumbnail_id( $attachment_id ), 'full' ); 
+			$variations = $product->get_available_variations();
 
-		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $attachment_id ), 'full' ); 
-		$variations = $product->get_available_variations();
 			$images_array = '{';
 			foreach ($variations as $key=>$vari) {
 				$vid = $vari['variation_id'];
 				$imgs = $vari['variation_gallery_images'];
 				$urls = array();
-				foreach ($imgs as $img) {
-					array_push($urls, $img['url']);
+				if($imgs) {
+					foreach ($imgs as $img) {
+						array_push($urls, $img['url']);
+					}
+					$images_array = $images_array . $vid . ':' . json_encode($urls) . ',';
+				} elseif( !$imgs) {
+					$attachment_ids  = $product->get_gallery_image_ids();
+					$prod_id        = $product->get_id();
+					foreach ( $attachment_ids as $attachment_id ) {
+						array_push($urls, $attachment_id['url']);
+					}
+					$images_array = $images_array . $prod_id . ':' . json_encode($urls) . ',';
 				}
-				$images_array = $images_array . $vid . ':' . json_encode($urls) . ',';
+				//$images_array = $images_array . $vid . ':' . json_encode($urls) . ',';
 
 			}
 			$images_array = $images_array . '};';
-		
+		} elseif($product->is_type('simple')) {
+			$images_array = '{';
+			$attachment_ids  = $product->get_gallery_image_ids();
+			$image_urls      = array();
+			$prod_id        = $product->get_id();
+			$image_id        = $product->get_image_id();
+			if ( $image_id ) {
+				$image_url = wp_get_attachment_image_url( $image_id, 'full' );
+			
+				$image_urls[ 0 ] = $image_url;
+			}
+			
+			foreach ( $attachment_ids as $attachment_id ) {
+				$image_urls[] = wp_get_attachment_url( $attachment_id );
+			}
+			$images_array = $images_array . $prod_id . ':' . json_encode($image_urls) . ',';
+			$images_array = $images_array . '};';
+
+		}
 		?>
 
 		<script>
+
 			<?php 
 				echo "var images_array = " . $images_array . "\n";
 			?>
+
 		</script>
-		<div id="gallery-wrapper">
-		</div>
-<script>
-	var swiperGallery;
-</script>
-					
-
-
-		
+		<div id="gallery-wrapper"></div>
+	
+		<script>
+			var swiperGallery;
+		</script>	
 	</div>
-	<div class=" col-lg-4 col-md-4 mt-4 mt-md-0 d-flex align-items-end">
+	<div class="col-12 col-sm-12 col-md-6 col-lg-4 mt-4 mt-md-0 d-flex align-items-end">
 		<div class="summary entry-summary product-sum" >
 			<?php
 			/**
@@ -93,18 +119,42 @@ if ( post_password_required() ) {
 			 * @hooked WC_Structured_Data::generate_product_data() - 60
 			 */
 				   				  
-					do_action( 'woocommerce_single_product_summary' );
-					
-
-					?> 
-				
-						
+			do_action( 'woocommerce_single_product_summary' ); ?> 		
 		</div>
 	</div>
 </div>
 </div>
-
-				
+<div class="container-lg after-summary">
+	<div class="row">
+		<p class="product-basic-description d-flex align-items-center">
+			<?php 
+			$product_description = $product->get_short_description();
+			echo $product_description;
+			?>
+			
+		</p>
+	</div>
+	<div class="row align-items-end additional-description">
+	</div>
+	<?php
+	/**
+	 * Hook: woocommerce_after_single_product_summary.
+	 *
+	 * @hooked woocommerce_output_product_data_tabs - 10
+	 * @hooked woocommerce_upsell_display - 15
+	 * @hooked woocommerce_output_related_products - 20
+	 */
+	do_action( 'woocommerce_after_single_product_summary' );
+	?>
+	<div class="in-detail">
+		<?php 
+		$in_detail = get_field( "in-detail" );
+		if( $in_detail ) {
+			echo $in_detail;
+		} else {
+			echo '';
+		}
+		?>
 	</div>
 </div>
 

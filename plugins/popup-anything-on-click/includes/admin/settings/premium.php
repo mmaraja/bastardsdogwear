@@ -102,7 +102,7 @@ if ( !defined( 'ABSPATH' ) ) {
 							</th>
 							<th>
 								<h2 class="wpos-epb">Premium</h2>
-								<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO" target="_blank">Buy Now</a>
+								<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO#wpos-epb" target="_blank">Buy Now</a>
 							</th>	    		
 						</tr>
 					</thead>
@@ -112,7 +112,7 @@ if ( !defined( 'ABSPATH' ) ) {
 							<th></th>
 							<td></td>
 							<td>
-							<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO" target="_blank">Buy Now</a></td>
+							<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO#wpos-epb" target="_blank">Buy Now</a></td>
 						</tr>
 					</tfoot>
 					<tbody>

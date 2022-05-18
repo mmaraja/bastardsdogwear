@@ -24,14 +24,10 @@ extract( Xoo_Wsc_Template_Args::cart_container() );
 <div class="xoo-wsc-container">
 
 	<div class="xoo-wsc-basket">
-
-	
-			
-			
-			<?php
-			if(xoo_wsc_cart()->get_cart_count() > 0) { ?>
-				<span class="xoo-wsc-items-count"><?php echo xoo_wsc_cart()->get_cart_count() ?></span>
-				<?php } ?>
+		<?php
+		if(xoo_wsc_cart()->get_cart_count() > 0) { ?>
+			<span class="xoo-wsc-items-count"><?php echo xoo_wsc_cart()->get_cart_count() ?></span>
+		<?php } ?>
 
 		<img  src="<?php echo get_template_directory_uri(); ?>/assets/cart-icon.png" alt="" />
 

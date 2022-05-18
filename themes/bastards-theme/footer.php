@@ -10,6 +10,7 @@
             )
           );
         ?>   
+        
       </div>
       <div class="col-sm-3 col-md-3 col-lg-3 mb-4 mb-md-0 text-left">
         <h5 class="p-foo-title text-uppercase"><?php _e('About:', 'bastards-theme') ?></h5>
@@ -42,6 +43,9 @@
   </div>
 </div>
 <div class="copyright-section container">
+    <div class="stripe-footer">
+      <img width="180" src="<?php echo get_template_directory_uri(); ?>/assets/logo-stripe.png" alt="">
+    </div>
     <p class="p-copyright text-end pe-4 ">
         © BASTARDS, <span id="year"></span>
     </p>
@@ -50,7 +54,6 @@
 
 <?php wp_footer(); ?>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
-
 <script>
 (function($) {
 

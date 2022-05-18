@@ -170,6 +170,7 @@ input.paoc-url{max-width: 60%; width: 100%;}
 .popupaoc-rc-wrap .popupaoc-rc-icon img{width: 100%; height: 100%;}
 .popupaoc-rc-wrap .popupaoc-rc-inr h3{font-size: 16px; margin: 0 0 5px 0;}
 .popupaoc-rc-wrap .popupaoc-rc-inr p{margin: 0;}
+.popupaoc-rc-wrap .popupaoc-rc-bg-box{ background-color:#f1f1f1; border: 1px solid #d1d1d1; padding: 5px 10px; }
 
 .popupaoc-solutions-section{margin-bottom: 20px;}
 .popupaoc-solutions-box-wrap{display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px;}

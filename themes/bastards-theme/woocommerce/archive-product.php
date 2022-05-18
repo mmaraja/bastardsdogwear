@@ -34,14 +34,14 @@ do_action( 'woocommerce_before_main_content' );
 <div class="shop-page">
     <div class="container-lg">
     <div class="row h-100 mb-5">
-        <div class="col-3 col-sm-2 col-md-1 col-lg-1 hero-div-arrow">
+        <div class="col-2 col-sm-1 col-md-1 col-lg-1 hero-div-arrow">
             <div class="hero-arrow-container blog-arrow">
                 <div class="arrow-hero">
                     <img src="<?php echo get_template_directory_uri(); ?>/assets/arrow-hero.png" width="40" alt="ScrollDown">
                 </div>
             </div>
         </div>
-        <div class="col-9 col-sm-10 col-md-8 col-lg-8 blog-text ps-0 position-relative">
+        <div class="col-10 col-sm-11 col-md-8 col-lg-8 blog-text ps-0 position-relative">
             <h1 class="shop-hero-header">BASTARDS wardrobe</h1>
         </div>
     </div>
@@ -75,7 +75,7 @@ do_action( 'woocommerce_before_main_content' );
 
             $i = 1;
             foreach ($product_categories as $product_category) {
-                echo '<h2 class="category-name">'.$product_category->name.'</h2>';
+                echo '<h2 class="category-name" id="' . $product_category->name. '">'.$product_category->name.'</h2>';
                 woocommerce_product_loop_start(); //open ul
 
                 $args = array(

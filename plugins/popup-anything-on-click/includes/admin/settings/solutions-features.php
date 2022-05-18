@@ -24,9 +24,9 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 						<div class="popupaoc-sf-subtitle">Getting Started</div>
 						<h2 class="popupaoc-sf-title">Welcome to Popup Anything</h2>
 						<p class="popupaoc-sf-content">Instantly grow your email list, get more leads and increase sales with the #1 most powerful conversion optimization toolkit in the world.</p>
-						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a></br> <b>OR</b> </br><a href="<?php echo POPUPAOC_PLUGIN_LINK_UNLOCK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
+						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a></br> <b>OR</b> </br><a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
 						<div class="popupaoc-rc-wrap">
-							<div class="popupaoc-rc-inr">
+							<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 								<div class="popupaoc-rc-icon">
 									<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/14-days-money-back-guarantee.png" alt="14-days-money-back-guarantee" title="14-days-money-back-guarantee" />
 								</div>
@@ -35,12 +35,12 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 									<p>14-day No Question Asked Refund Guarantee</p>
 								</div>
 							</div>
-							<div class="popupaoc-rc-inr">
+							<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 								<div class="popupaoc-rc-icon">
 									<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/popup-design.png" alt="popup-design" title="popup-design" />
 								</div>
 								<div class="popupaoc-rc-cont">
-									<h3>Include Done-For-You Popup Setup ($99 Value)</h3>
+									<h3>Include Done-For-You Popup Setup</h3>
 									<p>Our conversion experts will design 2 free popup / month for you to get maximum results.</p>
 								</div>
 							</div>
@@ -172,9 +172,9 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 							Popup Live Preview</li>
 						</ul>
 					</div>
-					<a href="<?php echo POPUPAOC_PLUGIN_LINK_UNLOCK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now Pro Features</a>
+					<a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now Pro Features</a>
 					<div class="popupaoc-rc-wrap">
-						<div class="popupaoc-rc-inr">
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
 								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/14-days-money-back-guarantee.png" alt="14-days-money-back-guarantee" title="14-days-money-back-guarantee" />
 							</div>
@@ -183,12 +183,12 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								<p>14-day No Question Asked Refund Guarantee</p>
 							</div>
 						</div>
-						<div class="popupaoc-rc-inr">
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
 								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/popup-design.png" alt="popup-design" title="popup-design" />
 							</div>
 							<div class="popupaoc-rc-cont">
-									<h3>Include Done-For-You Popup Setup ($99 Value)</h3>
+									<h3>Include Done-For-You Popup Setup</h3>
 									<p>Our conversion experts will design 2 free popup / month for you to get maximum results.</p>
 								</div>
 						</div>
@@ -299,9 +299,9 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								<div class="popupaoc-testimonial-rating"><img src="<?php echo POPUPAOC_URL; ?>/assets/images/rating.png" /></div>
 						</div>
 					</div>
-					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a> OR <a href="<?php echo POPUPAOC_PLUGIN_LINK_UNLOCK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
+					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a> OR <a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
 					<div class="popupaoc-rc-wrap">
-						<div class="popupaoc-rc-inr">
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
 								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/14-days-money-back-guarantee.png" alt="14-days-money-back-guarantee" title="14-days-money-back-guarantee" />
 							</div>
@@ -310,12 +310,12 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								<p>14-day No Question Asked Refund Guarantee</p>
 							</div>
 						</div>
-						<div class="popupaoc-rc-inr">
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
 								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/popup-design.png" alt="popup-design" title="popup-design" />
 							</div>
 							<div class="popupaoc-rc-cont">
-									<h3>Include Done-For-You Popup Setup ($99 Value)</h3>
+									<h3>Include Done-For-You Popup Setup</h3>
 									<p>Our conversion experts will design 2 free popup / month for you to get maximum results.</p>
 								</div>
 						</div>

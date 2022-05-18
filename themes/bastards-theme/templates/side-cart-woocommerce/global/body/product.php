@@ -24,11 +24,11 @@ $productClasses = apply_filters( 'xoo_wsc_product_class', $productClasses );
 	<?php do_action( 'xoo_wsc_product_start', $_product, $cart_item_key ); ?>
 <div class="container">
 		<div class="row">
-            <div class="col-sm-2">
+            <div class="col-3 col-sm-2 p-0">
                 <?php echo $thumbnail; ?>
                 <?php do_action( 'xoo_wsc_product_image_col', $_product, $cart_item_key ); ?>
             </div>
-            <div class="col-sm-7">
+            <div class="col-6 col-sm-7">
                 <?php do_action( 'xoo_wsc_product_summary_col_start', $_product, $cart_item_key ); ?>
                 <?php if( $showPname ): ?>
                     <span class="xoo-wsc-pname"><?php echo $product_name; ?></span>
@@ -41,7 +41,7 @@ $productClasses = apply_filters( 'xoo_wsc_product_class', $productClasses );
 			    <span class="xoo-wsc-smr-del delete-product-cart">Remove</span>
 		    <?php endif; ?>
             </div>
-            <div class="col-sm-3">
+            <div class="col-3 col-sm-3">
                 <span><?php _e( 'Quantity:', 'side-cart-woocommerce' ) ?></span> <span><?php echo $cart_item['quantity']; ?></span>
          
 

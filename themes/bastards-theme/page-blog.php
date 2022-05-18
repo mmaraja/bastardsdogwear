@@ -5,12 +5,10 @@
 get_header(); ?>
 <div class="hero-section about about-blog">
     <div class="container-lg h-100">
-        <div class="row h-100">
-            <div class="col-2 col-md-1 col-lg-1 hero-div-arrow">
-                <div class="hero-arrow-container blog-arrow">
-                    <div class="arrow-hero">
+        <div class="row h-100 hero-blog-arrow">
+            <div class="col-2 col-md-1 col-lg-1 d-flex align-items-end">
+                <div class="blog-arrow">
                         <img src="<?php echo get_template_directory_uri(); ?>/assets/arrow-hero.png" width="40" alt="ScrollDown">
-                    </div>
                 </div>
             </div>
             <div class="col-10 col-md-8 col-lg-8 blog-text ps-0">
@@ -35,13 +33,16 @@ get_header(); ?>
                 while ( $arr_posts->have_posts() ) :
                     $arr_posts->the_post(); ?>
                 <article class="col-sm-4" id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+                <a href="<?php the_permalink(); ?>">
                 <?php
                     if ( has_post_thumbnail() ) : the_post_thumbnail();
                     endif; ?>
                     <header class="entry-header">
-                        <a href="<?php the_permalink(); ?>"><h2 class="entry-title"><?php the_title(); ?></h2></a>
+                        <h2 class="entry-title"><?php the_title(); ?></h2>
                     </header>
+                    </a>
                 </article>
+
             <?php
             endwhile;
             endif; ?>

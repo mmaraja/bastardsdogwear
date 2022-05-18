@@ -1,0 +1,76 @@
+2022-03-30T08:24:35+00:00 CRITICAL Uncaught Error: Call to undefined function emove_action() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php:319
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-settings.php(555): include()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-config.php(99): require_once('C:\\xampp\\htdocs...')
+#2 C:\xampp\htdocs\bastardsdogwear\wp-load.php(50): require_once('C:\\xampp\\htdocs...')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(13): require_once('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#5 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 319
+
+2022-03-30T08:26:33+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_post_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:120
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 120
+
+2022-03-30T08:28:19+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_post_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:120
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 120
+
+2022-03-30T08:28:31+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_post_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:120
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 120
+
+2022-03-30T08:28:40+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_post_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:120
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 120
+
+2022-03-30T08:28:43+00:00 CRITICAL Uncaught Error: Call to undefined method WC_Product_Variable::get_post_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:120
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 120
+
+2022-03-30T12:30:38+00:00 CRITICAL Uncaught Error: Call to undefined function get_meta() in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php:113
+Stack trace:
+#0 C:\xampp\htdocs\bastardsdogwear\wp-includes\template.php(772): require()
+#1 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\includes\wc-core-functions.php(284): load_template('C:\\xampp\\htdocs...', false)
+#2 C:\xampp\htdocs\bastardsdogwear\wp-content\plugins\woocommerce\templates\single-product.php(37): wc_get_template_part('content', 'single-product')
+#3 C:\xampp\htdocs\bastardsdogwear\wp-includes\template-loader.php(106): include('C:\\xampp\\htdocs...')
+#4 C:\xampp\htdocs\bastardsdogwear\wp-blog-header.php(19): require_once('C:\\xampp\\htdocs...')
+#5 C:\xampp\htdocs\bastardsdogwear\index.php(17): require('C:\\xampp\\htdocs...')
+#6 {main}
+  thrown in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\woocommerce\content-single-product.php on line 113
+

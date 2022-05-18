@@ -43,22 +43,17 @@ function setSwiperGallery() {
   });
 }
 
-// function setSwiperRelated(centered, slides, margin) {
-//   var swiperRelated = new Swiper('.swiper-container-related', {
-//     direction: 'horizontal',
-//     centeredSlides: centered,
-//     slidesPerView: slides,
-//     spaceBetween: margin,
-//     keyboard: {
-//       enabled: true,
-//       onlyInViewport: true,
-//     },
-//     loop: false,
-//     loopFillGroupWithBlank: true,
-//     navigation: {
-//       nextEl: '.swiper-related-next',
-//       prevEl: '.swiper-related-prev',
-//     },
-//   });
-// }
+/**variation images / description images */
+$(document).ready(function() {
+  jQuery('.append-description').each(function(){
+    var item = jQuery(this);
+    var description = item.attr('request-email');
+    item.parent().append('<div class="request-mail">'+description+'</div>');
+  });
 
+})
+$(".menu-item-702 a").click(function() {
+  $('html, body').animate({
+     scrollTop: $("#accessories").offset().top + 130
+  }, 500);
+ });
