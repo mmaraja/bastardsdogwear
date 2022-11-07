@@ -17,6 +17,7 @@ defined( 'ABSPATH' ) || exit();
  * @property WC_Stripe_Rest_Controller  $plaid
  * @property WC_Stripe_Rest_Controller  $source
  * @property \WC_Stripe_Rest_Controller $signup
+ * @property \WC_Stripe_Rest_Controller $feedback
  */
 class WC_Stripe_Rest_API {
 
@@ -68,6 +69,7 @@ class WC_Stripe_Rest_API {
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/controllers/class-wc-stripe-controller-plaid.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/controllers/class-wc-stripe-controller-source.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/controllers/class-wc-stripe-controller-signup.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/controllers/class-wc-stripe-controller-feedback.php';
 
 		foreach ( $this->get_controllers() as $key => $class_name ) {
 			if ( class_exists( $class_name ) ) {
@@ -99,7 +101,8 @@ class WC_Stripe_Rest_API {
 			'product_data'   => 'WC_Stripe_Controller_Product_Data',
 			'plaid'          => 'WC_Stripe_Controller_Plaid',
 			'source'         => 'WC_Stripe_Controller_Source',
-			'signup'         => 'WC_Stripe_Controller_SignUp'
+			'signup'         => 'WC_Stripe_Controller_SignUp',
+			'feedback'       => 'WC_Stripe_Controller_Feedback'
 		);
 
 		/**

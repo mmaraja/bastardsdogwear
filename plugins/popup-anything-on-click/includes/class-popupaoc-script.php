@@ -109,12 +109,12 @@ class Popupaoc_Script {
 														'is_mobile'					=> ( wp_is_mobile() ) ? 1 : 0,
 														'code_editor'				=> ( version_compare( $wp_version, '4.9' ) >= 0 )				? 1 : 0,
 														'syntax_highlighting'		=> ( 'false' === wp_get_current_user()->syntax_highlighting )	? 0 : 1,
-														'cofirm_msg'				=> esc_html__( 'Are you sure you want to do this?', 'popup-anything-on-click' ),
-														'sorry_msg'					=> esc_html__( 'Sorry, Something happened wrong.', 'popup-anything-on-click' ),
-														'select2_input_too_short'	=> esc_html__( 'Search popup by its name or ID', 'popup-anything-on-click' ),
-														'select2_remove_all_items'	=> esc_html__( 'Remove all items', 'popup-anything-on-click' ),
-														'select2_remove_item'		=> esc_html__( 'Remove item', 'popup-anything-on-click' ),
-														'select2_searching'			=> esc_html__( 'Searching…', 'popup-anything-on-click' ),
+														'cofirm_msg'				=> esc_js( __( 'Are you sure you want to do this?', 'popup-anything-on-click' ) ),
+														'sorry_msg'					=> esc_js( __( 'Sorry, Something happened wrong.', 'popup-anything-on-click' ) ),
+														'select2_input_too_short'	=> esc_js( __( 'Search popup by its name or ID', 'popup-anything-on-click' ) ),
+														'select2_remove_all_items'	=> esc_js( __( 'Remove all items', 'popup-anything-on-click' ) ),
+														'select2_remove_item'		=> esc_js( __( 'Remove item', 'popup-anything-on-click' ) ),
+														'select2_searching'			=> esc_js( __( 'Searching…', 'popup-anything-on-click' ) ),
 													));
 
 		// If screen is Post Add / Edit page

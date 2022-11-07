@@ -93,6 +93,7 @@ do_action( 'woocommerce_before_main_content' );
                     'order' => 'asc',
                 );
                 $cat_query = new WP_Query( $args );
+            
 
                 while ( $cat_query->have_posts() ) : $cat_query->the_post();
                     wc_get_template_part( 'content', 'product' );

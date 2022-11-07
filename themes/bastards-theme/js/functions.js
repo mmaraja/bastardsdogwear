@@ -25,7 +25,7 @@ function setSwiperGallery() {
   swiperGallery = new Swiper('.swiper-container-gallery', {
     direction: 'horizontal',
     slidesPerView: 'auto',
-    allowTouchMove: false,
+    allowTouchMove: true,
     spaceBetween: 200,
     initialSlide: 0,
     autoHeight: false,
@@ -57,3 +57,4 @@ $(".menu-item-702 a").click(function() {
      scrollTop: $("#accessories").offset().top + 130
   }, 500);
  });
+

@@ -21,7 +21,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-social-type"><?php _e('Social Type', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-social-type"><?php esc_html_e('Social Type', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<select name="" class="paoc-select paoc-social-type" id="paoc-social-type" disabled="disabled" />
@@ -29,7 +29,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<option value=""><?php esc_html_e('Only Text', 'popup-anything-on-click'); ?></option>
 						<option value=""><?php esc_html_e('Icon With Text', 'popup-anything-on-click'); ?></option>
 					</select><br/>
-					<span class="description"><?php _e('Choose social icon type.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Choose social icon type.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>

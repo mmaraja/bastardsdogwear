@@ -121,9 +121,118 @@ class WC_Stripe_Utils {
 	 * @param \Stripe\PaymentIntent|\Stripe\SetupIntent $intent
 	 */
 	public static function sanitize_intent( $intent ) {
-		unset( $intent->client_secret );
-
 		return $intent;
+	}
+
+	public static function get_payment_intent_from_session() {
+		$session        = WC()->session;
+		$payment_intent = null;
+		if ( $session ) {
+			$payment_intent = WC()->session->get( \WC_Stripe_Constants::PAYMENT_INTENT, null );
+			if ( $payment_intent ) {
+				$payment_intent = (object) $payment_intent;
+			}
+		}
+
+		return $payment_intent;
+	}
+
+	public static function save_payment_intent_to_session( $payment_intent, $order = null ) {
+		if ( WC()->session ) {
+			$data = \is_array( $payment_intent ) ? $payment_intent : $payment_intent->toArray();
+			WC()->session->set( \WC_Stripe_Constants::PAYMENT_INTENT, $data );
+			$order_id = WC()->session->get( 'order_awaiting_payment', null );
+			if ( $order || $order_id ) {
+				$order = ! $order ? wc_get_order( absint( $order_id ) ) : $order;
+				if ( $order ) {
+					$order->update_meta_data( \WC_Stripe_Constants::PAYMENT_INTENT, $data );
+					$order->save();
+				}
+			}
+		}
+	}
+
+	public static function delete_payment_intent_to_session() {
+		if ( WC()->session ) {
+			unset( WC()->session->{\WC_Stripe_Constants::PAYMENT_INTENT} );
+		}
+	}
+
+	public static function redirect_url_has_hash( $url ) {
+		return preg_match( '/^#response=(.*)/', $url );
+	}
+
+	public static function parse_url_hash( $url ) {
+		preg_match( '/^#response=(.*)/', $url, $matches );
+
+		return json_decode( base64_decode( rawurldecode( $matches[1] ) ) );
+	}
+
+	public static function is_setup_intent( $intent ) {
+		return self::is_intent_type( 'seti_', $intent );
+	}
+
+	public static function is_payment_intent( $intent ) {
+		return self::is_intent_type( 'pi_', $intent );
+	}
+
+	private static function is_intent_type( $prefix, $intent ) {
+		if ( ! $intent ) {
+			return false;
+		}
+		if ( is_object( $intent ) && isset( $intent->id ) ) {
+			return strpos( $intent->id, $prefix ) !== false;
+		} elseif ( is_array( $intent ) && isset( $intent['id'] ) ) {
+			return strpos( $intent['id'], $prefix ) !== false;
+		}
+
+		return false;
+	}
+
+	public static function is_intent_mode_equal( $intent, $mode = null ) {
+		if ( $intent ) {
+			$intent = (object) $intent;
+			$mode   = ! $mode ? wc_stripe_mode() : $mode;
+			if ( $mode === WC_Stripe_Constants::TEST ) {
+				return ! $intent->livemode;
+			}
+
+			return $intent->livemode;
+		}
+
+		return false;
+	}
+
+	public static function validate_account_access( $betas = array(), $mode = 'test' ) {
+		$betas  = array_merge( array( '2020-08-27' ), $betas );
+		$result = wp_remote_post(
+			'https://api.stripe.com/v1/payment_methods',
+			array(
+				'headers' => array( 'Content-Type' => 'application/x-www-form-urlencoded' ),
+				'body'    => array(
+					'key'             => wc_stripe_get_publishable_key( $mode ),
+					'_stripe_version' => sprintf( implode( ';', array_fill( 0, count( $betas ), '%s' ) ), ...$betas ),
+					'type'            => 'card',
+					'card'            => array(
+						'number'    => '4242424242424242',
+						'exp_month' => 12,
+						'exp_year'  => 2030,
+						'cvc'       => 314
+					),
+					'metadata'        => array(
+						'origin' => 'API Settings connection test'
+					)
+				),
+			)
+		);
+		if ( ! is_wp_error( $result ) ) {
+			$body = json_decode( wp_remote_retrieve_body( $result ), true );
+			if ( isset( $body['error']['message'] ) && strpos( $body['error']['message'], 'server_side_confirmation_beta=v1' ) !== false ) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 
 }

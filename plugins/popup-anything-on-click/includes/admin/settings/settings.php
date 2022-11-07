@@ -15,7 +15,7 @@ global $popupaoc_options;
 // Plugin settings tab
 $sett_tab		= popupaoc_settings_tab();
 $sett_tab_count	= count( $sett_tab );
-$tab			= isset( $_GET['tab'] ) ? $_GET['tab'] : 'general';
+$tab			= isset( $_GET['tab'] ) ? popupaoc_clean( $_GET['tab'] ) : 'general';
 
 // If no valid tab is there
 if( ! isset( $sett_tab[ $tab ] ) ) {
@@ -35,7 +35,7 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 
 <div class="wrap">
 
-	<h2><?php _e( 'Popup Anything - Settings', 'popup-anything-on-click' ); ?></h2>
+	<h2><?php esc_html_e( 'Popup Anything - Settings', 'popup-anything-on-click' ); ?></h2>
 
 	<?php
 	// Reset message
@@ -44,7 +44,7 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 	}
 
 	// Success message
-	if( isset( $_GET['settings-updated'] ) && $_GET['settings-updated'] == 'true' ) {
+	if( isset( $_GET['settings-updated'] ) && 'true' == $_GET['settings-updated'] ) {
 		popupaoc_display_message( 'update' );
 	}
 
@@ -58,7 +58,7 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 			$tab_url 		= add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE, 'page' => 'popupaoc-settings', 'tab' => $tab_key ), admin_url('edit.php') );
 			$active_tab_cls = ($tab == $tab_key) ? 'nav-tab-active' : '';
 		?>
-			<a class="nav-tab <?php echo $active_tab_cls; ?>" href="<?php echo popupaoc_clean_url( $tab_url ); ?>"><?php echo $tab_val; ?></a>
+			<a class="nav-tab <?php echo esc_attr( $active_tab_cls ); ?>" href="<?php echo popupaoc_clean_url( $tab_url ); ?>"><?php echo wp_kses_post( $tab_val ); ?></a>
 		<?php } ?>
 	</h2>
 
@@ -76,7 +76,7 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 			<?php settings_fields( 'popupaoc_plugin_options' ); ?>
 
 			<div class="textright paoc-clearfix">
-				<input type="submit" name="<?php echo $save_btn_name; ?>" class="button button-primary right paoc-btn paoc-sett-submit paoc-sett-submit" value="<?php esc_html_e('Save Changes', 'popup-anything-on-click'); ?>" />
+				<input type="submit" name="<?php echo esc_attr( $save_btn_name ); ?>" class="button button-primary right paoc-btn paoc-sett-submit paoc-sett-submit" value="<?php esc_html_e('Save Changes', 'popup-anything-on-click'); ?>" />
 			</div>
 
 			<div class="metabox-holder">

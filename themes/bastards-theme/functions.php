@@ -37,6 +37,12 @@ function new_widgets_init() {
 		'before_widget' => '<div>',
 		'after_widget'  => '</div>',
 	) );
+  register_sidebar( array(
+		'name'          => 'Contact form - footer',
+		'id'            => 'footer_form',
+		'before_widget' => '<div>',
+		'after_widget'  => '</div>',
+	) );
 
 }
 add_action( 'widgets_init', 'new_widgets_init' );
@@ -175,7 +181,7 @@ function get_selected_variation_stock() {
   // Get the product attribute value(s)
   $product = wc_get_product( $product->get_id() );
   $color = $product->get_attribute('pa_colour');
-
+  $gender = $product->get_attribute('pa_option');
   
     ?>
     <script>
@@ -218,8 +224,20 @@ function get_selected_variation_stock() {
 
     jQuery(document).ready(function($) {
           var colour = '<?php echo($color);?>';
+          var gender = '<?php echo($gender);?>';
           // if product has attribute 'pa_color' value(s)
           if( !colour ){
+              // do something
+              setTimeout(function() {
+              var variation_id = $('input.variation_id').val();
+              var product_id = $('input[name="product_id"]').val();
+              createGallery(Number(variation_id));
+              var div_id = "var_" + product_id;
+              var html_product = $('#' + div_id).html();
+              $('.additional-description').html(html_product);
+            }, 300);
+          } 
+          if( !gender ){
               // do something
               setTimeout(function() {
               var variation_id = $('input.variation_id').val();
@@ -264,9 +282,38 @@ function get_selected_variation_stock() {
             }
            
               optsHtml = `${optsHtml}<div class="sh-size-opt ${class_size} ${selectedClass}"><input style="display:none;" value="${size_options[i].value}">${str1}<br>${str2}</div>`;
-           
+              
 
         }
+        if($('#product-210').length ) {
+          optsHtml = `${optsHtml}<input type="button" class="size-trigger" value="Size chart">`;
+          console.log('lalal')
+        }
+
+        const modal = $(".size-modal");
+        const modal_trigger = $(".size-trigger");
+        const closeButton = $(".size-close-button");
+
+        function toggleModalSize() {
+            modal.toggleClass("size-show-modal");
+        }
+
+        function windowOnClick(event) {
+            if (event.target === modal) {
+              toggleModalSize();
+            }
+        }
+        $(document).ready(function() {
+          $(".size-trigger").click(function() {
+            toggleModalSize();
+          }) 
+          closeButton.on("click", function() {
+            toggleModalSize();
+          }) 
+          
+        })
+      
+              
         var tag_options = $('#pa_name-tag option');
         var tag_selected = $('#pa_name-tag').val();
         var tag_opts = [];
@@ -283,10 +330,92 @@ function get_selected_variation_stock() {
             }
             tag_optsHtml = `${tag_optsHtml}<div class="sh-tag-opt ${class_tag} ${select_class}"><input style="display:none;" value="${tag_options[i].value}">${tag_options[i].text}</div>`;
         }
+
+        var gender_options = $('#pa_option option');
+        var gender_selected = $('#pa_option').val();
+        var gender_opts = [];
+        var gender_optsHtml = "";
+        
+        for (let i = 1; i < gender_options.length; i++) {
+          gender_opts.push({text: gender_options[i].text, val: gender_options[i].value});
+            let select_class = gender_options[i].value == gender_selected ? 'selected' : '';
+            var class_tag = "";
+            if( i == 1) {
+              var class_tag = "first";
+            } else if ( i == gender_options.length-1)  {
+              var class_tag = "last";
+            }
+            gender_optsHtml = `${gender_optsHtml}<div class="sh-option-opt ${class_tag} ${select_class}"><input style="display:none;" value="${gender_options[i].value}">${gender_options[i].text}</div>`;
+        }
+
+        var fit_options = $('#pa_fit option');
+        var fit_selected = $('#pa_fit').val();
+        var fit_opts = [];
+        var fit_optsHtml = "";
+        
+        for (let i = 1; i < fit_options.length; i++) {
+          fit_opts.push({text: fit_options[i].text, val: fit_options[i].value});
+            let select_class = fit_options[i].value == fit_selected ? 'selected' : '';
+            var class_tag = "";
+            if( i == 1) {
+              var class_tag = "first";
+            } else if ( i == size_options.length-1)  {
+              var class_tag = "last";
+            }
+            fit_optsHtml = `${fit_optsHtml}<div class="sh-tag-opt ${class_tag} ${select_class}"><input style="display:none;" value="${fit_options[i].value}">${fit_options[i].text}</div>`;
+        }
+       
+        var collarS_options = $('#pa_collar-size option');
+        var collarS_selected = $('#pa_collar-size').val();
+        var collarS_opts = [];
+        var collarS_optsHtml = "";
+        
+        for (let i = 1; i < collarS_options.length; i++) {
+          collarS_opts.push({text: collarS_options[i].text, val: collarS_options[i].value});
+            let select_class = collarS_options[i].value == collarS_selected ? 'selected' : '';
+            var class_sizeCollar = "";
+            var collarText = collarS_options[i].text;
+            var retCollar = collarText.split(" ");
+            var collarText1 = retCollar[0];
+            var collarText2 = retCollar.splice(1).join(" ");
+            if( i == 1) {
+              var class_sizeCollar = "first";
+            } else if ( i == collarS_options.length-1)  {
+              var class_sizeCollar = "last";
+            }
+            collarS_optsHtml = `${collarS_optsHtml}<div class="sh-collar-opt ${class_sizeCollar} ${select_class}"><input style="display:none;" value="${collarS_options[i].value}">${collarText1}<br>${collarText2}</div>`;
+        }
+
+        var leashS_options = $('#pa_leash-size option');
+        var leashS_selected = $('#pa_leash-size').val();
+        var leashS_opts = [];
+        var leashS_optsHtml = "";
+        
+        for (let i = 1; i < leashS_options.length; i++) {
+          leashS_opts.push({text: leashS_options[i].text, val: leashS_options[i].value});
+            let select_class = leashS_options[i].value == leashS_selected ? 'selected' : '';
+            var class_sizeLeash = "";
+            var leashText = leashS_options[i].text;
+            var retLeash = leashText.split(" ");
+            var leashText1 = retLeash[0];
+            var leashText2 = retLeash.splice(1).join(" ");
+            if( i == 1) {
+              var class_sizeLeash = "first";
+            } else if ( i == leashS_options.length-1)  {
+              var class_sizeLeash = "last";
+            }
+            leashS_optsHtml = `${leashS_optsHtml}<div class="sh-leash-opt ${class_sizeLeash} ${select_class}"><input style="display:none;" value="${leashS_options[i].value}">${leashText1}<br>${leashText2}</div>`;
+        }
        
         $('#pa_size').after(optsHtml);
+      
+        $('#pa_collar-size').after(collarS_optsHtml);
+        $('#pa_leash-size').after(leashS_optsHtml);
         $('#pa_name-tag').after(tag_optsHtml);
-
+        $('#pa_fit').after(fit_optsHtml);
+        $('#pa_option').after(gender_optsHtml);
+        
+       
 
         setTimeout(function(){
             var $select2_color = $('#pa_colour').select2({ minimumResultsForSearch: -1, dropdownPosition: 'below'}).on('change', function() {
@@ -298,6 +427,7 @@ function get_selected_variation_stock() {
                 $('.additional-description').html(html_product);
               }, 300)
             }).trigger('change');
+           
             var $select2_fabric = $('#pa_fabric').select2({ minimumResultsForSearch: -1, dropdownPosition: 'below'}).on('change', function() {
               setTimeout(function(){
                 var variation_id = $('input.variation_id').val();
@@ -319,7 +449,21 @@ function get_selected_variation_stock() {
            }
            
           }, 300);
-
+          setTimeout(function(){
+        $('.sh-option-opt').on('click', function() {
+          $('.sh-option-opt').removeClass('selected');
+          $("#pa_option").val($(this).children('input').val()).trigger('change');
+          $(this).addClass('selected');
+          setTimeout(function(){
+                var variation_id = $('input.variation_id').val();
+                createGallery(Number(variation_id));
+                var div_id = "var_" + variation_id;
+                var html_product = $('#' + div_id).html();
+                $('.additional-description').html(html_product);
+          }, 300)
+        });
+        $(".sh-option-opt:first").trigger('click');
+      }, 300)
         $('.sh-size-opt').on('click', function() {
           $('.sh-size-opt').removeClass('selected');
           $("#pa_size").val($(this).children('input').val()).trigger('change');
@@ -330,6 +474,17 @@ function get_selected_variation_stock() {
           $("#pa_name-tag").val($(this).children('input').val()).trigger('change');
           $(this).addClass('selected');
         });
+        $('.sh-collar-opt').on('click', function() {
+          $('.sh-collar-opt').removeClass('selected');
+          $("#pa_collar-size").val($(this).children('input').val()).trigger('change');
+          $(this).addClass('selected');
+        });
+        $('.sh-leash-opt').on('click', function() {
+          $('.sh-leash-opt').removeClass('selected');
+          $("#pa_leash-size").val($(this).children('input').val()).trigger('change');
+          $(this).addClass('selected');
+        });
+     
         // Once loaded (if a variation is selected by default)
         setTimeout(function(){
 
@@ -796,3 +951,88 @@ function custom_empty_cart_message() {
     echo $html . '</p>';
 }
 
+function contactform_dequeue_scripts() {
+
+
+  if( !is_page(array('contact', 'subscribe'))) {
+      wp_dequeue_script( 'contact-form-7' );
+wp_dequeue_script('google-recaptcha');
+      wp_dequeue_style( 'contact-form-7' );
+  
+  }
+
+}
+add_action( 'wp_enqueue_scripts', 'contactform_dequeue_scripts', 99 );
+
+/*IF COLLAR WITH NAME TAG IS ADDED TO CART, TWO ADDITIONAL FIELDS ON CHECKOUT */
+
+// add_action( 'woocommerce_checkout_after_customer_details', 'my_custom_checkout_field2');
+
+// function my_custom_checkout_field( $checkout ) {
+//   foreach( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+//     $product = $cart_item['data'];
+//     $id = $product->get_id();
+//     $products = array(667, 668, 669, 670);  // Product Ids
+
+//     if (in_array($id, $products)) { 
+//     echo '<div id="my_custom_checkout_field"><h2>' . __('My Field') . '</h2>';
+
+//     echo woocommerce_form_field( 'my_field_name', array(
+//         'type'          => 'text',
+//         'class'         => array('my-field-class form-row-wide'),
+//         'label'         => __('Fill in this field'),
+//         'placeholder'   => __('Enter something'),
+//         ), $checkout->get_value( 'my_field_name' ));
+
+//     echo '</div>';
+//       }
+//     }
+// }
+
+
+add_action( 'woocommerce_checkout_update_order_meta', 'bbloomer_save_new_checkout_field' );
+function bbloomer_save_new_checkout_field( $order_id ) { 
+    if ( $_POST['phone_name_tag'] ) {
+      update_post_meta( $order_id, '_phone_name_tag', esc_attr( $_POST['phone_name_tag'] ) );
+    }
+   if ( $_POST['dogs_name_tag'] ) { 
+      update_post_meta( $order_id, '_dogs_name_tag', esc_attr( $_POST['dogs_name_tag'] ) );
+    }
+}
+  
+add_action( 'woocommerce_admin_order_data_after_billing_address', 'bbloomer_show_new_checkout_field_order', 10, 1 );
+function bbloomer_show_new_checkout_field_order( $order ) {    
+  echo "<p><strong>Dog's name for COLLAR name tag:</strong> " . get_post_meta( $order->get_id(), '_dogs_name_tag', true ) . "</p><br>";
+  echo "<p><strong>Contact number:</strong> " . get_post_meta( $order->get_id(), '_phone_name_tag', true ) . "</p><br>";
+}
+ 
+add_action( 'woocommerce_email_after_order_table', 'bbloomer_show_new_checkout_field_emails', 20, 4 );
+function bbloomer_show_new_checkout_field_emails( $order, $sent_to_admin, $plain_text, $email ) {
+    if ( get_post_meta( $order->get_id(), '_phone_name_tag', true ) ) {
+      echo '<p><strong>Contact number for Name tag:</strong> ' . get_post_meta( $order->get_id(), '_phone_name_tag', true ) . '</p>';
+    }
+    if ( get_post_meta( $order->get_id(), '_dogs_name_tag', true ) ) {
+      echo '<p><strong>Dog\'s name for Name tag:</strong> ' . get_post_meta( $order->get_id(), '_dogs_name_tag', true ) . '</p>';
+    } 
+}
+
+add_action( 'woocommerce_single_product_summary', 'shoptimizer_custom_author_field', 8);
+  
+function shoptimizer_custom_author_field() { ?>
+ 
+<?php if(get_field('short_description')) { ?>
+	<div class="info-description"><?php the_field('short_description'); ?></div>
+<?php }
+}
+
+function my_hide_shipping_when_free_is_available( $rates ) {
+	$free = array();
+	foreach ( $rates as $rate_id => $rate ) {
+		if ( 'free_shipping' === $rate->method_id ) {
+			$free[ $rate_id ] = $rate;
+			break;
+		}
+	}
+	return ! empty( $free ) ? $free : $rates;
+}
+add_filter( 'woocommerce_package_rates', 'my_hide_shipping_when_free_is_available', 100 );

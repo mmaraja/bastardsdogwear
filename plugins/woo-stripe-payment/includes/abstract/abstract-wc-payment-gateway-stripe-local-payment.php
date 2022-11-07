@@ -89,20 +89,6 @@ abstract class WC_Payment_Gateway_Stripe_Local_Payment extends WC_Payment_Gatewa
 		$this->supports = array( 'tokenization', 'products', 'refunds' );
 	}
 
-	public function process_payment( $order_id ) {
-		$result = parent::process_payment( $order_id );
-
-		if ( defined( WC_Stripe_Constants::WOOCOMMERCE_STRIPE_ORDER_PAY ) && $result['result'] == 'success' ) {
-			wp_send_json( array(
-				'success'  => true,
-				'redirect' => $result['redirect']
-			), 200 );
-			exit();
-		}
-
-		return $result;
-	}
-
 	/**
 	 * Return an array of form fields for the gateway.
 	 *
@@ -204,7 +190,6 @@ abstract class WC_Payment_Gateway_Stripe_Local_Payment extends WC_Payment_Gatewa
 				),
 				'element_params'     => $this->get_element_params(),
 				'routes'             => array(
-					'order_pay'           => stripe_wc()->rest_api->checkout->rest_url( 'order-pay' ),
 					'delete_order_source' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'order/source' ) ),
 					'update_source'       => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->source->rest_uri( 'update' ) )
 				)

@@ -1,4 +1,5 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 if ( ! class_exists( 'WC_Stripe_Rest_Controller' ) ) {
@@ -7,8 +8,8 @@ if ( ! class_exists( 'WC_Stripe_Rest_Controller' ) ) {
 
 /**
  *
- * @author PaymentPlugins
- * @since 3.0.0
+ * @since   3.0.0
+ * @author  PaymentPlugins
  * @package Stripe/Controllers
  */
 class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
@@ -55,6 +56,11 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'process_order_pay' ),
 				'permission_callback' => '__return_true',
+				'args'                => array(
+					'order_id'       => array( 'required' => true ),
+					'order_key'      => array( 'required' => true ),
+					'payment_method' => array( 'required' => true )
+				)
 			)
 		);
 	}
@@ -91,8 +97,10 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 					return add_query_arg( 'wc_stripe_product_checkout', $order->get_payment_method(), $url );
 				}, 10, 2 );
 
-				$option                           = new WC_Stripe_Product_Gateway_Option( current( WC()->cart->get_cart() )['data'], $gateway );
-				$gateway->settings['charge_type'] = $option->get_option( 'charge_type' );
+				$option = new WC_Stripe_Product_Gateway_Option( current( WC()->cart->get_cart() )['data'], $gateway );
+				if ( $option->has_product() ) {
+					$gateway->settings['charge_type'] = $option->get_option( 'charge_type' );
+				}
 			}
 			$this->required_post_data();
 			$checkout->process_checkout();
@@ -148,10 +156,55 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 	 *
 	 * @param WP_REST_Request $request
 	 *
-	 * @return WP_REST_Response
 	 * @since 3.1.8
+	 * @return WP_REST_Response
 	 */
 	public function process_order_pay( $request ) {
+		global $wp;
+		/**
+		 * @var \WC_Payment_Gateway_Stripe $payment_method
+		 */
+		$payment_method = WC()->payment_gateways()->payment_gateways()[ $request['payment_method'] ];
+		$order_id       = absint( $request['order_id'] );
+		$order_key      = $request['order_key'];
+		$order          = wc_get_order( $order_id );
+		try {
+			if ( ! $order || ! hash_equals( $order_key, $order->get_order_key() ) ) {
+				throw new Exception( __( 'You are not authorized to update this order.', 'woo-stripe-payment' ) );
+			}
+			$wp->set_query_var( 'order-pay', $order_id );
+			$order->set_payment_method( $payment_method->id );
+			$payment_method->payment_object->set_update_payment_intent( true );
+			$response = array( 'success' => true, 'needs_confirmation' => false );
+			$result   = $payment_method->payment_object->process_payment( $order );
+			if ( is_wp_error( $result ) ) {
+				throw new Exception( $result->get_error_message() );
+			}
+			if ( ! $result->complete_payment ) {
+				if ( WC_Stripe_Utils::redirect_url_has_hash( $result->redirect ) ) {
+					$response['needs_confirmation'] = true;
+					$response['data']               = WC_Stripe_Utils::parse_url_hash( $result->redirect );
+				} else {
+					$response['redirect'] = $result->redirect;
+				}
+			}
+
+			return rest_ensure_response( $response );
+		} catch ( Exception $e ) {
+			wc_add_notice( $e->getMessage(), 'error' );
+
+			return new WP_Error( 'order-pay-error', $this->get_error_messages(), array( 'status' => 200 ) );
+		}
+	}
+
+	/**
+	 *
+	 * @param WP_REST_Request $request
+	 *
+	 * @since 3.1.8
+	 * @return WP_REST_Response
+	 */
+	public function process_local_order_pay( $request ) {
 		global $wp;
 		$this->frontend_includes();
 
@@ -225,7 +278,7 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 
 	/**
 	 *
-	 * @param WC_Order $order
+	 * @param WC_Order                  $order
 	 * @param WC_Payment_Gateway_Stripe $gateway
 	 */
 	public function set_stashed_cart( $order, $gateway ) {
@@ -234,7 +287,7 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 
 	/**
 	 *
-	 * @param array $data
+	 * @param array    $data
 	 * @param WP_Error $errors
 	 */
 	public function after_checkout_validation( $data, $errors ) {
@@ -282,8 +335,8 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 
 	/**
 	 *
-	 * @param int $order_id
-	 * @param array $posted_data
+	 * @param int      $order_id
+	 * @param array    $posted_data
 	 * @param WC_Order $order
 	 */
 	public function checkout_order_processed( $order_id, $posted_data, $order ) {
@@ -309,8 +362,8 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 	/**
 	 * @param $data
 	 *
-	 * @return mixed
 	 * @since 3.2.1
+	 * @return mixed
 	 */
 	public function filter_posted_data( $data ) {
 		if ( isset( $data['shipping_method'], $data['shipping_country'], $data['shipping_state'] ) ) {
@@ -319,4 +372,5 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 
 		return $data;
 	}
+
 }

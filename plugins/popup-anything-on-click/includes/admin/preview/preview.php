@@ -22,9 +22,8 @@ $paoc_preview = 1;
 
 // Taking form post data
 if( ! empty( $_POST['paoc_preview_form_data'] ) ) {
-	parse_str( $_POST['paoc_preview_form_data'], $form_data );
-	$form_data							= stripslashes_deep( $form_data );
-	$_POST['paoc_preview_form_data']	= popupaoc_preview_data( $form_data );
+	parse_str( wp_unslash( $_POST['paoc_preview_form_data'] ), $form_data ); // phpcs:ignore WordPress.Security.ValidatedSanitizedInput.InputNotSanitized
+	$_POST['paoc_preview_form_data'] = popupaoc_preview_data( $form_data );
 }
 ?>
 <!DOCTYPE html>
@@ -47,10 +46,13 @@ if( ! empty( $_POST['paoc_preview_form_data'] ) ) {
 	</head>
 	<body>
 		<div id="paoc-customizer-container" class="paoc-customizer-container"></div>
-		<div class="paoc-link-notice"><?php _e('Sorry, Some of the actions like link visit, form submission and etc will not work in popup preview.', 'popup-anything-on-click'); ?></div>
+		<div class="paoc-link-notice"><?php esc_html_e('Sorry, Some of the actions like link visit, form submission and etc will not work in popup preview.', 'popup-anything-on-click'); ?></div>
 
 		<script type="text/javascript">
-		jQuery(document).ready(function($) {
+		(function($) {
+
+			"use strict";
+			
 			$(document).on('click', 'a', function(event) {
 
 				var href_val = $(this).attr('href');
@@ -75,7 +77,7 @@ if( ! empty( $_POST['paoc_preview_form_data'] ) ) {
 
 				return false;
 			});
-		});
+		})(jQuery);
 		</script>
 
 		<?php wp_footer(); ?>

@@ -93,42 +93,38 @@ $gallery_slider_js_options = apply_filters( 'woo_variation_gallery_slider_js_opt
 $gallery_thumbnail_position              = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position', 'bottom', 'woo_variation_gallery_thumbnail_position' ) );
 $gallery_thumbnail_position_small_device = sanitize_textarea_field( woo_variation_gallery()->get_option( 'thumbnail_position_small_device', 'bottom' ) );
 
-///
-///
+
+//
 $thumbnail_js_options = array(
 	'slidesToShow'   => $columns,
 	'slidesToScroll' => $columns,
 	'focusOnSelect'  => true,
 	// 'dots'=>true,
-	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes', 'woo_variation_gallery_thumbnail_arrow' ) ),
+	'arrows'         => wc_string_to_bool( woo_variation_gallery()->get_option( 'thumbnail_arrow', 'yes' ) ),
 	'asNavFor'       => '.woo-variation-gallery-slider',
 	'centerMode'     => true,
 	'infinite'       => true,
 	'centerPadding'  => '0px',
-	'rtl'            => is_rtl(),
+	'vertical'       => in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ),
+	'rtl'            => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position ),
 	'prevArrow'      => '<i class="wvg-thumbnail-prev-arrow dashicons dashicons-arrow-left-alt2"></i>',
 	'nextArrow'      => '<i class="wvg-thumbnail-next-arrow dashicons dashicons-arrow-right-alt2"></i>',
 	'responsive'     => array(
 		array(
 			'breakpoint' => 768,
 			'settings'   => array(
-				'vertical' => in_array( $gallery_thumbnail_position_small_device, array( 'left', 'right' ) )
+				'vertical' => in_array( $gallery_thumbnail_position_small_device, array( 'left', 'right' ) ),
+				'rtl'      => woo_variation_gallery()->set_rtl_by_position( $gallery_thumbnail_position_small_device )
 			),
 		),
 	)
 );
 
-
-if ( in_array( $gallery_thumbnail_position, array( 'left', 'right' ) ) ) {
-	$thumbnail_js_options['vertical'] = true;
-}
-
 $thumbnail_slider_js_options = apply_filters( 'woo_variation_gallery_thumbnail_slider_js_options', $thumbnail_js_options );
 
 $gallery_width = absint( woo_variation_gallery()->get_option( 'width', apply_filters( 'woo_variation_gallery_default_width', 30 ), 'woo_variation_gallery_width' ) );
 
-$inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', array(// 'max-width' => esc_attr( $gallery_width ) . '%'
-) );
+$inline_style = apply_filters( 'woo_variation_product_gallery_inline_style', array() );
 
 $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes', array(
 	'woo-variation-product-gallery',
@@ -140,11 +136,12 @@ $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes
 $post_thumbnail_id = (int) apply_filters( 'woo_variation_gallery_post_thumbnail_id', $post_thumbnail_id, $attachment_ids, $product );
 $attachment_ids    = (array) apply_filters( 'woo_variation_gallery_attachment_ids', $attachment_ids, $post_thumbnail_id, $product );
 
+$loading_gallery_class = wc_string_to_bool( woo_variation_gallery()->get_option( 'preloader_disable', 'no' ) ) ? '' : 'loading-gallery';
 ?>
 
 <?php do_action( 'woo_variation_product_gallery_start', $product ); ?>
 	<div data-product_id="<?php echo esc_attr( $product_id ) ?>" data-variation_id="<?php echo esc_attr( $default_variation_id ) ?>" style="<?php echo esc_attr( woo_variation_gallery()->get_inline_style( $inline_style ) ) ?>" class="<?php echo esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $wrapper_classes ) ) ) ); ?>">
-		<div class="loading-gallery woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?>-<?php echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php echo esc_attr( $product_type ) ?>">
+		<div class="<?php echo esc_attr( $loading_gallery_class ) ?> woo-variation-gallery-wrapper woo-variation-gallery-thumbnail-position-<?php echo esc_attr( $gallery_thumbnail_position ) ?>-<?php echo esc_attr( $gallery_thumbnail_position_small_device ) ?> woo-variation-gallery-product-type-<?php echo esc_attr( $product_type ) ?>">
 
 			<div class="woo-variation-gallery-container preload-style-<?php echo trim( woo_variation_gallery()->get_option( 'preload_style', 'blur', 'woo_variation_gallery_preload_style' ) ) ?>">
 

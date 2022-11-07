@@ -127,28 +127,7 @@
     LocalPayment.prototype.process_order_pay = function (e) {
         if (this.is_gateway_selected()) {
             e.preventDefault();
-            var data = this.get_form().serializeArray();
-            data.push({name: '_wpnonce', value: this.params.rest_nonce});
-            data.push({name: 'order_id', value: this.params.order_id});
-            var search = window.location.search;
-            var match = this.params.routes.order_pay.match(/\?/);
-            if (match) {
-                search = '&' + search.substr(1);
-            }
-            $.ajax({
-                url: this.params.routes.order_pay + search,
-                method: 'POST',
-                dataType: 'json',
-                data: $.param(data)
-            }).done(function (response) {
-                if (response.success) {
-                    window.location.href = response.redirect;
-                } else {
-                    this.submit_error(response.message);
-                }
-            }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
-                this.submit_error(errorThrown);
-            }.bind(this))
+            wc_stripe.CheckoutGateway.prototype.process_order_pay.apply(this, arguments);
         }
     }
 
@@ -228,6 +207,10 @@
                 this.processConfirmation(obj);
             }
         }
+    }
+
+    LocalPayment.prototype.handle_next_action = function (data) {
+        this.processConfirmation(data);
     }
 
     LocalPayment.prototype.processConfirmation = function (obj) {

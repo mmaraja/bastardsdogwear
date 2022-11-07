@@ -129,11 +129,11 @@ class WC_Stripe_Admin_Order_Metaboxes {
 			array(
 				'_wpnonce' => wp_create_nonce( 'wp_rest' ),
 				'routes'   => array(
-					'charge_view'     => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'charge-view' ) ),
-					'capture'         => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'capture' ) ),
-					'void'            => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'void' ) ),
-					'pay'             => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'pay' ) ),
-					'payment_methods' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'customer-payment-methods' ) ),
+					'charge_view'     => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'charge-view' ) ),
+					'capture'         => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'capture' ) ),
+					'void'            => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'void' ) ),
+					'pay'             => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'pay' ) ),
+					'payment_methods' => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->order_actions->rest_uri( 'customer-payment-methods' ) ),
 				),
 				'messages' => array(
 					'capture_amount' => __( 'If the capture amount is less than the order total, make sure you edit your order line items to reflect the new capture amount.', 'woo-stripe-payment' )

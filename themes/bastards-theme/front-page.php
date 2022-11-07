@@ -13,7 +13,7 @@
                 <p class="hero-text">Act like a dog ... Wear it like a dog.</p>
             </div>
             <video disableRemotePlayback  autoplay="" loop="" muted="" playsinline="" data-wf-ignore="true" >
-            <source src="<?php echo get_template_directory_uri(); ?>/assets/bastards fri_hero video_small.mp4" type="video/webm">
+            <source src="<?php echo get_template_directory_uri(); ?>/assets/bastards fri_hero video_small_small.mp4" type="video/webm">
             </video>
           
         </div>

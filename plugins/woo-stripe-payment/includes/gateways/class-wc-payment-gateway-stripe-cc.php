@@ -15,6 +15,8 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 
 	protected $payment_method_type = 'card';
 
+	public $installments;
+
 	public function __construct() {
 		$this->id                 = 'stripe_cc';
 		$this->tab_title          = __( 'Credit/Debit Cards', 'woo-stripe-payment' );
@@ -23,6 +25,7 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 		$this->method_title       = __( 'Stripe Credit Cards', 'woo-stripe-payment' );
 		$this->method_description = __( 'Credit card gateway that integrates with your Stripe account.', 'woo-stripe-payment' );
 		parent::__construct();
+		$this->installments = \PaymentPlugins\Stripe\Installments\InstallmentController::instance();
 	}
 
 	public function get_icon() {
@@ -62,6 +65,7 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 			array(
 				'cardOptions'        => $this->get_card_form_options(),
 				'customFieldOptions' => $this->get_card_custom_field_options(),
+				'cardFormType'       => $this->get_active_card_form_type(),
 				'custom_form'        => $this->is_custom_form_active(),
 				'custom_form_name'   => $this->get_option( 'custom_form' ),
 				'html'               => array( 'card_brand' => sprintf( '<img id="wc-stripe-card" src="%s" />', $this->get_custom_form()['cardBrand'] ) ),
@@ -77,7 +81,10 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 				),
 				'postal_regex'       => $this->get_postal_code_regex(),
 				'notice_location'    => $this->get_option( 'notice_location' ),
-				'notice_selector'    => $this->get_notice_css_selector()
+				'notice_selector'    => $this->get_notice_css_selector(),
+				'installments'       => array(
+					'loading' => __( 'Loading installments...', 'woo-stripe-payment' )
+				)
 			)
 		);
 	}
@@ -137,6 +144,11 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 	public function get_element_options( $options = array() ) {
 		if ( $this->is_custom_form_active() ) {
 			return parent::get_element_options( $this->get_custom_form()['elementOptions'] );
+		} elseif ( $this->is_payment_element_active() ) {
+			$payment_intent = \WC_Stripe_Utils::get_payment_intent_from_session();
+			if ( $payment_intent ) {
+				return parent::get_element_options( array( 'clientSecret' => $payment_intent->client_secret ) );
+			}
 		}
 
 		return parent::get_element_options();
@@ -149,6 +161,10 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 	 */
 	public function is_custom_form_active() {
 		return $this->get_option( 'form_type' ) === 'custom';
+	}
+
+	public function is_payment_element_active() {
+		return $this->get_option( 'form_type' ) === 'payment';
 	}
 
 	public function get_custom_form_template() {
@@ -271,6 +287,61 @@ class WC_Payment_Gateway_Stripe_CC extends WC_Payment_Gateway_Stripe {
 		}
 
 		return $selector;
+	}
+
+	public function is_installment_available() {
+		$order_id = null;
+		if ( is_checkout_pay_page() ) {
+			global $wp;
+			$order_id = absint( $wp->query_vars['order-pay'] );
+		}
+
+		return $this->installments->is_available( $order_id );
+	}
+
+	public function get_confirmation_method( $order = null ) {
+		return $this->is_payment_element_active() ? 'automatic' : 'manual';
+	}
+
+	/**
+	 * @return string Serves as a wrapper for the form_type option with some validations to ensure
+	 *                a payment intent exists in the session.
+	 */
+	protected function get_active_card_form_type() {
+		$type = $this->get_option( 'form_type' );
+		if ( $this->is_payment_element_active() ) {
+			$payment_intent = WC_Stripe_Utils::get_payment_intent_from_session();
+			if ( ! $payment_intent ) {
+				$type = 'inline';
+			}
+		}
+
+		return $type;
+	}
+
+	public function validate_form_type_field( $key, $value ) {
+		if ( $value !== 'payment' && stripe_wc()->advanced_settings->is_active( 'link_enabled' ) ) {
+			$value = 'payment';
+			WC_Admin_Settings::add_error( __( 'Only the Stripe payment form can be used while Link is enabled.', 'woo-stripe-payment' ) );
+		} elseif ( $value === 'payment' && wc_stripe_test_mode() ) {
+			$key = wc_stripe_get_publishable_key( 'live' );
+			if ( ! $key ) {
+				$value = 'inline';
+				WC_Admin_Settings::add_error( __( 'The Payment Element card form design is only available to connected accounts at this time because it\'s a Stripe beta feature. To use the Payment Element in test mode, use the connect option on the API Settings page.', 'woo-stripe-payment' ) );
+			}
+		}
+
+		return $value;
+	}
+
+	public function get_form_fields() {
+		$fields = parent::get_form_fields();
+		if ( wc_stripe_test_mode() ) {
+			// until server side updates for the payment element are released fully, show a notice
+			$fields['form_type']['options']['payment'] = __( 'Stripe payment form (beta feature)', 'woo-stripe-payment' );
+		}
+
+		return $fields;
 	}
 
 }

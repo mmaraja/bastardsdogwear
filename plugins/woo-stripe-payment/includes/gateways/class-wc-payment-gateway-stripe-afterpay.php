@@ -310,7 +310,7 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 	 */
 	public function validate_local_payment_available( $currency, $billing_country, $total ) {
 		$_available      = false;
-		$account_country = stripe_wc()->account_settings->get_option( 'country' );
+		$account_country = stripe_wc()->account_settings->get_account_country( wc_stripe_mode() );
 		// in test mode, the API keys might have been manually entered which
 		// means the account settings 'country' value will be blank
 		if ( empty( $account_country ) && wc_stripe_mode() === 'test' ) {
@@ -338,8 +338,7 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 		$params['supported_locales'] = $this->get_supported_locales();
 		$params['requirements']      = $this->get_required_parameters();
 		$params['hide_ineligible']   = $this->is_active( 'hide_ineligible' ) ? 'yes' : 'no';
-		$locale                      = get_locale();
-		$params['locale']            = $locale ? str_replace( '_', '-', substr( $locale, 0, 5 ) ) : 'auto';
+		$params['locale']            = wc_stripe_get_site_locale();
 
 		return $params;
 	}
@@ -349,7 +348,6 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 	}
 
 	public function get_element_options( $options = array() ) {
-		$locale = get_locale();
 		$locale = wc_stripe_get_site_locale();
 		if ( ! in_array( $locale, $this->get_supported_locales() ) ) {
 			$locale = 'auto';

@@ -73,7 +73,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 				'callback' => array( $this, 'rtwpvg_migration_queue' )
 			);
 
-			return apply_filters( 'woo_variation_gallery_add_to_migration_list', $tools );
+			return apply_filters( 'woo_variation_gallery_add_to_migration_list', $tools, $this );
 		}
 
 		public function wc_avi_migration_queue() {
@@ -102,6 +102,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 
 		public function rtwpvg_migration_queue() {
 			Woo_Variation_Gallery_Migration::queue_migration( 'rtwpvg' );
+
 			return esc_html__( 'Variation product migration has been scheduled to run in the background.', 'woo-variation-gallery' );
 		}
 
@@ -132,7 +133,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Migrate', false ) ):
 				$images            = array_values( array_filter( $wc_gallery_images ) );
 			}
 
-			return $images;
+			return apply_filters( 'woo_variation_gallery_migrated_images', $images, $migrate_from, $product_id );
 		}
 	}
 endif;

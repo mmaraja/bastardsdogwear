@@ -10,18 +10,20 @@ class WC_Stripe_Admin_Assets {
 
 	public function __construct() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-
 		add_action( 'wp_print_scripts', array( __CLASS__, 'localize_scripts' ) );
-
 		add_action( 'admin_footer', array( __CLASS__, 'localize_scripts' ) );
 		add_action( 'wc_stripe_localize_stripe_advanced_settings', array( __CLASS__, 'localize_advanced_scripts' ) );
 	}
 
 	public function enqueue_scripts() {
+		global $pagenow;
 		$screen    = get_current_screen();
 		$screen_id = $screen ? $screen->id : '';
 		$js_path   = stripe_wc()->assets_url() . 'js/';
 		$css_path  = stripe_wc()->assets_url() . 'css/';
+
+		stripe_wc()->assets()->register_script( 'wc-stripe-admin-feedback', 'assets/build/admin-feedback.js' );
+		stripe_wc()->assets()->register_style( 'wc-stripe-admin-feedback', 'assets/build/admin-feedback-styles.css' );
 
 		wp_register_script( 'wc-stripe-help-widget', $js_path . 'admin/help-widget.js', array( 'jquery' ), stripe_wc()->version(), true );
 
@@ -60,12 +62,16 @@ class WC_Stripe_Admin_Assets {
 					'wc_stripe_setting_params',
 					array(
 						'routes'     => array(
-							'apple_domain'    => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'apple-domain' ) ),
-							'create_webhook'  => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'create-webhook' ) ),
-							'delete_webhook'  => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'delete-webhook' ) ),
-							'connection_test' => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'connection-test' ) ),
+							'apple_domain'      => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'apple-domain' ) ),
+							'create_webhook'    => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'create-webhook' ) ),
+							'delete_webhook'    => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'delete-webhook' ) ),
+							'connection_test'   => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'connection-test' ) ),
+							'delete_connection' => WC_Stripe_Rest_API::get_admin_endpoint( stripe_wc()->rest_api->settings->rest_uri( 'delete-connection' ) )
 						),
 						'rest_nonce' => wp_create_nonce( 'wp_rest' ),
+						'messages'   => array(
+							'delete_connection' => __( 'Are you sure you want to delete your connection data?', 'woo-stripe-payment' )
+						)
 					)
 				);
 			}
@@ -96,6 +102,32 @@ class WC_Stripe_Admin_Assets {
 					wp_enqueue_script( 'wc-stripe-help-widget' );
 				}
 			}
+		}
+		if ( $pagenow === 'plugins.php' ) {
+			wp_enqueue_script( 'wc-stripe-admin-feedback' );
+			wp_enqueue_style( 'wc-stripe-admin-feedback' );
+			add_action( 'admin_print_scripts', function () {
+				stripe_wc()->data_api()->print_data( 'stripeFeedbackParams', [
+					'title'           => esc_html__( 'Feedback', 'woo-stripe-payment' ),
+					'description'     => esc_html__( 'With your feedback we can make the plugin better.', 'woo-stripe-payment' ),
+					'reasonTextLabel' => esc_html__( 'Additional Info', 'woo-stripe-payment' ),
+					'placeholders'    => array(
+						'found_better' => __( 'What is the plugin\'s name and why was it better?', 'woo-stripe-payment' ),
+						'error'        => __( 'What error did you encounter?', 'woo-stripe-payment' )
+					),
+					'buttons'         => [
+						'primary'   => __( 'Submit & Deactivate', 'woo-stripe-payment' ),
+						'secondary' => __( 'Skip & Deactivate', 'woo-stripe-payment' )
+					],
+					'options'         => [
+						'found_better' => esc_html__( 'I found a better Stripe plugin', 'woo-stripe-payment' ),
+						'error'        => esc_html__( 'The plugin caused errors', 'woo-stripe-payment' ),
+						'temporary'    => esc_html__( 'This is a temporary deactivation', 'woo-stripe-payment' ),
+						'other'        => esc_html__( 'Other', 'woo-stripe-payment' )
+					],
+					'route'           => WC_Stripe_Rest_API::get_admin_endpoint( '/wc-stripe/v1/admin/feedback' )
+				] );
+			} );
 		}
 	}
 

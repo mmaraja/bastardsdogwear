@@ -15,14 +15,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 <div class="postbox paoc-pro-feature">
 	<div class="postbox-header">
 		<h3 class="hndle">
-			<span><?php _e( 'MailChimp Settings', 'popup-anything-on-click' ); ?></span>
+			<span><?php esc_html_e( 'MailChimp Settings', 'popup-anything-on-click' ); ?></span>
 		</h3>
 	</div>
 
 	<!-- Pro Notice -->
 	<div class="paoc-pro-notice">
 		<i class="dashicons dashicons-money-alt"></i>
-		<?php echo sprintf( __( 'Utilize these <a href="%s" target="_blank">Premium Features</a> to get best of this plugin.', 'popup-anything-on-click'), POPUPAOC_PLUGIN_LINK_UNLOCK); ?>
+		<?php echo sprintf( __( 'Utilize these <a href="%s" target="_blank">Premium Features</a> to get best of this plugin with Annual or Lifetime bundle deal.', 'popup-anything-on-click'), POPUPAOC_PLUGIN_LINK_UNLOCK); ?>
 	</div>
 
 	<div class="inside">
@@ -30,7 +30,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<tbody>
 				<tr>
 					<th scope="row">
-						<label for="paoc-intgs-mc-api-key"><?php _e('API Key', 'popup-anything-on-click'); ?></label>
+						<label for="paoc-intgs-mc-api-key"><?php esc_html_e('API Key', 'popup-anything-on-click'); ?></label>
 					</th>
 					<td>
 						<input type="text" name="" class="large-text" id="paoc-intgs-mc-api-key" value="" disabled="disabled" /><br/>

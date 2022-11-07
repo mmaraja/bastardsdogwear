@@ -218,12 +218,6 @@ class WC_Payment_Gateway_Stripe_GooglePay extends WC_Payment_Gateway_Stripe {
 		return $this->get_formatted_shipping_label( $price, $rate, $incl_tax );
 	}
 
-	public function add_to_cart_response( $data ) {
-		$data['googlepay']['displayItems'] = $this->get_display_items();
-
-		return $data;
-	}
-
 	/**
 	 * @param array $deps
 	 * @param       $scripts

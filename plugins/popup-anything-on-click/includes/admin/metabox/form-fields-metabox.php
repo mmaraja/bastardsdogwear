@@ -24,12 +24,12 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<table class="form-table paoc-form-field-row">
 						<tbody>
 							<tr>
-								<th><label for="paoc-field-type"><?php _e('Field Type', 'popup-anything-on-click'); ?></label></th>
+								<th><label for="paoc-field-type"><?php esc_html_e('Field Type', 'popup-anything-on-click'); ?></label></th>
 								<td>
 									<select name="" class="paoc-select paoc-field-type" disabled="disabled">
 										<option value=""><?php esc_html_e('Email', 'popup-anything-on-click'); ?></option>
 									</select><br/>
-									<span class="description paoc-email-fields"><?php _e('Select form field type.', 'popup-anything-on-click'); ?></span>
+									<span class="description paoc-email-fields"><?php esc_html_e('Select form field type.', 'popup-anything-on-click'); ?></span>
 								</td>
 								<td align="right" class="paoc-action-btn-wrp" style="width: 100px;">
 									<span class="paoc-action-btn paoc-action-add-btn paoc-add-form-field-row" title="<?php esc_html_e('Add', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-plus-alt"></i></span>
@@ -38,28 +38,28 @@ if ( ! defined( 'ABSPATH' ) ) {
 								</td>
 							</tr>
 							<tr>
-								<th><label for="paoc-field-label"><?php _e('Field Label', 'popup-anything-on-click'); ?></label></th>
+								<th><label for="paoc-field-label"><?php esc_html_e('Field Label', 'popup-anything-on-click'); ?></label></th>
 								<td>
 									<input type="text" name="" value="<?php esc_html_e('Email', 'popup-anything-on-click'); ?>" class="paoc-text large-text paoc-field-label" id="paoc-field-label" disabled="disabled" />
-									<span class="description paoc-email-fields"><?php _e('Enter form field label.', 'popup-anything-on-click'); ?></span>
+									<span class="description paoc-email-fields"><?php esc_html_e('Enter form field label.', 'popup-anything-on-click'); ?></span>
 								</td>
 							</tr>
 							<tr class="paoc-field-show paoc-field-hide-checkbox paoc-field-hide-date paoc-field-hide-math_captcha">
-								<th><label for="paoc-field-plch"><?php _e('Field Placeholder', 'popup-anything-on-click'); ?></label></th>
+								<th><label for="paoc-field-plch"><?php esc_html_e('Field Placeholder', 'popup-anything-on-click'); ?></label></th>
 								<td>
 									<input type="text" name="" value="<?php esc_html_e('Enter Your Email', 'popup-anything-on-click'); ?>" class="paoc-text large-text paoc-field-placeholder" id="paoc-field-plch" disabled="disabled" />
-									<span class="description paoc-email-fields"><?php _e('Enter form field placeholder.', 'popup-anything-on-click'); ?></span>
+									<span class="description paoc-email-fields"><?php esc_html_e('Enter form field placeholder.', 'popup-anything-on-click'); ?></span>
 								</td>
 							</tr>
 							<tr class="paoc-field-show paoc-field-hide-math_captcha">
-								<th><label for="paoc-field-require"><?php _e('Required', 'popup-anything-on-click'); ?></label></th>
+								<th><label for="paoc-field-require"><?php esc_html_e('Required', 'popup-anything-on-click'); ?></label></th>
 								<td>
 									<input type="checkbox" name="" value="1" class="paoc-checkbox regular-text paoc-field-require" id="paoc-field-require" disabled="disabled" /><br/>
-									<span class="description paoc-email-fields"><?php _e('Check this check box to enable required field.', 'popup-anything-on-click'); ?></span>
+									<span class="description paoc-email-fields"><?php esc_html_e('Check this check box to enable required field.', 'popup-anything-on-click'); ?></span>
 								</td>
 							</tr>
 							<tr>
-								<th><label><?php _e('Field Key', 'popup-anything-on-click'); ?></label></th>
+								<th><label><?php esc_html_e('Field Key', 'popup-anything-on-click'); ?></label></th>
 								<td>0</td>
 							</tr>
 							<tr>

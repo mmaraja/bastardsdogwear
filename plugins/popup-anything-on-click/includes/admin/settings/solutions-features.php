@@ -17,14 +17,28 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 <div id="wrap">
 	<div class="popupaoc-sf-wrap">
 		<div class="popupaoc-sf-inr">
+			<!-- Start - Popup Anything - Features -->
+			<div class="popupaoc-features-section popupaoc-team popupaoc-center">
+				<h1 class="popupaoc-heading">Now get best value from <span class="popupaoc-blue">Annual</span> OR <span class="popupaoc-blue">Lifetime</span> deal</h1>
+				<h2>And Build <span class="bg-highlight">better websites</span>, <span class="bg-highlight">landing pages</span> & <span class="bg-highlight">conversion flow</span></h2>
+				<h2>With <span class="popupaoc-blue">35+ plugins</span>, <span class="popupaoc-blue">2000+ templates</span> & $600 saving in <span class="popupaoc-blue">Essential Plugin Bundle</span></h2>
+				<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now This Deal</a>
+			</div>			
+			
+			<div class="popupaoc-features-section popupaoc-team popupaoc-center">
+				<h1 class="popupaoc-heading">Powerful Team Behind <span class="popupaoc-blue">PopupAnything</span></h1>
+					<div class="popupaoc-sf-cont">Alone we can do so little; together we can do so much. Our love language is helping small businesses grow and compete with the big guys.  Every time you see growth in your business, our little hearts go flip-flop!</div>
+					<p></p>
+					<div class="popupaoc-sf-cont">This is why I wanted to introduce you to <span class="popupaoc-blue">Anoop Ranawat & Team</span> at EssentialPlugin.com</div>
+					<img class="popupaoc-image" src="<?php echo POPUPAOC_URL; ?>/assets/images/wpos-team.png" alt="wpos team" />
+			</div>
+			<h1 class="popupaoc-heading">Boost Your Sales and Conversions with <span class="popupaoc-blue">PopupAnything</span></h1>
 			<!-- Start - Welcome Box -->
 			<div class="popupaoc-sf-welcome-wrap">
-				<div class="popupaoc-sf-welcome-inr">
-					<div class="popupaoc-sf-welcome-left">
-						<div class="popupaoc-sf-subtitle">Getting Started</div>
-						<h2 class="popupaoc-sf-title">Welcome to Popup Anything</h2>
-						<p class="popupaoc-sf-content">Instantly grow your email list, get more leads and increase sales with the #1 most powerful conversion optimization toolkit in the world.</p>
-						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a></br> <b>OR</b> </br><a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
+				<div class="popupaoc-sf-welcome-inr popupaoc-center">					
+						<h5 class="popupaoc-sf-content">Instantly <span class="popupaoc-blue">grow your email list, get more leads and increase sales</span> with the #1 most powerful conversion optimization toolkit in the world.</h5>
+						<h5 class="popupaoc-sf-content"><span class="popupaoc-blue">50,000+ </span>websites are using <span class="popupaoc-blue">PopupAnything</span> to turn their traffic into subscribers, leads and sales.</h5>
+						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a> <br /><b>OR</b> <br /><a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
 						<div class="popupaoc-rc-wrap">
 							<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 								<div class="popupaoc-rc-icon">
@@ -45,56 +59,11 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								</div>
 							</div>
 						</div>
+					<div class="popupaoc-sf-welcome-left">
+						
 					</div>
 					<div class="popupaoc-sf-welcome-right">
-						<div class="popupaoc-sf-fp-ttl">Free vs Pro</div>
-						<div class="popupaoc-sf-fp-box-wrp">
-							<div class="popupaoc-sf-fp-box">
-								<i class="dashicons dashicons-desktop"></i>
-								<div class="popupaoc-sf-box-ttl">Page Load</div>
-								<div class="popupaoc-sf-tag">Free</div>
-							</div>
-							<div class="popupaoc-sf-fp-box">
-								<i class="dashicons dashicons-admin-links"></i>
-								<div class="popupaoc-sf-box-ttl">Simple Link</div>
-								<div class="popupaoc-sf-tag">Free</div>
-							</div>
-							<div class="popupaoc-sf-fp-box">
-								<i class="dashicons dashicons-format-image"></i>
-								<div class="popupaoc-sf-box-ttl">Image Click</div>
-								<div class="popupaoc-sf-tag">Free</div>
-							</div>
-							<div class="popupaoc-sf-fp-box">
-								<i class="dashicons dashicons-button"></i>
-								<div class="popupaoc-sf-box-ttl">Button Click</div>
-								<div class="popupaoc-sf-tag">Free</div>
-							</div>
-							<div class="popupaoc-sf-fp-box popupaoc-sf-pro-box">
-								<i class="dashicons dashicons-no"></i>
-								<div class="popupaoc-sf-box-ttl">Inactivity Popup</div>
-								<div class="popupaoc-sf-tag">Pro</div>
-							</div>
-							<div class="popupaoc-sf-fp-box popupaoc-sf-pro-box">
-								<i class="dashicons dashicons-arrow-down-alt"></i>
-								<div class="popupaoc-sf-box-ttl">Scroll Down</div>
-								<div class="popupaoc-sf-tag">Pro</div>
-							</div>
-							<div class="popupaoc-sf-fp-box popupaoc-sf-pro-box">
-								<i class="dashicons dashicons-arrow-up-alt"></i>
-								<div class="popupaoc-sf-box-ttl">Scroll Up</div>
-								<div class="popupaoc-sf-tag">Pro</div>
-							</div>
-							<div class="popupaoc-sf-fp-box popupaoc-sf-pro-box">
-								<i class="dashicons dashicons-exit"></i>
-								<div class="popupaoc-sf-box-ttl">Exit Intent</div>
-								<div class="popupaoc-sf-tag">Pro</div>
-							</div>
-							<div class="popupaoc-sf-fp-box popupaoc-sf-pro-box">
-								<i class="dashicons dashicons-external"></i>
-								<div class="popupaoc-sf-box-ttl">HTML Element Click</div>
-								<div class="popupaoc-sf-tag">Pro</div>
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -102,11 +71,11 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 			
 			<!-- Start - Popup Anything - Features -->
 			<div class="popupaoc-features-section">
-				<div class="paoc-center popupaoc-features-ttl">
-					<h2 class="popupaoc-sf-ttl">Powerful Pro Features, Simplified</h2>
-					<div class="popupaoc-sf-cont">Convert Your Visitors into Subscribers & Customers</div>
+				<div class="popupaoc-center">
+					<h1 class="popupaoc-heading">Powerful Pro Features, Simplified</h1>
+					<div class="popupaoc-sf-cont">Convert Your Visitors into Subscribers & Customers.</div>
 				</div>
-				<div class="popupaoc-features-section-inr">
+				<div class="popupaoc-sf-welcome-wrap popupaoc-center">
 					<div class="popupaoc-features-box-wrap">
 						<ul class="popupaoc-features-box-grid">
 							<li>
@@ -172,7 +141,7 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 							Popup Live Preview</li>
 						</ul>
 					</div>
-					<a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now Pro Features</a>
+					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
 					<div class="popupaoc-rc-wrap">
 						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
@@ -198,65 +167,114 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 			<!-- End - Popup Anything - Features -->
 			
 			<!-- Start - Industry Wise Solutions -->
-			<div class="paoc-center popupaoc-solutions-section">
-				<h2 class="popupaoc-sf-ttl">Industry Wise Solutions</h2>
+			<div class="popupaoc-solutions-section popupaoc-top-rsn popupaoc-left">
+				<h1 class="popupaoc-heading">Top 4 Reasons Why People Love <span class="popupaoc-blue">PopupAnything</span></h1>
+				<div class="popupaoc-sf-cont popupaoc-center">Here's why business owners <span class="popupaoc-blue">love PopupAnything</span>, and you will too!</div>
 				<div class="popupaoc-solutions-section-inr">
 					<div class="popupaoc-solutions-box-wrap">
 						<div class="popupaoc-solutions-box-grid">
-							<div class="popupaoc-box-ttl">Publishers</div>
-							<ul>
-								<li>Grow Your Email List</li>
-								<li>Increase Your Pageviews</li>
-								<li>Reduce Cart Abandonment</li>
-								<li>Targeted Website Messages</li>
-								<li>Onsite Retargeting</li>
-								<li>Increase Sales Conversion</li>
-							</ul>
+							
+							<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/model-popup.png" alt="model-popup" />
 						</div>
 						<div class="popupaoc-solutions-box-grid">
-							<div class="popupaoc-box-ttl">E-commerce</div>
-							<ul>
-								<li>Reduce Cart Abandonment</li>
-								<li>Onsite Retargeting</li>
-								<li>Increase Sales Conversion</li>
-								<li>Grow Your Email List</li>
-								<li>Increase Your Pageviews</li>
-								<li>Targeted Website Messages</li>
-							</ul>
+							<div class="popupaoc-feature__text">
+								<h3>Display Popup On Right Time</h3>
+								<p>Show a popup of any action on your website, including <span class="popupaoc-blue">Welcome, Exit Intent, Bar, Referrer , UTM, Schedule Slide In, Fullscreen</span>, and more. Convert any link, button or image into a popup. </p>
+							</div>
+						
+						</div>
+						
+						
+					</div>
+					<div class="popupaoc-solutions-box-wrap">
+						<div class="popupaoc-solutions-box-grid">
+							<div class="popupaoc-feature__text">
+								<h3>Save Your Cart Abandonment Rate</h3>
+								<p>Show your <span class="popupaoc-blue">popup alert or message</span> when any user try to leave your website on <span class="popupaoc-blue">checkout page</span>. Attract them with some offer. Detects user's mouse behavior and show them a targeted message as they are leaving.</p>
+							</div>
 						</div>
 						<div class="popupaoc-solutions-box-grid">
-							<div class="popupaoc-box-ttl">Agencies</div>
-							<ul>
-								<li>Custom Branding</li>
-								<li>Complete Access Control</li>
-								<li>Grow Your Email List</li>
-								<li>Increase Your Pageviews</li>
-								<li>Targeted Website Messages</li>
-								<li>Onsite Retargeting</li>
-							</ul>
+							<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/checkout.png" alt="Checkout" />
+						
+						</div>
+						
+						
+					</div>
+					<div class="popupaoc-solutions-box-wrap">
+						<div class="popupaoc-solutions-box-grid">
+							<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/mail-popup.png" alt="mail-popup" />
+							
 						</div>
 						<div class="popupaoc-solutions-box-grid">
-							<div class="popupaoc-box-ttl">B2B</div>
-							<ul>
-								<li>Grow Your Email List</li>
-								<li>Increase Your Pageviews</li>
-								<li>Targeted Website Messages</li>
-								<li>Custom Branding</li>
-								<li>Complete Access Control</li>
-								<li>Onsite Retargeting</li>
-							</ul>
+							<div class="popupaoc-feature__text">
+								<h3>Increase Your E-Mail Marketing</h3>
+								<p>Show <span class="popupaoc-blue">subscription form on popup, when user reading your blog, on welcome screen</span>. Like this you can collect the mail ids of users and target them with any email marketing tool. </p>
+							</div>
+						
 						</div>
+						
+						
+					</div>
+					<div class="popupaoc-solutions-box-wrap">
+						<div class="popupaoc-solutions-box-grid">
+							<div class="popupaoc-feature__text">
+								<h3>Popup Based on Geo-Location Vise</h3>
+								<p>Show <span class="popupaoc-blue">diffrent popup for diffrent location</span>. Improve conversions by personalizing campaigns based on visitor's location.</p>
+							</div>
+						</div>
+						<div class="popupaoc-solutions-box-grid">
+							<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/geo-location.png" alt="popup-design" />
+						
+						</div>
+						
+						
 					</div>
 				</div>
+				<div class="popupaoc-center">
+					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
+				</div>	
+					<div class="popupaoc-rc-wrap">
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
+							<div class="popupaoc-rc-icon">
+								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/14-days-money-back-guarantee.png" alt="14-days-money-back-guarantee" title="14-days-money-back-guarantee" />
+							</div>
+							<div class="popupaoc-rc-cont">
+								<h3>14 Days Refund Policy</h3>
+								<p>14-day No Question Asked Refund Guarantee</p>
+							</div>
+						</div>
+						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
+							<div class="popupaoc-rc-icon">
+								<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/popup-icon/popup-design.png" alt="popup-design" title="popup-design" />
+							</div>
+							<div class="popupaoc-rc-cont">
+									<h3>Include Done-For-You Popup Setup</h3>
+									<p>Our conversion experts will design 2 free popup / month for you to get maximum results.</p>
+								</div>
+						</div>
+					</div>
 			</div>
 			<!-- End - Industry Wise Solutions -->
 
+			<!-- Start - Pagebuilder Section -->
 			
+			<div class="popupaoc-sf-testimonial-wrap">
+				<div class="paoc-center popupaoc-features-ttl">
+					<h1 class="popupaoc-heading">Seamless Integration With All Major <span class="popupaoc-blue">Page Builders</span></h1>	
+					<div class="popupaoc-sf-cont popupaoc-center">Compatible with Gutenberg, DIVI, Elementor, Avada, VC/WPbakery etc page builder/themes</div>
+					<div class="popupaoc-sf-welcome-wrap popupaoc-center">
+						<img src="<?php echo esc_url( POPUPAOC_URL ); ?>assets/images/page-builder-icon.png" alt="page-builder-icon" title="page-builder-icon" />	
+					</div>	
+				</div>
+	
+			</div>
+			<!-- End - pagebuilder Section -->
 
 			<!-- Start - Testimonial Section -->
 			<div class="popupaoc-sf-testimonial-wrap">
 				<div class="paoc-center popupaoc-features-ttl">
-					<h2 class="popupaoc-sf-ttl">Looking for a Reason to Use Popup Anything? Here are 40+...</h2>				
+					<h1 class="popupaoc-heading">Looking for a Reason to Use <span class="popupaoc-blue">PopupAnything</span>?</h1>	
+					<div class="popupaoc-sf-cont popupaoc-center"> Here are 40+...</div>	
 										
 				</div>
 				<div class="popupaoc-testimonial-section-inr">
@@ -299,7 +317,7 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								<div class="popupaoc-testimonial-rating"><img src="<?php echo POPUPAOC_URL; ?>/assets/images/rating.png" /></div>
 						</div>
 					</div>
-					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a> OR <a href="<?php echo POPUPAOC_PLUGIN_LINK_WELCOME; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange">Grab Now Pro Features</a>
+					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a> OR <a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
 					<div class="popupaoc-rc-wrap">
 						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">

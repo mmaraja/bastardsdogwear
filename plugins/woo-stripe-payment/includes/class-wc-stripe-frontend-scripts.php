@@ -20,13 +20,15 @@ class WC_Stripe_Frontend_Scripts {
 
 	public $localized_data = array();
 
-	public $global_scripts
-		= array(
-			'external' => 'https://js.stripe.com/v3/',
-			'gpay'     => 'https://pay.google.com/gp/p/js/pay.js'
-		);
+	public $global_scripts = array(
+		'external' => 'https://js.stripe.com/v3/',
+		'gpay'     => 'https://pay.google.com/gp/p/js/pay.js'
+	);
 
-	public function __construct() {
+	public $assets_api;
+
+	public function __construct( \PaymentPlugins\Stripe\Assets\AssetsApi $assets_api ) {
+		$this->assets_api = $assets_api;
 		add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'wp_print_scripts', array( $this, 'localize_scripts' ), 5 );
 		add_action( 'wp_print_footer_scripts', array( $this, 'localize_scripts' ), 5 );
@@ -74,13 +76,19 @@ class WC_Stripe_Frontend_Scripts {
 	}
 
 	public function localize_scripts() {
+		$account_id = wc_stripe_get_account_id();
 		$this->localize_script( 'wc-stripe',
 			array(
-				'api_key' => wc_stripe_get_publishable_key(),
-				'account' => wc_stripe_get_account_id(),
-				'page'    => $this->get_page_id(),
-				'version' => stripe_wc()->version(),
-				'mode'    => wc_stripe_mode()
+				'api_key'      => wc_stripe_get_publishable_key(),
+				'account'      => $account_id,
+				'page'         => $this->get_page_id(),
+				'version'      => stripe_wc()->version(),
+				'mode'         => wc_stripe_mode(),
+				'stripeParams' => array(
+					'stripeAccount' => $account_id,
+					'apiVersion'    => '2020-08-27',
+					'betas'         => array()
+				)
 			),
 			'wc_stripe_params_v3'
 		);

@@ -1,1 +1,1 @@
-{"version":3,"sources":["webpack://woo-stripe-payment/./packages/checkoutwc/assets/css/styles.scss"],"names":[],"mappings":";;;AAAA","file":"styles.js","sourcesContent":["// extracted by mini-css-extract-plugin\nexport {};"],"sourceRoot":""}
+{"version":3,"file":"styles.js","mappings":";;;AAAA","sources":["webpack://woo-stripe-payment/./packages/checkoutwc/assets/css/styles.scss"],"sourcesContent":["// extracted by mini-css-extract-plugin\nexport {};"],"names":[],"sourceRoot":""}

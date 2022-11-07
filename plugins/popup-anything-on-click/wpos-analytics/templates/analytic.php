@@ -27,20 +27,20 @@ if ( !defined( 'ABSPATH' ) ) {
 			<div class="wpos-anylc-optin-icon-wrap">
 				<div class="wpos-anylc-optin-icon wpos-anylc-wp-badge"><i class="dashicons dashicons-wordpress"></i></div>
 				<div class="wpos-anylc-optin-plus"><i class="dashicons dashicons-plus"></i></div>
-				<div class="wpos-anylc-optin-icon"><img src="<?php echo $analy_product['icon']; ?>" alt="Icon" /></div>
+				<div class="wpos-anylc-optin-icon"><img src="<?php echo esc_url( $analy_product['icon'] ); ?>" alt="Icon" /></div>
 				<div class="wpos-anylc-optin-plus"><i class="dashicons dashicons-plus"></i></div>
-				<div class="wpos-anylc-optin-icon"><img src="<?php echo $analy_product['brand_icon']; ?>" alt="Icon" /></div>
+				<div class="wpos-anylc-optin-icon"><img src="<?php echo esc_url( $analy_product['brand_icon'] ); ?>" alt="Icon" /></div>
 			</div>
 			<div class="wpos-anylc-optin-cnt">
-				<p>Hey <?php echo ucfirst($user_name); ?>,</p>
+				<p>Hey <?php echo ucfirst( $user_name ); ?>,</p>
 				<p>Don't ever miss an opportunity to <b>opt in</b> for Email Notifications / Announcements about exciting New Features and Update Releases.</p>
-				<p>Contribute in helping us making <b><?php echo $product_name; ?></b> compatible with most themes and plugins by allowing to share non-sensitive data to <a target="_blank" href="<?php echo POPUPAOC_SITE_LINK; ?>">essentialplugin.com</a> about your website.</p>
-				<p>If you skip this, that's okay! <b><?php echo $product_name; ?></b> will still work just fine.</p>
+				<p>Contribute in helping us making <b><?php echo esc_html( $product_name ); ?></b> compatible with most themes and plugins by allowing to share non-sensitive data to <a target="_blank" href="https://www.essentialplugin.com/">essentialplugin.com</a> about your website.</p>
+				<p>If you skip this, that's okay! <b><?php echo esc_html( $product_name ); ?></b> will still work just fine.</p>
 
-				<?php if( !empty( $analy_product['promotion'] ) ) { ?>
+				<?php if( ! empty( $analy_product['promotion'] ) ) { ?>
 				<div class="wpos-anylc-promotion-wrap">
 					<?php foreach( $analy_product['promotion'] as $promotion_key => $promotion_data ) { ?>
-					<div><label><input type="checkbox" value="<?php echo $promotion_key; ?>" name="promotion[]" checked="checked" /> <?php echo $promotion_data['name']; ?></label></div>
+					<div><label><input type="checkbox" value="<?php echo esc_attr( $promotion_key ); ?>" name="promotion[]" checked="checked" /> <?php echo esc_html( $promotion_data['name'] ); ?></label></div>
 					<?php } ?>
 				</div>
 				<?php } ?>
@@ -87,7 +87,7 @@ if ( !defined( 'ABSPATH' ) ) {
 				</div>
 			</div>
 			<div class="wpos-anylc-terms">
-				<a href="<?php echo POPUPAOC_SITE_LINK; ?>/privacy-policy/#free-pluign-info" target="_blank">Privacy Policy</a> - <a href="<?php echo POPUPAOC_SITE_LINK; ?>/term-and-condition/" target="_blank">Terms of Service</a>
+				<a href="https://www.essentialplugin.com/privacy-policy/#free-pluign-info" target="_blank">Privacy Policy</a> - <a href="https://www.essentialplugin.com/term-and-condition/" target="_blank">Terms of Service</a>
 			</div>
 		</div>
 	</form>

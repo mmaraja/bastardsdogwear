@@ -44,4 +44,14 @@
   li.wc-stripe-checkout-banner-gateway {
     margin: 0 5px;
   }
+
+  .wfacp_smart_buttons {
+    .wfacp_smart_button_outer_buttons {
+      &:not(.wfacp_button_count_1) {
+        .wc-stripe-checkout-banner-gateway {
+          margin: 0;
+        }
+      }
+    }
+  }
 }

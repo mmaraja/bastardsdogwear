@@ -21,46 +21,46 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-enable-email"><?php _e('Enable', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-enable-email"><?php esc_html_e('Enable', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" class="paoc-checkbox paoc-enable-email" id="paoc-enable-email" disabled="disabled" /><br />
-					<span class="description"><?php _e('Check this box to enable admin email notification.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box to enable admin email notification.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-email-to"><?php _e('Mail To', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-email-to"><?php esc_html_e('Mail To', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" class="paoc-text large-text paoc-email-to" id="paoc-email-to" disabled="disabled" />
-					<span class="description"><?php _e('Enter notification email address to send which one.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter notification email address to send which one.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-email-subject"><?php _e('Subject', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-email-subject"><?php esc_html_e('Subject', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" class="paoc-text large-text paoc-email-subject" id="paoc-email-subject" disabled="disabled" />
-					<span class="description"><?php _e('Enter notification admin email subject. Available template tags are', 'popup-anything-on-click'); ?></span><br/>
+					<span class="description"><?php esc_html_e('Enter notification admin email subject. Available template tags are', 'popup-anything-on-click'); ?></span><br/>
 					<div class="paoc-code-tag-wrap">
-						<code class="paoc-copy-clipboard">{ID}</code> - <span class="description"><?php _e('Display popup ID.', 'popup-anything-on-click'); ?></span>
+						<code class="paoc-copy-clipboard">{ID}</code> - <span class="description"><?php esc_html_e('Display popup ID.', 'popup-anything-on-click'); ?></span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-email-heading"><?php _e('Heading', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-email-heading"><?php esc_html_e('Heading', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" class="paoc-text large-text paoc-email-heading" id="paoc-email-heading" disabled="disabled" />
-					<span class="description"><?php _e('Enter notification admin email heading.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter notification admin email heading.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-email-msg"><?php _e('Message', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-email-msg"><?php esc_html_e('Message', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td class="paoc-pro-disabled">
 					<?php wp_editor( '', 'paoc-email-msg', array('textarea_name' => '', 'textarea_rows' => 8, 'media_buttons' => true, 'class' => 'paoc-email-msg') ); ?>
@@ -70,43 +70,43 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 			<tr>
 				<th colspan="2">
-					<div class="paoc-sub-sett-title"><i class="dashicons dashicons-admin-generic"></i> <?php _e('User Email Settings', 'popup-anything-on-click'); ?></div>
+					<div class="paoc-sub-sett-title"><i class="dashicons dashicons-admin-generic"></i> <?php esc_html_e('User Email Settings', 'popup-anything-on-click'); ?></div>
 				</th>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-enable-user-email"><?php _e('Enable', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-enable-user-email"><?php esc_html_e('Enable', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" class="paoc-checkbox paoc-enable-user-email" id="paoc-enable-user-email" disabled="disabled" /><br />
-					<span class="description"><?php _e('Check this box to enable user email notification.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box to enable user email notification.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-user-email-subject"><?php _e('Subject', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-user-email-subject"><?php esc_html_e('Subject', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" class="paoc-text large-text paoc-user-email-subject" id="paoc-user-email-subject" disabled="disabled" />
-					<span class="description"><?php _e('Enter notification user email subject. Available template tags are', 'popup-anything-on-click'); ?></span><br/>
+					<span class="description"><?php esc_html_e('Enter notification user email subject. Available template tags are', 'popup-anything-on-click'); ?></span><br/>
 					<div class="paoc-code-tag-wrap">
-						<code class="paoc-copy-clipboard">{name}</code> - <span class="description"><?php _e('Display user full name.', 'popup-anything-on-click'); ?></span>
+						<code class="paoc-copy-clipboard">{name}</code> - <span class="description"><?php esc_html_e('Display user full name.', 'popup-anything-on-click'); ?></span>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-user-email-heading"><?php _e('Heading', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-user-email-heading"><?php esc_html_e('Heading', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" class="paoc-text large-text paoc-user-email-heading" id="paoc-user-email-heading" disabled="disabled" />
-					<span class="description"><?php _e('Enter notification user email heading.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter notification user email heading.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 			<tr>
 				<th>
-					<label for="paoc-user-email-msg"><?php _e('Message', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-user-email-msg"><?php esc_html_e('Message', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td class="paoc-pro-disabled">
 					<?php wp_editor( '', 'paoc-user-email-msg', array('textarea_name' => '', 'textarea_rows' => 8, 'media_buttons' => true, 'class' => 'paoc-user-email-msg') ); ?>

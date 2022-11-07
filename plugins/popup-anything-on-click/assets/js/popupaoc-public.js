@@ -13,6 +13,7 @@ var paoc_ideal_timer = 0;
 	$('.paoc-popup iframe[src*="screencast-o-matic.com"]').wrap('<div class="paoc-iframe-wrap" />');
 	$('.paoc-popup iframe[src*="videopress.com"]').wrap('<div class="paoc-iframe-wrap" />');
 	$('.paoc-popup iframe[src*="video.wordpress.com"]').wrap('<div class="paoc-iframe-wrap" />');
+	$('.paoc-popup iframe[src*="fast.wistia.net"]').wrap('<div class="paoc-iframe-wrap" />');
 
 	/* Zero the idle timer on mouse movement */
 	$(document).on('mousemove keypress scroll click touchstart touchmove', function() {

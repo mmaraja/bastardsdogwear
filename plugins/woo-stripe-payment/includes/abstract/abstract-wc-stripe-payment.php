@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit();
 
 /**
  *
- * @since 3.1.0
- * @author PaymentPlugins
+ * @since   3.1.0
+ * @author  PaymentPlugins
  * @package Stripe/Abstract
  *
  */
@@ -167,8 +167,7 @@ abstract class WC_Stripe_Payment {
 			}
 
 			return $result;
-		}
-		catch ( Exception $e ) {
+		} catch ( Exception $e ) {
 			return new WP_Error( 'refund-error', $e->getMessage() );
 		}
 	}
@@ -188,6 +187,7 @@ abstract class WC_Stripe_Payment {
 			$order->update_status( apply_filters( 'wc_stripe_authorized_order_status', 'default' === $order_status ? 'on-hold' : $order_status, $order, $payment_method ) );
 		}
 		WC()->cart->empty_cart();
+		$this->destroy_session_data();
 
 		return array(
 			'result'   => 'success',
@@ -350,6 +350,16 @@ abstract class WC_Stripe_Payment {
 	 */
 	public function set_payment_method( $payment_method ) {
 		$this->payment_method = $payment_method;
+	}
+
+	/**
+	 * @since 3.3.20
+	 */
+	protected function get_payment_method_charge_type() {
+		return $this->payment_method->get_option( 'charge_type' ) === 'capture' ? WC_Stripe_Constants::AUTOMATIC : WC_Stripe_Constants::MANUAL;
+	}
+
+	public function destroy_session_data() {
 	}
 
 }

@@ -139,7 +139,7 @@ function wc_stripe_process_payment_intent_succeeded( $intent, $request ) {
 		}
 
 		$payment_method->set_order_lock( $order );
-		$order->update_meta_data( WC_Stripe_Constants::PAYMENT_INTENT, WC_Stripe_Utils::sanitize_intent( $intent->jsonSerialize() ) );
+		$order->update_meta_data( WC_Stripe_Constants::PAYMENT_INTENT, WC_Stripe_Utils::sanitize_intent( $intent->toArray() ) );
 		$result = $payment_method->payment_object->process_payment( $order );
 		if ( ! is_wp_error( $result ) && $result->complete_payment ) {
 			$payment_method->payment_object->payment_complete( $order, $result->charge );
@@ -351,6 +351,46 @@ function wc_stripe_review_closed( $review ) {
 			$order->delete_meta_data( WC_Stripe_Constants::PREV_STATUS );
 			$message = sprintf( __( 'A review has been closed for charge %1$s. Reason: %2$s.', 'woo-stripe-payment' ), $review->charge, strtoupper( $review->reason ) );
 			$order->update_status( $status, $message );
+		}
+	}
+}
+
+/**
+ * @param \Stripe\PaymentIntent $payment_intent
+ */
+function wc_stripe_process_requires_action( $payment_intent ) {
+	if ( isset( $payment_intent->metadata['gateway_id'], $payment_intent->metadata['order_id'] ) ) {
+		if ( in_array( $payment_intent->metadata['gateway_id'], array( 'stripe_oxxo', 'stripe_boleto' ), true ) ) {
+			$order = wc_get_order( wc_stripe_filter_order_id( $payment_intent->metadata['order_id'], $payment_intent ) );
+			if ( ! $order ) {
+				return;
+			}
+			/**
+			 *
+			 * @var WC_Payment_Gateway_Stripe $payment_method
+			 */
+			$payment_method = WC()->payment_gateways()->payment_gateways()[ $payment_intent->metadata['gateway_id'] ];
+			if ( $payment_method ) {
+				$payment_method->process_voucher_order_status( $order );
+				wc_stripe_log_info( sprintf( 'Order status processed for Voucher payment. Order ID %s. Payment Intent %s', $order->get_id(), $payment_intent->id ) );
+			}
+		}
+	}
+}
+
+/**
+ * @param Stripe\Charge $charge
+ */
+function wc_stripe_process_charge_pending( $charge ) {
+	if ( isset( $charge->metadata['gateway_id'], $charge->metadata['order_id'] ) ) {
+		$payment_methods = WC()->payment_gateways()->payment_gateways();
+		$payment_method  = $charge->metadata['gateway_id'];
+		$payment_method  = isset( $payment_methods[ $payment_method ] ) ? $payment_methods[ $payment_method ] : null;
+		if ( $payment_method && $payment_method instanceof \WC_Payment_Gateway_Stripe && ! $payment_method->synchronous ) {
+			$order = wc_get_order( wc_stripe_filter_order_id( $charge->metadata['order_id'], $charge ) );
+			if ( $order ) {
+				$order->update_status( apply_filters( 'wc_stripe_charge_pending_order_status', 'on-hold', $charge, $order ), __( 'Order status updated via charge.pending webhook.', 'woo-stripe-payment' ) );
+			}
 		}
 	}
 }

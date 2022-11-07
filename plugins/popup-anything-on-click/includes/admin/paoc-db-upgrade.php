@@ -56,13 +56,13 @@ function popupaoc_db_update_page_html() { ?>
 
 	<div class="wrap">
 		<h2>
-			<?php _e( 'Update Database - Popup Anything', 'popup-anything-on-click' ); ?>
+			<?php esc_html_e( 'Update Database - Popup Anything', 'popup-anything-on-click' ); ?>
 		</h2>
 
 		<div class="paoc-db-update-result-wrp">
-			<p><?php _e('Popup Anything needs to be updated! To keep things running smoothly, we have to update your database to the newest version. The database update process runs in the background and may take a little while, so please be patient.', 'popup-anything-on-click'); ?></p>
-			<p><?php _e('Database update process has been started.', 'popup-anything-on-click'); ?></p>
-			<p style="color:red;"><?php _e('Kindly do not refresh the page or close the browser.', 'popup-anything-on-click'); ?></p>
+			<p><?php esc_html_e('Popup Anything needs to be updated! To keep things running smoothly, we have to update your database to the newest version. The database update process runs in the background and may take a little while, so please be patient.', 'popup-anything-on-click'); ?></p>
+			<p><?php esc_html_e('Database update process has been started.', 'popup-anything-on-click'); ?></p>
+			<p style="color:red;"><?php esc_html_e('Kindly do not refresh the page or close the browser.', 'popup-anything-on-click'); ?></p>
 		</div>
 	</div>
 

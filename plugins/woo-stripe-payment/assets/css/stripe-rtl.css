@@ -213,6 +213,11 @@ label.wc-stripe-label-payment-type:after {
     margin-bottom: 1em;
 }
 
+#wc-stripe-card-element.payment-type {
+    height: 100%;
+    padding: 0px;
+}
+
 .wc-stripe_cc-new-method-container .wc-stripe-save-source {
     display: flex;
     align-items: center;
@@ -1046,4 +1051,70 @@ div.payment_method_stripe_cc > .woocommerce-NoticeGroup {
 
 div.payment_method_stripe_cc.custom-form__bootstrap > .woocommerce-NoticeGroup {
     margin-bottom: 20px;
+}
+
+.wc-stripe-installment-container {
+    margin-top: 15px;
+}
+
+.wc-stripe-installment-container p {
+    margin: 0;
+}
+
+.wc-stripe-installment-container label.installment-label {
+    font-weight: 500;
+    margin: 0 0 5px 0;
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.wc-stripe-installment-container .wc-stripe-installment-options.loading-installments {
+    opacity: 0.4;
+}
+
+.wc-stripe-installment-loader__container {
+    flex: 1 1 auto;
+}
+
+.wc-stripe-installment-loader__container .wc-stripe-installment-loader {
+    transform: scale(.55);
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    top: -2px;
+}
+
+.wc-stripe-installment-loader div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    width: 30px;
+    height: 30px;
+    border: 3px solid #000;
+    border-radius: 50%;
+    animation: installment-loader 1.3s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #000 transparent transparent transparent;
+}
+
+.wc-stripe-installment-loader div:nth-child(1) {
+    animation-delay: -0.45s;
+}
+
+.wc-stripe-installment-loader div:nth-child(2) {
+    animation-delay: -0.3s;
+}
+
+.wc-stripe-installment-loader div:nth-child(3) {
+    animation-delay: -0.15s;
+}
+
+@keyframes installment-loader {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(-360deg);
+    }
 }

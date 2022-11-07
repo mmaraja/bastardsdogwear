@@ -19,7 +19,6 @@ class WC_Payment_Gateway_Stripe_Bancontact extends WC_Payment_Gateway_Stripe_Loc
 	protected $payment_method_type = 'bancontact';
 
 	public function __construct() {
-		$this->synchronous        = false;
 		$this->local_payment_type = 'bancontact';
 		$this->currencies         = array( 'EUR' );
 		$this->countries          = array( 'BE' );

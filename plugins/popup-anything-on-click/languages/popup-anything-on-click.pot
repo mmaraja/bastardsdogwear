@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Popup Anything - A Marketing Popup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-12-28 06:25+0000\n"
+"POT-Creation-Date: 2022-07-05 12:22+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,26 +16,13 @@ msgstr ""
 "X-Loco-Version: 2.5.4; wp-5.8.1\n"
 "X-Domain: popup-anything-on-click"
 
-#: includes/popupaoc-functions.php:659
+#: includes/popupaoc-functions.php:651
 #, php-format
 msgid "100% secure your website."
 msgstr ""
 
-#: includes/popupaoc-functions.php:603
+#: includes/popupaoc-functions.php:595
 msgid "404 Error Page"
-msgstr ""
-
-#: includes/admin/settings/premium.php:93
-msgid ""
-"<span class=\"h-blue\">46 plugins</span>, <span class=\"h-blue\">10 "
-"sliders</span> with <span class=\"h-blue\">2000+</span> pre-built templates "
-"in <span class=\"h-blue\">Essential Bundle</span>"
-msgstr ""
-
-#: includes/admin/metabox/design-metabox.php:184
-msgid ""
-"<strong>Note:</strong> This will only work when overlay background image is "
-"not there or image is transparent."
 msgstr ""
 
 #: includes/admin/metabox/post-sett-metabox.php:93
@@ -67,7 +54,7 @@ msgstr ""
 msgid "Add Popup"
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:142
+#: includes/admin/metabox/behaviour-metabox.php:144
 #: includes/admin/metabox/behaviour-metabox.php:197
 #: includes/admin/metabox/behaviour-metabox.php:233
 msgid "Add this shortcode and popup will display on its click."
@@ -89,7 +76,7 @@ msgstr ""
 msgid "Advance Settings"
 msgstr ""
 
-#: includes/popupaoc-functions.php:273
+#: includes/popupaoc-functions.php:265
 msgid "After X Second of Inactivity (PRO)"
 msgstr ""
 
@@ -97,12 +84,12 @@ msgstr ""
 msgid "After X times"
 msgstr ""
 
-#: includes/popupaoc-functions.php:590
+#: includes/popupaoc-functions.php:582
 #: includes/admin/metabox/advance-metabox.php:77
 msgid "All"
 msgstr ""
 
-#: includes/popupaoc-functions.php:604
+#: includes/popupaoc-functions.php:596
 msgid "All Archives"
 msgstr ""
 
@@ -114,11 +101,11 @@ msgstr ""
 msgid "All looks good. No old records found."
 msgstr ""
 
-#: includes/popupaoc-functions.php:424
+#: includes/popupaoc-functions.php:416
 msgid "All settings reset successfully."
 msgstr ""
 
-#: includes/popupaoc-functions.php:292
+#: includes/popupaoc-functions.php:284
 msgid "Announcement"
 msgstr ""
 
@@ -126,7 +113,7 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:209
+#: includes/admin/class-popupaoc-admin.php:211
 msgid "Appear On"
 msgstr ""
 
@@ -134,7 +121,7 @@ msgstr ""
 msgid "Are you sure you want to do this?"
 msgstr ""
 
-#: includes/popupaoc-functions.php:325
+#: includes/popupaoc-functions.php:317
 msgid "Bar"
 msgstr ""
 
@@ -146,7 +133,7 @@ msgstr ""
 msgid "Behaviour Settings"
 msgstr ""
 
-#: includes/popupaoc-functions.php:272
+#: includes/popupaoc-functions.php:264
 msgid "Button Click"
 msgstr ""
 
@@ -166,15 +153,15 @@ msgstr ""
 msgid "Category"
 msgstr ""
 
-#: includes/popupaoc-functions.php:373
+#: includes/popupaoc-functions.php:365
 msgid "Center Bottom"
 msgstr ""
 
-#: includes/popupaoc-functions.php:372
+#: includes/popupaoc-functions.php:364
 msgid "Center Center"
 msgstr ""
 
-#: includes/popupaoc-functions.php:371
+#: includes/popupaoc-functions.php:363
 msgid "Center Top"
 msgstr ""
 
@@ -188,7 +175,7 @@ msgstr ""
 msgid "Check popup A/B testing campaign settings."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:104
+#: includes/admin/settings/display-rule-settings.php:106
 msgid ""
 "Check these boxes if you want to show different popups for individual posts "
 "and pages. This will enable the setting box at enabled post types while you "
@@ -255,19 +242,19 @@ msgstr ""
 msgid "Check this box if you want to show image title."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:139
+#: includes/admin/settings/display-rule-settings.php:141
 msgid ""
 "Check this box to display exit popup globally. You can still choose the "
 "popup for single posts and pages."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:175
+#: includes/admin/settings/display-rule-settings.php:177
 msgid ""
 "Check this box to display general popup globally. You can still choose the "
 "popup for single posts and pages."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:76
+#: includes/admin/settings/display-rule-settings.php:70
 msgid ""
 "Check this box to display welcome popup globally. You can still choose the "
 "popup for single posts and pages."
@@ -301,7 +288,7 @@ msgstr ""
 msgid "Check this check box to enable required field."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:240
+#: includes/admin/metabox/design-metabox.php:244
 msgid "Choose content text color."
 msgstr ""
 
@@ -309,19 +296,19 @@ msgstr ""
 msgid "Choose cookie popup settings."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:258
+#: includes/admin/metabox/design-metabox.php:262
 msgid "Choose custom close text color."
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:119
+#: includes/admin/metabox/behaviour-metabox.php:121
 msgid "Choose how popup should come."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:217
+#: includes/admin/metabox/design-metabox.php:221
 msgid "Choose main heading text color."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:183
+#: includes/admin/metabox/design-metabox.php:187
 msgid "Choose overlay background color. Leave empty for default color."
 msgstr ""
 
@@ -329,7 +316,7 @@ msgstr ""
 msgid "Choose Popup advance settings."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:161
+#: includes/admin/metabox/design-metabox.php:165
 msgid "Choose popup background color."
 msgstr ""
 
@@ -353,7 +340,7 @@ msgstr ""
 msgid "Choose Popup google analytics settings."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:126
+#: includes/admin/metabox/design-metabox.php:130
 msgid "Choose popup loader color."
 msgstr ""
 
@@ -373,11 +360,11 @@ msgstr ""
 msgid "Choose referrer popup settings."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:249
+#: includes/admin/metabox/design-metabox.php:253
 msgid "Choose secondary content text color."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:267
+#: includes/admin/metabox/design-metabox.php:271
 msgid "Choose security note text color."
 msgstr ""
 
@@ -385,7 +372,7 @@ msgstr ""
 msgid "Choose social icon type."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:226
+#: includes/admin/metabox/design-metabox.php:230
 msgid "Choose sub heading text color."
 msgstr ""
 
@@ -397,21 +384,21 @@ msgstr ""
 msgid "Choose UTM mode."
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:161
-#: includes/admin/metabox/design-metabox.php:150
-#: includes/admin/metabox/design-metabox.php:172
+#: includes/admin/metabox/behaviour-metabox.php:163
+#: includes/admin/metabox/design-metabox.php:154
+#: includes/admin/metabox/design-metabox.php:176
 msgid "Clear"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:133
+#: includes/admin/class-popupaoc-admin.php:134
 #: includes/admin/paoc-db-upgrade.php:236
-#: includes/shortcode/popupaoc-popup-shortcode.php:99
+#: includes/shortcode/popupaoc-popup-shortcode.php:88
 msgid "Click Here!!!"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:135
+#: includes/admin/class-popupaoc-admin.php:136
 #: includes/admin/paoc-db-upgrade.php:237
-#: includes/shortcode/popupaoc-popup-shortcode.php:73
+#: includes/shortcode/popupaoc-popup-shortcode.php:62
 msgid "Click Me!!!"
 msgstr ""
 
@@ -419,7 +406,7 @@ msgstr ""
 msgid "Clicks"
 msgstr ""
 
-#: includes/popupaoc-functions.php:469 includes/admin/popup-tags/tags.php:16
+#: includes/popupaoc-functions.php:461 includes/admin/popup-tags/tags.php:16
 msgid "Close"
 msgstr ""
 
@@ -431,11 +418,11 @@ msgstr ""
 msgid "Close Popup On Overlay"
 msgstr ""
 
-#: includes/popupaoc-functions.php:296
+#: includes/popupaoc-functions.php:288
 msgid "Collect Lead"
 msgstr ""
 
-#: includes/admin/settings/premium.php:161
+#: includes/admin/settings/premium.php:92
 msgid "Compare \"Popup Anything - A Marketing Popup\" Free VS Pro"
 msgstr ""
 
@@ -443,7 +430,7 @@ msgstr ""
 msgid "Content"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:236
+#: includes/admin/metabox/design-metabox.php:240
 msgid "Content Color"
 msgstr ""
 
@@ -471,7 +458,7 @@ msgstr ""
 msgid "Cookie Prefix"
 msgstr ""
 
-#: includes/popupaoc-functions.php:353
+#: includes/popupaoc-functions.php:345
 msgid "Corner"
 msgstr ""
 
@@ -479,7 +466,7 @@ msgstr ""
 msgid "Custom Close Text"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:254
+#: includes/admin/metabox/design-metabox.php:258
 msgid "Custom Close Text Color"
 msgstr ""
 
@@ -511,7 +498,7 @@ msgstr ""
 msgid "Date Time"
 msgstr ""
 
-#: includes/popupaoc-functions.php:389
+#: includes/popupaoc-functions.php:381
 msgid "Days"
 msgstr ""
 
@@ -574,9 +561,9 @@ msgstr ""
 msgid "Display current year."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:62
-#: includes/admin/settings/display-rule-settings.php:125
-#: includes/admin/settings/display-rule-settings.php:161
+#: includes/admin/settings/display-rule-settings.php:56
+#: includes/admin/settings/display-rule-settings.php:127
+#: includes/admin/settings/display-rule-settings.php:163
 msgid "Display In"
 msgstr ""
 
@@ -718,7 +705,7 @@ msgstr ""
 msgid "Enter google analytic event label."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:199
+#: includes/admin/metabox/design-metabox.php:203
 msgid "Enter main heading font size."
 msgstr ""
 
@@ -789,7 +776,7 @@ msgid ""
 "like email form etc. Available template tags are %s."
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:133
+#: includes/admin/metabox/behaviour-metabox.php:135
 msgid "Enter popup link text."
 msgstr ""
 
@@ -816,15 +803,15 @@ msgstr ""
 msgid "Enter security note text."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:208
+#: includes/admin/metabox/design-metabox.php:212
 msgid "Enter sub heading font size."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:116
+#: includes/admin/metabox/design-metabox.php:120
 msgid "Enter the popup closing animation speed. Default value is 0.25 Sec."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:106
+#: includes/admin/metabox/design-metabox.php:110
 msgid "Enter the popup opening animation speed. Default value is 0.5 Sec."
 msgstr ""
 
@@ -832,23 +819,23 @@ msgstr ""
 msgid "Enter Your Email"
 msgstr ""
 
-#: includes/admin/settings/premium.php:15
-msgid "Essential Plugin Bundle"
+#: includes/admin/metabox/integration-metabox.php:40
+msgid "Essential Plugin"
 msgstr ""
 
 #: includes/admin/metabox/advance-metabox.php:88
 msgid "Every Device"
 msgstr ""
 
-#: includes/popupaoc-functions.php:276
+#: includes/popupaoc-functions.php:268
 msgid "Exit Intent (PRO)"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:114
+#: includes/admin/settings/display-rule-settings.php:116
 msgid "Exit Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:110
+#: includes/admin/settings/display-rule-settings.php:112
 msgid "Exit Popup Settings"
 msgstr ""
 
@@ -856,7 +843,7 @@ msgstr ""
 msgid "Facebook"
 msgstr ""
 
-#: includes/popupaoc-functions.php:349
+#: includes/popupaoc-functions.php:341
 msgid "Fadein"
 msgstr ""
 
@@ -888,7 +875,7 @@ msgstr ""
 msgid "Form Fields"
 msgstr ""
 
-#: includes/popupaoc-functions.php:601
+#: includes/popupaoc-functions.php:593
 msgid "Front Page"
 msgstr ""
 
@@ -900,11 +887,11 @@ msgstr ""
 msgid "General"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:150
+#: includes/admin/settings/display-rule-settings.php:152
 msgid "General Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:146
+#: includes/admin/settings/display-rule-settings.php:148
 msgid "General Popup Settings (All type of Popup Appear)"
 msgstr ""
 
@@ -916,7 +903,7 @@ msgstr ""
 msgid "General Tags"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:207
+#: includes/admin/class-popupaoc-admin.php:209
 msgid "Goal"
 msgstr ""
 
@@ -933,7 +920,7 @@ msgstr ""
 msgid "Heading"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:190
+#: includes/admin/metabox/design-metabox.php:194
 msgid "Heading Settings"
 msgstr ""
 
@@ -953,7 +940,7 @@ msgstr ""
 msgid "Hide Overlay"
 msgstr ""
 
-#: includes/popupaoc-functions.php:390
+#: includes/popupaoc-functions.php:382
 msgid "Hours (PRO)"
 msgstr ""
 
@@ -961,15 +948,12 @@ msgstr ""
 msgid "How Popup Appear?"
 msgstr ""
 
-#: includes/popupaoc-functions.php:277
+#: includes/popupaoc-functions.php:269
 msgid "HTML Element Click (PRO)"
 msgstr ""
 
-#. Author URI of the plugin
-msgid "https://www.essentialplugin.com/"
-msgstr ""
-
 #. URI of the plugin
+#. Author URI of the plugin
 msgid "https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/"
 msgstr ""
 
@@ -988,7 +972,7 @@ msgid ""
 "If you add positive number then popup will be disappear on inactivity only."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:139
+#: includes/admin/metabox/design-metabox.php:143
 msgid "Image & Color Settings"
 msgstr ""
 
@@ -996,7 +980,7 @@ msgstr ""
 msgid "Image Caption"
 msgstr ""
 
-#: includes/popupaoc-functions.php:271
+#: includes/popupaoc-functions.php:263
 msgid "Image Click"
 msgstr ""
 
@@ -1026,7 +1010,7 @@ msgstr ""
 msgid "Integration Settings"
 msgstr ""
 
-#: popup-anything-on-click.php:195
+#: popup-anything-on-click.php:203
 #, php-format
 msgid ""
 "It looks like you had PRO version %s of this plugin activated. To avoid "
@@ -1051,23 +1035,23 @@ msgstr ""
 msgid "Leave it blank to display popup on each page load."
 msgstr ""
 
-#: includes/popupaoc-functions.php:370
+#: includes/popupaoc-functions.php:362
 msgid "Left Bottom"
 msgstr ""
 
-#: includes/popupaoc-functions.php:369
+#: includes/popupaoc-functions.php:361
 msgid "Left Center"
 msgstr ""
 
-#: includes/popupaoc-functions.php:368
+#: includes/popupaoc-functions.php:360
 msgid "Left Top"
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:129
+#: includes/admin/metabox/behaviour-metabox.php:131
 msgid "Link Text"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:122
+#: includes/admin/metabox/design-metabox.php:126
 msgid "Loader Color"
 msgstr ""
 
@@ -1091,15 +1075,15 @@ msgstr ""
 msgid "Main Heading"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:195
+#: includes/admin/metabox/design-metabox.php:199
 msgid "Main Heading Font Size"
 msgstr ""
 
-#: includes/popupaoc-functions.php:656
+#: includes/popupaoc-functions.php:648
 msgid "Main Heading Goes Here"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:213
+#: includes/admin/metabox/design-metabox.php:217
 msgid "Main Heading Text Color"
 msgstr ""
 
@@ -1112,18 +1096,12 @@ msgstr ""
 msgid "Message"
 msgstr ""
 
-#: includes/popupaoc-functions.php:391
+#: includes/popupaoc-functions.php:383
 msgid "Minutes (PRO)"
 msgstr ""
 
-#: includes/popupaoc-functions.php:321
+#: includes/popupaoc-functions.php:313
 msgid "Modal Popup"
-msgstr ""
-
-#: includes/admin/settings/premium.php:92
-msgid ""
-"Multiple pre-built template options with <span class=\"h-orange\"> Gutenberg,"
-" DIVI, Elementor, Avada, VC/WPbakery </span>etc page builder/themes"
 msgstr ""
 
 #: includes/admin/metabox/behaviour-metabox.php:262
@@ -1134,7 +1112,7 @@ msgstr ""
 msgid "New Popup"
 msgstr ""
 
-#: includes/popupaoc-functions.php:351
+#: includes/popupaoc-functions.php:343
 msgid "Newspaper"
 msgstr ""
 
@@ -1150,7 +1128,7 @@ msgstr ""
 msgid "No Popup found in trash"
 msgstr ""
 
-#: includes/popupaoc-functions.php:658
+#: includes/popupaoc-functions.php:650
 msgid "No, thank you. I do not want."
 msgstr ""
 
@@ -1174,11 +1152,17 @@ msgid ""
 "there are two version of polyfill.js loading in your website."
 msgstr ""
 
-#: includes/popupaoc-functions.php:468
+#: includes/popupaoc-functions.php:460
 msgid ""
 "Note: Preview will be displayed according to responsive layout mode. Live "
 "preview may display differently when added to your page based on inheritance "
 "from some styles."
+msgstr ""
+
+#: includes/admin/metabox/design-metabox.php:188
+msgid ""
+"Note: This will only work when overlay background image is not there or "
+"image is transparent."
 msgstr ""
 
 #: includes/admin/metabox/post-sett-metabox.php:69
@@ -1201,11 +1185,11 @@ msgstr ""
 msgid "Only Text"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:231
+#: includes/admin/metabox/design-metabox.php:235
 msgid "Other Settings"
 msgstr ""
 
-#: includes/popupaoc-functions.php:269
+#: includes/popupaoc-functions.php:261
 msgid "Page Load"
 msgstr ""
 
@@ -1217,7 +1201,7 @@ msgstr ""
 msgid "Percentage Completed"
 msgstr ""
 
-#: includes/popupaoc-functions.php:304
+#: includes/popupaoc-functions.php:296
 msgid "Phone Calls"
 msgstr ""
 
@@ -1239,12 +1223,12 @@ msgstr ""
 msgid "Popup Anything - A Marketing Popup"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:72
+#: includes/admin/class-popupaoc-admin.php:74
 #: includes/admin/settings/settings.php:38
 msgid "Popup Anything - Settings"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:194
+#: includes/admin/class-popupaoc-admin.php:196
 msgid "Popup Anything database proccess has been updated."
 msgstr ""
 
@@ -1269,10 +1253,10 @@ msgid "Popup Anything On Click - Preview"
 msgstr ""
 
 #: includes/admin/settings/premium.php:15
-msgid "Popup Anything Pro - A Marketing Popup with "
+msgid "Popup Anything Pro - A Marketing Popup"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:157
+#: includes/admin/metabox/design-metabox.php:161
 msgid "Popup Background Color"
 msgstr ""
 
@@ -1296,7 +1280,7 @@ msgstr ""
 msgid "Popup draft updated."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:89
+#: includes/admin/metabox/design-metabox.php:91
 msgid "Popup Effect"
 msgstr ""
 
@@ -1304,16 +1288,16 @@ msgstr ""
 msgid "Popup Height"
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:156
-#: includes/admin/metabox/design-metabox.php:145
+#: includes/admin/metabox/behaviour-metabox.php:158
+#: includes/admin/metabox/design-metabox.php:149
 msgid "Popup Image"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:179
+#: includes/admin/metabox/design-metabox.php:183
 msgid "Popup Overlay Color"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:167
+#: includes/admin/metabox/design-metabox.php:171
 msgid "Popup Overlay Image"
 msgstr ""
 
@@ -1325,7 +1309,7 @@ msgstr ""
 msgid "Popup published."
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:75
+#: includes/admin/class-popupaoc-admin.php:77
 msgid "Popup Report"
 msgstr ""
 
@@ -1347,7 +1331,7 @@ msgstr ""
 msgid "Popup scheduled for: <strong>%1$s</strong>."
 msgstr ""
 
-#: includes/admin/metabox/behaviour-metabox.php:138
+#: includes/admin/metabox/behaviour-metabox.php:140
 #: includes/admin/metabox/behaviour-metabox.php:193
 #: includes/admin/metabox/behaviour-metabox.php:229
 msgid "Popup Shortcode"
@@ -1381,7 +1365,7 @@ msgstr ""
 msgid "Positive Number"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:341
+#: includes/admin/class-popupaoc-admin.php:354
 #: includes/admin/settings/display-rule-settings.php:22
 msgid "Post"
 msgstr ""
@@ -1390,12 +1374,12 @@ msgstr ""
 msgid "Post Excerpt"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:89
+#: includes/admin/settings/display-rule-settings.php:91
 msgid "Post Types"
 msgstr ""
 
+#: templates/announcement/design-1.php:48
 #: templates/announcement/design-1.php:49
-#: templates/announcement/design-1.php:50
 msgid "Powered by"
 msgstr ""
 
@@ -1403,7 +1387,7 @@ msgstr ""
 msgid "Preview Popup"
 msgstr ""
 
-#: includes/popupaoc-functions.php:651
+#: includes/popupaoc-functions.php:643
 msgid "Primary Content – Primary Content Goes Here."
 msgstr ""
 
@@ -1411,9 +1395,9 @@ msgstr ""
 #: includes/admin/metabox/advance-metabox.php:127
 #: includes/admin/metabox/behaviour-metabox.php:64
 #: includes/admin/metabox/behaviour-metabox.php:94
-#: includes/admin/metabox/design-metabox.php:139
-#: includes/admin/metabox/design-metabox.php:190
-#: includes/admin/metabox/design-metabox.php:231
+#: includes/admin/metabox/design-metabox.php:143
+#: includes/admin/metabox/design-metabox.php:194
+#: includes/admin/metabox/design-metabox.php:235
 #: includes/admin/metabox/post-sett-metabox.php:61
 #: includes/admin/metabox/post-sett-metabox.php:65
 #: includes/admin/metabox/post-sett-metabox.php:69
@@ -1423,19 +1407,19 @@ msgstr ""
 #: includes/admin/metabox/post-sett-metabox.php:85
 #: includes/admin/metabox/post-sett-metabox.php:89
 #: includes/admin/metabox/post-sett-metabox.php:93
-#: includes/admin/settings/display-rule-settings.php:110
-#: includes/admin/settings/display-rule-settings.php:146
+#: includes/admin/settings/display-rule-settings.php:112
+#: includes/admin/settings/display-rule-settings.php:148
 #: includes/admin/settings/register-settings.php:26
 msgid "PRO"
 msgstr ""
 
-#: includes/popupaoc-functions.php:329
+#: includes/popupaoc-functions.php:321
 msgid "Push Notification"
 msgstr ""
 
 #: includes/admin/metabox/design-metabox.php:66
-#: includes/admin/metabox/design-metabox.php:198
-#: includes/admin/metabox/design-metabox.php:207
+#: includes/admin/metabox/design-metabox.php:202
+#: includes/admin/metabox/design-metabox.php:211
 msgid "PX"
 msgstr ""
 
@@ -1471,26 +1455,26 @@ msgstr ""
 msgid "Reset All Settings"
 msgstr ""
 
-#: includes/popupaoc-functions.php:376
+#: includes/popupaoc-functions.php:368
 msgid "Right Bottom"
 msgstr ""
 
-#: includes/popupaoc-functions.php:375
+#: includes/popupaoc-functions.php:367
 msgid "Right Center"
 msgstr ""
 
-#: includes/popupaoc-functions.php:374
+#: includes/popupaoc-functions.php:366
 msgid "Right Top"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:186
+#: includes/admin/settings/display-rule-settings.php:188
 #: includes/admin/settings/general-settings.php:65
 #: includes/admin/settings/integration-settings.php:43
 #: includes/admin/settings/settings.php:79
 msgid "Save Changes"
 msgstr ""
 
-#: includes/popupaoc-functions.php:354
+#: includes/popupaoc-functions.php:346
 msgid "Scale"
 msgstr ""
 
@@ -1502,7 +1486,7 @@ msgstr ""
 msgid "Search popup by its name or ID"
 msgstr ""
 
-#: includes/popupaoc-functions.php:602
+#: includes/popupaoc-functions.php:594
 msgid "Search Results"
 msgstr ""
 
@@ -1513,8 +1497,8 @@ msgstr ""
 #: includes/admin/metabox/behaviour-metabox.php:247
 #: includes/admin/metabox/behaviour-metabox.php:258
 #: includes/admin/metabox/behaviour-metabox.php:321
-#: includes/admin/metabox/design-metabox.php:105
-#: includes/admin/metabox/design-metabox.php:115
+#: includes/admin/metabox/design-metabox.php:109
+#: includes/admin/metabox/design-metabox.php:119
 msgid "Sec"
 msgstr ""
 
@@ -1522,7 +1506,7 @@ msgstr ""
 msgid "Secondary Content"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:245
+#: includes/admin/metabox/design-metabox.php:249
 msgid "Secondary Content Color"
 msgstr ""
 
@@ -1530,7 +1514,7 @@ msgstr ""
 msgid "Security Note"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:263
+#: includes/admin/metabox/design-metabox.php:267
 msgid "Security Note Text Color"
 msgstr ""
 
@@ -1538,11 +1522,11 @@ msgstr ""
 msgid "Select device on which popup will be display."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:117
+#: includes/admin/settings/display-rule-settings.php:119
 msgid "Select Exit Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:120
+#: includes/admin/settings/display-rule-settings.php:122
 msgid ""
 "Select exit popup to display globally. You can search popup by its name or "
 "ID."
@@ -1552,11 +1536,11 @@ msgstr ""
 msgid "Select form field type."
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:153
+#: includes/admin/settings/display-rule-settings.php:155
 msgid "Select General Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:156
+#: includes/admin/settings/display-rule-settings.php:158
 msgid ""
 "Select general popup to display globally. You can search popup by its name "
 "or ID."
@@ -1566,17 +1550,17 @@ msgstr ""
 msgid "Select Option"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:51
+#: includes/admin/settings/display-rule-settings.php:45
 msgid "Select Welcome Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:57
+#: includes/admin/settings/display-rule-settings.php:51
 msgid ""
 "Select welcome popup to display globally. You can search popup by its name "
 "or ID."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:151
+#: includes/admin/metabox/design-metabox.php:155
 msgid "Set popup background image."
 msgstr ""
 
@@ -1596,7 +1580,7 @@ msgstr ""
 msgid "Set popup loader speed. 60 Sec = 1 Min"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:173
+#: includes/admin/metabox/design-metabox.php:177
 msgid "Set popup overlay background image."
 msgstr ""
 
@@ -1634,7 +1618,7 @@ msgstr ""
 msgid "Show For"
 msgstr ""
 
-#: includes/popupaoc-functions.php:270
+#: includes/popupaoc-functions.php:262
 msgid "Simple Link"
 msgstr ""
 
@@ -1650,15 +1634,15 @@ msgstr ""
 msgid "Site URL"
 msgstr ""
 
-#: includes/popupaoc-functions.php:350
+#: includes/popupaoc-functions.php:342
 msgid "Slide"
 msgstr ""
 
-#: includes/popupaoc-functions.php:333
+#: includes/popupaoc-functions.php:325
 msgid "Slide In"
 msgstr ""
 
-#: includes/popupaoc-functions.php:355
+#: includes/popupaoc-functions.php:347
 msgid "Slide Together"
 msgstr ""
 
@@ -1674,6 +1658,14 @@ msgstr ""
 msgid "Social Type"
 msgstr ""
 
+#: includes/admin/class-popupaoc-admin.php:59
+msgid "Solutions & Features"
+msgstr ""
+
+#: includes/admin/class-popupaoc-admin.php:59
+msgid "Solutions & Features - Popup Anything On Click"
+msgstr ""
+
 #: includes/admin/metabox/post-sett-metabox.php:158
 msgid ""
 "Some setting options will not work here like 'When Popup Appear?', 'Cookie "
@@ -1687,16 +1679,16 @@ msgid ""
 "work in popup preview."
 msgstr ""
 
-#: includes/class-popupaoc-script.php:113 includes/popupaoc-functions.php:431
+#: includes/class-popupaoc-script.php:113 includes/popupaoc-functions.php:423
 #: includes/admin/paoc-db-upgrade.php:143
 msgid "Sorry, Something happened wrong."
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:102
+#: includes/admin/metabox/design-metabox.php:106
 msgid "Speed In"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:112
+#: includes/admin/metabox/design-metabox.php:116
 msgid "Speed Out"
 msgstr ""
 
@@ -1708,15 +1700,15 @@ msgstr ""
 msgid "Sub Heading"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:204
+#: includes/admin/metabox/design-metabox.php:208
 msgid "Sub Heading Font Size"
 msgstr ""
 
-#: includes/popupaoc-functions.php:657
+#: includes/popupaoc-functions.php:649
 msgid "Sub Heading Goes Here"
 msgstr ""
 
-#: includes/admin/metabox/design-metabox.php:222
+#: includes/admin/metabox/design-metabox.php:226
 msgid "Sub Heading Text Color"
 msgstr ""
 
@@ -1725,15 +1717,15 @@ msgstr ""
 msgid "Subject"
 msgstr ""
 
-#: includes/popupaoc-functions.php:352
+#: includes/popupaoc-functions.php:344
 msgid "Super Scaled"
 msgstr ""
 
-#: includes/popupaoc-functions.php:300
+#: includes/popupaoc-functions.php:292
 msgid "Target URL"
 msgstr ""
 
-#: popup-anything-on-click.php:194
+#: popup-anything-on-click.php:202
 #, php-format
 msgid "Thank you for activating %s"
 msgstr ""
@@ -1745,16 +1737,12 @@ msgid ""
 "target=\"_blank\">Get your API key here</a>."
 msgstr ""
 
-#: includes/admin/settings/premium.php:94
-msgid "Top plugins category wise:"
-msgstr ""
-
 #: includes/admin/paoc-db-upgrade.php:180
 #, php-format
 msgid "Total %d Popup found for update."
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:208
+#: includes/admin/class-popupaoc-admin.php:210
 msgid "Type"
 msgstr ""
 
@@ -1766,35 +1754,25 @@ msgstr ""
 msgid "Update Database - Popup Anything"
 msgstr ""
 
-#: includes/admin/metabox/report-metabox.php:68
-#: includes/admin/settings/display-rule-settings.php:36
-#: includes/admin/settings/integration-settings.php:25
-#, php-format
-msgid ""
-"Upgrade to <a href=\"%s\" target=\"_blank\">Pro Version</a> with Essential "
-"Plugin Bundle to boost your <b style=\"color:#FF5D52;\">web site, landing "
-"pages & conversions</b>."
-msgstr ""
-
 #: includes/admin/metabox/post-sett-metabox.php:100
 msgid "Upgrade to Premium"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:59
-msgid "Upgrade to PRO"
+#: includes/admin/class-popupaoc-admin.php:62
+msgid "Upgrade To PRO"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:59
-msgid "Upgrade to PRO - Popup Anything On Click"
-msgstr ""
-
-#: includes/admin/metabox/behaviour-metabox.php:160
-#: includes/admin/metabox/design-metabox.php:149
-#: includes/admin/metabox/design-metabox.php:171
-msgid "Upload Image"
+#: includes/admin/class-popupaoc-admin.php:62
+msgid "Upgrade To PRO - Popup Anything On Click"
 msgstr ""
 
 #: includes/admin/metabox/behaviour-metabox.php:162
+#: includes/admin/metabox/design-metabox.php:153
+#: includes/admin/metabox/design-metabox.php:175
+msgid "Upload Image"
+msgstr ""
+
+#: includes/admin/metabox/behaviour-metabox.php:164
 msgid "Upload popup image."
 msgstr ""
 
@@ -1808,6 +1786,21 @@ msgstr ""
 
 #: includes/admin/popup-tags/class-popup-tags.php:55
 msgid "User Name"
+msgstr ""
+
+#: includes/admin/settings/display-rule-settings.php:79
+#, php-format
+msgid ""
+"Utilize below <a href=\"%s\" target=\"_blank\">Premium Features</a> to get "
+"best of this plugin  with Annual or Lifetime bundle deal."
+msgstr ""
+
+#: includes/admin/metabox/report-metabox.php:68
+#: includes/admin/settings/integration-settings.php:25
+#, php-format
+msgid ""
+"Utilize these <a href=\"%s\" target=\"_blank\">Premium Features</a> to get "
+"best of this plugin with Annual or Lifetime bundle deal."
 msgstr ""
 
 #: includes/admin/metabox/utm-metabox.php:34
@@ -1838,36 +1831,24 @@ msgstr ""
 msgid "View Report"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:48
+#: includes/admin/settings/display-rule-settings.php:42
 msgid "Welcome Popup"
 msgstr ""
 
-#: includes/admin/settings/display-rule-settings.php:44
+#: includes/admin/settings/display-rule-settings.php:38
 msgid "Welcome Popup Settings"
 msgstr ""
 
-#: includes/admin/settings/premium.php:91
-msgid ""
-"Well <span style=\"color:#388e3c\"> optimized</span>, <span style=\"color:"
-"#7b1fa2\">light weight</span> & <span style=\"color:#3e50b4\">"
-"expandable</span> plugins <br /> for <span style=\"background:#ff4081; color:"
-"#fff;\">web site, landing pages &amp; conversions</span>"
-msgstr ""
-
-#: includes/popupaoc-functions.php:274
+#: includes/popupaoc-functions.php:266
 msgid "When Page Scroll Down (PRO)"
 msgstr ""
 
-#: includes/popupaoc-functions.php:275
+#: includes/popupaoc-functions.php:267
 msgid "When Page Scroll UP (PRO)"
 msgstr ""
 
-#: includes/popupaoc-functions.php:605
+#: includes/popupaoc-functions.php:597
 msgid "Whole Site"
-msgstr ""
-
-#: includes/admin/metabox/integration-metabox.php:40
-msgid "WP OnlineSupport"
 msgstr ""
 
 #. Author of the plugin
@@ -1878,6 +1859,6 @@ msgstr ""
 msgid "Year"
 msgstr ""
 
-#: includes/popupaoc-functions.php:438
+#: includes/popupaoc-functions.php:430
 msgid "Your changes saved successfully."
 msgstr ""

@@ -6,4 +6,5 @@ export * from './use-exported-values';
 export * from './use-payment-request';
 export * from './use-payment-events';
 export * from './use-breakpoint-width';
-export * from './use-process-checkout-error'
+export * from './use-process-checkout-error';
+export * from './use-update-payment-intent';

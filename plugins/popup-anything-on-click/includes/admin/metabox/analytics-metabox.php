@@ -20,41 +20,41 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-analytics-enable"><?php _e('Enable', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-analytics-enable"><?php esc_html_e('Enable', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" class="paoc-checkbox paoc-analytics-enable" id="paoc-analytics-enable" disabled="disabled" /><br />
-					<span class="description"><?php _e('Check this box to enable google analytic event for popup.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box to enable google analytic event for popup.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-analytics-action"><?php _e('Action', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-analytics-action"><?php esc_html_e('Action', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" id="paoc-analytics-action" class="paoc-text large-text paoc-analytics-action" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Enter google analytic event action.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter google analytic event action.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-analytics-category"><?php _e('Category', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-analytics-category"><?php esc_html_e('Category', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" id="paoc-analytics-category" class="paoc-text large-text paoc-analytics-category" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Enter google analytic event category.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter google analytic event category.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-analytics-label"><?php _e('Label', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-analytics-label"><?php esc_html_e('Label', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="text" name="" value="" id="paoc-analytics-label" class="paoc-text large-text paoc-analytics-label" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Enter google analytic event label.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter google analytic event label.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 		</tbody>

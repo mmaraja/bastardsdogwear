@@ -25,8 +25,8 @@ $custom_css	= get_post_meta( $post->ID, $prefix.'custom_css', true );
 		<tbody>
 			<tr>
 				<td class="paoc-no-lr-padding">
-					<textarea id="paoc-custom-css" name="<?php echo popupaoc_esc_attr( $prefix ); ?>custom_css" class="wpos-code-editor paoc-code-editor-small paoc-css-editor large-text" data-mode="css"><?php echo esc_textarea( $custom_css ); ?></textarea>
-					<span class="description"><?php _e('Enter custom CSS for popup. Note: Do not include `style` tag.', 'popup-anything-on-click'); ?></span>
+					<textarea id="paoc-custom-css" name="<?php echo esc_attr( $prefix ); ?>custom_css" class="wpos-code-editor paoc-code-editor-small paoc-css-editor large-text" data-mode="css"><?php echo esc_textarea( $custom_css ); ?></textarea>
+					<span class="description"><?php esc_html_e('Enter custom CSS for popup. Note: Do not include `style` tag.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 		</tbody>

@@ -17,32 +17,32 @@ $display_rule_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE, 'p
 
 <div class="paoc-popup-report-sett paoc-cnt-wrap">
 	<div class="paoc-preview-btn-wrp">
-		<button type="button" class="button button-large button-primary paoc-btn paoc-btn-large paoc-popup-preview-btn paoc-show-popup-modal" data-popup-id="<?php echo $post->ID; ?>" data-preview="1"><?php esc_html_e('Preview Popup', 'popup-anything-on-click'); ?></button>
+		<button type="button" class="button button-large button-primary paoc-btn paoc-btn-large paoc-popup-preview-btn paoc-show-popup-modal" data-popup-id="<?php echo esc_attr( $post->ID ); ?>" data-preview="1"><?php esc_html_e('Preview Popup', 'popup-anything-on-click'); ?></button>
 		<br/><br/>
 		<a class="button button-large button-primary paoc-btn paoc-btn-large" href="<?php echo esc_url( $display_rule_link ); ?>" target="_blank"><?php esc_html_e('Display Rule', 'popup-anything-on-click'); ?></a>
 	</div>
 
 	<div class="paoc-clearfix paoc-pro-feature paoc-center">
 		<div class="paoc-stats-box-wrap">
-			<div class="paoc-stats-box-title"><strong><?php _e('Impressions', 'popup-anything-on-click'); ?></strong></div>
+			<div class="paoc-stats-box-title"><strong><?php esc_html_e('Impressions', 'popup-anything-on-click'); ?></strong></div>
 			<div class="paoc-stats-box">
-				<div class="paoc-report-title"><?php _e('Normal', 'popup-anything-on-click'); ?></div>
+				<div class="paoc-report-title"><?php esc_html_e('Normal', 'popup-anything-on-click'); ?></div>
 				<span class="paoc-report-no">0</span>
 			</div>
 			<div class="paoc-stats-box">
-				<div class="paoc-report-title"><?php _e('Inline', 'popup-anything-on-click'); ?></div>
+				<div class="paoc-report-title"><?php esc_html_e('Inline', 'popup-anything-on-click'); ?></div>
 				<span class="paoc-report-no">0</span>
 			</div>
 		</div>
 
 		<div class="paoc-stats-box-wrap">
-			<div class="paoc-stats-box"><strong><?php _e('Clicks', 'popup-anything-on-click'); ?></strong></div>
+			<div class="paoc-stats-box"><strong><?php esc_html_e('Clicks', 'popup-anything-on-click'); ?></strong></div>
 			<div class="paoc-stats-box">
-				<div class="paoc-report-title"><?php _e('Normal', 'popup-anything-on-click'); ?></div>
+				<div class="paoc-report-title"><?php esc_html_e('Normal', 'popup-anything-on-click'); ?></div>
 				<span class="paoc-report-no">0</span>
 			</div>
 			<div class="paoc-stats-box">
-				<div class="paoc-report-title"><?php _e('Inline', 'popup-anything-on-click'); ?></div>
+				<div class="paoc-report-title"><?php esc_html_e('Inline', 'popup-anything-on-click'); ?></div>
 				<span class="paoc-report-no">0</span>
 			</div>
 		</div>
@@ -65,7 +65,7 @@ $display_rule_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE, 'p
 	<!-- Pro Notice -->
 	<div class="paoc-pro-notice">
 		<i class="dashicons dashicons-money-alt"></i>
-		<?php echo sprintf( __( 'Utilize these <a href="%s" target="_blank">Premium Features</a> to get best of this plugin.', 'popup-anything-on-click'), POPUPAOC_PLUGIN_LINK_UNLOCK); ?>		
+		<?php echo sprintf( __( 'Utilize these <a href="%s" target="_blank">Premium Features</a> to get best of this plugin with Annual or Lifetime bundle deal.', 'popup-anything-on-click'), POPUPAOC_PLUGIN_LINK_UNLOCK); ?>		
 	</div>
 	<?php } ?>
 </div>

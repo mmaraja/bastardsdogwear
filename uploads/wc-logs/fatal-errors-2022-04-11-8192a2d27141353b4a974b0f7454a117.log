@@ -1,6 +1,0 @@
-2022-04-11T08:22:53+00:00 CRITICAL syntax error, unexpected '}', expecting end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 654
-
-2022-04-11T08:30:31+00:00 CRITICAL syntax error, unexpected end of file in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 722
-
-2022-04-11T08:52:35+00:00 CRITICAL Cannot use [] for reading in C:\xampp\htdocs\bastardsdogwear\wp-content\themes\bastards-theme\functions.php on line 636
-

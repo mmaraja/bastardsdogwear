@@ -4,8 +4,8 @@ defined( 'ABSPATH' ) || exit();
 
 /**
  *
- * @since 3.0.0
- * @author Payment Plugins
+ * @since   3.0.0
+ * @author  Payment Plugins
  * @package Stripe/Classes
  *
  */
@@ -49,13 +49,32 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 					'woo-stripe-payment' ),
 			),
 			'account_id'           => array(
-				'type'        => 'paragraph',
-				'title'       => __( 'Account ID', 'woo-stripe-payment' ),
-				'text'        => '',
-				'class'       => '',
-				'default'     => '',
-				'desc_tip'    => true,
-				'description' => __( 'This is your Stripe Connect ID and serves as a unique identifier.', 'woo-stripe-payment' ),
+				'type'              => 'paragraph',
+				'title'             => __( 'Account ID', 'woo-stripe-payment' ),
+				'text'              => '',
+				'class'             => '',
+				'default'           => '',
+				'desc_tip'          => true,
+				'description'       => __( 'This is your Stripe Account ID and serves as a unique identifier.', 'woo-stripe-payment' ),
+				'custom_attributes' => array(
+					'data-show-if' => array(
+						'mode' => 'live'
+					)
+				)
+			),
+			'account_id_test'      => array(
+				'type'              => 'paragraph',
+				'title'             => __( 'Account ID', 'woo-stripe-payment' ),
+				'text'              => '',
+				'class'             => '',
+				'default'           => '',
+				'desc_tip'          => true,
+				'description'       => __( 'This is your Stripe Account ID and serves as a unique identifier.', 'woo-stripe-payment' ),
+				'custom_attributes' => array(
+					'data-show-if' => array(
+						'mode' => 'test'
+					)
+				)
 			),
 			'stripe_connect'       => array(
 				'type'        => 'stripe_connect',
@@ -170,16 +189,20 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 			),
 		);
 		if ( $this->get_option( 'account_id' ) ) {
-			$this->form_fields['account_id']['text']       = $this->get_option( 'account_id' );
-			$this->form_fields['stripe_connect']['description']
-			                                               = sprintf( __( '%s Your Stripe account has been connected. You can now accept Live and Test payments. You can Re-Connect if you want to recycle your API keys for security.',
+			$this->form_fields['account_id']['text']            = $this->get_option( 'account_id' );
+			$this->form_fields['stripe_connect']['description'] = sprintf( __( '%s Your Stripe account has been connected.',
 				'woo-stripe-payment' ),
-				'<span class="dashicons dashicons-yes stipe-connect-active"></span>' );
-			$this->form_fields['stripe_connect']['active'] = true;
+				'<span class="dashicons dashicons-yes stripe-connect-active"></span>' );
+			$this->form_fields['stripe_connect']['active']      = true;
 		} else {
 			unset( $this->form_fields['account_id'] );
 			// don't show the live connection test unless connect process has been completed.
 			unset( $this->form_fields['connection_test_live'] );
+		}
+		if ( $this->get_option( 'account_id_test' ) ) {
+			$this->form_fields['account_id_test']['text'] = $this->get_option( 'account_id_test' );
+		} else {
+			unset( $this->form_fields['account_id_test'] );
 		}
 
 		foreach ( array( 'test', 'live' ) as $mode ) {
@@ -210,7 +233,8 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 		);
 		$data['connect_url'] = $this->get_connect_url();
 		if ( $data['active'] ) {
-			$data['label'] = __( 'Click To Re-Connect', 'woo-stripe-payment' );
+			$data['label'] = __( 'Delete Connection', 'woo-stripe-payment' );
+			$data['class'] .= ' stripe-delete-connection';
 		}
 		ob_start();
 		include stripe_wc()->plugin_path() . 'includes/admin/views/html-stripe-connect.php';
@@ -233,38 +257,49 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 				wc_stripe_log_error( sprintf( 'Error connecting to Stripe account. Reason: %s', $message ) );
 				$this->add_error( sprintf( __( 'We were not able to connect your Stripe account. Reason: %s', 'woo-stripe-payment' ), $message ) );
 			} elseif ( isset( $_GET['response'] ) ) {
-				$response = json_decode( base64_decode( $_GET['response'] ) );
+				if ( ! current_user_can( 'manage_woocommerce' ) ) {
+					?>
+                    <div class="error inline notice-error is-dismissible">
+                        <p><?php esc_html_e( 'Not authorized to perform this action. Required permission: manage_woocommerce', 'woo-stripe-payment' ) ?></p>
+                    </div>
+					<?php
+				} else {
+					$response = json_decode( base64_decode( $_GET['response'] ) );
 
-				// save the token to the api settings
-				$this->settings['account_id']    = $response->live->stripe_user_id;
-				$this->settings['refresh_token'] = $response->live->refresh_token;
+					// save the token to the api settings
+					$this->settings['account_id']    = $response->live->stripe_user_id;
+					$this->settings['refresh_token'] = $response->live->refresh_token;
 
-				$this->settings['secret_key_live']      = $response->live->access_token;
-				$this->settings['publishable_key_live'] = $response->live->stripe_publishable_key;
+					$this->settings['secret_key_live']      = $response->live->access_token;
+					$this->settings['publishable_key_live'] = $response->live->stripe_publishable_key;
 
-				$this->settings['secret_key_test']      = $response->test->access_token;
-				$this->settings['publishable_key_test'] = $response->test->stripe_publishable_key;
+					$this->settings['secret_key_test']      = $response->test->access_token;
+					$this->settings['publishable_key_test'] = $response->test->stripe_publishable_key;
 
-				update_option( $this->get_option_key(), $this->settings );
+					update_option( $this->get_option_key(), $this->settings );
 
-				delete_option( 'wc_stripe_connect_notice' );
+					delete_option( 'wc_stripe_connect_notice' );
 
-				// create webhooks
-				$this->create_webhooks();
+					// create webhooks
+					$this->create_webhooks();
 
-				/**
-				 * @param array                  $response
-				 * @param WC_Stripe_API_Settings $this
-				 *
-				 * @since 3.1.6
-				 */
-				do_action( 'wc_stripe_connect_settings', $response, $this );
+					/**
+					 * @param array                  $response
+					 * @param WC_Stripe_API_Settings $this
+					 *
+					 * @since 3.1.6
+					 */
+					do_action( 'wc_stripe_connect_settings', $response, $this );
 
-				$this->init_form_fields();
-
-				echo '<div class="updated inline notice-success is-dismissible "><p>' .
-				     __( 'Your Stripe account has been connected to your WooCommerce store. You may now accept payments in Live and Test mode.', 'woo-stripe-payment' ) .
-				     '</p></div>';
+					$this->init_form_fields();
+					?>
+                    <div class="updated inline notice-success is-dismissible ">
+                        <p>
+							<?php esc_html_e( 'Your Stripe account has been connected to your WooCommerce store. You may now accept payments in Live and Test mode.', 'woo-stripe-payment' ) ?>
+                        </p>
+                    </div>
+					<?php
+				}
 			}
 		}
 		parent::admin_options();
@@ -313,8 +348,10 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 				array_values( array_unique( array_merge( array(
 					'charge.failed',
 					'charge.succeeded',
+					'charge.pending',
 					'source.chargeable',
 					'payment_intent.succeeded',
+					'payment_intent.requires_action',
 					'charge.refunded',
 					'charge.dispute.created',
 					'charge.dispute.closed',
@@ -347,6 +384,18 @@ class WC_Stripe_API_Settings extends WC_Stripe_Settings_API {
 
 	public function get_webhook_id( $mode ) {
 		return $this->get_option( "webhook_id_{$mode}", null );
+	}
+
+	public function get_account_id( $mode = '' ) {
+		if ( ! $mode ) {
+			$mode = wc_stripe_mode();
+		}
+
+		return $mode === WC_Stripe_Constants::LIVE ? $this->get_option( 'account_id' ) : $this->get_option( 'account_id_test' );
+	}
+
+	public function delete_account_settings() {
+		delete_option( $this->get_option_key() );
 	}
 
 }

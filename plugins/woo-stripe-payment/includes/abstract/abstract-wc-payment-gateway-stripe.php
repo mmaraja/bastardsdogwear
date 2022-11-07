@@ -88,7 +88,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 	 *
 	 * @var WC_Stripe_Gateway
 	 */
-	protected $gateway;
+	public $gateway;
 
 	/**
 	 *
@@ -391,9 +391,9 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 		}
 
 		if ( $result->complete_payment ) {
+			WC()->cart->empty_cart();
 			$this->payment_object->payment_complete( $order, $result->charge );
 			$this->trigger_post_payment_processes( $order, $this );
-			WC()->cart->empty_cart();
 
 			return array(
 				'result'   => 'success',
@@ -412,7 +412,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 	 * @return array
 	 */
 	public function get_localized_params() {
-		return array(
+		$data = array(
 			'gateway_id'            => $this->id,
 			'api_key'               => wc_stripe_get_publishable_key(),
 			'saved_method_selector' => '[name="' . $this->saved_method_key . '"]',
@@ -422,14 +422,17 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 				'required_field' => __( 'Please fill out all required fields.', 'woo-stripe-payment' )
 			),
 			'routes'                => array(
-				'setup_intent'     => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'setup-intent' ) ),
-				'sync_intent'      => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'sync-payment-intent' ) ),
-				'add_to_cart'      => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'add-to-cart' ) ),
-				'cart_calculation' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'cart-calculation' ) ),
-				'shipping_method'  => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'shipping-method' ) ),
-				'shipping_address' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'shipping-address' ) ),
-				'checkout'         => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout' ) ),
-				'checkout_payment' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout/payment' ) )
+				'create_payment_intent'       => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'payment-intent' ) ),
+				'order_create_payment_intent' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'order/payment-intent' ) ),
+				'setup_intent'                => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'setup-intent' ) ),
+				'sync_intent'                 => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'sync-payment-intent' ) ),
+				'add_to_cart'                 => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'add-to-cart' ) ),
+				'cart_calculation'            => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'cart-calculation' ) ),
+				'shipping_method'             => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'shipping-method' ) ),
+				'shipping_address'            => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->cart->rest_uri( 'shipping-address' ) ),
+				'checkout'                    => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout' ) ),
+				'checkout_payment'            => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout/payment' ) ),
+				'order_pay'                   => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'order-pay' ) ),
 			),
 			'rest_nonce'            => wp_create_nonce( 'wp_rest' ),
 			'banner_enabled'        => $this->banner_checkout_enabled(),
@@ -440,6 +443,13 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			'description'           => $this->get_description(),
 			'elementOptions'        => $this->get_element_options()
 		);
+		global $wp;
+		if ( isset( $wp->query_vars['order-pay'] ) ) {
+			$data['order_id']  = absint( $wp->query_vars['order-pay'] );
+			$data['order_key'] = isset( $_GET['key'] ) ? $_GET['key'] : '';
+		}
+
+		return $data;
 	}
 
 	/**
@@ -523,6 +533,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			$result->save();
 			WC_Payment_Tokens::set_users_default( $user_id, $result->get_id() );
 
+			unset( WC()->session->{WC_Stripe_Constants::PAYMENT_INTENT} );
 			do_action( 'wc_stripe_add_payment_method_success', $result );
 
 			return array(
@@ -1026,7 +1037,9 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			}
 		}
 		$token->set_user_id( $order->get_user_id() );
-		$token->save();
+		if ( strtolower( $token->get_brand() ) !== 'link' ) {
+			$token->save();
+		}
 
 		// set token value so it can be used for other processes.
 		$this->payment_method_token = $token->get_token();
@@ -1463,7 +1476,8 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			'shipping_options' => $this->has_digital_wallet ? $this->get_formatted_shipping_methods() : array(),
 			'total'            => wc_format_decimal( WC()->cart->total, 2 ),
 			'total_cents'      => wc_stripe_add_number_precision( WC()->cart->total, get_woocommerce_currency() ),
-			'currency'         => get_woocommerce_currency()
+			'currency'         => get_woocommerce_currency(),
+			'installments'     => array( 'enabled' => $this->is_installment_available() )
 		) );
 		if ( in_array( $page, array( 'checkout', 'cart' ) ) ) {
 			if ( ! empty( $wp->query_vars['order-pay'] ) ) {
@@ -1475,6 +1489,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 				$data['total_cents']    = wc_stripe_add_number_precision( $order->get_total(), $order->get_currency() );
 				$data['currency']       = $order->get_currency();
 				$data['pre_order']      = $this->order_contains_pre_order( $order );
+				$data['order']          = array( 'id' => $order->get_id(), 'key' => $order->get_order_key() );
 			} else {
 				$data['needs_shipping'] = WC()->cart->needs_shipping();
 				if ( 'checkout' === $page && is_cart() ) {
@@ -1488,7 +1503,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			$data['needs_shipping'] = $product->needs_shipping();
 			$data['product']        = array(
 				'id'        => $product->get_id(),
-				'price'     => $product->get_price(),
+				'price'     => wc_get_price_to_display( $product ),
 				'variation' => false
 			);
 		}
@@ -1836,6 +1851,10 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 		$options = array_merge( array( 'locale' => wc_stripe_get_site_locale() ), $options );
 
 		return apply_filters( 'wc_stripe_get_element_options', $options, $this );
+	}
+
+	public function is_installment_available() {
+		return false;
 	}
 
 }

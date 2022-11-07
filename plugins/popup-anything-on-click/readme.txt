@@ -1,9 +1,9 @@
-=== Popup Anything - A Marketing Popup and Lead Generation Conversions ===
+﻿=== Popup Anything - A Marketing Popup and Lead Generation Conversions ===
 Contributors: wponlinesupport, anoopranawat, pratik-jain, piyushpatel123, ridhimashukla, patelketan
 Tags:  modal popup, popup, email marketing, modal, page load, newsletter, marketing popup, exit popup, full-screen popup, HTML popup, image popup, page load popup, popup on click, modal popup on click, full-screen popup on click, on-click popup
 Requires at least: 5.2
-Tested up to: 5.9.2
-Stable tag: 2.1.3
+Tested up to: 6.0
+Stable tag: 2.1.9
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -11,7 +11,7 @@ Modal popup on a page load or by clicking link, image and button. Create popups,
 
 == Description ==
 
-[Explore Popup Anything Pro Features](https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me) | [Bundle Deal](https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me#wpos-epb)
+[Explore Popup Anything Features](https://demo.essentialplugin.com/popup-anything-on-click-demo/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me) | [Annual or Lifetime Bundle Deal](https://www.essentialplugin.com/pricing/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me)
 
 [Popup anything](https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me) work with
 
@@ -19,6 +19,18 @@ Modal popup on a page load or by clicking link, image and button. Create popups,
 * Link Click,
 * Image Click or
 * Button Click.
+* Element Click Popup
+* Inactivity Popup
+* Scroll Up & Down Popup
+* Exit Intent Popup
+* Bar Popup
+* Inline Popup
+* Schedule Popup
+* Push Notification Popup
+* Slide In Popup
+* A/B Testing
+* Referrer, UTM & Cookies Based Popup
+* Ad blocker Popup and many more
 
 Popup Anything is the best popup builder and marketing plugin that helps you get more email subscribers, increase sales and grow your business.
 
@@ -30,11 +42,11 @@ With Popup anything on click plugin, you can insert any type of content into you
 
 Your visitor’s experience is our #1 priority. Popup Anything’s campaigns won’t annoy your visitors like other WordPress popup plugins do. Our smart targeting and personalization features let you show the right message, to the right user, at the right time…no unwanted interruptions necessary.
 
-= Compatible with the major form plugins that submit the form with help of ajax =
+= Compatible with the major form plugins that submit the form with help of Ajax =
 * Contact form 7
 * Ninja Forms
 * Gravity Forms
-* Any generic form that submits the form with help of ajax.
+* Any generic form that submits the form with help of Ajax.
 
 = Features =
 * Create and manage as many popups as you want
@@ -105,7 +117,7 @@ Find out about other [best WordPress plugins](https://www.essentialplugin.com/wo
 
 = I want to change button design as per my theme =
 
-You can use <code>.paoc-popup-btn</code> class to change the button design as per your theme. Add the bellow custom css under custom css section of your theme and change the color and other values as per your need. Eg:
+You can use <code>.paoc-popup-btn</code> class to change the button design as per your theme. Add the bellow custom CSS under custom CSS section of your theme and change the color and other values as per your need. e.g:
 
 <code>
 .paoc-popup-btn {
@@ -120,24 +132,48 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 == Screenshots ==
 
 1. Advance
-2. Behaviour
+2. Behavior
 3. Content
-4. Custom CSS.
+4. Custom CSS
 5) Design
 6) Display Rule Settings
 7) General Settings
 
 == Changelog ==
 
+= 2.2 (12, July 2022) =
+* [*] Fixed - Fixed Popup Custom CSS setting is not going to be save.
+
+= 2.1.9 (07, July 2022) =
+* [*] Update - Taken care of data sanitization & escaping while Popup Preview.
+* [*] Update - Make embedded Wistia video responsive within popup content.
+* [*] Update - Removed some unused functions.
+
+= 2.1.8 (05, July 2022) =
+* [*] Update - Taken care of data sanitization & escaping.
+
+= 2.1.7 (29, June 2022) =
+* [*] Fixed - Fixed security issue in [paoc_details] shortcode.
+
+= 2.1.6 (17, May 2022) =
+* [*] Tested up to: 6.0
+
+= 2.1.5 (21, April 2022) =
+* [*] Removed unwanted images. Improve some code and functions
+
+= 2.1.4 (14, April 2022) =
+* [*] Tested up to: 5.9.3
+* [*] Improve some code and functions
+
 = 2.1.3 (29, March 2022) =
-[+] Tested up to: 5.9.2
+* [+] Tested up to: 5.9.2
 
 = 2.1.2 (08, March 2022) =
 * [-] Removed unwanted code and functions.
 
 = 2.1.1 (01, March 2022) =
 * [*] Fixed - Fixed the body scroll top issue on popup open.
-* [*] Fixed - Fixed custombox lagecy issue from shortcode.
+* [*] Fixed - Fixed custombox legacy issue from shortcode.
 * [*] Tested up to: 5.9.1
 
 = 2.1 (22, Feb 2022) =
@@ -175,7 +211,7 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 
 = 2.0.4 (14, Oct 2021) =
 * [*] Update - Removed WP_Query loop so popup can use global post data along with other third party plugins like 'Shortcode Ultimate' and etc.
-* [*] Fixed - Authenticated Cross Site Scripting Vulnerability in admin areay. This vulnerability was discovered by Vishnupriya Ilango of Fortinet's FortiGuard Labs with CVE ID CVE-2021-24883.
+* [*] Fixed - Authenticated Cross Site Scripting Vulnerability in admin area. This vulnerability was discovered by Vishnupriya Ilango of Fortinet's FortiGuard Labs with CVE ID CVE-2021-24883.
 
 = 2.0.3 (08, Oct 2021) =
 * [*] Update - Minor fix.
@@ -204,8 +240,8 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 = 1.9.2.1 (23, Aug 2021) =
 * [*] Updated all external links
 * [*] Tweak - Code optimization and performance improvements.
-* [*] Fixed - Blocks Initializer Issue.
-* [*] Updated language file and json.
+* [*] Fixed - Blocks initialize Issue.
+* [*] Updated language file and JSON.
 
 = 1.9.2 (31, May 2021) =
 * [*] Tested up to: 5.7.2
@@ -227,13 +263,13 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 
 = 1.7.6 (06, July 2020) =
 * [*] Added a 5px border-radius for the button for better look.
-* [*] Regular pluign maintenance. Updated readme file. Tested plugin some more populor themes. 
+* [*] Regular plugin maintenance. Updated readme file. Tested plugin some more popular themes. 
 
 = 1.7.5 (22, May 2020) =
-* [*] Regular pluign maintenance. Updated readme file. Tested plugin some more popular themes. 
+* [*] Regular plugin maintenance. Updated readme file. Tested plugin some more popular themes. 
 
 = 1.7.4 (02, March 2020) =
-* [*] Fix - Resolved some PHP warning when popup image not choosen for link type 'Image'.
+* [*] Fix - Resolved some PHP warning when popup image not chosen for link type 'Image'.
 
 = 1.7.3 (25, Feb 2020) =
 * [*] Fixed popup width issue in mobile (screen size < 480px). 
@@ -264,7 +300,7 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 * [*] Important Note: Please clear your website cache (if you are using it) after updating the plugin.  
 
 = 1.5.1 (06, Jan 2020) =
-* [*] Fixed z-index issue with divi theme.
+* [*] Fixed z-index issue with Divi theme.
 
 = 1.5 (26, Dec 2019) =
 * [*] Tested: Tested with Gutenberg blocks.
@@ -295,10 +331,10 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 * [*] Follow some WordPress Detailed Plugin Guidelines.
 
 = 1.2.1 (08-05-2018) =
-* Fixed : Fixed some css issues.
+* Fixed : Fixed some CSS issues.
 
 = 1.2 (10-3-2018) =
-* Fixed : Fixed some css issues
+* Fixed : Fixed some CSS issues
 
 = 1.1.6 (28-2-2018) =
 * Fixed: Popup display issue if large content is added in the popup.

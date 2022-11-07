@@ -83,15 +83,19 @@ class WC_Stripe_Gateway {
 	 */
 	private $client = null;
 
-	public function __construct( $mode = null, $secret_key = null ) {
+	public function __construct( $mode = null, $secret_key = null, $config = array() ) {
 		if ( null != $mode ) {
 			$this->mode = $mode;
 		}
 		if ( null != $secret_key ) {
 			$this->secret_key = $secret_key;
 		}
-		$this->client = new \Stripe\StripeClient( array( 'stripe_version' => '2020-08-27' ) );
+		$this->client = new \Stripe\StripeClient( array_merge( $this->get_client_config(), $config ) );
 		self::init();
+	}
+
+	protected function get_client_config() {
+		return apply_filters( 'wc_stripe_client_config_params', array( 'stripe_version' => '2020-08-27' ), $this );
 	}
 
 	public static function init() {
@@ -110,10 +114,10 @@ class WC_Stripe_Gateway {
 	 * @since 3.1.0
 	 * @return WC_Stripe_Gateway
 	 */
-	public static function load( $mode = null, $secret_key = null ) {
+	public static function load( $mode = null, $secret_key = null, $config = array() ) {
 		$class = apply_filters( 'wc_stripe_gateway_class', 'WC_Stripe_Gateway' );
 
-		return new $class( $mode, $secret_key );
+		return new $class( $mode, $secret_key, $config );
 	}
 
 	/**
@@ -396,7 +400,8 @@ class WC_Stripe_Gateway {
 
 	public function get_api_options( $mode = '' ) {
 		if ( empty( $mode ) && $this->mode != null ) {
-			$mode = $this->mode;
+			$mode             = $this->mode;
+			$this->secret_key = wc_stripe_get_secret_key( $mode );
 		}
 		$args = array( 'api_key' => $this->secret_key ? $this->secret_key : wc_stripe_get_secret_key( $mode ) );
 
@@ -455,7 +460,6 @@ class WC_Stripe_Gateway {
 	 * @param string                              $code
 	 *
 	 * @since 3.1.1
-	 * @todo  use in future version to replace manual returns of WP_Error in each method
 	 */
 	public function get_wp_error( $e, $code = 'stripe-error' ) {
 		if ( ( $json_body = $e->getJsonBody() ) ) {
@@ -464,7 +468,7 @@ class WC_Stripe_Gateway {
 			$err = '';
 		}
 
-		return new WP_Error( $code, $this->get_error_message( $err ), $err );
+		return apply_filters( 'wc_stripe_api_get_wp_error', new WP_Error( $code, $this->get_error_message( $err ), $err ), $e, $code );
 	}
 
 	/**

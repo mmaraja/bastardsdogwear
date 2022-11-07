@@ -249,8 +249,8 @@ class WC_Stripe_Controller_Cart extends WC_Stripe_Rest_Controller {
 					array(
 						'data' => $gateway->add_to_cart_response(
 							array(
-								'total'           => round( WC()->cart->total, 2 ),
-								'subtotal'        => round( WC()->cart->subtotal, 2 ),
+								'total'           => wc_format_decimal( WC()->cart->total, 2 ),
+								'subtotal'        => wc_format_decimal( WC()->cart->subtotal, 2 ),
 								'totalCents'      => wc_stripe_add_number_precision( WC()->cart->total ),
 								'displayItems'    => $gateway->get_display_items( 'cart' ),
 								'shippingOptions' => $gateway->get_formatted_shipping_methods(),

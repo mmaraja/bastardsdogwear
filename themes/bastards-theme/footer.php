@@ -1,4 +1,11 @@
 <footer class="d-flex justify-content-center flex-column">
+<div class="container-md p-0">
+<div class="d-flex contact_footer">
+  <div class="col-11 col-md-4">
+  <?php echo do_shortcode('[mailerlite_form form_id=1]'); ?>
+  </div>
+</div>
+</div>
 <div class="menu-section">
  <div class="container-md p-0">
     <div class="m-0 pt-5 row d-flex flex-row justify-content-start">
@@ -155,6 +162,34 @@ AttachBody.prototype._positionDropdown = function() {
 };
 
 })(window.jQuery);
+
+
 </script>
+<?php if(is_product()) {?>
+<script type='text/javascript'>
+    var term_color = $('#select2-pa_colour-container').val();
+    <?php
+    global $product;
+   
+    $variations = $product->get_available_variations();
+    $variations_id = wp_list_pluck( $variations, 'variation_id' );
+    $name = $product->get_name();
+    $price = $product->get_price();
+    $term_size = $product->get_attribute( 'pa_size-shop' );
+    $term_color = $product->get_attribute( 'pa_colour' );
+    ?>
+    window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+          'name' : '<?php echo $name ?>',
+          'id' : '<?php echo $variations_id ?>',
+          'price' : '<?php echo $price , "€"?>',
+          'brand' : '',
+          'category' : '<?php echo strip_tags($product->get_categories(', ', '', '')); ?>',
+          'variant' : '<?php echo $name , " " , $term_color , " " , $term_size?>',
+          'coupon' : ''          
+      });
+    
+</script>
+<?php  } ?>
 </body>
 </html>

@@ -5,7 +5,6 @@ defined( 'ABSPATH' ) or die( 'Keep Silent' );
 if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 	class Woo_Variation_Gallery {
 
-		protected $_version = '1.3.1';
 		protected static $_instance = null;
 
 		public static function instance() {
@@ -41,7 +40,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 		}
 
 		public function version() {
-			return esc_attr( $this->_version );
+			return esc_attr( WOO_VARIATION_GALLERY_PLUGIN_VERSION );
 		}
 
 		public function get_frontend() {
@@ -63,19 +62,23 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 			return implode( '; ', array_unique( apply_filters( 'woo_variation_gallery_generated_inline_style', $generated ) ) );
 		}
 
-		public function get_option( $option, $default = null, $old_id = false ) {
+		public function get_option( $option, $default = null ) {
 			$options = GetWooPlugins_Admin_Settings::get_option( 'woo_variation_gallery' );
 
-			if ( isset( $options[ $option ] ) ) {
-				return $options[ $option ];
-			} else {
-				// return ( $old_id ) ? get_option( $old_id, $default ) : $default;
-				return $default;
+			if ( current_theme_supports( 'woo_variation_gallery' ) ) {
+				$theme_support = get_theme_support( 'woo_variation_gallery' );
+				$default       = isset( $theme_support[0][ $option ] ) ? $theme_support[0][ $option ] : $default;
 			}
+
+			return isset( $options[ $option ] ) ? $options[ $option ] : $default;
 		}
 
 		public function is_pro() {
 			return false;
+		}
+
+		public function set_rtl_by_position( $position ) {
+			return ! in_array( $position, array( 'left', 'right' ) ) && is_rtl();
 		}
 
 		public function get_options() {
@@ -139,7 +142,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery' ) ):
 		}
 
 		public function org_assets_url( $file = '' ) {
-			return 'https://ps.w.org/woo-variation-gallery/assets' . $file;
+			return 'https://ps.w.org/woo-variation-gallery/assets' . $file . '?ver=' . $this->version();
 		}
 
 		public static function plugin_activated() {

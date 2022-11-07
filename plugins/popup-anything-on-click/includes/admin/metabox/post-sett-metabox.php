@@ -58,46 +58,46 @@ if( ! $enable ) { ?>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_form_fields_sett"><i class="dashicons dashicons-id-alt" aria-hidden="true"></i> <?php esc_html_e('Form Fields', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_form_fields_sett"><i class="dashicons dashicons-id-alt" aria-hidden="true"></i> <?php esc_html_e('Form Fields', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_social_sett"><i class="dashicons dashicons-share" aria-hidden="true"></i> <?php esc_html_e('Social Profile', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_social_sett"><i class="dashicons dashicons-share" aria-hidden="true"></i> <?php esc_html_e('Social Profile', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_notification_sett"><i class="dashicons dashicons-email-alt" aria-hidden="true"></i> <?php esc_html_e('Notification', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_notification_sett"><i class="dashicons dashicons-email-alt" aria-hidden="true"></i> <?php esc_html_e('Notification', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_integration_sett"><i class="dashicons dashicons-networking" aria-hidden="true"></i> <?php esc_html_e('Integration', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_integration_sett"><i class="dashicons dashicons-networking" aria-hidden="true"></i> <?php esc_html_e('Integration', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_referrer_sett"><i class="dashicons dashicons-megaphone" aria-hidden="true"></i> <?php esc_html_e('Referrer Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_referrer_sett"><i class="dashicons dashicons-megaphone" aria-hidden="true"></i> <?php esc_html_e('Referrer Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_utm_sett"><i class="dashicons dashicons-admin-links" aria-hidden="true"></i> <?php esc_html_e('UTM Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_utm_sett"><i class="dashicons dashicons-admin-links" aria-hidden="true"></i> <?php esc_html_e('UTM Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_cookie_sett"><i class="dashicons dashicons-art" aria-hidden="true"></i> <?php esc_html_e('Cookie Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_cookie_sett"><i class="dashicons dashicons-art" aria-hidden="true"></i> <?php esc_html_e('Cookie Popup', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_analytics_sett"><i class="dashicons dashicons-chart-bar" aria-hidden="true"></i> <?php esc_html_e('Google Analytics', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_analytics_sett"><i class="dashicons dashicons-chart-bar" aria-hidden="true"></i> <?php esc_html_e('Google Analytics', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<li class="paoc-pro-feature paoc-vtab-nav">
-			<a href="#paoc_campaign_sett"><i class="dashicons dashicons-randomize" aria-hidden="true"></i> <?php esc_html_e('A/B Testing', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php _e('PRO','popup-anything-on-click');?></span></a>
+			<a href="#paoc_campaign_sett"><i class="dashicons dashicons-randomize" aria-hidden="true"></i> <?php esc_html_e('A/B Testing', 'popup-anything-on-click'); ?> <span class="paoc-pro-tag"><?php esc_html_e('PRO','popup-anything-on-click');?></span></a>
 		</li>
 
 		<!-- Pro Feature - Button -->
 		<li class="paoc-pro-tab-wrap">
 			<a href="<?php echo POPUPAOC_PLUGIN_LINK_UNLOCK; ?>" target="_blank" class="paoc-pro-upgrade-link">
 				<i class="dashicons dashicons-money-alt"></i>
-				<?php _e('Upgrade to Premium', 'popup-anything-on-click'); ?>
+				<?php esc_html_e('Upgrade to Premium', 'popup-anything-on-click'); ?>
 			</a>
 		</li>
 	</ul>
@@ -147,7 +147,7 @@ if( ! $enable ) { ?>
 			include_once( POPUPAOC_DIR . '/includes/admin/metabox/campaign-metabox.php' );
 		?>
 	</div>
-	<input type="hidden" value="<?php echo popupaoc_esc_attr( $selected_tab ); ?>" class="paoc-selected-tab" name="<?php echo popupaoc_esc_attr( $prefix ); ?>tab" />
+	<input type="hidden" value="<?php echo esc_attr( $selected_tab ); ?>" class="paoc-selected-tab" name="<?php echo esc_attr( $prefix ); ?>tab" />
 </div>
 
 <div class="paoc-meta-notify paoc-hide"><?php esc_html_e('Changing the Popup Bahaviour or Popup Type will enable some settings in Content and Designs tab.', 'popup-anything-on-click'); ?></div>

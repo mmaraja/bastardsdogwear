@@ -2,9 +2,9 @@
 Contributors: mr.clayton
 Tags: stripe, ach, klarna, credit card, apple pay, google pay, ideal, sepa, sofort
 Requires at least: 3.0.1
-Tested up to: 5.9
+Tested up to: 6.0
 Requires PHP: 5.6
-Stable tag: 3.3.18
+Stable tag: 3.3.24
 Copyright: Payment Plugins
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -35,6 +35,7 @@ To see Apple Pay, visit the site using an iOS device. Google Pay will display fo
 - WooCommerce Subscriptions
 - WooCommerce Pre-Orders
 - WooCommerce Blocks
+- Installments for supported countries
 
 == Frequently Asked Questions ==
 = How do I test this plugin? = 
@@ -58,8 +59,40 @@ If you're site is not loading over https, then Stripe won't render the Payment R
 6. Configuration pages
 7. Payment options at top of checkout page for easy one click checkout
 8. Edit payment gateways on the product page
+9. Stripe Link for high conversion
 
 == Changelog ==
+= 3.3.24 - 7/5/22 =
+* Fixed - Remove payment intent from session when intent's status is processing
+* Updated - If payment intent's status transitions to requires_payment_method, update order status to pending
+* Added - Filter wc_stripe_asynchronous_payment_method_order_status which can be used to change the order's status before redirect to payment page like Sofort, etc
+* Added - Filter wc_stripe_get_api_error_messages which can be used to customize error messages
+= 3.3.23 - 6/27/22 =
+* Fixed - Conflict with the WooCommerce Pay Trace plugin
+* Updated - Billing phone required if Stripe payment form card design used.
+* Updated - Improved WooCommerce Blocks Link integration
+* Updated - Check terms and conditions on when Plaid ACH button clicked on checkout page
+= 3.3.22 - 6/16/22 =
+* Updated - WC Tested up to 6.6
+* Fixed - Error that could be triggered on plugins page if WooCommerce deactivated
+* Fixed - WooCommerce Blocks Link integration autofill of shipping address
+= 3.3.21 - 6/4/22 =
+* Fixed - Error on checkout page when Payment Element is active and saved card used for payment
+* Fixed - Don't hide "save card" checkbox when Link is active on checkout page
+* Updated - Improved Payment Element integration with WooCommerce Blocks
+= 3.3.20 - 6/3/22 =
+* Added - PaymentElement for card payments
+* Added - Link with Stripe which uses the PaymentElement to increase conversion rates
+* Added - Additional messaging for the installments option located on the Advanced Settings page
+* Added - Loader on Blocks ACH when initializing Plaid
+* Added - Ability to delete connection to Stripe account on API Settings page
+* Added - payment_intent.requires_action event for OXXO and Boleto
+* Fixed - ACH fee option not being included in order on checkout page
+* Fixed - Correctly display AfterPay messaging on product pages if prices are shown including tax
+= 3.3.19 - 4/7/22 =
+* Added - Support for installments for Mexico based accounts
+* Added - Afterpay messaging in order summary of Checkout Block
+* Fixed - GPay gateway 3DS error where authentication screen wasn't appearing.
 = 3.3.18 =
 * Fixed - Elementor template editor error when Woofunnels Checkout design is being edited in Admin.
 * Updated - Mini cart code so it's more fault tolerant when using 3rd party mini-cart plugins.

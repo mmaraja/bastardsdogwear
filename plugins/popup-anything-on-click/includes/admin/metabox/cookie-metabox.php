@@ -21,21 +21,21 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-cookie-enable"><?php _e('Enable', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-cookie-enable"><?php esc_html_e('Enable', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" class="paoc-checkbox paoc-cookie-enable" id="paoc-cookie-enable" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Check this box if you want to enable cookie based popup.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box if you want to enable cookie based popup.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-cookie-params"><?php _e('Cookie Params', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-cookie-params"><?php esc_html_e('Cookie Params', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<textarea id="paoc-cookie-params" name="" class="large-text paoc-textarea paoc-cookie-params" disabled="disabled"></textarea>
-					<span class="description"><?php _e('Enter one Cookie params fragment per line. Example: test_cookie | test. So popup will be displayed if visitor browser have cookie set.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Enter one Cookie params fragment per line. Example: test_cookie | test. So popup will be displayed if visitor browser have cookie set.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 		</tbody>

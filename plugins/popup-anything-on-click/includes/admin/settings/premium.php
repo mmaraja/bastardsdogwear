@@ -12,7 +12,7 @@ if ( !defined( 'ABSPATH' ) ) {
 ?>
 <div class="wrap">
 
-	<h2><?php _e( 'Popup Anything Pro - A Marketing Popup', 'popup-anything-on-click' ); ?></h2>
+	<h2><?php esc_html_e( 'Popup Anything Pro - A Marketing Popup', 'popup-anything-on-click' ); ?></h2>
 
 	<style>
 		.wpos-plugin-pricing-table thead th h2{font-weight: 400; font-size: 2.4em; line-height:normal; margin:0px; color: #2ECC71;}
@@ -82,13 +82,14 @@ if ( !defined( 'ABSPATH' ) ) {
 		.larger-font{font-size:24px; line-height:35px; margin:0px;}
 		.h-blue{color:#0055fb ;}
 		.h-orange{color:#FF5D52 ;}
+		.wpos-deal-heading{padding:0px 10px;}
 	</style>
 
 	<div id="poststuff">
 		<div id="post-body" class="metabox-holder">
 			<div id="post-body-content">
 
-				<h3 style="text-align:center"><?php _e( 'Compare "Popup Anything - A Marketing Popup" Free VS Pro', 'popup-anything-on-click' ); ?></h3>
+				<h3 style="text-align:center"><?php esc_html_e( 'Compare "Popup Anything - A Marketing Popup" Free VS Pro', 'popup-anything-on-click' ); ?></h3>
 
 				<table class="wpos-plugin-pricing-table">
 					<colgroup></colgroup>
@@ -102,7 +103,8 @@ if ( !defined( 'ABSPATH' ) ) {
 							</th>
 							<th>
 								<h2 class="wpos-epb">Premium</h2>
-								<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO#wpos-epb" target="_blank">Buy Now</a>
+								<h3 class="wpos-deal-heading">Choose best pricing in <span class="h-blue"> Annual</span> and <span class="h-blue">Lifetime</span> deal</h3>
+								<a href="<?php echo POPUPAOC_PLUGIN_LINK_UPGRADE; ?>" target="_blank">Buy Now</a>
 							</th>	    		
 						</tr>
 					</thead>
@@ -112,7 +114,8 @@ if ( !defined( 'ABSPATH' ) ) {
 							<th></th>
 							<td></td>
 							<td>
-							<a href="<?php echo POPUPAOC_SITE_LINK; ?>/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO#wpos-epb" target="_blank">Buy Now</a></td>
+							<h3 class="wpos-deal-heading">Choose best pricing in <span class="h-blue"> Annual</span> and <span class="h-blue">Lifetime</span> deal</h3>
+							<a href="<?php echo POPUPAOC_PLUGIN_LINK_UPGRADE; ?>" target="_blank">Buy Now</a></td>
 						</tr>
 					</tfoot>
 					<tbody>

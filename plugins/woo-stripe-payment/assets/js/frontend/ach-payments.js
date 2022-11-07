@@ -24,7 +24,6 @@
                 selectAccount: true,
                 countryCodes: ['US'],
                 onSuccess: function (public_token, metadata) {
-                    // serialize metadata and submit form
                     this.payment_token_received = true;
                     this.set_nonce(public_token);
                     this.set_metadata(metadata);
@@ -45,7 +44,11 @@
         if (this.is_gateway_selected()) {
             if (!this.payment_token_received && !this.is_saved_method_selected()) {
                 e.preventDefault();
-                this.linkHandler.open();
+                if (this.is_valid_checkout()) {
+                    this.linkHandler.open();
+                } else {
+                    return this.submit_error(this.params.messages.terms);
+                }
             }
         }
     }
@@ -79,7 +82,11 @@
                 dataType: 'json',
                 data: {_wpnonce: this.params.rest_nonce}
             }).done(function (response) {
-                resolve(response.token);
+                if (response.code) {
+                    console.log(response.message);
+                } else {
+                    resolve(response.token);
+                }
             }.bind(this)).fail(function (xhr, textStatus, errorThrown) {
                 $(this.container).hide();
                 console.log(errorThrown);

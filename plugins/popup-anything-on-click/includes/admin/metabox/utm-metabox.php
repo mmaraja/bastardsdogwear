@@ -21,33 +21,33 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-utm-enable"><?php _e('Enable', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-utm-enable"><?php esc_html_e('Enable', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" class="paoc-checkbox paoc-utm-enable" id="paoc-utm-enable" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Check this box if you want to enable UTM based popup.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box if you want to enable UTM based popup.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-utm-mode"><?php _e('UTM Mode', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-utm-mode"><?php esc_html_e('UTM Mode', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<select name="" class="paoc-select paoc-utm-mode" id="paoc-utm-mode" disabled="disabled">
 						<option value=""><?php esc_html_e('Direct UTM', 'popup-anything-on-click'); ?></option>
 					</select><br/>
-					<span class="description"><?php _e('Choose UTM mode.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Choose UTM mode.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-utm-params"><?php _e('UTM Params', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-utm-params"><?php esc_html_e('UTM Params', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<textarea id="paoc-utm-params" name="" class="large-text paoc-textarea paoc-utm-params" disabled="disabled"></textarea>
-					<span class="description"><?php _e('Enter one UTM params fragment per line. Example: popup | true. So popup will be displayed by below URL.', 'popup-anything-on-click'); ?></span><br/>
+					<span class="description"><?php esc_html_e('Enter one UTM params fragment per line. Example: popup | true. So popup will be displayed by below URL.', 'popup-anything-on-click'); ?></span><br/>
 					<code><?php echo add_query_arg( 'popup', 'true', site_url() ); ?></code>
 				</td>
 			</tr>

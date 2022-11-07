@@ -113,7 +113,7 @@ class POPUPAOC_Public {
 
 		// If Popup Preview is there
 		if( $paoc_preview == 1 ) {
-			$popup_id = isset( $_POST['paoc_preview_popup_id'] ) ? $_POST['paoc_preview_popup_id'] : $popup_id;
+			$popup_id = isset( $_POST['paoc_preview_popup_id'] ) ? popupaoc_clean_number( $_POST['paoc_preview_popup_id'] ) : $popup_id;
 		}
 
 		// Return If no popup ID is there
@@ -143,16 +143,14 @@ class POPUPAOC_Public {
 		$animateTo			= 'top';
 		$prefix				= POPUPAOC_META_PREFIX;
 		$cookie_prefix		= popupaoc_get_option( 'cookie_prefix' );
-		$behaviour 			= popupaoc_get_meta( $popup_id, $prefix.'behaviour' );
-		$popup_goal 		= popupaoc_get_meta( $popup_id, $prefix.'popup_goal' );
-		$display_type 		= popupaoc_get_meta( $popup_id, $prefix.'display_type' );
-		$popup_appear 		= popupaoc_get_meta( $popup_id, $prefix.'popup_appear' );
+		$behaviour			= popupaoc_get_meta( $popup_id, $prefix.'behaviour' );
+		$popup_appear		= popupaoc_get_meta( $popup_id, $prefix.'popup_appear' );
 		$design 			= popupaoc_get_meta( $popup_id, $prefix.'design' );
-		$content 			= popupaoc_get_meta( $popup_id, $prefix.'content' );
+		$content			= popupaoc_get_meta( $popup_id, $prefix.'content' );
 		$custom_css 		= popupaoc_get_meta( $popup_id, $prefix.'custom_css' );
 		$advance 			= popupaoc_get_meta( $popup_id, $prefix.'advance' );
-		$popup_goal			= ( empty( $popup_goal ) || $popup_goal != 'announcement' )	? 'announcement'	: 'announcement';
-		$display_type		= ( empty( $display_type ) || $display_type != 'modal' )	? 'modal'			: 'modal';
+		$popup_goal			= 'announcement';
+		$display_type		= 'modal';
 
 		// Assign value to global var
 		$paoc_popup_post		= $popup_query[0];
@@ -292,19 +290,15 @@ class POPUPAOC_Public {
 		popupaoc_enqueue_script();
 
 		// Print Inline Style
-		echo "<style type='text/css'>{$style['inline']}</style>";
+		echo "<style type='text/css'>".wp_strip_all_tags( $style['inline'] )."</style>";
 
 		// If Popup Preview is there
 		if( $paoc_preview == 1 ) {
-			$popup_content = $_POST['paoc_preview_form_data']['content'];
+			$popup_content = popupaoc_render_popup_content( $_POST['paoc_preview_form_data']['content'] );
 		} else {
-			$popup_content = $popup_query[0]->post_content;
+			$popup_content = popupaoc_render_popup_content( $popup_query[0]->post_content );
 		}
-
-		$secondary_content	= isset( $content['secondary_content'] ) ? $content['secondary_content'] : '';
-		$popup_content		= popupaoc_render_popup_content( $popup_content );
-		$secondary_content	= popupaoc_render_popup_content( $secondary_content );
-
+		$secondary_content	= isset( $content['secondary_content'] ) ? popupaoc_render_popup_content( $content['secondary_content'] ) : '';
 
 		// Include design html file
 		if( $design_file_path ) {

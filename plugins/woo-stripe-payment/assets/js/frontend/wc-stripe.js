@@ -20,11 +20,19 @@
         this.payment_token_received = false;
         this.stripe = stripe;
         this.fields = checkoutFields;
-        this.elements = stripe.elements($.extend({}, {
-            locale: 'auto'
-        }, this.get_element_options()));
+        this.elements = this.create_stripe_elements();
         this.initialize();
     };
+
+    wc_stripe.BaseGateway.prototype.create_stripe_elements = function () {
+        return stripe.elements($.extend({}, {
+            locale: 'auto'
+        }, this.get_element_options()));
+    }
+
+    wc_stripe.BaseGateway.prototype.is_user_logged_in = function () {
+        return this.params.user_id > 0;
+    }
 
     wc_stripe.BaseGateway.prototype.get_page = function () {
         var page = wc_stripe_params_v3.page;
@@ -91,6 +99,13 @@
 
     wc_stripe.BaseGateway.prototype.get_error_message = function (message) {
         if (typeof message == 'object') {
+            if (message.hasOwnProperty('message')) {
+                if (message.message.indexOf('server_side_confirmation_beta=v1') > -1) {
+                    message.code = 'server_side_confirmation_beta';
+                } else if (message.message.indexOf('params.payment_method_data.billing_details.phone') > -1) {
+                    message.code = 'phone_required';
+                }
+            }
             if (message.code && wc_stripe_messages[message.code]) {
                 message = wc_stripe_messages[message.code];
             } else {
@@ -528,7 +543,7 @@
     }
 
     wc_stripe.BaseGateway.prototype.ajax_before_send = function (xhr) {
-        if (this.params.user_id > 0) {
+        if (this.is_user_logged_in()) {
             xhr.setRequestHeader('X-WP-Nonce', this.params.rest_nonce);
         }
     };
@@ -598,12 +613,9 @@
         try {
             this.stripe[this.handleActionMethod](obj.client_secret).then(function (result) {
                 if (result.error) {
+                    this.unblock();
                     this.payment_token_received = false;
-                    this.submit_error(result.error);
-                    this.sync_payment_intent(obj.order_id, obj.client_secret).catch(function (response) {
-                        this.submit_error(response.message);
-                    }.bind(this));
-                    return;
+                    return this.submit_error(result.error);
                 }
                 if (this.is_current_page('order_pay')) {
                     this.get_form().trigger('submit');
@@ -863,7 +875,7 @@
     };
 
     wc_stripe.CheckoutGateway.prototype.has3DSecureParams = function () {
-        if (this.is_current_page('order_pay') || this.is_change_payment_method()) {
+        if (this.is_current_page('order_pay') || this.is_current_page('checkout') || this.is_change_payment_method()) {
             if (window.location.hash && typeof window.location.hash === 'string') {
                 var match = window.location.hash.match(/response=(.*)/);
                 if (match) {
@@ -1017,6 +1029,10 @@
         this.on_payment_method_selected(null, $('[name="payment_method"]:checked').val());
     };
 
+    wc_stripe.CheckoutGateway.prototype.show_new_payment_method = function () {
+        $('[name="' + this.gateway_id + '_payment_type_key"][value="new"').trigger('click');
+    }
+
     wc_stripe.CheckoutGateway.prototype.on_payment_method_selected = function (e, payment_method) {
         if (payment_method === this.gateway_id) {
             if (this.payment_token_received || this.is_saved_method_selected()) {
@@ -1065,6 +1081,37 @@
 
     wc_stripe.CheckoutGateway.prototype.set_save_payment_method = function (bool) {
         $('[name="' + this.gateway_id + '_save_source_key' + '"]').prop('checked', bool);
+    }
+
+    wc_stripe.CheckoutGateway.prototype.process_order_pay = function () {
+        var data = this.get_form().serializeArray();
+        data.push({name: '_wpnonce', value: this.params.rest_nonce});
+        data.push({name: 'order_id', value: this.params.order_id});
+        data.push({name: 'order_key', value: this.params.order_key});
+        this.block();
+        $.ajax({
+            url: this.params.routes.order_pay,
+            method: 'POST',
+            dataType: 'json',
+            data: $.param(data)
+        }).done(function (response) {
+            if (response.success) {
+                if (response.needs_confirmation) {
+                    if (response.data) {
+                        this.handle_next_action(response.data);
+                    } else {
+                        window.location.href = response.redirect;
+                    }
+                } else {
+                    this.get_form().trigger('submit');
+                }
+            } else {
+                this.submit_error(response.message);
+            }
+        }.bind(this)).fail(function (jqXHR, textStatus, errorThrown) {
+            this.unblock();
+            this.submit_error(errorThrown);
+        }.bind(this))
     }
 
     /************** Product Gateway ***************/
@@ -1262,6 +1309,9 @@
 
     wc_stripe.GooglePay = function () {
     };
+
+    wc_stripe.GooglePay.prototype.handleActionMethod = 'handleCardAction';
+    wc_stripe.GooglePay.prototype.setupActionMethod = 'confirmCardSetup';
 
     var googlePayBaseRequest = {
         apiVersion: 2,
@@ -1533,6 +1583,9 @@
     wc_stripe.ApplePay = function () {
     };
 
+    wc_stripe.ApplePay.prototype.handleActionMethod = 'handleCardAction';
+    wc_stripe.ApplePay.prototype.setupActionMethod = 'confirmCardSetup';
+
     wc_stripe.ApplePay.prototype.initialize = function () {
         this.createPaymentRequest();
         this.canMakePayment();
@@ -1580,6 +1633,9 @@
     /*********** PaymentRequest *********/
     wc_stripe.PaymentRequest = function () {
     };
+
+    wc_stripe.PaymentRequest.prototype.handleActionMethod = 'handleCardAction';
+    wc_stripe.PaymentRequest.prototype.setupActionMethod = 'confirmCardSetup';
 
     wc_stripe.PaymentRequest.prototype.initialize = function () {
         this.createPaymentRequest();
@@ -2121,12 +2177,7 @@
     }
 
     try {
-        stripe = Stripe(wc_stripe_params_v3.api_key, (function () {
-            if (wc_stripe_params_v3.mode === 'test' && wc_stripe_params_v3.account === '') {
-                return {};
-            }
-            return {stripeAccount: wc_stripe_params_v3.account};
-        }()));
+        stripe = Stripe(wc_stripe_params_v3.api_key, wc_stripe_params_v3.stripeParams);
     } catch (error) {
         window.alert(error);
         console.log(error);

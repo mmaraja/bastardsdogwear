@@ -26,7 +26,7 @@ class WC_Stripe_Manager {
 	 *
 	 * @var string
 	 */
-	public $version = '3.3.18';
+	public $version = '3.3.24';
 
 	/**
 	 *
@@ -35,7 +35,7 @@ class WC_Stripe_Manager {
 	public $api_settings;
 
 	/**
-	 * @var WC_Stripe_Settings_API
+	 * @var \WC_Stripe_Account_Settings
 	 * @since 3.1.7
 	 */
 	public $account_settings;
@@ -79,7 +79,6 @@ class WC_Stripe_Manager {
 
 	public function __construct() {
 		add_action( 'plugins_loaded', array( $this, 'plugins_loaded' ), 10 );
-		add_action( 'init', array( $this, 'init' ) );
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
 		add_action( 'woocommerce_init', array( $this, 'woocommerce_dependencies' ) );
 		add_action( 'woocommerce_blocks_loaded', array( '\PaymentPlugins\Blocks\Stripe\Package', 'init' ) );
@@ -152,6 +151,9 @@ class WC_Stripe_Manager {
 		\PaymentPlugins\CartFlows\Stripe\Main::init();
 		\PaymentPlugins\WooFunnels\Stripe\Main::init();
 		\PaymentPlugins\CheckoutWC\Stripe\Main::init();
+		\PaymentPlugins\Stripe\WooCommerceSubscriptions\Package::init();
+		\PaymentPlugins\Stripe\WooCommercePreOrders\Package::init();
+		\PaymentPlugins\Stripe\GermanMarket\Package::init();
 	}
 
 	/**
@@ -161,6 +163,7 @@ class WC_Stripe_Manager {
 	}
 
 	public function includes() {
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/class-wc-stripe-constants.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/class-wc-stripe-install.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/class-wc-stripe-update.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/class-wc-stripe-rest-api.php';
@@ -190,9 +193,6 @@ class WC_Stripe_Manager {
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/wc-stripe-functions.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/wc-stripe-webhook-functions.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/wc-stripe-hooks.php';
-
-		// constants
-		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/class-wc-stripe-constants.php';
 
 		// traits
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/traits/wc-stripe-settings-trait.php';
@@ -294,7 +294,7 @@ class WC_Stripe_Manager {
 		$this->rest_api = new $api_class();
 
 		if ( $this->is_request( 'frontend' ) && class_exists( 'WC_Stripe_Frontend_Scripts' ) ) {
-			$this->scripts = new WC_Stripe_Frontend_Scripts();
+			$this->scripts();
 		}
 
 		// allow other plugins to provide their own settings classes.
@@ -310,6 +310,10 @@ class WC_Stripe_Manager {
 		}
 
 		new WC_Stripe_API_Request_Filter( $this->advanced_settings );
+
+		new \PaymentPlugins\Stripe\Link\LinkIntegration( $this->advanced_settings, $this->account_settings, $this->assets(), $this->data_api() );
+		new \PaymentPlugins\Stripe\Controllers\PaymentIntent( WC_Stripe_Gateway::load(), [ 'stripe_cc' ] );
+		new \PaymentPlugins\Stripe\Messages\MessageController();
 	}
 
 	/**
@@ -348,10 +352,32 @@ class WC_Stripe_Manager {
 	 */
 	public function scripts() {
 		if ( is_null( $this->scripts ) ) {
-			$this->scripts = new WC_Stripe_Frontend_Scripts();
+			$this->scripts = new WC_Stripe_Frontend_Scripts( $this->assets() );
 		}
 
 		return $this->scripts;
+	}
+
+	public function assets() {
+		static $assets;
+		if ( is_null( $assets ) ) {
+			$assets = new \PaymentPlugins\Stripe\Assets\AssetsApi(
+				WC_STRIPE_PLUGIN_FILE_PATH,
+				trailingslashit( plugins_url( dirname( WC_STRIPE_PLUGIN_NAME ) ) ),
+				$this->version()
+			);
+		}
+
+		return $assets;
+	}
+
+	public function data_api() {
+		static $data_api;
+		if ( is_null( $data_api ) ) {
+			$data_api = new \PaymentPlugins\Stripe\Assets\AssetDataApi();
+		}
+
+		return $data_api;
 	}
 
 	public function payment_gateways() {

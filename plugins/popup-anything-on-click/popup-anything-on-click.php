@@ -5,7 +5,7 @@
  * Text Domain: popup-anything-on-click
  * Description: Display a modal popup on a page load or by clicking link, image or button. Also work with Gutenberg shortcode block.
  * Domain Path: /languages/
- * Version: 2.1.3
+ * Version: 2.2
  * Author: WP OnlineSupport, Essential Plugin
  * Author URI: https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/
 */
@@ -15,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if( ! defined( 'POPUPAOC_VERSION' ) ) {
-	define( 'POPUPAOC_VERSION', '2.1.3' ); // Version of plugin
+	define( 'POPUPAOC_VERSION', '2.2' ); // Version of plugin
 }
 
 if( ! defined( 'POPUPAOC_DIR' ) ) {
@@ -38,20 +38,16 @@ if( ! defined( 'POPUPAOC_META_PREFIX' ) ) {
 	define('POPUPAOC_META_PREFIX','_aoc_'); // Plugin metabox prefix
 }
 
-if(!defined( 'POPUPAOC_PLUGIN_BUNDLE_LINK' ) ) {
-	define('POPUPAOC_PLUGIN_BUNDLE_LINK','https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Bundle-Banner#wpos-epb'); // Plugin link
+if( ! defined( 'POPUPAOC_PLUGIN_BUNDLE_LINK' ) ) {
+	define('POPUPAOC_PLUGIN_BUNDLE_LINK','https://www.essentialplugin.com/pricing/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Welcome-Screen'); // Plugin link
 }
 
-if(!defined( 'POPUPAOC_PLUGIN_LINK_UNLOCK' ) ) {
+if( ! defined( 'POPUPAOC_PLUGIN_LINK_UNLOCK' ) ) {
 	define('POPUPAOC_PLUGIN_LINK_UNLOCK','https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Features-PRO#wpos-epb'); // Plugin link
 }
 
-if(!defined( 'POPUPAOC_PLUGIN_LINK_UPGRADE' ) ) {
+if( ! defined( 'POPUPAOC_PLUGIN_LINK_UPGRADE' ) ) {
 	define('POPUPAOC_PLUGIN_LINK_UPGRADE','https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Upgrade-PRO#wpos-epb'); // Plugin Check link
-}
-
-if(!defined( 'POPUPAOC_PLUGIN_LINK_WELCOME' ) ) {
-	define('POPUPAOC_PLUGIN_LINK_WELCOME','https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Welcome-Screen#wpos-epb'); // Plugin Check link
 }
 
 if( ! defined( 'POPUPAOC_SITE_LINK' ) ) {
@@ -159,9 +155,6 @@ function popupaoc_install() {
 	if( is_plugin_active('popup-anything-on-click-pro/popup-anything-on-click-pro.php') ){
 		add_action('update_option_active_plugins', 'popupaoc_deactivate_free_version');
 	}
-
-	// Add option for solutions & features
-	add_option( 'popupaoc_sf_optin', true );
 }
 
 /**
@@ -265,6 +258,7 @@ function wpos_analytics_anl32_load() {
 							'slug'			=> 'popup-anything-on-click',
 							'type'			=> 'plugin',
 							'menu'			=> 'edit.php?post_type=aoc_popup',
+							'redirect_page'	=> 'edit.php?post_type=aoc_popup&page=paoc-solutions-features',
 							'text_domain'	=> 'popup-anything-on-click',							
 						));
 

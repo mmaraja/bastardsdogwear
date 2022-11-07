@@ -115,11 +115,13 @@ return array(
 		'title'       => __( 'Card Form', 'woo-stripe-payment' ),
 		'type'        => 'select',
 		'options'     => array(
-			'inline' => __( 'Stripe form', 'woo-stripe-payment' ),
-			'custom' => __( 'Custom form', 'woo-stripe-payment' ),
+			'inline'  => __( 'Stripe inline form', 'woo-stripe-payment' ),
+			'payment' => __( 'Stripe payment form', 'woo-stripe-payment' ),
+			'custom'  => __( 'Custom form', 'woo-stripe-payment' ),
 		),
 		'default'     => 'inline',
-		'description' => __( 'The Stripe form option displays a CC form rendered by Stripe. It works well with most themes. The custom card forms are offered if you want more options on the CC form design.', 'woo-stripe-payment' ),
+		'desc_tip'    => true,
+		'description' => __( 'The card form design that displays on payment pages.', 'woo-stripe-payment' ),
 	),
 	'custom_form'       => array(
 		'title'             => __( 'Custom Form', 'woo-stripe-payment' ),

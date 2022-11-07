@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
 	<?php esc_html_e( 'How to tutorials', 'woo-variation-gallery' ); ?>
 </h2>
 
-<div id="gwp-variation-gallery-tutorials-wrapper">
+<div id="woo-variation-gallery-tutorials-wrapper">
 
 	<ul>
 		<li>
@@ -38,7 +38,6 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
 			<div class="tutorial-image-wrapper">
 				<img alt="" src="<?php echo woo_variation_gallery()->org_assets_url( '/tutorial-2.png' ) ?>"></div>
 		</li>
-
 
 		<li>
 			<div class="tutorial-image-wrapper">
@@ -132,6 +131,7 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
 			<div class="tutorial-image-wrapper">
 				<img alt="" src="<?php echo woo_variation_gallery()->org_assets_url( '/tutorial-11.gif' ) ?>"></div>
 		</li>
+
 		<li>
 			<div class="tutorial-image-wrapper">
 				<img alt="" src="<?php echo woo_variation_gallery()->org_assets_url( '/tutorial-11.png' ) ?>"></div>
@@ -238,10 +238,6 @@ defined( 'ABSPATH' ) or die( 'Keep Quit' );
 					<?php endif; ?>
 				</div>
 			</div>
-
 		</li>
-
-
 	</ul>
-
 </div>

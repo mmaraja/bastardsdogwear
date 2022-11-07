@@ -1,25 +1,29 @@
 import {useEffect, useCallback} from '@wordpress/element';
-import {initStripe as loadStripe, getSettings, handleCardAction} from '@paymentplugins/stripe/util';
+import {handleCardAction} from '@paymentplugins/stripe/util';
+import {useProcessCheckoutError} from './hooks';
 
 const SavedCardComponent = (
     {
         eventRegistration,
         emitResponse,
-        getData
+        getData,
+        method = 'handleCardAction'
     }) => {
-    const {onCheckoutAfterProcessingWithSuccess} = eventRegistration;
+    const {onCheckoutAfterProcessingWithSuccess, onCheckoutAfterProcessingWithError} = eventRegistration;
     const {responseTypes} = emitResponse;
+    useProcessCheckoutError({
+        responseTypes,
+        subscriber: onCheckoutAfterProcessingWithError,
+        messageContext: emitResponse.noticeContexts.PAYMENTS
+    })
     const handleSuccessResult = useCallback(async ({redirectUrl}) => {
-        const stripe = await loadStripe;
-        return await handleCardAction({redirectUrl, getData, stripe, responseTypes});
-    }, [onCheckoutAfterProcessingWithSuccess]);
+        return await handleCardAction({redirectUrl, getData, responseTypes, method});
+    }, []);
 
     useEffect(() => {
-        const unsubscribeOnCheckoutAfterProcessingWithSuccess = onCheckoutAfterProcessingWithSuccess(handleSuccessResult);
-        return () => unsubscribeOnCheckoutAfterProcessingWithSuccess();
-    }, [
-        onCheckoutAfterProcessingWithSuccess
-    ]);
+        const unsubscribe = onCheckoutAfterProcessingWithSuccess(handleSuccessResult);
+        return () => unsubscribe();
+    }, [onCheckoutAfterProcessingWithSuccess, handleSuccessResult]);
     return null;
 }
 

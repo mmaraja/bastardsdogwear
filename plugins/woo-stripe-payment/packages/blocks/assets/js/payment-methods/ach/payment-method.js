@@ -20,7 +20,7 @@ const ACHPaymentContent = (
     }) => {
     const {responseTypes} = emitResponse;
     const {onPaymentProcessing, onCheckoutAfterProcessingWithError} = eventRegistration;
-    const {ValidationInputError} = components;
+    const {ValidationInputError, LoadingMask} = components;
     const [validationError, setValidationError] = useState(false);
 
     const linkToken = useCreateLinkToken({setValidationError});
@@ -43,10 +43,10 @@ const ACHPaymentContent = (
         paymentMethod: getData('name')
     });
     return (
-        <>
+        <LoadingMask isLoading={!validationError && !linkToken} showSpinner={true}>
             {isTestMode && <ACHTestModeCredentials/>}
             {validationError && <ValidationInputError errorMessage={validationError}/>}
-        </>
+        </LoadingMask>
     )
 }
 

@@ -4,7 +4,7 @@
 
 namespace Composer\Autoload;
 
-class ComposerStaticInit50989f547160e30b048ac4ee36befb35
+class ComposerStaticInitdec63be801117bd3802f395375c13eb2
 {
     public static $prefixLengthsPsr4 = array (
         'S' => 
@@ -14,6 +14,10 @@ class ComposerStaticInit50989f547160e30b048ac4ee36befb35
         'P' => 
         array (
             'PaymentPlugins\\WooFunnels\\Stripe\\' => 33,
+            'PaymentPlugins\\Stripe\\WooCommerceSubscriptions\\' => 47,
+            'PaymentPlugins\\Stripe\\WooCommercePreOrders\\' => 43,
+            'PaymentPlugins\\Stripe\\GermanMarket\\' => 35,
+            'PaymentPlugins\\Stripe\\' => 22,
             'PaymentPlugins\\CheckoutWC\\Stripe\\' => 33,
             'PaymentPlugins\\CartFlows\\Stripe\\' => 32,
             'PaymentPlugins\\Blocks\\Stripe\\' => 29,
@@ -28,6 +32,22 @@ class ComposerStaticInit50989f547160e30b048ac4ee36befb35
         'PaymentPlugins\\WooFunnels\\Stripe\\' => 
         array (
             0 => __DIR__ . '/../..' . '/packages/woofunnels/src',
+        ),
+        'PaymentPlugins\\Stripe\\WooCommerceSubscriptions\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/subscriptions/src',
+        ),
+        'PaymentPlugins\\Stripe\\WooCommercePreOrders\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/preorders/src',
+        ),
+        'PaymentPlugins\\Stripe\\GermanMarket\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/packages/germanmarket/src',
+        ),
+        'PaymentPlugins\\Stripe\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/src',
         ),
         'PaymentPlugins\\CheckoutWC\\Stripe\\' => 
         array (
@@ -50,9 +70,9 @@ class ComposerStaticInit50989f547160e30b048ac4ee36befb35
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
-            $loader->prefixLengthsPsr4 = ComposerStaticInit50989f547160e30b048ac4ee36befb35::$prefixLengthsPsr4;
-            $loader->prefixDirsPsr4 = ComposerStaticInit50989f547160e30b048ac4ee36befb35::$prefixDirsPsr4;
-            $loader->classMap = ComposerStaticInit50989f547160e30b048ac4ee36befb35::$classMap;
+            $loader->prefixLengthsPsr4 = ComposerStaticInitdec63be801117bd3802f395375c13eb2::$prefixLengthsPsr4;
+            $loader->prefixDirsPsr4 = ComposerStaticInitdec63be801117bd3802f395375c13eb2::$prefixDirsPsr4;
+            $loader->classMap = ComposerStaticInitdec63be801117bd3802f395375c13eb2::$classMap;
 
         }, null, ClassLoader::class);
     }

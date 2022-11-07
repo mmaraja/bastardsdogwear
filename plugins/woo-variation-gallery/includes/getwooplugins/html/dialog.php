@@ -4,11 +4,13 @@
      * @var $template_id
      * @var $title
      * @var $body
+     * @var $links
      * @var $footer
      */
+    $template_id = sprintf( 'tmpl-%s', esc_attr( $template_id ) );
 ?>
 
-<script type="text/template" id="<?php echo 'tmpl-' . esc_attr( $template_id ) ?>">
+<script type="text/template" id="<?php echo esc_attr( $template_id ) ?>">
     <div class="gwp-backbone-modal gwp-pro-dialog">
         <div class="gwp-backbone-modal-content">
             <section class="gwp-backbone-modal-main" role="main">
@@ -29,17 +31,17 @@
                         <?php echo wp_kses_post( $body ); // WPCS: XSS ok. ?>
                     </div>
                 </article>
-                <?php if ( ! empty( $demo_link ) || ! empty( $buy_link ) ): ?>
+                <?php if ( ! empty( $links ) ): ?>
                     <footer>
                         <div class="inner">
-                            <?php if ( ! empty( $demo_link ) ): ?>
+                            <?php if ( isset( $links[ 'button_url' ] ) && ! empty( $links[ 'button_url' ] ) ): ?>
                                 <div class="gwp-action-button-group">
-                                    <a target="_blank" href="<?php echo esc_url( $demo_link ) ?>" class="button button-primary"><?php esc_html_e( 'See demo', 'woo-variation-gallery' ) ?></a>
+                                    <a target="_blank" href="<?php echo esc_url( $links[ 'button_url' ] ) ?>" class="button button-primary"><?php echo esc_html( $links[ 'button_text' ] ) ?></a>
                                 </div>
                             <?php endif; ?>
                             
-                            <?php if ( ! empty( $buy_link ) ): ?>
-                                <a target="_blank" href="<?php echo esc_url( $buy_link ) ?>"><?php esc_html_e( 'Buy Now', 'woo-variation-gallery' ) ?></a>
+                            <?php if ( isset( $links[ 'link_url' ] ) && ! empty( $links[ 'link_url' ] ) ): ?>
+                                <a target="_blank" href="<?php echo esc_url( $links[ 'link_url' ] ) ?>"><?php echo esc_html( $links[ 'link_text' ] ) ?></a>
                             <?php endif; ?>
                         </div>
                     </footer>

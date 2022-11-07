@@ -157,7 +157,34 @@ if ( post_password_required() ) {
 		?>
 	</div>
 </div>
+<div class="size-modal">
+    <div class="size-modal-content">
+        <img class="size-close-button" src="<?php echo get_template_directory_uri(); ?>/assets/popup-close-black.png">
+		<table style="border-collapse: collapse;">
+			<tbody>
+				<tr class="desktop_sizechart">
+					<td><span style="color: #000000; font-size: 24px; padding-left: 12%;">SLIM FIT</span></td>
+					<td><span style="color: #000000; font-size: 24px; padding-left: 18%;">FAT FIT</span></td>
+				</tr>
+				<tr class="desktop_sizechart">
+					<td style="border-color: #000000; border-style: solid; border-width: 0 1px 0 0;"><img src="<?php echo get_template_directory_uri(); ?>/assets/slim_fit.png" alt="Raincoat - Slim fit Sizes"/></td>
+					<td><img class="ms-3" src="<?php echo get_template_directory_uri(); ?>/assets/fat_fit.png" alt="Raincoat - Fat fit Sizes"/></td>
+				</tr>
+				<tr class="mobile_sizechart">
+					<td><span style="color: #000000; font-size: 20px; padding-left: 11%;">SLIM FIT</span></td>
+					<td><img src="<?php echo get_template_directory_uri(); ?>/assets/slim_fit.png" alt="Raincoat - Slim fit Sizes"></td>
+				</tr>
+				<tr class="mobile_sizechart mt-3">
+					<td><span style="color: #000000; font-size: 20px; padding-left: 11%;">FAT FIT</span></td>
+					<td> <img src="<?php echo get_template_directory_uri(); ?>/assets/fat_fit.png" alt="Raincoat - Fat fit Sizes"></td>
+				</tr>
+			</tbody>
+		</table>
+		<span><strong>back length _</strong> torso length from end of neck to tail </span><br>
+		<span><strong>elbow length_</strong> the longest part of coat, from end of neck to elbow </span><br>
+		<span><strong>flap_</strong> the cross over part of coat, space between first two arms</span><br>
+		<span style="font-size: 12px">All measurements are in centimeters</span>
 
-
-
+    </div>
+</div>
 <?php do_action( 'woocommerce_after_single_product' ); ?>

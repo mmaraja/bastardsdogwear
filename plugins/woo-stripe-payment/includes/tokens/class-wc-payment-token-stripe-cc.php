@@ -1,4 +1,5 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 if ( ! class_exists( 'WC_Payment_Token_Stripe' ) ) {
@@ -6,9 +7,9 @@ if ( ! class_exists( 'WC_Payment_Token_Stripe' ) ) {
 }
 
 /**
- * @sin 3.0.0
+ * @sin     3.0.0
  *
- * @author PaymentPlugins
+ * @author  PaymentPlugins
  * @package Stripe/Tokens
  *
  */
@@ -31,17 +32,22 @@ class WC_Payment_Token_Stripe_CC extends WC_Payment_Token_Stripe {
 	);
 
 	public function details_to_props( $details ) {
-		if ( isset( $details['card'] ) ) {
-			$card = $details['card'];
+		if ( isset( $details['type'] ) && $details['type'] === 'link' ) {
+			$this->set_brand( 'link' );
+			$this->set_format( 'short_title' );
+		} else {
+			if ( isset( $details['card'] ) ) {
+				$card = $details['card'];
+			}
+			if ( $details instanceof \Stripe\Card ) {
+				$card = $details;
+			}
+			$this->set_brand( $card['brand'] );
+			$this->set_last4( $card['last4'] );
+			$this->set_exp_month( $card['exp_month'] );
+			$this->set_exp_year( $card['exp_year'] );
+			$this->set_masked_number( sprintf( '********%s', $card['last4'] ) );
 		}
-		if ( $details instanceof \Stripe\Card ) {
-			$card = $details;
-		}
-		$this->set_brand( $card['brand'] );
-		$this->set_last4( $card['last4'] );
-		$this->set_exp_month( $card['exp_month'] );
-		$this->set_exp_year( $card['exp_year'] );
-		$this->set_masked_number( sprintf( '********%s', $card['last4'] ) );
 	}
 
 	public function get_last4( $context = 'view' ) {
@@ -130,6 +136,19 @@ class WC_Payment_Token_Stripe_CC extends WC_Payment_Token_Stripe {
 	}
 
 	public function get_basic_payment_method_title() {
+		if ( strtolower( $this->get_prop( 'brand' ) ) === 'link' ) {
+			return __( 'Link by Stripe', 'woo-stripe-payment' );
+		}
+
 		return __( 'Credit Card', 'woo-stripe-payment' );
 	}
+
+	public function get_payment_method_title( $format = '' ) {
+		if ( strtolower( $this->get_prop( 'brand' ) ) === 'link' ) {
+			return $this->get_basic_payment_method_title();
+		}
+
+		return parent::get_payment_method_title( $format );
+	}
+
 }

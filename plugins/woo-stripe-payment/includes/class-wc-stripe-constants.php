@@ -77,4 +77,18 @@ class WC_Stripe_Constants {
 
 	const VOUCHER_PAYMENT = '_stripe_voucher_payment';
 
+	const INSTALLMENT_PLAN = '_stripe_installment_plan';
+
+	const LIVE = 'live';
+
+	const TEST = 'test';
+
+	const VERSION_KEY = 'stripe_wc_version';
+
+	const INITIAL_INSTALL = 'wc_stripe_initialize_install';
+
+	const AUTOMATIC = 'automatic';
+
+	const MANUAL = 'manual';
+
 }

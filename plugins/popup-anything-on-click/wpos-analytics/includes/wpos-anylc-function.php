@@ -287,11 +287,13 @@ function wpos_anylc_optout_url( $module_data = '', $optin_status = null, $redire
  */
 function wpos_anylc_pdt_url( $module_data = '', $type = false ) {
 
-	$redirect_url = false;
+	$redirect_url 	= false;
+	$redirect_page	= ! empty( $module_data['redirect_page'] ) ? $module_data['redirect_page'] : $module_data['menu'];
 
-	if( !empty( $module_data['menu'] ) ) {
-		$pos 			= strpos( $module_data['menu'], '?post_type' );
-		$redirect_url 	= ( $pos !== false ) ? admin_url( $module_data['menu'] ) : add_query_arg( array( 'page' => $module_data['menu'] ), admin_url('admin.php') );
+	if( ! empty( $redirect_page ) ) {
+
+		$pos 			= strpos( $redirect_page, '?post_type' );
+		$redirect_url 	= ( $pos !== false ) ? admin_url( $redirect_page ) : add_query_arg( array( 'page' => $redirect_page ), admin_url('admin.php') );
 
 		switch ( $type ) {
 			case 'promotion':

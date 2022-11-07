@@ -31,27 +31,27 @@ $security_note		= isset( $content['security_note'] )		? $content['security_note'
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-main-heading"><?php _e('Main Heading', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-main-heading"><?php esc_html_e('Main Heading', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
-					<input type="text" name="<?php echo popupaoc_esc_attr( $prefix ); ?>content[main_heading]" value="<?php echo popupaoc_esc_attr( $main_heading ); ?>" class="large-text paoc-text paoc-main-heading" id="paoc-main-heading" />
-					<span class="description"><?php _e('Enter popup main heading text.', 'popup-anything-on-click'); ?></span>
+					<input type="text" name="<?php echo esc_attr( $prefix ); ?>content[main_heading]" value="<?php echo esc_attr( $main_heading ); ?>" class="large-text paoc-text paoc-main-heading" id="paoc-main-heading" />
+					<span class="description"><?php esc_html_e('Enter popup main heading text.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-sub-heading"><?php _e('Sub Heading', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-sub-heading"><?php esc_html_e('Sub Heading', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
-					<input type="text" name="<?php echo popupaoc_esc_attr( $prefix ); ?>content[sub_heading]" value="<?php echo popupaoc_esc_attr( $sub_heading ); ?>" class="large-text paoc-text paoc-sub-heading" id="paoc-sub-heading" />
-					<span class="description"><?php _e('Enter popup sub heading text.', 'popup-anything-on-click'); ?></span>
+					<input type="text" name="<?php echo esc_attr( $prefix ); ?>content[sub_heading]" value="<?php echo esc_attr( $sub_heading ); ?>" class="large-text paoc-text paoc-sub-heading" id="paoc-sub-heading" />
+					<span class="description"><?php esc_html_e('Enter popup sub heading text.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-popup-content"><?php _e('Popup Content', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-popup-content"><?php esc_html_e('Popup Content', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<?php wp_editor( $popup_content, 'paoc-popup-content', array('textarea_name' => 'content', 'editor_height' => 300, 'media_buttons' => true) ); ?>
@@ -61,7 +61,7 @@ $security_note		= isset( $content['security_note'] )		? $content['security_note'
 
 			<tr>
 				<th>
-					<label for="paoc-secondary-con"><?php _e('Secondary Content', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-secondary-con"><?php esc_html_e('Secondary Content', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<?php wp_editor( $secondary_content, 'paoc-secondary-con', array('textarea_name' => $prefix.'content[secondary_content]', 'editor_height' => 300, 'media_buttons' => true) ); ?>
@@ -71,21 +71,21 @@ $security_note		= isset( $content['security_note'] )		? $content['security_note'
 
 			<tr>
 				<th>
-					<label for="paoc-cus-close-txt"><?php _e('Custom Close Text', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-cus-close-txt"><?php esc_html_e('Custom Close Text', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
-					<input type="text" name="<?php echo popupaoc_esc_attr( $prefix ); ?>content[cust_close_txt]" value="<?php echo popupaoc_esc_attr( $cust_close_txt ); ?>" class="large-text paoc-text paoc-cus-close-txt" id="paoc-cus-close-txt" />
-					<span class="description"><?php _e('Enter custom close text. e.g No, thank you. I do not want.', 'popup-anything-on-click'); ?></span>
+					<input type="text" name="<?php echo esc_attr( $prefix ); ?>content[cust_close_txt]" value="<?php echo esc_attr( $cust_close_txt ); ?>" class="large-text paoc-text paoc-cus-close-txt" id="paoc-cus-close-txt" />
+					<span class="description"><?php esc_html_e('Enter custom close text. e.g No, thank you. I do not want.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label for="paoc-secur-note"><?php _e('Security Note', 'popup-anything-on-click'); ?></label>
+					<label for="paoc-secur-note"><?php esc_html_e('Security Note', 'popup-anything-on-click'); ?></label>
 				</th>
 				<td>
-					<input type="text" name="<?php echo popupaoc_esc_attr( $prefix ); ?>content[security_note]" value="<?php echo popupaoc_esc_attr( $security_note ); ?>" class="large-text paoc-text paoc-secur-note" id="paoc-secur-note" />
-					<span class="description"><?php _e('Enter security note text.', 'popup-anything-on-click'); ?></span>
+					<input type="text" name="<?php echo esc_attr( $prefix ); ?>content[security_note]" value="<?php echo esc_attr( $security_note ); ?>" class="large-text paoc-text paoc-secur-note" id="paoc-secur-note" />
+					<span class="description"><?php esc_html_e('Enter security note text.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 		</tbody>

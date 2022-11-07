@@ -1,8 +1,8 @@
 /*!
- * Variation Gallery for WooCommerce 
- * 
- * Author: Emran Ahmed ( emran.bd.08@gmail.com ) 
- * Date: 3/15/2022, 2:40:39 PM
+ * Variation Gallery for WooCommerce
+ *
+ * Author: Emran Ahmed ( emran.bd.08@gmail.com )
+ * Date: 7/31/2022, 4:26:26 PM
  * Released under the GPLv3 license.
  */
 .rtl .woo-variation-gallery-images li {
@@ -33,7 +33,7 @@
   display: none;
 }
 .woo-variation-gallery-wrapper .woo-variation-gallery-postbox.closed .toggle-indicator::before {
-  content: "\F140";
+  content: "\f140";
 }
 .woo-variation-gallery-wrapper .handle-div {
   width: 36px;
@@ -95,7 +95,7 @@
   width: 100%;
   height: 100%;
   text-align: center;
-  content: "\F161";
+  content: "\f161";
   font-size: 2.618em;
   line-height: 80px;
   color: #DDDDDD;
@@ -125,12 +125,12 @@
   padding: 0 13px 10px 13px;
 }
 
-#gwp-variation-gallery-tutorials-wrapper {
+#woo-variation-gallery-tutorials-wrapper {
   background: #fff;
   border-radius: 2px;
   border: 1px solid #DDDDDD;
 }
-#gwp-variation-gallery-tutorials-wrapper li {
+#woo-variation-gallery-tutorials-wrapper li {
   overflow: hidden;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -143,30 +143,30 @@
   border-bottom: 1px solid #DDDDDD;
   position: relative;
 }
-#gwp-variation-gallery-tutorials-wrapper li:last-child {
+#woo-variation-gallery-tutorials-wrapper li:last-child {
   border: 0;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper,
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper,
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper {
   float: left;
   padding: 0 20px;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper {
   width: 40%;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper h3 {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper h3 {
   margin: 0 0 20px;
   font-size: 1.5em;
   line-height: 1.5em;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-contents {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-contents {
   font-size: 15px;
   line-height: 1.5em;
   margin-bottom: 20px;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button {
   border-radius: 3px;
   line-height: 1;
   padding: 13px 20px;
@@ -176,43 +176,43 @@
           box-shadow: none;
   text-shadow: none;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button:active {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button:active {
   -webkit-transform: translateY(0);
       -ms-transform: translateY(0);
           transform: translateY(0);
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-live-demo {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-live-demo {
   background-color: #FFFFFF;
   color: #333333;
   border: 1px solid #EEEEEE;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-live-demo:hover {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-live-demo:hover {
   background: #EEEEEE;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-docs {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-docs {
   background-color: #36373A;
   color: #FFFFFF;
   border: 1px solid #36373A;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-docs:hover {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-docs:hover {
   background: #5D5E61;
   border-color: #5D5E61;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-pro {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-pro {
   background-color: #39B54A;
   color: #FFFFFF;
   border: 1px solid #39B54A;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-pro:hover {
+#woo-variation-gallery-tutorials-wrapper .tutorial-description-wrapper .tutorial-buttons .button.button-pro:hover {
   background: #3FC851;
   border-color: #3FC851;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper {
   width: 60%;
   position: relative;
   text-align: center;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon {
   position: absolute;
   left: -5px;
   top: -5px;
@@ -223,7 +223,7 @@
   text-align: right;
   margin: 1px 22px;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span {
   font-size: 10px;
   font-weight: bold;
   color: #fff;
@@ -236,13 +236,13 @@
   width: 100px;
   display: block;
   background: #bc0808;
-  -webkit-box-shadow: 0 3px 10px -5px black;
-          box-shadow: 0 3px 10px -5px black;
+  -webkit-box-shadow: 0 3px 10px -5px rgb(0, 0, 0);
+          box-shadow: 0 3px 10px -5px rgb(0, 0, 0);
   position: absolute;
   top: 19px;
   left: -21px;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span::before {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span::before {
   content: "";
   position: absolute;
   left: 0;
@@ -252,7 +252,7 @@
   border-style: solid;
   border-color: #8f0808 transparent transparent #8f0808;
 }
-#gwp-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span::after {
+#woo-variation-gallery-tutorials-wrapper .tutorial-image-wrapper .ribbon span::after {
   content: "";
   position: absolute;
   right: 0;
@@ -261,16 +261,4 @@
   border-width: 3px;
   border-style: solid;
   border-color: #8f0808 #8f0808 transparent transparent;
-}
-
-.woo-variation-gallery-form-table .description {
-  display: inline;
-  line-height: 2;
-  font-style: italic;
-  font-size: small;
-}
-.woo-variation-gallery-form-table .suffix {
-  display: inline;
-  padding: 0 5px;
-  line-height: 2;
 }

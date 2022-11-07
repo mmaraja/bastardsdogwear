@@ -20,7 +20,7 @@ export const useProcessPaymentIntent = (
         paymentType = 'card',
         setupIntent = null,
         removeSetupIntent = null,
-        savePaymentMethod = false,
+        shouldSavePayment = false,
         exportedValues = {},
         getPaymentMethodArgs = () => ({})
     }) => {
@@ -30,10 +30,14 @@ export const useProcessPaymentIntent = (
     const [paymentMethod, setPaymentMethod] = useState(null);
     const stripe = useStripe();
     const currentPaymentMethodArgs = useRef(getPaymentMethodArgs);
-
+    const paymentMethodData = useRef({});
     useEffect(() => {
         currentPaymentMethodArgs.current = getPaymentMethodArgs;
     }, [getPaymentMethodArgs]);
+
+    const addPaymentMethodData = useCallback((data) => {
+        paymentMethodData.current = {...paymentMethodData.current, ...data};
+    }, []);
 
     const getCreatePaymentMethodArgs = useCallback(() => {
         const args = {
@@ -43,17 +47,19 @@ export const useProcessPaymentIntent = (
         return {...args, ...currentPaymentMethodArgs.current()};
     }, [billingData, paymentType, getPaymentMethodArgs]);
 
-    const getSuccessResponse = useCallback((paymentMethodId, savePaymentMethod) => {
+    const getSuccessResponse = useCallback((paymentMethodId, shouldSavePayment) => {
         const response = {
             meta: {
                 paymentMethodData: {
                     [`${getData('name')}_token_key`]: paymentMethodId,
-                    [`${getData('name')}_save_source_key`]: savePaymentMethod
+                    [`${getData('name')}_save_source_key`]: shouldSavePayment,
+                    ...paymentMethodData.current
                 }
             }
         }
         if (exportedValues?.billingData) {
             response.meta.billingData = exportedValues.billingData;
+            response.meta.billingAddress = exportedValues.billingData;
         }
         if (exportedValues?.shippingAddress) {
             response.meta.shippingData = {address: exportedValues.shippingAddress};
@@ -99,7 +105,7 @@ export const useProcessPaymentIntent = (
                         paymentMethodId = result.paymentMethod.id;
                     }
                 }
-                return ensureSuccessResponse(responseTypes, getSuccessResponse(paymentMethodId, savePaymentMethod));
+                return ensureSuccessResponse(responseTypes, getSuccessResponse(paymentMethodId, shouldSavePayment));
             } catch (e) {
                 console.log(e);
                 setPaymentMethod(null);
@@ -115,7 +121,11 @@ export const useProcessPaymentIntent = (
         stripe,
         setupIntent,
         activePaymentMethod,
-        savePaymentMethod
+        shouldSavePayment
     ]);
-    return {setPaymentMethod};
+    return {
+        setPaymentMethod,
+        getCreatePaymentMethodArgs,
+        addPaymentMethodData
+    };
 }

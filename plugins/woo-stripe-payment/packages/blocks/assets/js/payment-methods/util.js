@@ -3,7 +3,7 @@ import {getSetting} from '@woocommerce/settings'
 import apiFetch from "@wordpress/api-fetch";
 import {getCurrency, formatPrice as wcFormatPrice} from '@woocommerce/price-format';
 
-const {publishableKey, account} = getSetting('stripeGeneralData');
+const {publishableKey, stripeParams} = getSetting('stripeGeneralData');
 const messages = getSetting('stripeErrorMessages');
 const countryLocale = getSetting('countryLocale', {});
 
@@ -50,7 +50,7 @@ const PAYMENT_REQUEST_ADDRESS_MAPPINGS = {
 }
 
 export const initStripe = new Promise((resolve, reject) => {
-    loadStripe(publishableKey, (() => account ? {stripeAccount: account} : {})()).then(stripe => {
+    loadStripe(publishableKey, stripeParams).then(stripe => {
         resolve(stripe);
     }).catch(err => {
         resolve({error: err});
@@ -79,8 +79,8 @@ export const ensureSuccessResponse = (responseTypes, data = {}) => {
  * @param error
  * @returns {{type: *, message: *}}
  */
-export const ensureErrorResponse = (responseTypes, error) => {
-    return {type: responseTypes.ERROR, message: getErrorMessage(error)}
+export const ensureErrorResponse = (responseTypes, error, options = {}) => {
+    return {type: responseTypes.ERROR, message: getErrorMessage(error), ...options}
 };
 
 /**
@@ -249,21 +249,21 @@ export const handleCardAction = async (
     {
         redirectUrl,
         responseTypes,
-        stripe,
-        getData,
+        name,
+        method = 'handleCardAction',
         savePaymentMethod = false
     }) => {
     try {
         let match = redirectUrl.match(/#response=(.+)/)
         if (match) {
             let {client_secret, order_id, order_key} = JSON.parse(window.atob(decodeURIComponent(match[1])));
-            let result = await stripe.handleCardAction(client_secret);
+            const stripe = await initStripe;
+            let result = await stripe[method](client_secret);
             if (result.error) {
-                syncPaymentIntentWithOrder(order_id, client_secret);
                 return ensureErrorResponse(responseTypes, result.error);
             }
             // success so finish processing order then redirect to thank you page
-            let data = {order_id, order_key, [`${getData('name')}_save_source_key`]: savePaymentMethod};
+            let data = {order_id, order_key, [`${name}_save_source_key`]: savePaymentMethod};
             let response = await apiFetch({
                 url: getRoute('process/payment'),
                 method: 'POST',
@@ -514,3 +514,12 @@ export const versionCompare = (ver1, ver2, compare) => {
 export const isCartPage = () => getSetting('stripeGeneralData').page === 'cart';
 
 export const isCheckoutPage = () => getSetting('stripeGeneralData').page === 'checkout';
+
+export const isNextActionRequired = (url) => {
+    let match = url.match(/#response=(.+)/);
+    let args = null;
+    if (match) {
+        args = JSON.parse(window.atob(decodeURIComponent(match[1])));
+    }
+    return args;
+}

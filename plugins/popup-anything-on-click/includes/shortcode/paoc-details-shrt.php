@@ -37,34 +37,39 @@ function popupaoc_details_shrt( $atts, $content = null ) {
 	if( $display == 'admin_email' ) {
 
 		$admin_email = get_option('admin_email');
-		echo $admin_email;
+
+		echo esc_html( $admin_email );
 
 	} else if( $display == 'site_url' ) { // Display site URL
 
 		$site_url = get_option('siteurl');
-		echo $site_url;
+
+		echo wp_kses_post( $site_url );
 
 	} else if( $display == 'site_name' ) { // Display site name
 
 		$site_name = get_option('blogname');
-		echo $site_name;
+
+		echo wp_kses_post( $site_name );
 
 	} else if( $display == 'page_title' ) { // Display current page title
 
 		$page_title = get_the_title();
 		$page_title	= ! empty( $page_title ) ? $page_title : $default;
 
-		echo $page_title;
+		echo wp_kses_post( $page_title );
 
 	} else if( $display == 'post_excerpt' ) { // Display current page OR post `excerpt`
 
 		$post_excerpt = get_the_excerpt();
-		echo $post_excerpt;
+		
+		echo wp_kses_post( $post_excerpt );
 
 	} else if( $display == 'site_logo' ) { // Display site logo
 
 		$site_logo = get_custom_logo();
-		echo $site_logo;
+
+		echo wp_kses_post( $site_logo );
 
 	} else if( $display == 'date_time' ) { // Display current date & time
 
@@ -75,20 +80,19 @@ function popupaoc_details_shrt( $atts, $content = null ) {
 		$time_format	= ! empty( $default_time_format ) ? $default_time_format : 'H:i:s';
 		$date_time		= date_i18n( $date_format.' '.$time_format );
 
-		echo $date_time;
+		echo esc_html( $date_time );
 
 	} else if( $display == 'date' ) { // Display current date
 
-		$default_date_format	= get_option('date_format');
+		$default_date_format	= get_option( 'date_format' );
 		$date_format			= ! empty( $default_date_format ) ? $default_date_format : 'Y-m-d';
+		$current_date			= date_i18n( $date_format );
 
-		$current_date = date_i18n( $date_format );
-		echo $current_date;
+		echo esc_html( $current_date );
 
 	} else if( $display == 'year' ) { // Display current year
 
-		$current_year = date_i18n('Y');
-		echo $current_year;
+		echo esc_html( date_i18n('Y') );
 
 	} else if( $display == 'user_name' ) { // Display user name
 
@@ -113,22 +117,22 @@ function popupaoc_details_shrt( $atts, $content = null ) {
 		}
 
 		// Display Username
-		echo $user_name;
+		echo wp_kses_post( $user_name );
 
 	} else if( $display == 'user_email' ) { // Display user Email Address
 
 		// Taking some variable
 		$user_email = isset( $current_user->user_email ) ? $current_user->user_email : '';
 
-		echo $user_email;
+		echo wp_kses_post( $user_email );
 
 	} else if( strpos( $display, 'key_' ) !== false ) { // Display query string value
 
 		// Taking some variable
 		$key			= str_replace( 'key_', '', $display );
-		$string_value	= ! empty( $_GET[ $key ] ) ? $_GET[ $key ] : $default;
+		$string_value	= ! empty( $_GET[ $key ] ) ? popupaoc_clean( $_GET[ $key ] ) : $default;
 
-		echo $string_value;
+		echo wp_kses_post( $string_value );
 	}
 
 	$content .= ob_get_clean();

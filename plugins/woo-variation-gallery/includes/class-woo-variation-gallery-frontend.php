@@ -37,7 +37,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 			add_action( 'wc_ajax_get_default_gallery', array( $this, 'get_default_gallery' ) );
 			add_action( 'wc_ajax_get_variation_gallery', array( $this, 'get_variation_gallery' ) );
 
-			add_filter( 'disable_woo_variation_gallery', array( $this, 'disable_for_specific_product_type' ) );
+			add_filter( 'disable_woo_variation_gallery', array( $this, 'disable_for_specific_product_type' ), 9 );
 			add_filter( 'woo_variation_product_gallery_inline_style', array( $this, 'gallery_inline_style' ) );
 
 			add_action( 'after_setup_theme', array( $this, 'enable_theme_support' ), 200 );
@@ -121,7 +121,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 
 		public function gallery_thumbnail_image_width() {
 			// Set from gallery settings
-			$thumbnail_width = absint( woo_variation_gallery()->get_option( 'thumbnail_width', 100, 'woo_variation_gallery_thumbnail_width' ) );
+			$thumbnail_width = absint( woo_variation_gallery()->get_option( 'thumbnail_width', 100 ) );
 			if ( $thumbnail_width > 0 ) {
 				add_theme_support( 'woocommerce', array( 'gallery_thumbnail_image_width' => absint( $thumbnail_width ) ) );
 			}
@@ -218,7 +218,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				return false;
 			}
 
-			$single_image_width     = absint( wc_get_theme_support( 'single_image_width', get_option( 'woocommerce_single_image_width', 600 ) ) );
+			$single_image_width = absint( wc_get_theme_support( 'single_image_width', get_option( 'woocommerce_single_image_width', 600 ) ) );
 
 			$gallery_thumbnails_columns = absint( woo_variation_gallery()->get_option( 'thumbnails_columns', 4 ) );
 
@@ -289,8 +289,12 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 					array_unshift( $gallery_images, get_post_thumbnail_id( $product_id ) );
 				}*/
 				$parent_product          = wc_get_product( $product_id );
-				$parent_product_image_id = $parent_product->get_image_id();
-				$placeholder_image_id    = get_option( 'woocommerce_placeholder_image', 0 );
+				$parent_product_image_id = 0;
+				if ( $parent_product ) {
+					$parent_product_image_id = $parent_product->get_image_id();
+				}
+
+				$placeholder_image_id = get_option( 'woocommerce_placeholder_image', 0 );
 
 				if ( ! empty( $parent_product_image_id ) ) {
 					array_unshift( $gallery_images, $parent_product_image_id );
@@ -520,7 +524,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				$inner_html = apply_filters( 'woo_variation_gallery_thumbnail_image_inner_html', $inner_html, $image, $template, $attachment_id, $options );
 			}
 
-			return '<div class="' . esc_attr( implode( ' ', array_unique( $classes ) ) ) . '"><div>' . $inner_html . '</div></div>';
+			return '<div class="' . esc_attr( implode( ' ', array_map( 'sanitize_html_class', array_unique( $classes ) ) ) ) . '"><div>' . $inner_html . '</div></div>';
 		}
 
 		public function get_available_variation( $product_id, $variation_id ) {
@@ -639,7 +643,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Frontend' ) ):
 				$product_types         = woo_variation_gallery()->get_option( 'disabled_product_type', array(
 					'gift-card',
 					'bundle'
-				), 'woo_variation_gallery_disabled_product_type' );
+				) );
 				$disabled_product_type = map_deep( $product_types, 'sanitize_text_field' );
 
 				return is_object( $product ) ? in_array( $product->get_type(), $disabled_product_type ) : $default;

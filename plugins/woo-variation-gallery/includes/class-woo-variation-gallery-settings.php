@@ -223,7 +223,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 
 				// Gallery Section Start
 				array(
-					'name' => __( 'Gallery Options', 'woo-variation-gallery' ),
+					'name' => esc_html__( 'Gallery Options', 'woo-variation-gallery' ),
 					'type' => 'title',
 					'desc' => '',
 					'id'   => 'main_options',
@@ -324,7 +324,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'type'              => 'number',
 					'default'           => absint( apply_filters( 'woo_variation_gallery_default_margin', 30 ) ),
 					'css'               => 'width:60px;',
-					'desc_tip'          => esc_html__( 'Slider gallery gottom margin in pixel', 'woo-variation-gallery' ),
+					'desc_tip'          => esc_html__( 'Slider gallery bottom margin in pixel', 'woo-variation-gallery' ),
 					'suffix'            => 'px',
 					'desc'              => sprintf( esc_html__( 'Slider gallery bottom margin in pixel. Default value is: %d. Limit: 10-100.', 'woo-variation-gallery' ), apply_filters( 'woo_variation_gallery_default_margin', 30 ) ),
 					'id'                => 'margin',
@@ -340,7 +340,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'title'   => esc_html__( 'Disable Preloader', 'woo-variation-gallery' ),
 					'type'    => 'checkbox',
 					'default' => 'no',
-					'desc'    => esc_html__( 'Disable preloader on change variation', 'woo-variation-gallery' ),
+					'desc'    => esc_html__( 'Disable preloader on loading variation images', 'woo-variation-gallery' ),
 					'id'      => 'preloader_disable'
 				),
 
@@ -395,7 +395,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 					'default'           => 5000,
 					'css'               => 'width:70px;',
 					'suffix'            => 'milliseconds',
-					'desc'              => esc_html__( 'Slider gallery autoplay speed. Default is 3000 means 3 seconds', 'woo-variation-gallery' ),
+					'desc'              => esc_html__( 'Slider gallery autoplay speed. Default is 5000 means 5 seconds', 'woo-variation-gallery' ),
 					'id'                => 'slider_autoplay_speed',
 					'require'           => $this->normalize_required_attribute( array( 'slider_autoplay' => array( 'type' => '!empty' ) ) ),
 					'custom_attributes' => array(
@@ -527,7 +527,7 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Settings', false ) ):
 			$settings = array(
 
 				array(
-					'name'  => __( 'Advanced Options', 'woo-variation-gallery' ),
+					'name'  => esc_html__( 'Advanced Options', 'woo-variation-gallery' ),
 					'type'  => 'title',
 					'desc'  => '',
 					'class' => 'woo-variation-gallery-options',

@@ -5,7 +5,7 @@ defined( 'ABSPATH' ) || exit();
 /**
  *
  * @package Stripe/Controllers
- * @author PaymentPlugins
+ * @author  PaymentPlugins
  *
  */
 class WC_Stripe_Controller_Gateway_Settings extends WC_Stripe_Rest_Controller {
@@ -36,6 +36,13 @@ class WC_Stripe_Controller_Gateway_Settings extends WC_Stripe_Rest_Controller {
 			array(
 				'methods'             => WP_REST_Server::CREATABLE,
 				'callback'            => array( $this, 'connection_test' ),
+				'permission_callback' => array( $this, 'shop_manager_permission_check' )
+			)
+		);
+		register_rest_route( $this->rest_uri(), 'delete-connection',
+			array(
+				'methods'             => WP_REST_Server::CREATABLE,
+				'callback'            => array( $this, 'delete_connection' ),
 				'permission_callback' => array( $this, 'shop_manager_permission_check' )
 			)
 		);
@@ -106,8 +113,7 @@ class WC_Stripe_Controller_Gateway_Settings extends WC_Stripe_Rest_Controller {
 					}
 				}
 			}
-		}
-		catch ( Exception $e ) {
+		} catch ( Exception $e ) {
 			return new WP_Error( 'domain-error', $e->getMessage(), array( 'status' => 200 ) );
 		}
 
@@ -270,16 +276,26 @@ class WC_Stripe_Controller_Gateway_Settings extends WC_Stripe_Rest_Controller {
 			// if test mode and keys are good, save them
 			if ( $api_keys ) {
 				update_option( $settings->get_option_key(), $settings->settings, 'yes' );
+				do_action( 'wc_stripe_api_connection_test_success', $mode );
 			}
 			ob_get_clean();
-		}
-		catch ( Exception $e ) {
+		} catch ( Exception $e ) {
 			return new WP_Error( 'connection-failure', $e->getMessage(), array( 'status' => 200 ) );
 		}
 
 		return rest_ensure_response( array(
 			'message' => sprintf( __( 'Connection test to Stripe was successful. Mode: %s.', 'woo-stripe-payment' ), $mode )
 		) );
+	}
+
+	/**
+	 * @param \WP_REST_Request $request
+	 */
+	public function delete_connection( $request ) {
+		stripe_wc()->api_settings->delete_account_settings();
+		stripe_wc()->account_settings->delete_account_settings();
+
+		return rest_ensure_response( array( 'success', true ) );
 	}
 
 	public function shop_manager_permission_check() {

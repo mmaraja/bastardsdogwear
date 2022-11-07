@@ -3,15 +3,14 @@ import {registerPaymentMethod} from '@woocommerce/blocks-registry';
 import {
     initStripe as loadStripe,
     getSettings,
-    isUserLoggedIn,
-    cartContainsSubscription,
-    cartContainsPreOrder
 } from '../util';
 import {Elements, CardElement, useStripe, useElements, CardNumberElement} from '@stripe/react-stripe-js';
-import {PaymentMethodLabel, PaymentMethod, SavePaymentMethod} from '../../components/checkout';
+import {PaymentMethodLabel, PaymentMethod} from '../../components/checkout';
 import SavedCardComponent from '../saved-card-component';
 import CustomCardForm from './components/custom-card-form';
 import StripeCardForm from "./components/stripe-card-form";
+import {Installments} from '../../components/checkout';
+import PaymentElementComponent from './payment-element';
 import {
     useProcessPaymentIntent,
     useAfterProcessingPayment,
@@ -20,11 +19,6 @@ import {
 } from "../hooks";
 
 const getData = getSettings('stripe_cc_data');
-
-const displaySaveCard = (customerId) => {
-    return isUserLoggedIn(customerId) && getData('saveCardEnabled') &&
-        !cartContainsSubscription() && !cartContainsPreOrder()
-}
 
 const CreditCardContent = (props) => {
     const [error, setError] = useState(false);
@@ -35,6 +29,11 @@ const CreditCardContent = (props) => {
     }, [setError]);
     if (error) {
         throw new Error(error);
+    }
+    if (getData('isPaymentElement')) {
+        return (
+            <PaymentElementComponent {...props}/>
+        )
     }
     return (
         <Elements stripe={loadStripe} options={getData('elementOptions')}>
@@ -50,11 +49,11 @@ const CreditCardElement = (
         shippingData,
         emitResponse,
         eventRegistration,
-        activePaymentMethod
+        activePaymentMethod,
+        shouldSavePayment
     }) => {
     const [error, setError] = useStripeError();
-    const [savePaymentMethod, setSavePaymentMethod] = useState(false);
-    const onSavePaymentMethod = (checked) => setSavePaymentMethod(checked);
+    const [formComplete, setFormComplete] = useState(false);
     const {onPaymentProcessing} = eventRegistration;
     const stripe = useStripe();
     const elements = useElements();
@@ -69,14 +68,14 @@ const CreditCardElement = (
         setError
     })
 
-    useProcessPaymentIntent({
+    const {getCreatePaymentMethodArgs, addPaymentMethodData} = useProcessPaymentIntent({
         getData,
         billing,
         shippingData,
         emitResponse,
         error,
         onPaymentProcessing,
-        savePaymentMethod,
+        shouldSavePayment,
         setupIntent,
         removeSetupIntent,
         getPaymentMethodArgs,
@@ -87,7 +86,7 @@ const CreditCardElement = (
         eventRegistration,
         responseTypes: emitResponse.responseTypes,
         activePaymentMethod,
-        savePaymentMethod
+        shouldSavePayment
     });
 
     const onChange = (event) => {
@@ -97,14 +96,26 @@ const CreditCardElement = (
             setError(false);
         }
     }
+
+    const getPaymentMethod = useCallback(async () => {
+        let paymentMethod = null;
+        const result = await stripe.createPaymentMethod(getCreatePaymentMethodArgs());
+        if (result?.paymentMethod?.id) {
+            paymentMethod = result.paymentMethod.id;
+        }
+        return paymentMethod;
+    }, [stripe, getCreatePaymentMethodArgs]);
+
     const Tag = getData('customFormActive') ? CustomCardForm : StripeCardForm;
     return (
         <div className='wc-stripe-card-container'>
-            <Tag {...{getData, billing, onChange}}/>
-            {displaySaveCard(billing.customerId) &&
-            <SavePaymentMethod label={getData('savePaymentMethodLabel')}
-                               onChange={onSavePaymentMethod}
-                               checked={savePaymentMethod}/>}
+            <Tag {...{getData, billing, onChange}} onComplete={setFormComplete}/>
+            {getData('installmentsActive') && <Installments
+                paymentMethodName={getData('name')}
+                cardFormComplete={formComplete}
+                addPaymentMethodData={addPaymentMethodData}
+                getPaymentMethod={getPaymentMethod}/>}
+
         </div>
     );
 }
@@ -118,11 +129,11 @@ registerPaymentMethod({
     ariaLabel: 'Credit Cards',
     canMakePayment: () => loadStripe,
     content: <PaymentMethod content={CreditCardContent} getData={getData}/>,
-    savedTokenComponent: <SavedCardComponent getData={getData}/>,
+    savedTokenComponent: <SavedCardComponent getData={getData} method={getData('isPaymentElement') ? 'confirmCardPayment' : 'handleCardAction'}/>,
     edit: <PaymentMethod content={CreditCardContent} getData={getData}/>,
     supports: {
         showSavedCards: getData('showSavedCards'),
-        showSaveOption: false,
+        showSaveOption: true,
         features: getData('features')
     }
 })

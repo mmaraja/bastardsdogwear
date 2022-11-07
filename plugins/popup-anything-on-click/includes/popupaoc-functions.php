@@ -73,18 +73,6 @@ function popupaoc_get_option( $key = '', $default = false ) {
 }
 
 /**
- * Escape Tags & Slashes
- *
- * Handles escapping the slashes and tags
- *
- * @package Popup Anything on Click
- * @since 1.0
- */
-function popupaoc_esc_attr( $data ) {
-	return esc_attr( stripslashes( $data ) );
-}
-
-/**
  * Clean variables using sanitize_text_field. Arrays are cleaned recursively.
  * Non-scalar values are ignored.
  * 
@@ -96,7 +84,7 @@ function popupaoc_clean( $var ) {
 		return array_map( 'popupaoc_clean', $var );
 	} else {
 		$data = is_scalar( $var ) ? sanitize_text_field( $var ) : $var;
-		return wp_unslash($data);
+		return wp_unslash( $data );
 	}
 }
 
@@ -270,15 +258,15 @@ function popupaoc_get_unique() {
 function popupaoc_when_appear_options() {
 
 	$popup_appear = array(
-						'page_load'		=>  esc_html__('Page Load', 'popup-anything-on-click'),
-						'simple_link'	=>  esc_html__('Simple Link', 'popup-anything-on-click'),
-						'image'			=>  esc_html__('Image Click', 'popup-anything-on-click'),
-						'button'		=>  esc_html__('Button Click', 'popup-anything-on-click'),
-						'inactivity'	=>  esc_html__('After X Second of Inactivity (PRO)', 'popup-anything-on-click'),
-						'scroll'		=>  esc_html__('When Page Scroll Down (PRO)', 'popup-anything-on-click'),
-						'scroll_up'		=>  esc_html__('When Page Scroll UP (PRO)', 'popup-anything-on-click'),
-						'exit'			=>  esc_html__('Exit Intent (PRO)', 'popup-anything-on-click'),
-						'html_element'	=>  esc_html__('HTML Element Click (PRO)', 'popup-anything-on-click'),
+						'page_load'		=> __('Page Load', 'popup-anything-on-click'),
+						'simple_link'	=> __('Simple Link', 'popup-anything-on-click'),
+						'image'			=> __('Image Click', 'popup-anything-on-click'),
+						'button'		=> __('Button Click', 'popup-anything-on-click'),
+						'inactivity'	=> __('After X Second of Inactivity (PRO)', 'popup-anything-on-click'),
+						'scroll'		=> __('When Page Scroll Down (PRO)', 'popup-anything-on-click'),
+						'scroll_up'		=> __('When Page Scroll UP (PRO)', 'popup-anything-on-click'),
+						'exit'			=> __('Exit Intent (PRO)', 'popup-anything-on-click'),
+						'html_element'	=> __('HTML Element Click (PRO)', 'popup-anything-on-click'),
 					);
 
 	return apply_filters('popuppaoc_when_appear_options', $popup_appear );
@@ -293,19 +281,19 @@ function popupaoc_popup_goals() {
 
 	$popup_goals = array(
 						'announcement'	=>	array(
-												'name'	=> esc_html__('Announcement', 'popup-anything-on-click'),
+												'name'	=> __('Announcement', 'popup-anything-on-click'),
 												'icon'	=> "dashicons dashicons-megaphone",
 											),
 						'email-lists'	=>	array(
-												'name'	=> esc_html__('Collect Lead', 'popup-anything-on-click'),
+												'name'	=> __('Collect Lead', 'popup-anything-on-click'),
 												'icon'	=> "dashicons dashicons-email-alt",
 											),
 						'target-url'	=>	array(
-												'name'	=> esc_html__('Target URL', 'popup-anything-on-click'),
+												'name'	=> __('Target URL', 'popup-anything-on-click'),
 												'icon'	=> "dashicons dashicons-admin-links",
 											),
 						'phone-calls'	=>	array(
-												'name'	=> esc_html__('Phone Calls', 'popup-anything-on-click'),
+												'name'	=> __('Phone Calls', 'popup-anything-on-click'),
 												'icon'	=> "dashicons dashicons-phone",
 											),
 					);
@@ -322,19 +310,19 @@ function popupaoc_popup_types() {
 
 	$popup_types = array(
 						'modal'				=>	array(
-													'name'	=> esc_html__('Modal Popup', 'popup-anything-on-click'),
+													'name'	=> __('Modal Popup', 'popup-anything-on-click'),
 													'icon'	=> "dashicons dashicons-admin-page",
 												),
 						'bar'				=>	array(
-													'name'	=> esc_html__('Bar', 'popup-anything-on-click'),
+													'name'	=> __('Bar', 'popup-anything-on-click'),
 													'icon'	=> "dashicons dashicons-schedule",
 												),
 						'push-notification'	=>	array(
-													'name'	=> esc_html__('Push Notification', 'popup-anything-on-click'),
+													'name'	=> __('Push Notification', 'popup-anything-on-click'),
 													'icon'	=> "dashicons dashicons-admin-comments",
 												),
 						'slide-in'			=>	array(
-													'name'	=> esc_html__('Slide In', 'popup-anything-on-click'),
+													'name'	=> __('Slide In', 'popup-anything-on-click'),
 													'icon'	=> "dashicons dashicons-align-right",
 												),
 					);
@@ -350,13 +338,13 @@ function popupaoc_popup_types() {
  */
 function popupaoc_popup_effects() {
 	$popup_effect = array(
-						'fadein'		=> esc_html__('Fadein', 'popup-anything-on-click'),
-						'slide'			=> esc_html__('Slide', 'popup-anything-on-click'),
-						'newspaper'		=> esc_html__('Newspaper', 'popup-anything-on-click'),
-						'superscaled'	=> esc_html__('Super Scaled', 'popup-anything-on-click'),
-						'corner'		=> esc_html__('Corner', 'popup-anything-on-click'),
-						'scale'			=> esc_html__('Scale', 'popup-anything-on-click'),
-						'slidetogether'	=> esc_html__('Slide Together', 'popup-anything-on-click'),
+						'fadein'		=> __('Fadein', 'popup-anything-on-click'),
+						'slide'			=> __('Slide', 'popup-anything-on-click'),
+						'newspaper'		=> __('Newspaper', 'popup-anything-on-click'),
+						'superscaled'	=> __('Super Scaled', 'popup-anything-on-click'),
+						'corner'		=> __('Corner', 'popup-anything-on-click'),
+						'scale'			=> __('Scale', 'popup-anything-on-click'),
+						'slidetogether'	=> __('Slide Together', 'popup-anything-on-click'),
 					);
 	return apply_filters('popupaoc_popup_effects', $popup_effect );
 }
@@ -369,15 +357,15 @@ function popupaoc_popup_effects() {
 function popupaoc_position_options() {
 
 	$position_option = array(
-							'left-top'		=> esc_html__('Left Top', 'popup-anything-on-click'),
-							'left-center'	=> esc_html__('Left Center', 'popup-anything-on-click'),
-							'left-bottom'	=> esc_html__('Left Bottom', 'popup-anything-on-click'),
-							'center-top'	=> esc_html__('Center Top', 'popup-anything-on-click'),
-							'center-center'	=> esc_html__('Center Center', 'popup-anything-on-click'),
-							'center-bottom'	=> esc_html__('Center Bottom', 'popup-anything-on-click'),
-							'right-top'		=> esc_html__('Right Top', 'popup-anything-on-click'),
-							'right-center'	=> esc_html__('Right Center', 'popup-anything-on-click'),
-							'right-bottom'	=> esc_html__('Right Bottom', 'popup-anything-on-click'),
+							'left-top'		=> __('Left Top', 'popup-anything-on-click'),
+							'left-center'	=> __('Left Center', 'popup-anything-on-click'),
+							'left-bottom'	=> __('Left Bottom', 'popup-anything-on-click'),
+							'center-top'	=> __('Center Top', 'popup-anything-on-click'),
+							'center-center'	=> __('Center Center', 'popup-anything-on-click'),
+							'center-bottom'	=> __('Center Bottom', 'popup-anything-on-click'),
+							'right-top'		=> __('Right Top', 'popup-anything-on-click'),
+							'right-center'	=> __('Right Center', 'popup-anything-on-click'),
+							'right-bottom'	=> __('Right Bottom', 'popup-anything-on-click'),
 						);
 	return apply_filters('popupaoc_position_options', $position_option );
 }
@@ -390,9 +378,9 @@ function popupaoc_position_options() {
 function popupaoc_time_options() {
 
 	$time_options = array(	
-					'day'		=> esc_html__('Days', 'popup-anything-on-click'),
-					'hour'		=> esc_html__('Hours (PRO)', 'popup-anything-on-click'),
-					'minutes'	=> esc_html__('Minutes (PRO)', 'popup-anything-on-click'),
+					'day'		=> __('Days', 'popup-anything-on-click'),
+					'hour'		=> __('Hours (PRO)', 'popup-anything-on-click'),
+					'minutes'	=> __('Minutes (PRO)', 'popup-anything-on-click'),
 				);
 	return apply_filters( 'popupaoc_time_options', $time_options );
 }
@@ -425,21 +413,21 @@ function popupaoc_display_message( $type = 'update', $msg = '', $echo = 1 ) {
 
 	switch ( $type ) {
 		case 'reset':
-			$msg = !empty( $msg ) ? $msg : __( 'All settings reset successfully.', 'popup-anything-on-click');
+			$msg = ! empty( $msg ) ? $msg : __( 'All settings reset successfully.', 'popup-anything-on-click');
 			$msg_html = '<div id="message" class="updated notice notice-success is-dismissible">
 							<p><strong>' . $msg . '</strong></p>
 						</div>';
 			break;
 
 		case 'error':
-			$msg = !empty( $msg ) ? $msg : __( 'Sorry, Something happened wrong.', 'popup-anything-on-click');
+			$msg = ! empty( $msg ) ? $msg : __( 'Sorry, Something happened wrong.', 'popup-anything-on-click');
 			$msg_html = '<div id="message" class="error notice is-dismissible">
 							<p><strong>' . $msg . '</strong></p>
 						</div>';
 			break;
 
 		default:
-			$msg = !empty( $msg ) ? $msg : __('Your changes saved successfully.', 'popup-anything-on-click');
+			$msg = ! empty( $msg ) ? $msg : __('Your changes saved successfully.', 'popup-anything-on-click');
 			$msg_html = '<div id="message" class="updated notice notice-success is-dismissible">
 							<p><strong>'. $msg .'</strong></p>
 						</div>';
@@ -447,7 +435,7 @@ function popupaoc_display_message( $type = 'update', $msg = '', $echo = 1 ) {
 	}
 
 	if( $echo ) {
-		echo $msg_html;
+		echo wp_kses_post( $msg_html );
 	} else {
 		return $msg_html;
 	}
@@ -469,11 +457,11 @@ function popupaoc_preview_popup( $args = array() ) {
 ?>
 	<div class="paoc-popup-modal paoc-cnt-wrap">
 		<div class="paoc-popup-modal-act-btn-wrp">
-			<span class="paoc-popup-modal-act-btn paoc-popup-modal-info" title="<?php echo esc_html__("Note: Preview will be displayed according to responsive layout mode. Live preview may display differently when added to your page based on inheritance from some styles.", 'popup-anything-on-click') ."<br/><br/>". $args['info']; ?>"><i class="dashicons dashicons-info"></i></span>
+			<span class="paoc-popup-modal-act-btn paoc-popup-modal-info" title="<?php echo esc_html__("Note: Preview will be displayed according to responsive layout mode. Live preview may display differently when added to your page based on inheritance from some styles.", 'popup-anything-on-click') ."\n\n". esc_attr( $args['info'] ); ?>"><i class="dashicons dashicons-info"></i></span>
 			<span class="paoc-popup-modal-act-btn paoc-popup-modal-close paoc-popup-close" title="<?php esc_html_e('Close', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-no-alt"></i></span>
 		</div>
 		<div class="paoc-popup-modal-title-wrp">
-			<span class="paoc-popup-modal-title"><?php echo $args['title']; ?></span>
+			<span class="paoc-popup-modal-title"><?php echo wp_kses_post( $args['title'] ); ?></span>
 		</div>
 		<div class="paoc-popup-modal-cnt">
 			<iframe src="about:blank" data-src="<?php echo esc_url( $args['preview_link'] ); ?>" class="paoc-preview-frame" name="paoc_preview_frame" scrolling="auto" frameborder="0"></iframe>
@@ -492,7 +480,7 @@ function popupaoc_preview_popup( $args = array() ) {
 function popupaoc_preview_data( $post_data ) {
 
 	$prefix			= POPUPAOC_META_PREFIX;
-	$show_credit	= isset( $post_data[ $prefix.'advance' ]['show_credit'] ) ? $post_data[ $prefix.'advance' ]['show_credit'] : '';
+	$show_credit	= ! empty( $post_data[ $prefix.'advance' ]['show_credit'] ) ? 1 : 0;
 
 	unset( $post_data[ $prefix.'advance'] );
 
@@ -502,30 +490,6 @@ function popupaoc_preview_data( $post_data ) {
 	$post_data[ $prefix.'behaviour']['disappear']	= '';
 
 	return $post_data;
-}
-
-/**
- * Function to get current page URL
- * 
- * @since 2.0
- */
-function popupaoc_get_current_page_url( $args = array() ) {
-
-	$curent_page_url = is_ssl() ? 'https://' : 'http://';
-
-	// Check server port is not 80
-	if ( $_SERVER["SERVER_PORT"] != "80" ) {
-		$curent_page_url .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"].$_SERVER["REQUEST_URI"];
-	} else {
-		$curent_page_url .= $_SERVER["SERVER_NAME"].$_SERVER["REQUEST_URI"];
-	}
-
-	// Remove Query Args
-	if( isset( $args['remove_args'] ) ) {
-		$curent_page_url = remove_query_arg( $args['remove_args'], $curent_page_url );
-	}
-
-	return apply_filters( 'popupaoc_get_current_page_url', $curent_page_url );
 }
 
 /**
@@ -591,7 +555,7 @@ function popupaoc_display_locations( $type = 'all', $all = true, $exclude = arra
 
 	foreach ( $all_post_types as $post_type => $post_data ) {
 		if( $all ) {
-			$type_label = esc_html__( 'All', 'popup-anything-on-click' ) .' '. $post_data;
+			$type_label = __( 'All', 'popup-anything-on-click' ) .' '. $post_data;
 		} else {
 			$type_label = $post_data;
 		}
@@ -602,11 +566,11 @@ function popupaoc_display_locations( $type = 'all', $all = true, $exclude = arra
 	if ( 'global' != $type ) {
 		
 		$glocations = array(
-			'is_front_page'	=> esc_html__( 'Front Page', 'popup-anything-on-click' ),
-			'is_search'		=> esc_html__( 'Search Results', 'popup-anything-on-click' ),
-			'is_404'		=> esc_html__( '404 Error Page', 'popup-anything-on-click' ),
-			'is_archive'	=> esc_html__( 'All Archives', 'popup-anything-on-click' ),
-			'all'			=> esc_html__( 'Whole Site', 'popup-anything-on-click' ),
+			'is_front_page'	=> __( 'Front Page', 'popup-anything-on-click' ),
+			'is_search'		=> __( 'Search Results', 'popup-anything-on-click' ),
+			'is_404'		=> __( '404 Error Page', 'popup-anything-on-click' ),
+			'is_archive'	=> __( 'All Archives', 'popup-anything-on-click' ),
+			'all'			=> __( 'Whole Site', 'popup-anything-on-click' ),
 		);
 
 		$locations = array_merge( $locations, $glocations );	
@@ -674,23 +638,109 @@ function popupaoc_popup_default_meta() {
  * Get post meta
  * If preview is there then get run time post meta
  * 
+ * @since 2.1.9
+ */
+function popupaoc_process_meta( $meta_key, $post_id = 0 ) {
+
+	global $pagenow, $paoc_preview;
+
+	$prefix		= POPUPAOC_META_PREFIX; // Taking metabox prefix
+	$meta_data	= '';
+
+	// If popup preview is there
+	if( $paoc_preview && ! empty( $_POST['paoc_preview_form_data'] ) ) {
+		$postdata = $_POST['paoc_preview_form_data']; // WPCS: input var okay, CSRF ok.
+	} else {
+		$postdata = $_POST; // WPCS: input var okay, CSRF ok.
+	}
+
+	if( "{$prefix}popup_appear" == $meta_key ) {
+
+		$meta_data = isset( $postdata[$prefix.'popup_appear'] ) ? popupaoc_clean( $postdata[$prefix.'popup_appear'] ) : 'page_load';
+
+	} elseif( "{$prefix}behaviour" == $meta_key ) {
+
+		// Behaviour Meta Data
+		$meta_data						= array();
+		$meta_data['open_delay']		= isset( $postdata[$prefix.'behaviour']['open_delay'] )			? popupaoc_clean_number( $postdata[$prefix.'behaviour']['open_delay'], '', 'abs') 		: '';
+		$meta_data['disappear']			= isset( $postdata[$prefix.'behaviour']['disappear'] )			? popupaoc_clean_number( $postdata[$prefix.'behaviour']['disappear'], '', 'float')		: '';
+		$meta_data['loader_speed']		= ! empty( $postdata[$prefix.'behaviour']['loader_speed'] )		? popupaoc_clean_number( $postdata[$prefix.'behaviour']['loader_speed'], '', 'abs')		: 1;
+		$meta_data['popup_img_id']		= ! empty( $postdata[$prefix.'behaviour']['popup_img_id'] )		? popupaoc_clean_number( $postdata[$prefix.'behaviour']['popup_img_id'] )				: 0;
+		$meta_data['image_url']			= isset( $postdata[$prefix.'behaviour']['image_url'] )			? popupaoc_clean_url( $postdata[$prefix.'behaviour']['image_url'] )						: '';
+		$meta_data['btn_class']			= isset( $postdata[$prefix.'behaviour']['btn_class'] )			? popupaoc_sanitize_html_classes( $postdata[$prefix.'behaviour']['btn_class'] )			: '';
+		$meta_data['btn_text']			= ! empty( $postdata[$prefix.'behaviour']['btn_text'] )			? popupaoc_clean_html( $postdata[$prefix.'behaviour']['btn_text'] )						: '';
+		$meta_data['btn_text']			= ! empty( $meta_data['btn_text'] )							? $meta_data['btn_text']															: esc_html__('Click Here!!!', 'popup-anything-on-click');
+		$meta_data['link_text']			= ! empty( $postdata[$prefix.'behaviour']['link_text'] )		? popupaoc_clean_html( $postdata[$prefix.'behaviour']['link_text'] )					: '';
+		$meta_data['link_text']			= ! empty( $meta_data['link_text'] )						? $meta_data['link_text']															: esc_html__('Click Me!!!', 'popup-anything-on-click');
+		$meta_data['image_title']		= ! empty( $postdata[$prefix.'behaviour']['image_title'] )		? 1	: 0;
+		$meta_data['image_caption']		= ! empty( $postdata[$prefix.'behaviour']['image_caption'] )	? 1	: 0;
+		$meta_data['hide_close']		= ! empty( $postdata[$prefix.'behaviour']['hide_close'] )		? 1	: 0;
+		$meta_data['clsonesc']			= ! empty( $postdata[$prefix.'behaviour']['clsonesc'] )		? 1	: 0;
+		$meta_data['enable_loader']		= ! empty( $postdata[$prefix.'behaviour']['enable_loader'] )	? 1	: 0;
+		$meta_data['hide_overlay']		= ! empty( $postdata[$prefix.'behaviour']['hide_overlay'] )	? 1	: 0;
+		$meta_data['close_overlay']		= ! empty( $postdata[$prefix.'behaviour']['close_overlay'] )	? 1	: 0;
+		$meta_data['close_overlay']		= ( $meta_data['hide_overlay'] == 1 )						? 0	: $meta_data['close_overlay'];
+
+	} elseif ( "{$prefix}content" == $meta_key ) {
+
+		// Content Meta Data
+		$meta_data						= array();
+		$meta_data['main_heading']		= isset( $postdata[$prefix.'content']['main_heading'] )			? popupaoc_clean_html( $postdata[$prefix.'content']['main_heading'] )		: '';
+		$meta_data['sub_heading']		= isset( $postdata[$prefix.'content']['sub_heading'] )			? popupaoc_clean_html( $postdata[$prefix.'content']['sub_heading'] )		: '';
+		$meta_data['cust_close_txt']	= isset( $postdata[$prefix.'content']['cust_close_txt'] )		? popupaoc_clean( $postdata[$prefix.'content']['cust_close_txt'] )			: '';
+		$meta_data['security_note']		= isset( $postdata[$prefix.'content']['security_note'] )		? popupaoc_clean( $postdata[$prefix.'content']['security_note'] )			: '';
+		$meta_data['secondary_content']	= isset( $postdata[$prefix.'content']['secondary_content'] )	? sanitize_post_field( 'post_excerpt', $postdata[$prefix.'content']['secondary_content'], $post_id, 'db' )	: ''; /* Secondary Content Acts as a Post Excerpt */
+
+	} elseif ( "{$prefix}design" == $meta_key ) {
+
+		// Design Meta Data
+		$meta_data						= array();
+		$meta_data['template']			= isset( $postdata[$prefix.'design']['template'] )				? popupaoc_clean( $postdata[$prefix.'design']['template'] )						: 'design-1';
+		$meta_data['width']				= isset( $postdata[$prefix.'design']['width'] )					? popupaoc_clean( $postdata[$prefix.'design']['width'] )						: '';
+		$meta_data['height']			= isset( $postdata[$prefix.'design']['height'] )				? popupaoc_clean_number( $postdata[$prefix.'design']['height'], '' )			: '';
+		$meta_data['mn_position']		= isset( $postdata[$prefix.'design']['mn_position'] )			? popupaoc_clean( $postdata[$prefix.'design']['mn_position'] )					: 'center-center';
+		$meta_data['effect']			= isset( $postdata[$prefix.'design']['effect'] )				? popupaoc_clean( $postdata[$prefix.'design']['effect'] )						: '';
+		$meta_data['speed_in']			= ! empty( $postdata[$prefix.'design']['speed_in'] )			? popupaoc_clean_number( $postdata[$prefix.'design']['speed_in'], '', 'abs' )	: 0.5;
+		$meta_data['speed_out']			= ! empty( $postdata[$prefix.'design']['speed_out'] )			? popupaoc_clean_number( $postdata[$prefix.'design']['speed_out'], '', 'abs' )	: 0.25;
+		$meta_data['loader_color']		= ! empty( $postdata[$prefix.'design']['loader_color'] )		? popupaoc_clean_color( $postdata[$prefix.'design']['loader_color'] )			: '#000000';
+		$meta_data['fullscreen_popup']	= ! empty( $postdata[$prefix.'design']['fullscreen_popup'] )	? 1	: 0;
+
+	} elseif( "{$prefix}advance" == $meta_key ) {
+
+		// Advance Meta Data
+		$meta_data					= array();
+		$meta_data['show_credit']	= ! empty( $postdata[$prefix.'advance']['show_credit'] )	? 1	: 0;
+		$meta_data['cookie_expire']	= ( $postdata[$prefix.'advance']['cookie_expire'] != '' )	? popupaoc_clean_number( $postdata[$prefix.'advance']['cookie_expire'], null )	: '';
+		$meta_data['cookie_unit']	= 'day';
+
+	} elseif( "{$prefix}custom_css" == $meta_key ) {
+
+		$meta_data = isset( $postdata[$prefix.'custom_css'] ) ? sanitize_textarea_field( $postdata[$prefix.'custom_css'] ) : '';
+	}
+
+	return $meta_data;
+}
+
+/**
+ * Get post meta
+ * If preview is there then get run time post meta
+ * 
  * @since 2.0
  */
 function popupaoc_get_meta( $post_id, $meta_key, $flag = true ) {
 
 	global $pagenow, $paoc_preview;
 
-	$post_meta = get_post_meta( $post_id, $meta_key, $flag );
-
-	// If popup preview is there
+	// If popup preview is there sanitize meta on run time
 	if( $paoc_preview && ! empty( $_POST['paoc_preview_form_data'] ) ) {
 
-		$form_data = $_POST['paoc_preview_form_data'];
-		$post_meta = isset( $form_data[ $meta_key ] ) ? stripslashes_deep( $form_data[ $meta_key ] ) : '';
+		$post_meta = popupaoc_process_meta( $meta_key, $post_id );
 
 	} else {
 
 		$default_meta	= popupaoc_popup_default_meta();
+
+		$post_meta		= get_post_meta( $post_id, $meta_key, $flag );
 		$post_meta		= ( $pagenow == 'post-new.php' && isset( $default_meta[ $meta_key ] ) ) ? $default_meta[ $meta_key ] : $post_meta;
 	}
 

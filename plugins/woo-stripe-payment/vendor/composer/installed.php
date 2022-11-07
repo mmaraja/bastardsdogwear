@@ -5,7 +5,7 @@
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
-        'reference' => '6c7791dab69ce5f4ad0ad63098ffb98cd677031d',
+        'reference' => '0977434b1f22bd484f222a21c2cf60c02734d0dc',
         'name' => '__root__',
         'dev' => false,
     ),
@@ -16,7 +16,7 @@
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
-            'reference' => '6c7791dab69ce5f4ad0ad63098ffb98cd677031d',
+            'reference' => '0977434b1f22bd484f222a21c2cf60c02734d0dc',
             'dev_requirement' => false,
         ),
         'stripe/stripe-php' => array(

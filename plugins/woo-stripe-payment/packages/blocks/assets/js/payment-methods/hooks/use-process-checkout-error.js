@@ -9,6 +9,7 @@ export const useProcessCheckoutError = (
     useEffect(() => {
         const unsubscribe = subscriber((data) => {
             if (data?.processingResponse.paymentDetails?.stripeErrorMessage) {
+                console.log(data.processingResponse.paymentDetails.stripeErrorMessage);
                 return {
                     type: responseTypes.ERROR,
                     message: data.processingResponse.paymentDetails.stripeErrorMessage,

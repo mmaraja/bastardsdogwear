@@ -39,8 +39,8 @@ function popupaoc_register_post_type() {
 		'show_ui'			=> true,
 		'query_var'			=> false,
 		'rewrite'			=> false,
-		'capability_type'	=> 'post',
 		'hierarchical'		=> false,
+		'capability_type'	=> 'post',
 		'menu_icon'			=> 'dashicons-welcome-comments',
 		'supports'			=> apply_filters( 'popupaoc_post_supports', array('title') ),
 	);

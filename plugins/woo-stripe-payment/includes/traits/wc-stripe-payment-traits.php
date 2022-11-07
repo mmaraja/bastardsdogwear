@@ -22,7 +22,7 @@ trait WC_Stripe_Payment_Intent_Trait {
 	 *
 	 * @param WC_Order $order
 	 */
-	public function get_confirmation_method( $order ) {
+	public function get_confirmation_method( $order = null ) {
 		return 'manual';
 	}
 
@@ -161,6 +161,7 @@ trait WC_Stripe_Payment_Intent_Trait {
 		}
 		WC_Pre_Orders_Order::mark_order_as_pre_ordered( $order );
 		$this->save_zero_total_meta( $order, $token );
+		$this->payment_object->destroy_session_data();
 
 		return array(
 			'result'   => 'success',
@@ -300,7 +301,7 @@ trait WC_Stripe_Local_Payment_Intent_Trait {
 	 *
 	 * @param WC_Order $order
 	 */
-	public function get_confirmation_method( $order ) {
+	public function get_confirmation_method( $order = null ) {
 		return 'automatic';
 	}
 

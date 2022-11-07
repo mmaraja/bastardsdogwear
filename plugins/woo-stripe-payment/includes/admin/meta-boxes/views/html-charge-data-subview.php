@@ -75,7 +75,7 @@
 		<?php endif; ?>
     </div>
     <div class="payment-data column-6">
-        <h3><?php esc_html_e( 'Riska Data', 'woo-stripe-payment' ); ?></h3>
+        <h3><?php esc_html_e( 'Risk Data', 'woo-stripe-payment' ); ?></h3>
 		<?php if ( isset( $charge->outcome->risk_score ) ) { ?>
             <div class="metadata">
                 <label><?php esc_html_e( 'Score', 'woo-stripe-payment' ); ?></label>

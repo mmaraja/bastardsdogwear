@@ -21,6 +21,8 @@ jQuery(function ($) {
 
         $('.wc-stripe-connection-test').on('click', this.do_connection_test.bind(this));
 
+        $('.stripe-delete-connection').on('click', this.do_delete_connection.bind(this));
+
         if (typeof (wc_stripe_admin_notices) != 'undefined') {
             this.display_notices();
         }
@@ -130,6 +132,7 @@ jQuery(function ($) {
             } else {
                 $('#woocommerce_stripe_api_webhook_secret_' + env).val(response.secret);
                 window.alert(response.message);
+                window.location.reload();
             }
         }.bind(this)).fail(function (xhr, textStatus, errorThrown) {
             this.unblock();
@@ -219,6 +222,28 @@ jQuery(function ($) {
      */
     Settings.prototype.unblock = function () {
         $('.wc-stripe-settings-container').unblock();
+    }
+
+    Settings.prototype.do_delete_connection = function (e) {
+        e.preventDefault();
+        if (confirm(this.params.messages.delete_connection)) {
+            this.block();
+            $.ajax({
+                method: 'POST',
+                url: this.params.routes.delete_connection,
+                dataType: 'json',
+                data: {_wpnonce: this.params.rest_nonce}
+            }).done(function (response) {
+                this.unblock();
+                if (!response.code) {
+                    window.location.reload();
+                } else {
+                    window.alert(response.message);
+                }
+            }.bind(this)).fail(function () {
+                this.unblock();
+            }.bind(this));
+        }
     }
 
     new Settings();

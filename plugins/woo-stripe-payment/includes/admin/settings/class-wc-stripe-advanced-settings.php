@@ -26,10 +26,14 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 				'type'  => 'title',
 				'title' => __( 'Advanced Settings', 'woo-stripe-payment' ),
 			),
+			'settings_description'   => array(
+				'type'        => 'description',
+				'description' => __( 'This section provides advanced settings that allow you to configure functionality that fits your business process.', 'woo-stripe-payment' )
+			),
 			'locale'                 => array(
 				'title'       => __( 'Locale Type', 'woo-stripe-payment' ),
 				'type'        => 'select',
-				'default'     => 'auto',
+				'default'     => 'site',
 				'options'     => array(
 					'auto' => __( 'Auto', 'woo-stripe-payment' ),
 					'site' => __( 'Site Locale', 'woo-stripe-payment' )
@@ -38,9 +42,13 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 				'description' => __( 'If set to "auto" Stripe will determine the locale to use based on the customer\'s browser/location settings. Site locale uses the Wordpress locale setting.',
 					'woo-stripe-payment' )
 			),
-			'settings_description'   => array(
-				'type'        => 'description',
-				'description' => __( 'This section provides advanced settings that allow you to configure functionality that fits your business process.', 'woo-stripe-payment' )
+			'installments'           => array(
+				'title'       => __( 'Installments', 'woo-stripe-payment' ),
+				'type'        => 'checkbox',
+				'default'     => 'yes',
+				'value'       => 'yes',
+				'desc_tip'    => false,
+				'description' => sprintf( __( 'If enabled, installments will be available for the credit card gateway. %1$s', 'woo-stripe-payment' ), $this->get_supported_countries_description() )
 			),
 			'statement_descriptor'   => array(
 				'title'             => __( 'Statement Descriptor', 'woo-stripe-payment' ),
@@ -85,6 +93,42 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 				'value'       => 'yes',
 				'desc_tip'    => true,
 				'description' => __( 'If enabled, the plugin will process a payment cancellation or refund within Stripe when the order\'s status is set to cancelled.', 'woo-stripe-payment' )
+			),
+			'link_title'             => array(
+				'type'  => 'title',
+				'title' => __( 'Link Settings', 'woo-stripe-payment' ),
+			),
+			'link_enabled'           => array(
+				'title'       => __( 'Faster Checkout With Link', 'woo-stripe-payment' ),
+				'type'        => 'checkbox',
+				'default'     => 'no',
+				'value'       => 'yes',
+				'description' => __( 'Only available to US merchants: With Link enabled, Stripe will use your customer\'s email address to determine if they have used Stripe in the past. If yes, their payment info, billing and shipping information can be used to 
+				auto-populate the checkout page resulting in higher conversion rates and less customer friction. If enabled, the Stripe payment form will be used because it\'s the only card form compatible with Link.', 'woo-stripe-payment' )
+			),
+			'link_email'             => array(
+				'title'             => __( 'Move email field to top of page', 'woo-stripe-payment' ),
+				'type'              => 'checkbox',
+				'default'           => 'yes',
+				'value'             => 'yes',
+				'description'       => __( 'If enabled, the email field will be placed at the top of the checkout page. Link uses the email address so it\'s best to prioritize it.', 'woo-stripe-payment' ),
+				'custom_attributes' => array(
+					'data-show-if' => array(
+						'link_enabled' => true
+					)
+				)
+			),
+			'link_autoload'          => array(
+				'title'             => __( 'Launch link on page load', 'woo-stripe-payment' ),
+				'type'              => 'checkbox',
+				'default'           => 'yes',
+				'value'             => 'yes',
+				'description'       => __( 'If enabled and the email address is already populated, the plugin will attempt to launch Link  on the checkout page.', 'woo-stripe-payment' ),
+				'custom_attributes' => array(
+					'data-show-if' => array(
+						'link_enabled' => true
+					)
+				)
 			),
 			'disputes'               => array(
 				'title' => __( 'Dispute Settings', 'woo-stripe-payment' ),
@@ -148,6 +192,27 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 		);
 	}
 
+	public function process_admin_options() {
+		parent::process_admin_options();
+		if ( $this->is_active( 'link_enabled' ) ) {
+			/**
+			 * @var \WC_Payment_Gateway_Stripe $payment_method
+			 */
+			$payment_method = WC()->payment_gateways()->payment_gateways()['stripe_cc'];
+			$payment_method->update_option( 'form_type', 'payment' );
+			wc_stripe_log_info( 'Stripe payment form enabled for Link integration compatibility' );
+		}
+	}
+
+	public function get_form_fields() {
+		$fields = parent::get_form_fields();
+		if ( stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ) !== 'US' ) {
+			unset( $fields['link_title'], $fields['link_enabled'], $fields['link_email'], $fields['link_autoload'] );
+		}
+
+		return $fields;
+	}
+
 	public function is_fee_enabled() {
 		return $this->is_active( 'stripe_fee' );
 	}
@@ -178,6 +243,12 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 
 	public function is_review_closed_enabled() {
 		return $this->is_active( 'review_closed' );
+	}
+
+	public function get_supported_countries_description() {
+		return sprintf( __( 'Supported Stripe account countries: %1$s. Supported currencies: %2$s', 'woo-stripe-payment' ),
+			implode( ', ', \PaymentPlugins\Stripe\Installments\InstallmentController::get_supported_countries() ),
+			implode( ', ', \PaymentPlugins\Stripe\Installments\InstallmentController::get_supported_currencies() ) );
 	}
 
 }

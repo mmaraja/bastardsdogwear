@@ -11,6 +11,7 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 
 	/**
 	 * The Payment Method that is wrapped by this class.
+	 *
 	 * @var \WC_Payment_Gateway_Stripe
 	 */
 	protected $payment_method;
@@ -87,6 +88,7 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 
 	/**
 	 * Return true if the express checkout option is enabled for the payment method.
+	 *
 	 * @return bool
 	 */
 	protected function is_express_checkout_enabled() {
@@ -106,4 +108,9 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	protected function get_payment_method_icon() {
 		return array();
 	}
+
+	public function get_endpoint_data() {
+		return [];
+	}
+
 }

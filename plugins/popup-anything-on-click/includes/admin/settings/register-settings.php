@@ -21,9 +21,9 @@ function popupaoc_settings_tab() {
 
 	// Plugin settings tab
 	$sett_tabs = array(
-					'general'		=> esc_html__( 'General', 'popup-anything-on-click' ),
-					'display_rule'	=> esc_html__( 'Display Rule', 'popup-anything-on-click' ),
-					'integration'	=> esc_html__( 'Integration', 'popup-anything-on-click' ).' <span class="paoc-pro-tag">'. __('PRO','popup-anything-on-click').'</span>',
+					'general'		=> __( 'General', 'popup-anything-on-click' ),
+					'display_rule'	=> __( 'Display Rule', 'popup-anything-on-click' ),
+					'integration'	=> __( 'Integration', 'popup-anything-on-click' ).' <span class="paoc-pro-tag">'. esc_html__('PRO','popup-anything-on-click').'</span>',
 				);
 
 	return apply_filters( 'popupaoc_settings_tab', (array)$sett_tabs );
@@ -60,10 +60,10 @@ function popupaoc_validate_options( $input ) {
 
 	// Pull out the tab and section
 	if ( isset ( $_POST['_wp_http_referer'] ) ) {
-		parse_str( $_POST['_wp_http_referer'], $referrer );
+		parse_str( wp_unslash( $_POST['_wp_http_referer'] ), $referrer ); // WPCS: input var ok, CSRF ok, sanitization ok.
 	}
-	
-	$tab = isset( $referrer['tab'] ) ? $referrer['tab'] : 'general';
+
+	$tab = isset( $referrer['tab'] ) ? popupaoc_clean( $referrer['tab'] ) : 'general';
 
 	// Run a general sanitization for the tab for special fields
 	$input = apply_filters( 'popupaoc_sett_sanitize_'.$tab, $input );

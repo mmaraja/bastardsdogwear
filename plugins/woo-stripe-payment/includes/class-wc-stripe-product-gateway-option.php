@@ -1,10 +1,11 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 /**
- * @since 3.1.2
+ * @since   3.1.2
  * @package Stripe/Classes
- * @author PaymentPlugins
+ * @author  PaymentPlugins
  *
  */
 class WC_Stripe_Product_Gateway_Option {
@@ -35,7 +36,7 @@ class WC_Stripe_Product_Gateway_Option {
 
 	/**
 	 *
-	 * @param int|WC_Product $product
+	 * @param int|WC_Product            $product
 	 * @param WC_Payment_Gateway_Stripe $payment_method
 	 */
 	public function __construct( $product, $payment_method ) {
@@ -68,7 +69,7 @@ class WC_Stripe_Product_Gateway_Option {
 	 * Initialzie the settings.
 	 */
 	public function init_settings() {
-		if ( ! $this->settings ) {
+		if ( ! $this->settings && $this->product ) {
 			$this->settings = $this->product->get_meta( $this->get_id() );
 			$this->settings = is_array( $this->settings ) ? $this->settings : array();
 			$this->settings = wp_parse_args( $this->settings, $this->get_default_values() );
@@ -77,6 +78,7 @@ class WC_Stripe_Product_Gateway_Option {
 
 	/**
 	 * Return default options build from the payment gateway's options.
+	 *
 	 * @return array
 	 */
 	public function get_default_values() {
@@ -89,7 +91,7 @@ class WC_Stripe_Product_Gateway_Option {
 	/**
 	 *
 	 * @param string $key
-	 * @param mixed $default
+	 * @param mixed  $default
 	 */
 	public function get_option( $key, $default = null ) {
 		if ( ! isset( $this->settings[ $key ] ) && null != $default ) {
@@ -106,4 +108,13 @@ class WC_Stripe_Product_Gateway_Option {
 	public function enabled() {
 		return $this->get_option( 'enabled', false );
 	}
+
+	/**
+	 * @since 3.3.21
+	 * @return bool
+	 */
+	public function has_product() {
+		return ! ! $this->product;
+	}
+
 }

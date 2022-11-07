@@ -13,7 +13,8 @@ const classes = {
 const CustomCardForm = (
     {
         getData,
-        onChange: eventChange
+        onChange: eventChange,
+        onComplete
     }) => {
     const [cardType, setCardType] = useState('');
     const elementOrder = useRef([]);
@@ -23,6 +24,7 @@ const CustomCardForm = (
     const {component: CardForm = null, breakpoint = 475} = getCreditCardForm(id);
     const postalCodeEnabled = getData('postalCodeEnabled');
     const options = {};
+    const elementStatus = useRef({'cardNumber': {}, 'cardExpiry': {}, 'cardCvc': {}});
     ['cardNumber', 'cardExpiry', 'cardCvc'].forEach(type => {
         options[type] = {
             classes,
@@ -34,6 +36,7 @@ const CustomCardForm = (
         setElementOrder(element);
         return (event) => {
             eventChange(event);
+            elementStatus.current[event.elementType] = event;
             if (event.elementType === 'cardNumber') {
                 if (event.brand === 'unknown') {
                     setCardType('');
@@ -48,8 +51,15 @@ const CustomCardForm = (
                     elements.getElement(nextElement).focus();
                 }
             }
+            onComplete(isFormComplete());
         }
     }
+
+    const isFormComplete = () => {
+        let status = elementStatus.current;
+        return Object.keys(status).filter(key => !!status[key].complete).length === Object.keys(status).length;
+    }
+
     const setElementOrder = useCallback((element) => {
         if (!elementOrder.current.includes(element)) {
             elementOrder.current.push(element);

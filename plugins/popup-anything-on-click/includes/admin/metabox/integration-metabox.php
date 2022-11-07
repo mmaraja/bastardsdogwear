@@ -21,31 +21,31 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<tbody>
 			<tr>
 				<th>
-					<label for="paoc-mc-enable"><?php _e('Enable','popup-anything-on-click'); ?></label>
+					<label for="paoc-mc-enable"><?php esc_html_e('Enable','popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<input type="checkbox" name="" value="1" id="paoc-mc-enable" disabled="disabled" /><br/>
-					<span class="description"><?php _e('Check this box to enable MailChimp integration.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box to enable MailChimp integration.', 'popup-anything-on-click'); ?></span>
 				</td>
 			</tr>
 
 			<tr>
 				<th>
-					<label><?php _e('MailChimp Lists','popup-anything-on-click'); ?></label>
+					<label><?php esc_html_e('MailChimp Lists','popup-anything-on-click'); ?></label>
 				</th>
 				<td>
 					<div class="paoc-loop-irow">
 						<label>
 							<input type="checkbox" name="" value="" class="paoc-checkbox" disabled="disabled" />
-							<?php esc_html_e('WP OnlineSupport', 'popup-anything-on-click'); ?>
+							<?php esc_html_e('Essential Plugin', 'popup-anything-on-click'); ?>
 						</label>
 					</div>
 					<br/>
-					<span class="description"><?php _e('Check this box to enable entries for the respective lists.', 'popup-anything-on-click'); ?></span>
+					<span class="description"><?php esc_html_e('Check this box to enable entries for the respective lists.', 'popup-anything-on-click'); ?></span>
 
 					<br/><br/>
 					<div class="paoc-info">
-						<?php _e('Did not find your list? Please refresh the account from', 'popup-anything-on-click'); ?>
+						<?php esc_html_e('Did not find your list? Please refresh the account from', 'popup-anything-on-click'); ?>
 						<a href="javascript:void(0);"><?php esc_html_e('here', 'popup-anything-on-click'); ?></a>
 					</div>
 				</td>

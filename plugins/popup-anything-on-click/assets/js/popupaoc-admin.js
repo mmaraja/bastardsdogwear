@@ -192,7 +192,6 @@
 
 										return {
 											action		: 'popupaoc_post_title_sugg',
-											form_data	: $('.paoc-post-title-sugg-form').serialize(),
 											search		: search_term,
 											post_type	: post_type,
 											meta_data	: meta_data,

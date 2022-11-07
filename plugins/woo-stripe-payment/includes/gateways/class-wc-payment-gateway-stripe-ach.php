@@ -1,12 +1,13 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 /**
  * Gateway that processes ACH payments.
  * Only available for U.S. based merchants at this time.
  *
- * @since 3.0.5
- * @author Payment Plugins
+ * @since   3.0.5
+ * @author  Payment Plugins
  * @package Stripe/Gateways
  *
  */
@@ -37,6 +38,7 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 
 	public static function init() {
 		add_action( 'woocommerce_checkout_update_order_review', array( __CLASS__, 'update_order_review' ) );
+		add_action( 'woocommerce_checkout_process', array( __CLASS__, 'add_fees_for_checkout' ) );
 	}
 
 	/**
@@ -51,7 +53,7 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 		if ( isset( $wp->query_vars['order-pay'] ) ) {
 			$order = wc_get_order( absint( $wp->query_vars['order-pay'] ) );
 
-			return $is_available && $order->get_currency() === 'USD';
+			return $is_available && $order && $order->get_currency() === 'USD';
 		}
 
 		return $is_available && get_woocommerce_currency() === 'USD';
@@ -182,9 +184,9 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 	}
 
 	/**
+	 * @since 3.2.1
 	 * @return mixed|null
 	 * @throws Exception
-	 * @since 3.2.1
 	 */
 	public function fetch_link_token() {
 		$env = $this->get_plaid_environment();
@@ -314,13 +316,8 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 	 *
 	 * @param WC_Cart $cart
 	 */
-	public function after_calculate_totals( $cart ) {
-		remove_action( 'woocommerce_after_calculate_totals', array( $this, 'after_calculate_totals' ) );
-
-		add_action( 'woocommerce_cart_calculate_fees', array( $this, 'calculate_fees' ) );
-
-		WC()->session->set( 'wc_stripe_cart_total', $cart->total );
-		$cart->calculate_totals();
+	public function calculate_cart_fees( $cart ) {
+		$this->calculate_fees( $cart );
 	}
 
 	/**
@@ -328,25 +325,33 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 	 * @param WC_Cart $cart
 	 */
 	public function calculate_fees( $cart ) {
-		remove_action( 'woocommerce_cart_calculate_fees', array( $this, 'calculate_fees' ) );
 		$fee     = $this->get_option( 'fee' );
-		$taxable = $fee['taxable'] == 'yes';
+		$taxable = wc_string_to_bool( $fee['taxable'] );
 		switch ( $fee['type'] ) {
 			case 'amount':
-				$cart->add_fee( __( 'ACH Fee' ), $fee['value'], $taxable );
+				$cart->add_fee( __( 'ACH Fee', 'woo-stripe-payment' ), $fee['value'], $taxable );
 				break;
 			case 'percent':
-				$cart->add_fee( __( 'ACH Fee' ), $fee['value'] * WC()->session->get( 'wc_stripe_cart_total', 0 ), $taxable );
+				$cart_total = $cart->get_subtotal() + $cart->get_shipping_total() + $cart->get_subtotal_tax() + $cart->get_shipping_tax();
+				$cart->add_fee( __( 'ACH Fee', 'woo-stripe-payment' ), $fee['value'] * $cart_total, $taxable );
 				break;
 		}
-		unset( WC()->session->wc_stripe_cart_total );
 	}
 
 	public static function update_order_review() {
 		if ( ! empty( $_POST['payment_method'] ) && wc_clean( $_POST['payment_method'] ) === 'stripe_ach' ) {
 			$payment_method = new WC_Payment_Gateway_Stripe_ACH();
 			if ( $payment_method->fees_enabled() ) {
-				add_action( 'woocommerce_after_calculate_totals', array( $payment_method, 'after_calculate_totals' ) );
+				add_action( 'woocommerce_cart_calculate_fees', array( $payment_method, 'calculate_cart_fees' ) );
+			}
+		}
+	}
+
+	public static function add_fees_for_checkout() {
+		if ( ! empty( $_POST['payment_method'] ) && wc_clean( $_POST['payment_method'] ) === 'stripe_ach' ) {
+			$payment_method = WC()->payment_gateways()->payment_gateways()['stripe_ach'];
+			if ( $payment_method && $payment_method->fees_enabled() ) {
+				add_action( 'woocommerce_cart_calculate_fees', array( $payment_method, 'calculate_cart_fees' ) );
 			}
 		}
 	}
@@ -381,6 +386,7 @@ class WC_Payment_Gateway_Stripe_ACH extends WC_Payment_Gateway_Stripe {
 	public function has_enqueued_scripts( $scripts ) {
 		return wp_script_is( $scripts->get_handle( 'ach' ) );
 	}
+
 }
 
 WC_Payment_Gateway_Stripe_ACH::init();

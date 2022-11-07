@@ -1,4 +1,5 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 class WC_Stripe_Controller_Plaid extends WC_Stripe_Rest_Controller {
@@ -29,7 +30,10 @@ class WC_Stripe_Controller_Plaid extends WC_Stripe_Rest_Controller {
 
 			return rest_ensure_response( array( 'token' => $response->link_token ) );
 		} catch ( Exception $e ) {
+			wc_stripe_log_error( sprintf( 'Error generating link token for checkout page. Error: %s', $e->getMessage() ) );
+
 			return new WP_Error( 'plaid-error', $e->getMessage(), array( 'status' => 200 ) );
 		}
 	}
+
 }

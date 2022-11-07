@@ -60,12 +60,13 @@ class WC_Stripe_Redirect_Handler {
 				}
 			} elseif ( in_array( $result->status, array( 'requires_payment_method', 'failed' ) ) ) {
 				wc_add_notice( __( 'Payment authorization failed. Please select another payment method.', 'woo-stripe-payment' ), 'error' );
+				wc_stripe_log_info( sprintf( 'User cancelled their payment and has been redirected to the checkout page. Payment Method: %s. Order ID: %s', $payment_method->id, $order->get_id() ) );
 				if ( $result instanceof \Stripe\PaymentIntent ) {
-					$order->update_meta_data( WC_Stripe_Constants::PAYMENT_INTENT, WC_Stripe_Utils::sanitize_intent( $result->jsonSerialize() ) );
+					$order->update_meta_data( WC_Stripe_Constants::PAYMENT_INTENT, WC_Stripe_Utils::sanitize_intent( $result->toArray() ) );
 				} else {
 					$order->delete_meta_data( WC_Stripe_Constants::SOURCE_ID );
 				}
-				$order->update_status( 'failed', __( 'Payment authorization failed.', 'woo-stripe-payment' ) );
+				$order->update_status( 'pending' );
 
 				return;
 			} elseif ( 'chargeable' === $result->status ) {
@@ -88,6 +89,8 @@ class WC_Stripe_Redirect_Handler {
 				}
 			} elseif ( $result->status === 'processing' && isset( $result->charges->data ) ) {
 				$payment_method->save_order_meta( $order, $result->charges->data[0] );
+				$order->update_status( 'on-hold' );
+				WC_Stripe_Utils::delete_payment_intent_to_session();
 				// if this isn't the checkout page, then skip redirect
 				if ( ! is_checkout() ) {
 					return;

@@ -139,16 +139,28 @@ input.paoc-url{max-width: 60%; width: 100%;}
 .paoc-colorpicker-wrap .wp-picker-clear{display: inline-block !important;}
 
 /************** Start - Solutions & Features Page CSS ****************/
+.popupaoc-center{text-align:center;}
+.aoc_popup_page_paoc-solutions-features #wpwrap { background: #f7faff;}
+.popupaoc-sf-wrap{max-width: 860px;margin: 0 auto;}
+.popupaoc-heading{font-size: 28px;font-weight: 700;letter-spacing: -1px;text-align: center;margin-top: 30px; margin-bottom:5px;}
+.popupaoc-image{margin:25px 0 15px 0;}
+.popupaoc-sf-cont {color: #000; font-size:15px;}
+.popupaoc-top-rsn p, .popupaoc-sf-testimonial-wrap p{color: #000; font-size:15px;}
+.popupaoc-left{text-align:left;}
+.popupaoc-feature__text h3{font-size: 22px;font-weight: 700;margin:0;}
+.popupaoc-solutions-box-grid	{display: -webkit-box;display: -ms-flexbox;display: flex;-webkit-box-orient: vertical;-webkit-box-direction: normal;-ms-flex-direction: column;
+flex-direction: column;-webkit-box-pack: center;-ms-flex-pack: center;justify-content: center;}
+.popupaoc-team{margin-bottom:50px; border-radius: 10px;border: 1px solid #e5ecf6; padding:10px 30px 30px 30px;}
+.popupaoc-blue{color:#6c63ff; font-weight:bold;}
 .aoc_popup_page_paoc-solutions-features #wpcontent{padding: 0 0 40px; line-height: normal;}
 .popupaoc-sf-wrap .popupaoc-sf-inr{padding: 30px 40px 0;}
-.popupaoc-sf-wrap .popupaoc-sf-welcome-wrap{background-color: #fff; justify-content: space-between; box-shadow: 0 3px 2px rgba(0,0,0,.05); margin-bottom: 20px; position: relative; color: #23282d;}
-.popupaoc-sf-welcome-wrap .popupaoc-sf-welcome-inr{display: -webkit-box; display: -ms-flexbox; display: flex; -webkit-box-align: start; -ms-flex-align: start; align-items: flex-start; padding: 30px;}
-.popupaoc-sf-welcome-wrap .popupaoc-sf-welcome-inr > *{flex: 1;}
+.popupaoc-sf-wrap .popupaoc-sf-welcome-wrap{ margin-bottom:50px; position: relative;  -webkit-box-sizing: border-box;  box-sizing: border-box;  background: #fff;  padding: 30px;  border-radius: 10px;  border: 1px solid #e5ecf6; }
+
 .popupaoc-sf-subtitle{color: #6c7781; font-size: 16px; font-weight: 600; margin-bottom: 6px;}
 .popupaoc-sf-title{font-size: 32px; font-weight: 600; color: #23282d; margin-top: 0; margin-bottom: 20px;}
 .popupaoc-sf-ttl{font-size: 23px; font-weight: 600; color: #23282d; margin-top: 0; margin-bottom: 20px;}
-.popupaoc-sf-content{margin: 0 0 20px; font-size: 16px; line-height: 150%; color: #646970;}
-.popupaoc-sf-btn{display: inline-block; font-size: 16px; padding: 10px 10px;  background-color: #46b450; border-color: #46b450; color: #fff !important; font-weight: 600; border-radius: 3px; text-decoration: none;}
+.popupaoc-sf-content{margin: 0 0 20px; font-size: 22px;  color: #646970;}
+.popupaoc-sf-btn{display: inline-block; font-size: 18px; padding: 10px 25px; border-radius: 100px;  background-color: #46b450; border-color: #46b450; color: #fff !important; font-weight: 600; text-decoration: none;}
 .popupaoc-sf-btn-orange{ background-color: #FF1000; border-color: #FF1000 ;}
 .popupaoc-sf-btn:hover,
 .popupaoc-sf-btn:focus{background-color: #3fa548; border-color: #3fa548;}
@@ -173,32 +185,32 @@ input.paoc-url{max-width: 60%; width: 100%;}
 .popupaoc-rc-wrap .popupaoc-rc-bg-box{ background-color:#f1f1f1; border: 1px solid #d1d1d1; padding: 5px 10px; }
 
 .popupaoc-solutions-section{margin-bottom: 20px;}
-.popupaoc-solutions-box-wrap{display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px;}
+.popupaoc-solutions-box-wrap{display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px; margin-top:50px;}
 .popupaoc-solutions-box-wrap>*{flex: 1 0 21%;}
-.popupaoc-solutions-box-wrap .popupaoc-solutions-box-grid{background-color: #ffffff; box-shadow: 0 0px 5px rgba(0, 0, 0, 0.08);}
+
 .popupaoc-solutions-box-wrap .popupaoc-box-ttl{background-color: #cce5ff; color: #004085; font-size: 16px; padding: 10px;}
 .popupaoc-solutions-box-wrap ul{padding: 0 10px; margin: 0;}
 .popupaoc-solutions-box-wrap ul li{position: relative; font-size: 14px; border-bottom: 1px solid #e7e7e7; margin: 0; padding: 8px 0;}
 .popupaoc-solutions-box-wrap ul li:last-child{border-bottom: none;}
 
-.popupaoc-features-section{background-color: #ffffff; box-shadow: 0 3px 2px rgba(0,0,0,.05);}
-.popupaoc-features-ttl{background-color: #d4edda; color: #155724; padding: 10px 30px; margin-bottom: 15px;}
+.popupaoc-sf-welcome-wrap{margin-top:30px;}
+.popupaoc-features-ttl{margin-top:45px; margin-bottom: 15px;}
 .popupaoc-features-ttl h2{margin-bottom: 5px; color: #155724;}
-.popupaoc-sf-cont{color: #464646;}
+
 .popupaoc-features-section .popupaoc-features-section-inr{padding: 15px 30px; margin-bottom:30px; text-align:center;}
-.popupaoc-features-section ul.popupaoc-features-box-grid{margin:0px;display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px; list-style: none !important;}
+.popupaoc-features-section ul.popupaoc-features-box-grid{margin:0px;display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px; list-style: none !important; margin-bottom:15px;}
 ul.popupaoc-features-box-grid>*{flex: 1 0 21%; text-align:center; font-size:13px; font-weight:bold;}
 ul.popupaoc-features-box-grid li{border:1px solid #f1f1f1; padding:10px 0;}
 
 .popupaoc-testimonial-section-inr{text-align:center;}
-.popupaoc-testimonial-box-wrap{margin-bottom:15px;}
+.popupaoc-testimonial-box-wrap{margin-bottom:35px;}
 .popupaoc-testimonial-box-wrap{display: -webkit-box; display: -ms-flexbox; display: flex; -ms-flex-wrap: wrap; flex-wrap: wrap; gap: 15px;}
 .popupaoc-testimonial-box-wrap>*{flex: 1 0 21%;}
 .popupaoc-testimonial-box-wrap .popupaoc-testimonial-box-grid{border: 1px solid #ddd;background:#fff;  box-shadow: 0 3px 2px rgba(0,0,0,.05);
 padding: 30px;text-align: center;display: flex;flex-direction: column;align-items: center;}
 .popupaoc-testimonial-box-wrap h3{margin-top:0px;}
 .popupaoc-testimonial-clnt{margin:15px 0 0 0; font-size:16px; font-weight:bold;}
-
+.bg-highlight{background:#bde1f9;color:#000;padding: 0 5px; display:inline-block;}
 /************** End - Solutions & Features Page CSS ****************/
 
 /***** Column grid *****/

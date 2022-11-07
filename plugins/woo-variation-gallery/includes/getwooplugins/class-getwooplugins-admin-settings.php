@@ -68,9 +68,6 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 		}
   
 		public static function action($current_tab, $current_section, $current_action ) {
-   
-			check_admin_referer( 'getwooplugins-settings' );
-
 			// Trigger actions.
 			do_action( 'getwooplugins_settings_action', $current_tab, $current_section, $current_action );
 		}
@@ -280,9 +277,8 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 				$tooltip_html      = $field_description['tooltip_html'];
                 
                 // Dependent field
-                $require = isset( $value['require'] ) ? "data-gwpdepends='" . wc_esc_json(wp_json_encode( $value['require'] )) . "'" : '';
-                
-                
+                $require = isset( $value['require'] ) ? "data-gwp_dependency='" . wc_esc_json(wp_json_encode( $value['require'] )) . "'" : '';
+
                 $classes = array();
                 
                 if( $value['is_pro'] ){
@@ -426,7 +422,7 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
  							    <?php echo self::popup_template_links($value); // WPCS: XSS ok. ?>
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
-								<?php echo $description; // WPCS: XSS ok. ?>
+								
 
 								<textarea
 									name="<?php echo esc_attr( $value['id'] ); ?>"
@@ -436,6 +432,8 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 									placeholder="<?php echo esc_attr( $value['placeholder'] ); ?>"
 									<?php echo implode( ' ', $custom_attributes ); // WPCS: XSS ok. ?>
 									><?php echo esc_textarea( $option_value ); // WPCS: XSS ok. ?></textarea>
+									
+									<?php echo $description; // WPCS: XSS ok. ?>
 							</td>
 						</tr>
 						<?php
@@ -489,7 +487,7 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 							</th>
 							<td class="forminp forminp-<?php echo esc_attr( sanitize_title( $value['type'] ) ); ?>">
 								<fieldset>
-									<?php echo $description; // WPCS: XSS ok. ?>
+									
 									<ul>
 									<?php
 									foreach ( $value['options'] as $key => $val ) {
@@ -509,6 +507,8 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 									}
 									?>
 									</ul>
+									
+									<?php echo $description; // WPCS: XSS ok. ?>
 								</fieldset>
 							</td>
 						</tr>
@@ -787,7 +787,7 @@ if ( ! class_exists( 'GetWooPlugins_Admin_Settings', false ) ) :
 			}
 
 			if ( $description && in_array( $value['type'], array( 'textarea', 'radio' ), true ) ) {
-				$description = '<p style="margin-top:0">' . wp_kses_post( $description ) . '</p>';
+				$description = '<p class="description">' . wp_kses_post( $description ) . '</p>';
 			} elseif ( $description && in_array( $value['type'], array( 'checkbox' ), true ) ) {
 				$description = wp_kses_post( $description );
 			} elseif ( $description ) {

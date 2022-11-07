@@ -43,6 +43,35 @@ if ( ! $checkout->is_registration_enabled() && $checkout->is_registration_requir
 				</div>
 
 				<?php do_action( 'woocommerce_checkout_after_customer_details' ); ?>
+				<?php 
+				 foreach( WC()->cart->get_cart() as $cart_item_key => $cart_item ) {
+					$product = $cart_item['data'];
+					$id = $product->get_id();
+					$products = array(667, 668, 669, 670);  // Product Ids
+				
+					if (in_array($id, $products)) { 
+						echo '<div class="checkout_product-data wrapper-box">';
+						echo "<div class='wrapper-heading'><h4>Name tag</h4></div>";
+						echo "<div class='inner-wrap'>";
+						echo woocommerce_form_field( 'dogs_name_tag', array(
+							'type'          => 'text',
+							'class'         => array('contact_name_tag form-row-wide'),
+							'label'         => __('Dog\'s name'),
+							'placeholder'   => __(''),
+							'required' => true,
+							), $checkout->get_value( 'dogs_name_tag' ));
+						echo woocommerce_form_field( 'phone_name_tag', array(
+							'type'          => 'text',
+							'class'         => array('contact_name_tag form-row-wide'),
+							'label'         => __('Contact number'),
+							'placeholder'   => __(''),
+							'required' => true,
+							), $checkout->get_value( 'phone_name_tag' ));
+						echo '</div>';
+						echo '</div>';
+					  }
+					}
+				?>
 
 			<?php endif; ?>
 			

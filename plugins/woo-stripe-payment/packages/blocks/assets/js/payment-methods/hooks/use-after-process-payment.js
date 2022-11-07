@@ -9,7 +9,7 @@ export const useAfterProcessingPayment = (
         eventRegistration,
         responseTypes,
         activePaymentMethod,
-        savePaymentMethod = false,
+        shouldSavePayment = false,
         messageContext = null
     }) => {
     const stripe = useStripe();
@@ -26,9 +26,8 @@ export const useAfterProcessingPayment = (
                 return await handleCardAction({
                     redirectUrl,
                     responseTypes,
-                    stripe,
-                    getData,
-                    savePaymentMethod
+                    name: activePaymentMethod,
+                    savePaymentMethod: shouldSavePayment
                 });
             }
             return null;
@@ -39,6 +38,6 @@ export const useAfterProcessingPayment = (
         responseTypes,
         onCheckoutAfterProcessingWithSuccess,
         activePaymentMethod,
-        savePaymentMethod
+        shouldSavePayment
     ]);
 }
