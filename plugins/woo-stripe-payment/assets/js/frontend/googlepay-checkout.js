@@ -36,6 +36,9 @@
                 }));
                 $(this.banner_container).show().addClass('active').closest('.wc-stripe-banner-checkout').addClass('active');
                 $(this.banner_container).empty().append($button);
+                if (this.is_rectangle_button()) {
+                    $button.find('button').removeClass('new_style');
+                }
             }
         }.bind(this))
     }

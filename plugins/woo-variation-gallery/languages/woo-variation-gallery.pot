@@ -7,7 +7,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language-Team: Emran Ahmed <emran.bd.08@gmail.com>\n"
-"POT-Creation-Date: 2022-07-31 10:26+0000\n"
+"POT-Creation-Date: 2022-11-13 06:53+0000\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -27,31 +27,31 @@ msgstr ""
 msgid "Upgrade to pro to add more images and videos"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:146
+#: ../includes/class-woo-variation-gallery-backend.php:148
 msgid "Choose Image"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:147
+#: ../includes/class-woo-variation-gallery-backend.php:149
 msgid "Add Images"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:187
+#: ../includes/class-woo-variation-gallery-backend.php:189
 msgid "View documentation"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:188
+#: ../includes/class-woo-variation-gallery-backend.php:190
 msgid "Help &amp; Support"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:197
+#: ../includes/class-woo-variation-gallery-backend.php:199
 msgid "View Gallery Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:197
+#: ../includes/class-woo-variation-gallery-backend.php:199
 msgid "Settings"
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-backend.php:201
+#: ../includes/class-woo-variation-gallery-backend.php:203
 msgid "Go Pro"
 msgstr ""
 
@@ -219,7 +219,7 @@ msgstr ""
 msgid "Gallery Settings reset."
 msgstr ""
 
-#: ../includes/class-woo-variation-gallery-settings.php:152
+#: ../includes/class-woo-variation-gallery-settings.php:152, ../includes/getwooplugins/class-getwooplugins-settings-page.php:128
 msgid "General"
 msgstr ""
 
@@ -555,6 +555,58 @@ msgstr ""
 msgid "Are you sure you want to \n%s?"
 msgstr ""
 
+#: ../includes/html-settings-sidebar.php:7
+msgid "Documentation"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:9
+msgid "Get started by spending some time with the"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:10
+msgid "documentation."
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:15
+msgid "Facing issue?"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:17
+msgid "Stuck with something?"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:18
+msgid "Please open a ticket."
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:18
+msgid "For emergency case join our live chat."
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:23
+msgid "Love Our Plugin?"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:25
+msgid "Thank you for choosing"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:25
+msgid "Variation Gallery for WooCommerce"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:25
+msgid "If you have found our plugin useful and makes you smile,"
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:26
+msgid "please consider giving us a 5-star rating."
+msgstr ""
+
+#: ../includes/html-settings-sidebar.php:26
+msgid "It will help us to grow."
+msgstr ""
+
 #: ../includes/html-tutorials.php:6
 msgid "How to tutorials"
 msgstr ""
@@ -563,20 +615,81 @@ msgstr ""
 msgid "PRO"
 msgstr ""
 
-#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:152, ../includes/getwooplugins/class-getwooplugins-admin-menus.php:181
+#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:132, ../includes/getwooplugins/class-getwooplugins-plugin-deactivate-feedback.php:60
+msgid "The changes you made will be lost if you navigate away from this page."
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:160, ../includes/getwooplugins/class-getwooplugins-admin-menus.php:189
 msgid "GetWooPlugins Settings"
 msgstr ""
 
-#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:152
+#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:160
 msgid "GetWooPlugins"
 msgstr ""
 
-#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:181
+#: ../includes/getwooplugins/class-getwooplugins-admin-menus.php:189
 msgid "Home"
 msgstr ""
 
 #: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:65
 msgid "Your settings have been saved."
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:215
+msgid "Check how this feature works"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:219
+msgid "See how this feature works"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:633
+msgid "Select a page&hellip;"
+msgstr ""
+
+#. translators: 1: page name 2: page ID
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:647
+msgid "%1$s (ID: %2$s)"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:665
+msgid "Search for a page&hellip;"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:699
+msgid "Choose a country / region&hellip;"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:699, ../includes/getwooplugins/class-getwooplugins-admin-settings.php:725
+msgid "Country / Region"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:725
+msgid "Choose countries / regions&hellip;"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:733
+msgid "Select all"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:733
+msgid "Select none"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:742
+msgid "Day(s)"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:743
+msgid "Week(s)"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:744
+msgid "Month(s)"
+msgstr ""
+
+#: ../includes/getwooplugins/class-getwooplugins-admin-settings.php:745
+msgid "Year(s)"
 msgstr ""
 
 #: ../includes/getwooplugins/html/deactive-feedback-dialog.php:16
@@ -603,8 +716,16 @@ msgstr ""
 msgid "Skip &amp; Deactivate"
 msgstr ""
 
+#: ../includes/getwooplugins/html/settings-page.php:99, ../includes/getwooplugins/html/settings-page.php:99
+msgid "Save changes"
+msgstr ""
+
 #: ../includes/getwooplugins/html/settings-page.php:100
 msgid "Are you sure to reset?"
+msgstr ""
+
+#: ../includes/getwooplugins/html/settings-page.php:100
+msgid "Reset all"
 msgstr ""
 
 #: ../woo-variation-gallery.php:37

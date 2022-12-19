@@ -64,7 +64,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</th>
 				<td class="paoc-pro-disabled">
 					<?php wp_editor( '', 'paoc-email-msg', array('textarea_name' => '', 'textarea_rows' => 8, 'media_buttons' => true, 'class' => 'paoc-email-msg') ); ?>
-					<span class="description"><?php echo sprintf( esc_html__('Enter notification admin email message. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_html__('Popup Tags', 'popup-anything-on-click').'" data-tags="notification">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
+					<span class="description"><?php echo sprintf( esc_html__('Enter notification admin email message. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_attr__('Popup Tags', 'popup-anything-on-click').'" data-tags="notification">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
 				</td>
 			</tr>
 
@@ -110,7 +110,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				</th>
 				<td class="paoc-pro-disabled">
 					<?php wp_editor( '', 'paoc-user-email-msg', array('textarea_name' => '', 'textarea_rows' => 8, 'media_buttons' => true, 'class' => 'paoc-user-email-msg') ); ?>
-					<span class="description"><?php echo sprintf( esc_html__('Enter notification user email message. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_html__('Popup Tags', 'popup-anything-on-click').'" data-tags="notification">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
+					<span class="description"><?php echo sprintf( esc_html__('Enter notification user email message. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_attr__('Popup Tags', 'popup-anything-on-click').'" data-tags="notification">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
 				</td>
 			</tr>
 		</tbody>

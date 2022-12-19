@@ -128,7 +128,10 @@
         }
 
         $container.prepend(message);
-        $container.removeClass('processing').unblock();
+        $container.removeClass('processing')
+        if ($().unblock) {
+            $container.unblock();
+        }
         $container.find('.input-text, select, input:checkbox').trigger('blur');
 
         if ($.scroll_to_notices) {
@@ -1142,6 +1145,7 @@
     wc_stripe.ProductGateway.prototype.found_variation = function (e, variation) {
         var data = this.get_gateway_data();
         data.product.price = variation.display_price;
+        data.product.price_cents = variation.display_price_cents;
         data.needs_shipping = !variation.is_virtual;
         data.product.variation = variation;
         this.set_gateway_data(data);
@@ -1535,7 +1539,14 @@
 
         this.$button = $(this.paymentsClient.createButton(this.get_button_options()));
         this.$button.addClass('gpay-button-container');
+        if (this.is_rectangle_button()) {
+            this.$button.find('button').removeClass('new_style');
+        }
     };
+
+    wc_stripe.GooglePay.prototype.is_rectangle_button = function () {
+        return this.params.button_shape === 'rect';
+    }
 
     wc_stripe.GooglePay.prototype.get_button_options = function () {
         var options = {
@@ -1667,7 +1678,7 @@
         return new Promise(function (resolve) {
             var paymentRequest = this.paymentRequest;
             this.paymentRequest.canMakePayment().then(function (result) {
-                if (result && !result.applePay && paymentRequest === this.paymentRequest) {
+                if (result && !result.applePay && !result.link && paymentRequest === this.paymentRequest) {
                     this.can_pay = true;
                     this.create_button();
                     $(this.container).show();
@@ -1685,7 +1696,7 @@
     };
 
     wc_stripe.Afterpay.prototype.is_eligible = function (price) {
-        return this.needs_shipping() && (price > this.get_min() && price < this.get_max());
+        return (price >= this.get_min() && price <= this.get_max());
     }
 
     wc_stripe.Afterpay.prototype.get_min = function () {
@@ -1854,7 +1865,7 @@
     wc_stripe.CheckoutFields.prototype.required = function (k) {
         if (this.params[k]) {
             if (typeof this.params[k].required !== 'undefined') {
-                return this.params[k].required;
+                return !!this.params[k].required;
             }
         }
 

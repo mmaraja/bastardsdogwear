@@ -2,7 +2,7 @@
  * Variation Gallery for WooCommerce
  *
  * Author: Emran Ahmed ( emran.bd.08@gmail.com )
- * Date: 7/31/2022, 4:26:26 PM
+ * Date: 11/13/2022, 12:53:56 PM
  * Released under the GPLv3 license.
  */
 /******/ (function() { // webpackBootstrap
@@ -631,7 +631,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
           if (hasGallery) {
             this.$target.addClass('woo-variation-gallery-has-product-thumbnail');
+            this.$target.removeClass('woo-variation-gallery-no-product-thumbnail');
           } else {
+            this.$target.addClass('woo-variation-gallery-no-product-thumbnail');
             this.$target.removeClass('woo-variation-gallery-has-product-thumbnail');
           }
 

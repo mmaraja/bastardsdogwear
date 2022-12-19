@@ -7,21 +7,46 @@ use Automattic\WooCommerce\Blocks\Payments\PaymentContext;
 use Automattic\WooCommerce\Blocks\Payments\PaymentResult;
 use \PaymentPlugins\Blocks\Stripe\Assets\Api as AssetsApi;
 
+/**
+ * @property \WC_Payment_Gateway_Stripe $payment_method
+ */
 abstract class AbstractStripePayment extends AbstractPaymentMethodType {
-
-	/**
-	 * The Payment Method that is wrapped by this class.
-	 *
-	 * @var \WC_Payment_Gateway_Stripe
-	 */
-	protected $payment_method;
 
 	protected $assets_api;
 
+	/**
+	 * @var \WC_Payment_Gateway_Stripe
+	 */
+	protected $payment_gateway;
+
 	public function __construct( AssetsApi $assets_api ) {
-		$this->assets_api     = $assets_api;
-		$this->payment_method = WC()->payment_gateways()->payment_gateways()[ $this->get_name() ];
+		$this->assets_api = $assets_api;
 		$this->init();
+	}
+
+	public function __get( $key ) {
+		switch ( $key ) {
+			case 'payment_method':
+				return $this->payment_method();
+		}
+	}
+
+	protected function payment_method() {
+		if ( ! $this->payment_gateway ) {
+			$payment_methods = WC()->payment_gateways()->payment_gateways();
+
+			$this->payment_gateway = isset( $payment_methods[ $this->get_name() ] ) ? $payment_methods[ $this->get_name() ] : null;
+			/**
+			 * It's possible that some 3rd party code has unset the payment gateway using the
+			 * woocommerce_payment_gateways filter. To prevent null exceptions, ensure this variable
+			 * is never null
+			 */
+			if ( ! $this->payment_gateway ) {
+				$this->payment_gateway = new MagicPaymentMethod( $this->get_name() );
+			}
+		}
+
+		return $this->payment_gateway;
 	}
 
 	protected function init() {
@@ -29,12 +54,12 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	}
 
 	public function initialize() {
-		$this->settings = $this->payment_method->settings;
+		$this->settings = get_option( "woocommerce_{$this->name}_settings", [] );
 	}
 
 
 	public function is_active() {
-		return $this->payment_method && $this->payment_method->is_available();
+		return wc_string_to_bool( $this->get_setting( 'enabled', 'no' ) );
 	}
 
 	public function get_payment_method_script_handles() {
@@ -44,9 +69,9 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	public function get_payment_method_data() {
 		return array(
 			'name'                  => $this->get_name(),
-			'title'                 => $this->payment_method->get_title(),
-			'showSaveOption'        => $this->payment_method->supports( 'tokenization' ),
-			'showSavedCards'        => $this->payment_method->supports( 'tokenization' ),
+			'title'                 => $this->get_setting( 'title_text' ),
+			'showSaveOption'        => \in_array( 'tokenization', $this->get_supported_features() ),
+			'showSavedCards'        => \in_array( 'tokenization', $this->get_supported_features() ),
 			'features'              => $this->get_supported_features(),
 			'expressCheckout'       => $this->is_express_checkout_enabled(),
 			'cartCheckoutEnabled'   => $this->is_cart_checkout_enabled(),
@@ -54,8 +79,8 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 			'totalLabel'            => __( 'Total', 'woo-stripe-payment' ),
 			'isAdmin'               => is_admin(),
 			'icons'                 => $this->get_payment_method_icon(),
-			'placeOrderButtonLabel' => $this->payment_method->order_button_text,
-			'description'           => $this->payment_method->get_description()
+			'placeOrderButtonLabel' => $this->get_setting( 'order_button_text' ),
+			'description'           => $this->get_setting( 'description' )
 		);
 	}
 
@@ -92,11 +117,11 @@ abstract class AbstractStripePayment extends AbstractPaymentMethodType {
 	 * @return bool
 	 */
 	protected function is_express_checkout_enabled() {
-		return $this->payment_method->banner_checkout_enabled();
+		return \in_array( 'checkout_banner', $this->get_setting( 'payment_sections', [] ), true );
 	}
 
 	protected function is_cart_checkout_enabled() {
-		return $this->payment_method->cart_checkout_enabled();
+		return \in_array( 'cart', $this->get_setting( 'payment_sections', [] ), true );
 	}
 
 	/**

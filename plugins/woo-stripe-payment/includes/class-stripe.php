@@ -26,7 +26,7 @@ class WC_Stripe_Manager {
 	 *
 	 * @var string
 	 */
-	public $version = '3.3.24';
+	public $version = '3.3.35';
 
 	/**
 	 *
@@ -154,6 +154,15 @@ class WC_Stripe_Manager {
 		\PaymentPlugins\Stripe\WooCommerceSubscriptions\Package::init();
 		\PaymentPlugins\Stripe\WooCommercePreOrders\Package::init();
 		\PaymentPlugins\Stripe\GermanMarket\Package::init();
+
+		if ( class_exists( '\Automattic\WooCommerce\Utilities\FeaturesUtil' ) ) {
+			add_action( 'before_woocommerce_init', function () {
+				try {
+					\Automattic\WooCommerce\Utilities\FeaturesUtil::declare_compatibility( 'custom_order_tables', $this->plugin_path() . 'stripe-payments.php', true );
+				} catch ( \Exception $e ) {
+				}
+			} );
+		}
 	}
 
 	/**
@@ -226,6 +235,7 @@ class WC_Stripe_Manager {
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-afterpay.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-boleto.php';
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-oxxo.php';
+		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/gateways/class-wc-payment-gateway-stripe-affirm.php';
 
 		// tokens
 		include_once WC_STRIPE_PLUGIN_FILE_PATH . 'includes/abstract/abstract-wc-payment-token-stripe.php';
@@ -270,6 +280,7 @@ class WC_Stripe_Manager {
 				'WC_Payment_Gateway_Stripe_GooglePay',
 				'WC_Payment_Gateway_Stripe_Payment_Request',
 				'WC_Payment_Gateway_Stripe_Afterpay',
+				'WC_Payment_Gateway_Stripe_Affirm',
 				'WC_Payment_Gateway_Stripe_ACH',
 				'WC_Payment_Gateway_Stripe_Ideal',
 				'WC_Payment_Gateway_Stripe_P24',
@@ -314,6 +325,7 @@ class WC_Stripe_Manager {
 		new \PaymentPlugins\Stripe\Link\LinkIntegration( $this->advanced_settings, $this->account_settings, $this->assets(), $this->data_api() );
 		new \PaymentPlugins\Stripe\Controllers\PaymentIntent( WC_Stripe_Gateway::load(), [ 'stripe_cc' ] );
 		new \PaymentPlugins\Stripe\Messages\MessageController();
+		new PaymentPlugins\Stripe\Products\ProductController();
 	}
 
 	/**

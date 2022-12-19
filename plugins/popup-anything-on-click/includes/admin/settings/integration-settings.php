@@ -40,7 +40,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 				<tr>
 					<td colspan="2">
-						<input type="submit" name="paoc_intgs_mc_sett_submit" class="button button-primary right paoc-btn paoc-intgs-sett-submit paoc-intgs-mc-sett-submit paoc-sett-submit" value="<?php esc_html_e('Save Changes', 'popup-anything-on-click'); ?>" />
+						<input type="submit" name="paoc_intgs_mc_sett_submit" class="button button-primary right paoc-btn paoc-intgs-sett-submit paoc-intgs-mc-sett-submit paoc-sett-submit" value="<?php esc_attr_e('Save Changes', 'popup-anything-on-click'); ?>" />
 					</td>
 				</tr>
 			</tbody>

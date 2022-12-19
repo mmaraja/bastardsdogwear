@@ -185,7 +185,7 @@ $welcome_popup_title	= ! empty( $welcome_popup_post->post_title )	? $welcome_pop
 
 				<tr>
 					<td colspan="2">
-						<input type="submit" name="paoc_display_rule_sett" class="button button-primary right paoc-btn paoc-sett-submit" value="<?php esc_html_e('Save Changes', 'popup-anything-on-click'); ?>" />
+						<input type="submit" name="paoc_display_rule_sett" class="button button-primary right paoc-btn paoc-sett-submit" value="<?php esc_attr_e('Save Changes', 'popup-anything-on-click'); ?>" />
 					</td>
 				</tr>
 			</tbody>

@@ -250,11 +250,11 @@ function wc_stripe_log_info( $message ) {
  * @package Stripe/Functions
  */
 function wc_stripe_order_mode( $order ) {
-	if ( is_object( $order ) ) {
-		return $order->get_meta( WC_Stripe_Constants::MODE, true );
+	if ( ! is_object( $order ) ) {
+		$order = wc_get_order( $order );
 	}
 
-	return get_post_meta( $order, WC_Stripe_Constants::MODE, true );
+	return $order->get_meta( WC_Stripe_Constants::MODE, true );
 }
 
 /**
@@ -308,7 +308,9 @@ function wc_stripe_order_status_completed( $order_id, $order ) {
 	$gateway = isset( $gateways[ $order->get_payment_method() ] ) ? $gateways[ $order->get_payment_method() ] : null;
 	// @since 3.0.3 check added to ensure this is a Stripe gateway.
 	if ( $gateway && $gateway instanceof WC_Payment_Gateway_Stripe && ! $gateway->processing_payment ) {
-		$gateway->capture_charge( $order->get_total(), $order );
+		if ( stripe_wc()->advanced_settings->get_option( 'capture_status', 'completed' ) === $order->get_status() ) {
+			$gateway->capture_charge( $order->get_total(), $order );
+		}
 	}
 }
 
@@ -910,11 +912,27 @@ function wc_stripe_pre_orders_active() {
  * @package Stripe/Functions
  */
 function wc_stripe_get_order_from_source_id( $source_id ) {
-	global $wpdb;
-	$order_id
-		= $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id WHERE meta.meta_key = %s AND meta.meta_value = %s LIMIT 1",
-		WC_Stripe_Constants::SOURCE_ID,
-		$source_id ) );
+	if ( \PaymentPlugins\Stripe\Utilities\FeaturesUtil::is_custom_order_tables_enabled() ) {
+		$order_ids = wc_get_orders( [
+			'type'       => 'shop_order',
+			'limit'      => 1,
+			'return'     => 'ids',
+			'meta_query' => [
+				[
+					'key'   => WC_Stripe_Constants::SOURCE_ID,
+					'value' => $source_id
+				]
+			]
+		] );
+		$order_id  = ! empty( $order_ids ) ? $order_ids[0] : null;
+	} else {
+		global $wpdb;
+		$order_id
+			= $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id WHERE posts.post_type = %s AND meta.meta_key = %s AND meta.meta_value = %s LIMIT 1",
+			'shop_order',
+			WC_Stripe_Constants::SOURCE_ID,
+			$source_id ) );
+	}
 
 	return wc_get_order( $order_id );
 }
@@ -928,11 +946,22 @@ function wc_stripe_get_order_from_source_id( $source_id ) {
  * @package Stripe/Functions
  */
 function wc_stripe_get_order_from_transaction( $transaction_id ) {
-	global $wpdb;
-	$order_id
-		= $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id WHERE meta.meta_key = %s AND meta.meta_value = %s LIMIT 1",
-		'_transaction_id',
-		$transaction_id ) );
+	if ( \PaymentPlugins\Stripe\Utilities\FeaturesUtil::is_custom_order_tables_enabled() ) {
+		$order_ids = wc_get_orders( [
+			'type'           => 'shop_order',
+			'limit'          => 1,
+			'return'         => 'ids',
+			'transaction_id' => $transaction_id
+		] );
+		$order_id  = ! empty( $order_ids ) ? $order_ids[0] : null;
+	} else {
+		global $wpdb;
+		$order_id
+			= $wpdb->get_var( $wpdb->prepare( "SELECT ID FROM {$wpdb->posts} AS posts LEFT JOIN {$wpdb->postmeta} AS meta ON posts.ID = meta.post_id WHERE posts.post_type = %s AND meta.meta_key = %s AND meta.meta_value = %s LIMIT 1",
+			'shop_order',
+			'_transaction_id',
+			$transaction_id ) );
+	}
 
 	return wc_get_order( $order_id );
 }
@@ -1138,7 +1167,8 @@ function wc_stripe_get_error_messages() {
 			'test_mode_live_card'              => __( 'Your card was declined. Your request was in test mode, but you used a real credit card. Only test cards can be used in test mode.',
 				'woo-stripe-payment' ),
 			'server_side_confirmation_beta'    => __( 'You do not have permission to use the PaymentElement card form. Please send a request to https://support.stripe.com/ and ask for the "server_side_confirmation_beta" to be added to your account.', 'woo-stripe-payment' ),
-			'phone_required'                   => __( 'Please provide a billing phone number.', 'woo-stripe-payment' )
+			'phone_required'                   => __( 'Please provide a billing phone number.', 'woo-stripe-payment' ),
+			'ach_instant_only'                 => __( 'Your payment could not be processed at this time because your bank account does not support instant verification.', 'woo-stripe-payment' ),
 		)
 	);
 }
@@ -1255,6 +1285,7 @@ function wc_stripe_get_checkout_fields() {
 			$field['required'] = (bool) $field['required'];
 		}
 	} );
+	do_action( 'wc_stripe_after_get_checkout_fields', $fields );
 
 	return $fields;
 }

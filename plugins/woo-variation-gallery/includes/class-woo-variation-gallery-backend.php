@@ -134,6 +134,8 @@ if ( ! class_exists( 'Woo_Variation_Gallery_Backend', false ) ):
 
 			$suffix = defined( 'SCRIPT_DEBUG' ) && SCRIPT_DEBUG ? '' : '.min';
 
+			wp_enqueue_media();
+
 			wp_enqueue_style( 'woo-variation-gallery-admin', esc_url( woo_variation_gallery()->assets_url( "/css/admin{$suffix}.css" ) ), array(), woo_variation_gallery()->assets_version( "/css/admin{$suffix}.css" ) );
 
 			wp_enqueue_script( 'woo-variation-gallery-admin', esc_url( woo_variation_gallery()->assets_url( "/js/admin{$suffix}.js" ) ), array(

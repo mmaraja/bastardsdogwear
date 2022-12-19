@@ -1,14 +1,26 @@
-import {useState, useEffect, useMemo} from '@wordpress/element';
+import {useEffect, useCallback, useRef, useMemo} from '@wordpress/element';
 import {BASE_PAYMENT_REQUEST, BASE_PAYMENT_METHOD} from "../constants";
 import {isEmpty, isFieldRequired} from "../../util";
 import {getTransactionInfo, getShippingOptionParameters} from "../util";
 
 export const usePaymentRequest = ({getData, publishableKey, merchantInfo, billing, shippingData}) => {
-    const {billingData} = billing;
-    const {shippingRates} = shippingData;
     const {processingCountry, totalPriceLabel} = getData();
+    const currentData = useRef({
+        shippingData,
+        billing
+    });
 
-    const paymentRequest = useMemo(() => {
+    useEffect(() => {
+        currentData.current = {
+            shippingData,
+            billing
+        }
+    });
+
+    const buildPaymentRequest = useCallback(() => {
+        const {billing, shippingData} = currentData.current;
+        const {billingData} = billing;
+        const {shippingRates} = shippingData;
         let options = {
             ...{
                 emailRequired: isEmpty(billingData.email),
@@ -38,7 +50,7 @@ export const usePaymentRequest = ({getData, publishableKey, merchantInfo, billin
         options.allowedPaymentMethods[0].parameters.billingAddressRequired = true;
         options.allowedPaymentMethods[0].parameters.billingAddressParameters = {
             format: 'FULL',
-            phoneNumberRequired: isFieldRequired('phone', billingData.country) && isEmpty(billingData.phone)
+            phoneNumberRequired: isFieldRequired(shippingData.needsShipping ? 'shipping-phone' : 'phone', billingData.country) && isEmpty(billingData.phone)
         };
         if (options.shippingAddressRequired) {
             options.callbackIntents = [...options.callbackIntents, ...['SHIPPING_ADDRESS', 'SHIPPING_OPTION']];
@@ -49,11 +61,8 @@ export const usePaymentRequest = ({getData, publishableKey, merchantInfo, billin
             }
         }
         return options;
-    }, [
-        billing.cartTotal,
-        billing.cartTotalItems,
-        billingData,
-        shippingData
-    ]);
-    return paymentRequest;
+    }, []);
+
+
+    return buildPaymentRequest;
 }

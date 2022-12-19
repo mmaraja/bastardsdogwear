@@ -45,7 +45,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	<?php if( ! empty( $show_credit ) ) { ?>
 		<div class="paoc-credit-wrp">
 			<span class="paoc-credit-inr-wrp">
-				<a class="paoc-credit-link" href="<?php echo esc_url( $credit_link ); ?>" target="_blank" title="<?php esc_html_e('Powered by', 'popup-anything-on-click'); ?> EssentialPlugin">
+				<a class="paoc-credit-link" href="<?php echo esc_url( $credit_link ); ?>" target="_blank" title="<?php esc_attr_e('Powered by', 'popup-anything-on-click'); ?> EssentialPlugin">
 					<span class="paoc-credit-copyright-text"><?php esc_html_e('Powered by', 'popup-anything-on-click'); ?></span>
 					<span class="paoc-credit-copyright-logo">
 						<img src="<?php echo POPUPAOC_URL; ?>assets/images/essentialplugin-logo-small.png" alt="EssentialPlugin" />

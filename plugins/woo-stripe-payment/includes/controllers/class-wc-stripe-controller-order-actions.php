@@ -111,7 +111,7 @@ class WC_Stripe_Controller_Order_Actions extends WC_Stripe_Rest_Controller {
 	 * @param int $order_id
 	 */
 	public function validate_order_id( $order_id ) {
-		return null !== get_post( $order_id );
+		return null !== wc_get_order( $order_id );
 	}
 
 	/**

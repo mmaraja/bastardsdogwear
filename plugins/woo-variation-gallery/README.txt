@@ -2,11 +2,11 @@
 Contributors: EmranAhmed, getwooplugins
 Tags: woocommerce variation image gallery, additional variation image gallery, product variation image gallery, product variation image, variation images gallery, additional image, additional variation image, WooCommerce variation product thumbnail gallery
 Requires PHP: 7.0
-Stable tag: trunk
+Stable tag: 1.3.13
 Requires at least: 5.5
-Tested up to: 6.0
+Tested up to: 6.1
 WC requires at least: 5.3
-WC tested up to: 6.7
+WC tested up to: 7.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -88,7 +88,7 @@ Generally, you see the four images in the product thumbnail slider initially. Yo
 
 👉 **Arrow control for Product Image and Thumbnails Slider**
 
-Both product feature images and thumbnail sliders come with arrows to navigate the variation images. It is possible to disable arrows for both sliders.
+Product feature images and thumbnail sliders come with arrows to navigate the variation images. It is possible to disable arrows for both sliders.
 
 [Live Demo & Documentation](https://getwooplugins.com/documentation/woocommerce-variation-gallery/#gallery-slider-thumbnail-arrow-control)
 <hr />
@@ -317,7 +317,7 @@ The video expresses more words than images. With variation images gallery plugin
 </ul>
 </blockquote>
 
-= Featured on Poular Blog Sites =
+= Featured on Popular Blog Sites =
 
 <blockquote>
 
@@ -335,7 +335,7 @@ The video expresses more words than images. With variation images gallery plugin
 
 ### Automatic Install From WordPress Dashboard
 
-1. Login to your the admin panel
+1. Login to your admin panel
 2. Navigate to Plugins -> Add New
 3. Search **Additional Variation Images Gallery for WooCommerce**
 4. Click install and activate respectively.
@@ -378,6 +378,27 @@ Yes, it is.
 4. Adding Images on gallery
 
 == Changelog ==
+
+= 1.3.13 - 13-10-2022 =
+
+* Update: WooCommerce 7.1 Compatibility
+* Update: Gallery width based on thumbnail availability
+
+= 1.3.12 - 03-10-2022 =
+
+* Update: WordPress 6.1 and WooCommerce 7.0 Compatibility
+
+= 1.3.11 - 28-08-2022 =
+
+* Update: Settings Scripts
+
+= 1.3.10 - 23-08-2022 =
+
+* Fix: Settings Issue
+
+= 1.3.9 - 14-08-2022 =
+
+* Update: WooCommerce Compatibility
 
 = 1.3.8 - 31-07-2022 =
 

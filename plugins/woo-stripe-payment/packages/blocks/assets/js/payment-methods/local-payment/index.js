@@ -15,3 +15,4 @@ import './alipay'
 import './afterpay';
 import './boleto';
 import './oxxo';
+import './affirm';

@@ -101,7 +101,7 @@ class WC_Stripe_Customer_Manager {
 		// this customer may have an ID from another plugin. Check that too.
 		if ( empty( $id ) ) {
 			$id = get_user_option( WC_Stripe_Constants::STRIPE_CUSTOMER_ID, $customer->get_id() );
-			if ( ! empty( $id ) ) {
+			if ( ! empty( $id ) && is_string( $id ) ) {
 				// validate that this customer exists in the Stripe gateway
 				$response = WC_Stripe_Gateway::load()->customers->retrieve( $id );
 				if ( ! is_wp_error( $response ) ) {

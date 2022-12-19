@@ -1,72 +1,63 @@
 import {useState} from '@wordpress/element';
 import {registerPaymentMethod} from '@woocommerce/blocks-registry';
-import {getSettings, isTestMode} from '../util';
+import {Elements} from '@stripe/react-stripe-js';
+import {getSettings, initStripe as loadStripe} from '../util';
 import {PaymentMethodLabel, PaymentMethod} from '../../components/checkout';
 import SavedCardComponent from '../saved-card-component';
 import {useCreateLinkToken, useInitializePlaid, useProcessPayment} from './hooks';
 import {useProcessCheckoutError} from "../hooks";
-import {__} from '@wordpress/i18n';
 
 const getData = getSettings('stripe_ach_data');
 
 const ACHPaymentContent = (
     {
-        getData,
         eventRegistration,
         components,
         emitResponse,
         onSubmit,
+        billing,
         ...props
     }) => {
     const {responseTypes} = emitResponse;
-    const {onPaymentProcessing, onCheckoutAfterProcessingWithError} = eventRegistration;
-    const {ValidationInputError, LoadingMask} = components;
-    const [validationError, setValidationError] = useState(false);
-
-    const linkToken = useCreateLinkToken({setValidationError});
+    const {
+        onPaymentProcessing,
+        onCheckoutAfterProcessingWithError,
+        onCheckoutAfterProcessingWithSuccess
+    } = eventRegistration;
 
     useProcessCheckoutError({
         responseTypes,
         subscriber: onCheckoutAfterProcessingWithError
     });
 
-    const openLinkPopup = useInitializePlaid({
-        getData,
-        linkToken,
-        onSubmit
-    });
 
     useProcessPayment({
-        openLinkPopup,
-        onPaymentProcessing,
+        onCheckoutAfterProcessingWithSuccess,
         responseTypes,
-        paymentMethod: getData('name')
+        paymentMethod: getData('name'),
+        billingAddress: billing.billingData
     });
     return (
-        <LoadingMask isLoading={!validationError && !linkToken} showSpinner={true}>
-            {isTestMode && <ACHTestModeCredentials/>}
-            {validationError && <ValidationInputError errorMessage={validationError}/>}
-        </LoadingMask>
+        <div className={'wc-stripe-ach__container'}>
+            <Mandate text={getData('mandateText')}/>
+        </div>
     )
 }
 
-const ACHTestModeCredentials = () => {
+const ACHComponent = (props) => {
     return (
-        <div className='wc-stripe-blocks-ach__creds'>
-            <label className='wc-stripe-blocks-ach__creds-label'>{__('Test Credentials', 'woo-stripe-payment')}</label>
-            <div className='wc-stripe-blocks-ach__username'>
-                <div>
-                    <strong>{__('username', 'woo-stripe-payment')}</strong>: user_good
-                </div>
-                <div>
-                    <strong>{__('password', 'woo-stripe-payment')}</strong>: pass_good
-                </div>
-                <div>
-                    <strong>{__('pin', 'woo-stripe-payment')}</strong>: credential_good
-                </div>
-            </div>
-        </div>
-    );
+        <Elements stripe={loadStripe}>
+            <ACHPaymentContent {...props}/>
+        </Elements>
+    )
+}
+
+const Mandate = ({text}) => {
+    return (
+        <p className={'wc-stripe-ach__mandate'}>
+            {text}
+        </p>
+    )
 }
 
 registerPaymentMethod({
@@ -78,9 +69,9 @@ registerPaymentMethod({
     canMakePayment: ({cartTotals}) => cartTotals.currency_code === 'USD',
     content: <PaymentMethod
         getData={getData}
-        content={ACHPaymentContent}/>,
+        content={ACHComponent}/>,
     savedTokenComponent: <SavedCardComponent getData={getData}/>,
-    edit: <ACHPaymentContent getData={getData}/>,
+    edit: <ACHComponent/>,
     placeOrderButtonLabel: getData('placeOrderButtonLabel'),
     supports: {
         showSavedCards: getData('showSavedCards'),

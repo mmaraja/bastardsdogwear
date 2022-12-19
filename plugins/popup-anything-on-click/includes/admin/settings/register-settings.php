@@ -37,7 +37,7 @@ function popupaoc_settings_tab() {
 function popupaoc_register_settings() {
 
 	// Reset default settings
-	if( ! empty( $_POST['popupaoc_reset_settings'] ) ) {
+	if( ! empty( $_POST['popupaoc_reset_settings'] ) && check_admin_referer( 'popupaoc_reset_setting', 'popupaoc_reset_sett_nonce' ) ) {
 		popupaoc_default_settings();
 	}
 

@@ -8,7 +8,7 @@ export const useBreakpointWidth = (
         node,
         className
     }) => {
-    const [windowWidth, setWindowWith] = useState(window.innerWidth);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
     const getMaxWidth = useCallback((name) => {
         const maxWidth = getFromCache(name);
         return maxWidth ? parseInt(maxWidth) : 0;
@@ -33,7 +33,7 @@ export const useBreakpointWidth = (
         }
     }, [windowWidth, node]);
     useEffect(() => {
-        const handleResize = () => setWindowWith(window.innerWidth);
+        const handleResize = () => setWindowWidth(window.innerWidth);
         window.addEventListener('resize', handleResize);
         return () => window.removeEventListener('resize', handleResize);
     });

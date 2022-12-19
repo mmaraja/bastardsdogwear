@@ -65,6 +65,10 @@
             <key name="title_text"/>
             <key name="description"/>
         </key>
+        <key name="woocommerce_stripe_affirm_settings">
+            <key name="title_text"/>
+            <key name="description"/>
+        </key>
         <key name="woocommerce_stripe_alipay_settings">
             <key name="title_text"/>
             <key name="description"/>

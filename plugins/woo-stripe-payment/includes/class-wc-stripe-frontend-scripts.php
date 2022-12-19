@@ -86,7 +86,7 @@ class WC_Stripe_Frontend_Scripts {
 				'mode'         => wc_stripe_mode(),
 				'stripeParams' => array(
 					'stripeAccount' => $account_id,
-					'apiVersion'    => '2020-08-27',
+					'apiVersion'    => '2022-08-01',
 					'betas'         => array()
 				)
 			),
@@ -180,8 +180,11 @@ class WC_Stripe_Frontend_Scripts {
 	 * @param string $uri
 	 */
 	public function assets_url( $uri = '' ) {
-		// if minification scripts required, convert the uri to it's min format.
-		$uri = ( ( $min = $this->get_min() ) ) ? preg_replace( '/([\w-]+)(\.(?<!min\.)(js|css))$/', '$1' . $min . '$2', $uri ) : $uri;
+		// if minification scripts required, convert the uri to its min format.
+		// don't minify scripts in the build directory
+		if ( strpos( $uri, 'build/' ) !== 0 ) {
+			$uri = ( ( $min = $this->get_min() ) ) ? preg_replace( '/([\w-]+)(\.(?<!min\.)(js|css))$/', '$1' . $min . '$2', $uri ) : $uri;
+		}
 
 		return untrailingslashit( stripe_wc()->assets_url( $uri ) );
 	}

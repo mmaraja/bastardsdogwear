@@ -18,8 +18,8 @@ class WC_Stripe_API_Request_Filter {
 	}
 
 	private function initialize() {
+		add_filter( 'wc_stripe_payment_intent_args', array( $this, 'expand_payment_intent_properties' ) );
 		if ( $this->advanced_settings->is_fee_enabled() ) {
-			add_filter( 'wc_stripe_payment_intent_args', array( $this, 'expand_balance_transaction' ) );
 			add_filter( 'wc_stripe_payment_intent_confirmation_args', array( $this, 'expand_balance_transaction' ) );
 			add_filter( 'wc_stripe_payment_intent_retrieve_args', array( $this, 'expand_balance_transaction' ) );
 			add_filter( 'wc_stripe_payment_intent_capture_args', array( $this, 'expand_balance_transaction' ) );
@@ -35,6 +35,16 @@ class WC_Stripe_API_Request_Filter {
 		$args['expand'][] = 'charges.data.balance_transaction';
 
 		return $args;
+	}
+
+	public function expand_payment_intent_properties( $args ) {
+		$args['expand']   = isset( $args['expand'] ) ? $args['expand'] : array();
+		$args['expand'][] = 'payment_method';
+		if ( $this->advanced_settings->is_fee_enabled() ) {
+			$args = $this->expand_balance_transaction( $args );
+		}
+
+ 		return $args;
 	}
 
 	public function expand_balance_transaction_for_charge( $args ) {

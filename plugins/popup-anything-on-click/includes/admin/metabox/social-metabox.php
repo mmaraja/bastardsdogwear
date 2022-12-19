@@ -47,8 +47,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<input type="text" name="" value="" class="paoc-text large-text paoc-social-link" disabled="disabled" />
 				</td>
 				<td>
-					<span class="paoc-action-btn paoc-action-add-btn paoc-add-social-row" title="<?php esc_html_e('Add', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-plus-alt"></i></span>
-					<span class="paoc-action-btn paoc-action-del-btn paoc-del-social-row" title="<?php esc_html_e('Delete', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-trash"></i></span>
+					<span class="paoc-action-btn paoc-action-add-btn paoc-add-social-row" title="<?php esc_attr_e('Add', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-plus-alt"></i></span>
+					<span class="paoc-action-btn paoc-action-del-btn paoc-del-social-row" title="<?php esc_attr_e('Delete', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-trash"></i></span>
 				</td>
 			</tr>
 		</tbody>

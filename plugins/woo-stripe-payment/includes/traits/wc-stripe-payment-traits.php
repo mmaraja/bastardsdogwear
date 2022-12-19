@@ -226,6 +226,14 @@ trait WC_Stripe_Payment_Intent_Trait {
 		}
 	}
 
+	/**
+	 * @since 3.3.32
+	 * @return false
+	 */
+	public function is_deferred_intent_creation() {
+		return false;
+	}
+
 }
 
 /**

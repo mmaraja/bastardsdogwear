@@ -8,8 +8,8 @@ if ( ! class_exists( 'WC_Payment_Gateway_Stripe' ) ) {
 
 /**
  *
- * @since 3.0.0
- * @author PaymentPlugins
+ * @since   3.0.0
+ * @author  PaymentPlugins
  * @package Stripe/Gateways
  */
 class WC_Payment_Gateway_Stripe_GooglePay extends WC_Payment_Gateway_Stripe {
@@ -106,6 +106,7 @@ class WC_Payment_Gateway_Stripe_GooglePay extends WC_Payment_Gateway_Stripe {
 				'button_style'       => $this->get_option( 'button_style' ),
 				'button_size_mode'   => 'fill',
 				'button_locale'      => $this->get_payment_button_locale(),
+				'button_shape'       => $this->get_option( 'button_shape', 'rect' ),
 				'total_price_label'  => __( 'Total', 'woo-stripe-payment' ),
 				'routes'             => array( 'payment_data' => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->googlepay->rest_uri( 'shipping-data' ) ) ),
 				'messages'           => array( 'invalid_amount' => __( 'Please update you product quantity before using Google Pay.', 'woo-stripe-payment' ) )
@@ -259,8 +260,38 @@ class WC_Payment_Gateway_Stripe_GooglePay extends WC_Payment_Gateway_Stripe {
 	 */
 	public function get_supported_button_locales() {
 		return apply_filters( 'wc_stripe_googlepay_supported_button_locales',
-			array( 'en', 'ar', 'bg', 'ca', 'cs', 'da', 'de', 'el', 'es', 'et', 'fi', 'fr', 'hr',
-			       'id', 'it', 'ja', 'ko', 'ms', 'nl', 'no', 'pl', 'pt', 'ru', 'sk', 'sl', 'sr', 'sv', 'th', 'tr', 'uk', 'zh'
+			array(
+				'en',
+				'ar',
+				'bg',
+				'ca',
+				'cs',
+				'da',
+				'de',
+				'el',
+				'es',
+				'et',
+				'fi',
+				'fr',
+				'hr',
+				'id',
+				'it',
+				'ja',
+				'ko',
+				'ms',
+				'nl',
+				'no',
+				'pl',
+				'pt',
+				'ru',
+				'sk',
+				'sl',
+				'sr',
+				'sv',
+				'th',
+				'tr',
+				'uk',
+				'zh'
 			)
 		);
 	}

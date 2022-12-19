@@ -53,7 +53,7 @@ export const usePaymentRequest = (
                 },
                 requestPayerName: true,
                 requestPayerEmail: isFieldRequired('email', billingData.country),
-                requestPayerPhone: isFieldRequired('phone', billingData.country),
+                requestPayerPhone: isFieldRequired(needsShipping ? 'shipping-phone' : 'phone', billingData.country),
                 requestShipping: needsShipping,
                 displayItems: getDisplayItems(cartTotalItems, currency)
             }
@@ -140,7 +140,7 @@ export const usePaymentRequest = (
         exportedValues.billingData = billingData;
 
         if (paymentResponse.shippingAddress) {
-            exportedValues.shippingAddress = toCartAddress(paymentResponse.shippingAddress);
+            exportedValues.shippingAddress = toCartAddress(paymentResponse.shippingAddress, {payerPhone});
         }
 
         // set payment method

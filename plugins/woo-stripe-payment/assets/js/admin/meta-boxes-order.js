@@ -94,7 +94,7 @@
             url: this.params.routes.capture,
             data: {
                 _wpnonce: this.params._wpnonce,
-                order_id: $('#post_ID').val(),
+                order_id: woocommerce_admin_meta_boxes.post_id,
                 amount: $('[name="capture_amount"]').val()
             },
         }).done(function (response) {
@@ -123,7 +123,7 @@
             url: this.params.routes.void,
             data: {
                 _wpnonce: this.params._wpnonce,
-                order_id: $('#post_ID').val()
+                order_id: woocommerce_admin_meta_boxes.post_id
             },
         }).done(function (response) {
             if (!response.code) {

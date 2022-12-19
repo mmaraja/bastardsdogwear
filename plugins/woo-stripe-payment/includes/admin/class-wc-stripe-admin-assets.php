@@ -16,14 +16,10 @@ class WC_Stripe_Admin_Assets {
 	}
 
 	public function enqueue_scripts() {
-		global $pagenow;
 		$screen    = get_current_screen();
 		$screen_id = $screen ? $screen->id : '';
 		$js_path   = stripe_wc()->assets_url() . 'js/';
 		$css_path  = stripe_wc()->assets_url() . 'css/';
-
-		stripe_wc()->assets()->register_script( 'wc-stripe-admin-feedback', 'assets/build/admin-feedback.js' );
-		stripe_wc()->assets()->register_style( 'wc-stripe-admin-feedback', 'assets/build/admin-feedback-styles.css' );
 
 		wp_register_script( 'wc-stripe-help-widget', $js_path . 'admin/help-widget.js', array( 'jquery' ), stripe_wc()->version(), true );
 
@@ -76,7 +72,7 @@ class WC_Stripe_Admin_Assets {
 				);
 			}
 		}
-		if ( $screen_id === 'shop_order' ) {
+		if ( $screen_id === 'shop_order' || $screen_id === 'woocommerce_page_wc-orders' ) {
 			wp_enqueue_style( 'wc-stripe-admin-style' );
 		}
 		if ( $screen_id === 'product' ) {
@@ -102,32 +98,6 @@ class WC_Stripe_Admin_Assets {
 					wp_enqueue_script( 'wc-stripe-help-widget' );
 				}
 			}
-		}
-		if ( $pagenow === 'plugins.php' ) {
-			wp_enqueue_script( 'wc-stripe-admin-feedback' );
-			wp_enqueue_style( 'wc-stripe-admin-feedback' );
-			add_action( 'admin_print_scripts', function () {
-				stripe_wc()->data_api()->print_data( 'stripeFeedbackParams', [
-					'title'           => esc_html__( 'Feedback', 'woo-stripe-payment' ),
-					'description'     => esc_html__( 'With your feedback we can make the plugin better.', 'woo-stripe-payment' ),
-					'reasonTextLabel' => esc_html__( 'Additional Info', 'woo-stripe-payment' ),
-					'placeholders'    => array(
-						'found_better' => __( 'What is the plugin\'s name and why was it better?', 'woo-stripe-payment' ),
-						'error'        => __( 'What error did you encounter?', 'woo-stripe-payment' )
-					),
-					'buttons'         => [
-						'primary'   => __( 'Submit & Deactivate', 'woo-stripe-payment' ),
-						'secondary' => __( 'Skip & Deactivate', 'woo-stripe-payment' )
-					],
-					'options'         => [
-						'found_better' => esc_html__( 'I found a better Stripe plugin', 'woo-stripe-payment' ),
-						'error'        => esc_html__( 'The plugin caused errors', 'woo-stripe-payment' ),
-						'temporary'    => esc_html__( 'This is a temporary deactivation', 'woo-stripe-payment' ),
-						'other'        => esc_html__( 'Other', 'woo-stripe-payment' )
-					],
-					'route'           => WC_Stripe_Rest_API::get_admin_endpoint( '/wc-stripe/v1/admin/feedback' )
-				] );
-			} );
 		}
 	}
 

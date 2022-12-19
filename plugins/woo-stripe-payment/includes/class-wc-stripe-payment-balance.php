@@ -7,6 +7,7 @@ defined( 'ABSPATH' ) || exit();
  *
  * @property int    $fee
  * @property int    $net
+ * @property int    $refunded
  * @property string $currency
  */
 class WC_Stripe_Payment_Balance {
@@ -22,8 +23,9 @@ class WC_Stripe_Payment_Balance {
 		$this->order = $order;
 		$this->data  = array(
 			'currency' => $order->get_meta( WC_Stripe_Constants::STRIPE_CURRENCY ),
-			'fee'      => $order->get_meta( WC_Stripe_Constants::STRIPE_FEE ),
-			'net'      => $order->get_meta( WC_Stripe_Constants::STRIPE_NET )
+			'fee'      => (float) $order->get_meta( WC_Stripe_Constants::STRIPE_FEE ),
+			'net'      => (float) $order->get_meta( WC_Stripe_Constants::STRIPE_NET ),
+			'refunded' => 0
 		);
 	}
 
@@ -69,6 +71,10 @@ class WC_Stripe_Payment_Balance {
 		return $this->get_prop( 'net', 0 );
 	}
 
+	public function get_refunded() {
+		return $this->get_prop( 'refunded', 0 );
+	}
+
 	/**
 	 * @return mixed
 	 */
@@ -78,6 +84,14 @@ class WC_Stripe_Payment_Balance {
 
 	public function to_array() {
 		return $this->data;
+	}
+
+	/**
+	 * @since 3.3.35
+	 * @return void
+	 */
+	public function save() {
+		$this->update_meta_data( true );
 	}
 
 	public function update_meta_data( $save = false ) {

@@ -10,6 +10,7 @@ use Automattic\WooCommerce\Blocks\Registry\Container as Container;
 use Automattic\WooCommerce\Blocks\Payments\PaymentMethodRegistry;
 use \PaymentPlugins\Blocks\Stripe\Assets\Api as AssetsApi;
 use PaymentPlugins\Blocks\Stripe\Config;
+use PaymentPlugins\Blocks\Stripe\Payments\Gateways\AffirmPayment;
 use PaymentPlugins\Stripe\Controllers\PaymentIntent;
 use PaymentPlugins\Stripe\Installments\InstallmentController;
 use PaymentPlugins\Stripe\Link\LinkIntegration;
@@ -122,10 +123,13 @@ class PaymentsApi {
 			return new Gateways\OXXOPayment( $container->get( AssetsApi::class ) );
 		} );
 		$this->container->register( Gateways\LinkPayment::class, function ( $container ) {
-			$instance = new Gateways\LinkPayment( LinkIntegration::get_instance(), $container->get( AssetsApi::class ) );
+			$instance = new Gateways\LinkPayment( LinkIntegration::instance(), $container->get( AssetsApi::class ) );
 			$instance->set_payment_intent_controller( PaymentIntent::instance() );
 
 			return $instance;
+		} );
+		$this->container->register( Gateways\AffirmPayment::class, function ( Container $container ) {
+			return new AffirmPayment( $container->get( AssetsApi::class ) );
 		} );
 	}
 
@@ -135,7 +139,7 @@ class PaymentsApi {
 	 * @param PaymentMethodRegistry $registry
 	 */
 	public function register_payment_methods( PaymentMethodRegistry $registry ) {
-		$payment_gateways              = WC()->payment_gateways()->payment_gateways();
+		//$payment_gateways              = WC()->payment_gateways()->payment_gateways();
 		$this->payment_method_registry = $registry;
 		$payment_methods               = array(
 			Gateways\CreditCardPayment::class,
@@ -160,33 +164,23 @@ class PaymentsApi {
 			Gateways\AfterpayPayment::class,
 			Gateways\BoletoPayment::class,
 			Gateways\OXXOPayment::class,
+			Gateways\LinkPayment::class,
+			Gateways\AffirmPayment::class
 		);
+
 		foreach ( $payment_methods as $clazz ) {
-			$this->maybe_add_payment_method_to_registry( $clazz, $registry, $payment_gateways );
+			$this->add_payment_method_to_registry( $clazz, $registry );
 		}
-		$this->payment_method_registry->register( $this->container->get( Gateways\LinkPayment::class ) );
-		$this->payment_methods[] = $this->container->get( Gateways\LinkPayment::class );
 	}
 
 	/**
 	 * @param                       $clazz
 	 * @param PaymentMethodRegistry $registry
-	 * @param array                 $payment_gateways
 	 */
-	private function maybe_add_payment_method_to_registry( $clazz, $registry, $payment_gateways ) {
-		if ( class_exists( $clazz ) ) {
-			try {
-				$reflection_class = new \ReflectionClass( $clazz );
-				$name             = $reflection_class->getDefaultProperties()['name'];
-				if ( isset( $payment_gateways[ $name ] ) ) {
-					$instance = $this->container->get( $clazz );
-					$registry->register( $instance );
-					$this->payment_methods[] = $instance;
-				}
-			} catch ( \ReflectionException $e ) {
-				// fail silently
-			}
-		}
+	private function add_payment_method_to_registry( $clazz, $registry ) {
+		$instance = $this->container->get( $clazz );
+		$registry->register( $instance );
+		$this->payment_methods[] = $instance;
 	}
 
 	/**
@@ -227,9 +221,9 @@ class PaymentsApi {
 					'create/payment_intent' => \WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'payment-intent' ) ),
 					'sync/intent'           => \WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->payment_intent->rest_uri( 'sync-payment-intent' ) ),
 					'update/source'         => \WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->source->rest_uri( 'update' ) ),
-					'create/linkToken'      => \WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->plaid->rest_uri( 'link-token' ) ),
 					'payment/data'          => \WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->googlepay->rest_uri( 'shipping-data' ) )
-				)
+				),
+				'assetsUrl'      => stripe_wc()->assets_url()
 			) ) );
 		}
 		if ( ! $this->assets_registry->exists( 'stripeErrorMessages' ) ) {

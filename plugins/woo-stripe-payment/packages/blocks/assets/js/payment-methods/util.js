@@ -188,7 +188,7 @@ export const getLocaleFields = (country) => {
             locale[key] = {...locale[key], ...value}
             return locale;
         }, localeFields);
-        ['phone', 'email'].forEach(key => {
+        ['phone', 'shipping-phone', 'email'].forEach(key => {
             let node = document.getElementById(key);
             if (node) {
                 localeFields[key] = {required: node.required};
@@ -251,19 +251,25 @@ export const handleCardAction = async (
         responseTypes,
         name,
         method = 'handleCardAction',
-        savePaymentMethod = false
+        savePaymentMethod = false,
+        data = {}
     }) => {
     try {
         let match = redirectUrl.match(/#response=(.+)/)
         if (match) {
-            let {client_secret, order_id, order_key} = JSON.parse(window.atob(decodeURIComponent(match[1])));
+            let {type, client_secret, order_id, order_key} = JSON.parse(window.atob(decodeURIComponent(match[1])));
             const stripe = await initStripe;
-            let result = await stripe[method](client_secret);
+            let result;
+            if (type === 'intent') {
+                result = await stripe[method](client_secret);
+            } else {
+                result = await stripe.confirmCardSetup(client_secret);
+            }
             if (result.error) {
                 return ensureErrorResponse(responseTypes, result.error);
             }
             // success so finish processing order then redirect to thank you page
-            let data = {order_id, order_key, [`${name}_save_source_key`]: savePaymentMethod};
+            data = {...data, order_id, order_key, [`${name}_save_source_key`]: savePaymentMethod};
             let response = await apiFetch({
                 url: getRoute('process/payment'),
                 method: 'POST',

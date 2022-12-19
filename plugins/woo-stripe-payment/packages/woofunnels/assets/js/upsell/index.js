@@ -5,18 +5,21 @@ let stripe;
 
 let data = {};
 
+const getStripeParams = () => {
+    if (getData('account')) {
+        return {stripeAccount: getData('account')};
+    }
+    return {};
+}
+
 const initialize = () => {
     $(document).on('wfocu_external', onHandleSubmit);
     window.addEventListener('hashchange', handleHashChange);
     wfocuCommons.addFilter('wfocu_front_charge_data', addChargeData);
-    loadStripe(getData('publishableKey', (() => {
-        if (getData('account')) {
-            return {stripeAccount: getData('account')};
-        }
-        return {};
-    })())).then((client) => {
+    loadStripe(getData('publishableKey'), getStripeParams()).then((client) => {
         stripe = client;
     }).catch(error => {
+        console.log(error);
     });
 }
 

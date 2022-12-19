@@ -457,8 +457,8 @@ function popupaoc_preview_popup( $args = array() ) {
 ?>
 	<div class="paoc-popup-modal paoc-cnt-wrap">
 		<div class="paoc-popup-modal-act-btn-wrp">
-			<span class="paoc-popup-modal-act-btn paoc-popup-modal-info" title="<?php echo esc_html__("Note: Preview will be displayed according to responsive layout mode. Live preview may display differently when added to your page based on inheritance from some styles.", 'popup-anything-on-click') ."\n\n". esc_attr( $args['info'] ); ?>"><i class="dashicons dashicons-info"></i></span>
-			<span class="paoc-popup-modal-act-btn paoc-popup-modal-close paoc-popup-close" title="<?php esc_html_e('Close', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-no-alt"></i></span>
+			<span class="paoc-popup-modal-act-btn paoc-popup-modal-info" title="<?php echo esc_attr__("Note: Preview will be displayed according to responsive layout mode. Live preview may display differently when added to your page based on inheritance from some styles.", 'popup-anything-on-click') ."\n\n". esc_attr( $args['info'] ); ?>"><i class="dashicons dashicons-info"></i></span>
+			<span class="paoc-popup-modal-act-btn paoc-popup-modal-close paoc-popup-close" title="<?php esc_attr_e('Close', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-no-alt"></i></span>
 		</div>
 		<div class="paoc-popup-modal-title-wrp">
 			<span class="paoc-popup-modal-title"><?php echo wp_kses_post( $args['title'] ); ?></span>
@@ -484,10 +484,11 @@ function popupaoc_preview_data( $post_data ) {
 
 	unset( $post_data[ $prefix.'advance'] );
 
-	$post_data[ $prefix.'advance' ]['show_credit']	= $show_credit;
-	$post_data[ $prefix.'popup_appear' ]			= 'page_load';
-	$post_data[ $prefix.'behaviour' ]['open_delay'] = '';
-	$post_data[ $prefix.'behaviour']['disappear']	= '';
+	$post_data[ $prefix.'advance' ]['show_credit']		= $show_credit;
+	$post_data[ $prefix.'advance' ]['cookie_expire']	= '';
+	$post_data[ $prefix.'popup_appear' ]				= 'page_load';
+	$post_data[ $prefix.'behaviour' ]['open_delay'] 	= '';
+	$post_data[ $prefix.'behaviour']['disappear']		= '';
 
 	return $post_data;
 }

@@ -32,10 +32,6 @@ class WC_Stripe_Gateway_Conversion {
 				$payment_method = 'stripe_cc';
 				break;
 		}
-		// commented out in 3.2.10. Don't update the post_meta in case merchant switches back to other plugin.
-		/*if ( $payment_method !== $old_payment_method && ! empty( $payment_method ) ) {
-			update_post_meta( $order->get_id(), '_payment_method', $payment_method );
-		}*/
 
 		return $payment_method;
 	}

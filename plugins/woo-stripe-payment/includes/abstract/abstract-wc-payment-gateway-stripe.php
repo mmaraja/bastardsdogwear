@@ -433,6 +433,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 				'checkout'                    => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout' ) ),
 				'checkout_payment'            => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'checkout/payment' ) ),
 				'order_pay'                   => WC_Stripe_Rest_API::get_endpoint( stripe_wc()->rest_api->checkout->rest_uri( 'order-pay' ) ),
+				'base_path'                   => WC_Stripe_Rest_API::get_endpoint( '%s' )
 			),
 			'rest_nonce'            => wp_create_nonce( 'wp_rest' ),
 			'banner_enabled'        => $this->banner_checkout_enabled(),
@@ -1418,7 +1419,8 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 					$array_keys = array_keys( $keys );
 					if ( ! empty( $array_keys ) ) {
 						$value = $meta_data[ current( $array_keys ) ]->value;
-						update_post_meta( $order->get_id(), $meta_key, $value );
+						$order->update_meta_data( $meta_key, $value );
+						$order->save();
 					}
 				}
 			}
@@ -1500,11 +1502,13 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 			}
 		} elseif ( 'product' === $page ) {
 			global $product;
+			$price                  = wc_get_price_to_display( $product );
 			$data['needs_shipping'] = $product->needs_shipping();
 			$data['product']        = array(
-				'id'        => $product->get_id(),
-				'price'     => wc_get_price_to_display( $product ),
-				'variation' => false
+				'id'          => $product->get_id(),
+				'price'       => $price,
+				'price_cents' => wc_stripe_add_number_precision( $price, get_woocommerce_currency() ),
+				'variation'   => false
 			);
 		}
 		/**
@@ -1836,6 +1840,7 @@ abstract class WC_Payment_Gateway_Stripe extends WC_Payment_Gateway {
 	public function update_failing_payment_method( $subscription, $order ) {
 		if ( ( $token = $this->get_token( $order->get_meta( WC_Stripe_Constants::PAYMENT_METHOD_TOKEN ), $order->get_customer_id() ) ) ) {
 			$subscription->update_meta_data( WC_Stripe_Constants::PAYMENT_METHOD_TOKEN, $token->get_token() );
+			$subscription->update_meta_data( WC_Stripe_Constants::CUSTOMER_ID, $token->get_customer_id() );
 			$subscription->set_payment_method_title( $token->get_payment_method_title( $this->get_option( 'method_format' ) ) );
 			$subscription->save();
 		}

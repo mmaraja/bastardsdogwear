@@ -95,7 +95,7 @@ const LocalPaymentSourceMethod = (
     return null;
 }
 
-const LocalPaymentIntentMethod = (
+export const LocalPaymentIntentMethod = (
     {
         getData,
         billing,
@@ -104,7 +104,8 @@ const LocalPaymentIntentMethod = (
         activePaymentMethod,
         confirmationMethod = null,
         component = null,
-        callback = null
+        callback = null,
+        ...props
     }) => {
     const elements = useElements();
     const {billingData} = billing;
@@ -152,7 +153,9 @@ const LocalPaymentIntentMethod = (
                 options={getData('paymentElementOptions')}
                 onChange={onChange}
                 element={component}
-                callback={callback}/>
+                callback={callback}
+                billing={billing}
+                {...props}/>
         )
     }
     return null;
@@ -160,8 +163,9 @@ const LocalPaymentIntentMethod = (
 
 const LocalPaymentElementContainer = ({name, onChange, element, options, ...props}) => {
     const Tag = element;
+    const displayName = Tag?.displayName || '';
     return (
-        <div className={`wc-stripe-local-payment-container ${name} ${Tag.displayName}`}>
+        <div className={`wc-stripe-local-payment-container ${name} ${displayName}`}>
             <Tag options={options} onChange={onChange} {...props}/>
         </div>
     )

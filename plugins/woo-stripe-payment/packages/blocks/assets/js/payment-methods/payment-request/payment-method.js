@@ -42,7 +42,7 @@ const PaymentRequestButton = (
     const [error] = useStripeError();
     const canPay = (result) => result != null && !result.applePay;
     const exportedValues = useExportedValues();
-    useExpressBreakpointWidth({payment_method: getData('name'), width: 300});
+    useExpressBreakpointWidth({payment_method: getData('name'), width: 375});
     const {setPaymentMethod} = useProcessPaymentIntent({
         getData,
         billing,

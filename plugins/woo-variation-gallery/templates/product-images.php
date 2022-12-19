@@ -130,6 +130,7 @@ $wrapper_classes = apply_filters( 'woo_variation_gallery_product_wrapper_classes
 	'woo-variation-product-gallery',
 	'woo-variation-product-gallery-thumbnail-columns-' . absint( $columns ),
 	$has_gallery_thumbnail ? 'woo-variation-gallery-has-product-thumbnail' : '',
+	$has_gallery_thumbnail ? '' : 'woo-variation-gallery-no-product-thumbnail',
 	( 'yes' === woo_variation_gallery()->get_option( 'thumbnail_slide', 'yes', 'woo_variation_gallery_thumbnail_slide' ) ) ? 'woo-variation-gallery-enabled-thumbnail-slider' : ''
 ) );
 

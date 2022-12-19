@@ -35,7 +35,7 @@ class PaymentsApi {
 		// validate that next step is an offer
 		$checkout_id = wcf()->utils->get_checkout_id_from_post_data();
 		$flow_id     = wcf()->utils->get_flow_id_from_post_data();
-		if ( $checkout_id && $flow_id ) {
+		if ( Main::cartflows_pro_enabled() && $checkout_id && $flow_id ) {
 			$wcf_step_obj      = wcf_pro_get_step( $checkout_id );
 			$next_step_id      = $wcf_step_obj->get_next_step_id();
 			$wcf_next_step_obj = wcf_pro_get_step( $next_step_id );
@@ -81,4 +81,5 @@ class PaymentsApi {
 			'stripe_payment_request'
 		) );
 	}
+
 }

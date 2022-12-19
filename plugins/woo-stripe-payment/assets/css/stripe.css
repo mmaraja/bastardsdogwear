@@ -60,7 +60,7 @@ ul.payment_methods li[class*=payment_method_stripe_] label > img:first-of-type {
     margin-bottom: 1em;
 }
 
-.wc-stripe_cc-container .StripeElement {
+.wc-stripe_cc-container .StripeElement:not(.payment-type) {
     box-sizing: border-box;
     height: 40px;
     padding: 10px 12px;
@@ -397,11 +397,37 @@ li.payment_method_stripe_payment_request label:first-of-type img[src*=googlepay_
     max-height: 30px;
 }
 
-li.payment_method_stripe_ach label:first-of-type img {
+li.payment_method_stripe_ach label:first-of-type img,
+li.payment_method_stripe_plaid label:first-of-type img {
     width: 32px;
     height: 32px;
     min-width: 32px;
     min-height: 32px;
+}
+
+li.payment_method_stripe_affirm label:first-of-type img,
+li.payment_method_stripe_affirm label:first-of-type img {
+    width: 65px;
+    height: 26px;
+}
+
+li.payment_method_stripe_affirm label[for="payment_method_stripe_affirm"] {
+    display: flex;
+    align-items: center;
+}
+
+#wc-stripe-affirm-message-container {
+    flex: 1 1 auto;
+    margin-left: 30px;
+    min-width: 200px;
+}
+
+#wc-stripe-affirm-message-container .StripeElement {
+    width: 100%;
+}
+
+#wc-stripe-affirm-message-container .__PrivateStripeElement {
+    width: 100%;
 }
 
 .gpay-button-container .gpay-button:hover,
@@ -942,6 +968,7 @@ li.payment_method_stripe_oxxo.wc-stripe-no-desc .payment_box.wc-stripe-no-method
 
 label[for=payment_method_stripe_afterpay] > #wc-stripe-afterpay-msg {
     display: inline-block;
+    float: right;
 }
 
 .payment_method_stripe_afterpay #wc-stripe-afterpay-msg .__PrivateStripeElement p,
@@ -976,6 +1003,30 @@ label[for=payment_method_stripe_afterpay] > #wc-stripe-afterpay-msg {
     margin-top: 10px;
 }
 
+.wc-stripe-offsite-notice-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10px;
+    width: 100%;
+}
+
+.wc-stripe-offsite-notice-container .wc-stripe-offsite-notice {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    max-width: 400px;
+}
+
+.wc-stripe-offsite-notice-container .wc-stripe-offsite-notice img {
+    max-width: 105px;
+}
+
+.wc-stripe-offsite-notice-container .wc-stripe-offsite-notice p {
+    font-size: 14px;
+}
+
 #wc-stripe-afterpay-cart-container #wc-stripe-afterpay-cart-msg {
     text-align: left;
 }
@@ -990,7 +1041,8 @@ label[for=payment_method_stripe_afterpay] > #wc-stripe-afterpay-msg {
     border: none;
 }
 
-#wc-stripe-afterpay-cart-container td::before {
+#wc-stripe-afterpay-cart-container td::before,
+#wc-stripe-affirm-cart-container td::before {
     content: '';
 }
 
@@ -1117,4 +1169,16 @@ div.payment_method_stripe_cc.custom-form__bootstrap > .woocommerce-NoticeGroup {
     100% {
         transform: rotate(360deg);
     }
+}
+
+#wc-stripe-ach-container .wc-stripe-ach__mandate {
+    margin: 10px 0;
+}
+
+.gpay-button-fill-new-style.gpay-button-container > .gpay-button.pay,
+.gpay-button-fill-new-style .gpay-button.order,
+.gpay-button-fill-new-style .gpay-button.checkout,
+.gpay-button-fill-new-style .gpay-button.pay,
+.gpay-button-fill-new-style .gpay-button.subscribe{
+    padding: 9px 24px;
 }

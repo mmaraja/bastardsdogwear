@@ -1,11 +1,11 @@
 <?php
-	defined( 'ABSPATH' ) or die( 'Keep Quit' );
+    defined( 'ABSPATH' ) or die( 'Keep Quit' );
     /**
      * @var $slug
      * @var $version
      * @var $deactivate_reasons
      */
-    $template_id = sprintf( 'tmpl-gwp-deactive-feedback-dialog-%s', esc_attr( $slug ));
+    $template_id = sprintf( 'tmpl-gwp-deactive-feedback-dialog-%s', esc_attr( $slug ) );
 ?>
 
 <script type="text/template" id="<?php echo esc_attr( $template_id ) ?>">
@@ -28,18 +28,18 @@
                             <input type="hidden" name="plugin" value="<?php echo esc_attr( $slug ) ?>"/>
                             <input type="hidden" name="version" value="<?php echo esc_attr( $version ) ?>"/>
                             <div class="feedback-dialog-form-body">
-								<?php foreach ( $deactivate_reasons as $reason_key => $reason ) : ?>
+                                <?php foreach ( $deactivate_reasons as $reason_key => $reason ) : ?>
                                     <div class="feedback-dialog-input-wrapper">
                                         <input id="feedback-<?php echo esc_attr( $reason_key ); ?><?php echo esc_attr( $slug ) ?>" class="feedback-dialog-input" type="radio" name="reason_type" value="<?php echo esc_attr( $reason_key ); ?>"/>
-                                        <label for="feedback-<?php echo esc_attr( $reason_key ); ?><?php echo esc_attr( $slug ) ?>" class="feedback-dialog-label"><?php echo $reason[ 'title' ]; ?></label>
-										<?php if ( ! empty( $reason[ 'input_placeholder' ] ) ) : ?>
-                                            <input value="<?php echo( isset( $reason[ 'input_value' ] ) ? $reason[ 'input_value' ] : '' ) ?>" class="feedback-text" style="display: none" disabled type="text" name="reason_text" placeholder="<?php echo esc_attr( $reason[ 'input_placeholder' ] ); ?>"/>
-										<?php endif; ?>
-										<?php if ( ! empty( $reason[ 'alert' ] ) ) : ?>
-                                            <div class="feedback-text feedback-alert"><?php echo $reason[ 'alert' ]; ?></div>
-										<?php endif; ?>
+                                        <label for="feedback-<?php echo esc_attr( $reason_key ); ?><?php echo esc_attr( $slug ) ?>" class="feedback-dialog-label"><?php echo wp_kses_post( $reason[ 'title' ] ); ?></label>
+                                        <?php if ( ! empty( $reason[ 'input_placeholder' ] ) ) : ?>
+                                            <input value="<?php echo( isset( $reason[ 'input_value' ] ) ? esc_attr( $reason[ 'input_value' ] ) : '' ) ?>" class="feedback-text" style="display: none" disabled type="text" name="reason_text" placeholder="<?php echo esc_attr( $reason[ 'input_placeholder' ] ); ?>"/>
+                                        <?php endif; ?>
+                                        <?php if ( ! empty( $reason[ 'alert' ] ) ) : ?>
+                                            <div class="feedback-text feedback-alert"><?php echo wp_kses_post( $reason[ 'alert' ] ); ?></div>
+                                        <?php endif; ?>
                                     </div>
-								<?php endforeach; ?>
+                                <?php endforeach; ?>
                             </div>
                         </form>
                     </div>

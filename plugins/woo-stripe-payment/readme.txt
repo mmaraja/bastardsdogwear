@@ -2,15 +2,15 @@
 Contributors: mr.clayton
 Tags: stripe, ach, klarna, credit card, apple pay, google pay, ideal, sepa, sofort
 Requires at least: 3.0.1
-Tested up to: 6.0
+Tested up to: 6.1
 Requires PHP: 5.6
-Stable tag: 3.3.24
+Stable tag: 3.3.35
 Copyright: Payment Plugins
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
-Accept Credit Cards, Google Pay, ApplePay, Afterpay, ACH, Klarna, iDEAL and more all in one plugin for free!
+Accept Credit Cards, Google Pay, ApplePay, Afterpay, Affirm, ACH, Klarna, iDEAL and more all in one plugin for free!
 
 = Official Stripe Partner = 
 Payment Plugins is an official partner of Stripe. 
@@ -28,7 +28,7 @@ To see Apple Pay, visit the site using an iOS device. Google Pay will display fo
 - Credit Cards
 - Google Pay
 - Apple Pay
-- Afterpay
+- Afterpay, Affirm, Klarna
 - ACH Payments
 - 3DS 2.0
 - Local Payment Methods
@@ -48,11 +48,11 @@ Yes, the plugin supports all functionality related to WooCommerce Subscriptions.
 https://docs.paymentplugins.com/wc-stripe/config/#/
 
 = Why isn't the Payment Request button showing on my local machine? = 
-If you're site is not loading over https, then Stripe won't render the Payment Request button. Make sure you are using https.
+If your site is not loading over https, then Stripe won't render the Payment Request button. Make sure you are using https.
 
 == Screenshots ==
 1. Let customers pay directly from product pages
-2. Apple pay on the cart page
+2. Apple Pay on the cart page
 3. Custom credit card forms
 4. Klarna on checkout page
 5. Local payment methods like iDEAL and P24
@@ -62,6 +62,57 @@ If you're site is not loading over https, then Stripe won't render the Payment R
 9. Stripe Link for high conversion
 
 == Changelog ==
+= 3.3.35 - 12/17/22 =
+* Fixed - Ensure Affirm and Afterpay messaging updates on product page when variation is selected
+* Added - GPay option for rounded button corners. Google recently changed their API so the default button has rounded corners. We prefer
+to give merchants the option on what button style they use.
+* Added - Stripe fee for FunnelKit Upsell order
+= 3.3.34 - 12/02/22 =
+* Added - Support for Affirm payments. Affirm messaging can be added on product pages, cart page, and checkout page
+* Added - Afterpay title to the checkout page. There was feedback that this title was needed in addition to the Afterpay messaging
+* Updated - afterpay.php template file was modified to use the offsite-notice.php template
+* Fixed - Installment plans not loading when Payment Form active
+= 3.3.33 - 11/23/22 =
+* Fixed - Afterpay payment method title not showing in order received emails and on order details page
+* Updated - Removed "beta" from Payment form label in settings
+* Added - Link support for FunnelKit/WooFunnels Upsells
+= 3.3.32  - 11/11/22 =
+* Updated - Improved Payment form (beta) performance
+* Updated - Improved Link integration
+* Updated - WC tested up to 7.1
+= 3.3.31 - 10/19/22 =
+* Fixed - Potential PHP error caused by PHP 8.1+ in Blocks class GooglePayPayment
+* Fixed - Incorrect text domain for installment text
+= 3.3.30 - 10/18/22 =
+* Updated - WC tested up to 7.0
+* Updated - Improved integration with FunnelKit (WooFunnels One Click Upsell)
+* Added - Support for WooCommerce custom order tables (HPOS)
+* Added - Filter "wc_stripe_show_admin_metaboxes" and "wc_stripe_show_pay_order_section" if custom logic is needed to show the charge view or Pay for Order view
+* Fixed - Brazil installments minimum amount should be 1 BRL.
+= 3.3.28 - 9/26/22 =
+* Fixed - ACH javascript files not included in version 3.3.27 build
+* Updated - Removed admin feedback code
+= 3.3.27  - 9/25/22 =
+* Fixed - Cast float to payment balance fee and net values
+* Fixed - If refund is created in stripe.com dashboard, always take the latest refund from the list of refunds.
+* Updated - WC tested up to 6.9
+* Updated - WeChat Pay logo
+* Updated - Alipay logo
+* Updated - GPay WooCommerce Blocks integration performance improvements
+* Added - Installments for Brazil Stripe accounts
+* Added - Stripe Link support for EU countries
+* Added - Stripe ACH Connections integration which replaces Plaid. Plaid can still be used but has been deprecated in favor of the new ACH integration.
+= 3.3.26 - 8/24/22 =
+* Updated - WC Tested up to 6.8
+* Updated - Afterpay can now be used to purchase digital goods
+* Added  - Afterpay support for France and Spain.
+* Fixed - WC_Stripe_Utils::get_order_from_payment_intent()
+* Fixed - Boleto WooCommerce Blocks checkout error
+* Removed - Feedback modal on plugin deactivation
+= 3.3.25 - 8/3/22 =
+* Added - Advanced Settings option so merchants can control if the processing or completed status triggers the capture for an authorized order
+* Fixed - Customer pay for order page error caused by Stripe payment form (beta)
+* Added - Improved Subscription retry logic
 = 3.3.24 - 7/5/22 =
 * Fixed - Remove payment intent from session when intent's status is processing
 * Updated - If payment intent's status transitions to requires_payment_method, update order status to pending

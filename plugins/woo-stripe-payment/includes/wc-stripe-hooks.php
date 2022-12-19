@@ -8,6 +8,7 @@ defined( 'ABSPATH' ) || exit();
 add_action( 'woocommerce_payment_token_deleted', 'wc_stripe_woocommerce_payment_token_deleted', 10, 2 );
 add_action( 'woocommerce_order_status_cancelled', 'wc_stripe_order_cancelled', 10, 2 );
 add_action( 'woocommerce_order_status_completed', 'wc_stripe_order_status_completed', 10, 2 );
+add_action( 'woocommerce_order_status_processing', 'wc_stripe_order_status_completed', 10, 2 );
 add_action( 'wc_stripe_remove_order_locks', 'wc_stripe_remove_order_locks' );
 add_action( 'wc_stripe_retry_source_chargeable', 'wc_stripe_retry_source_chargeable' );
 

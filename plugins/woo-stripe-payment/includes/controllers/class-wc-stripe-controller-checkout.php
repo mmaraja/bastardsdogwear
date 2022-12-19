@@ -137,7 +137,9 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 			 * @var WC_Payment_Gateway_Stripe $payment_method
 			 */
 			$payment_method = WC()->payment_gateways()->payment_gateways()[ $order->get_payment_method() ];
-
+			if ( empty( $_POST ) ) {
+				$_POST = array_merge( $_POST, $request->get_json_params() );
+			}
 			$result = $payment_method->process_payment( $order_id );
 
 			if ( isset( $result['result'] ) && 'success' === $result['result'] ) {
@@ -161,6 +163,12 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 	 */
 	public function process_order_pay( $request ) {
 		global $wp;
+
+		/**
+		 * Only set when the order pay is being processed via Ajax.
+		 */
+		wc_maybe_define_constant( WC_Stripe_Constants::PROCESSING_ORDER_PAY, true );
+
 		/**
 		 * @var \WC_Payment_Gateway_Stripe $payment_method
 		 */
@@ -194,33 +202,6 @@ class WC_Stripe_Controller_Checkout extends WC_Stripe_Rest_Controller {
 			wc_add_notice( $e->getMessage(), 'error' );
 
 			return new WP_Error( 'order-pay-error', $this->get_error_messages(), array( 'status' => 200 ) );
-		}
-	}
-
-	/**
-	 *
-	 * @param WP_REST_Request $request
-	 *
-	 * @since 3.1.8
-	 * @return WP_REST_Response
-	 */
-	public function process_local_order_pay( $request ) {
-		global $wp;
-		$this->frontend_includes();
-
-		$wp->set_query_var( 'order-pay', $request->get_param( 'order_id' ) );
-
-		wc_maybe_define_constant( WC_Stripe_Constants::WOOCOMMERCE_STRIPE_ORDER_PAY, true );
-
-		WC_Form_Handler::pay_action();
-
-		if ( wc_notice_count( 'error' ) > 0 ) {
-			return rest_ensure_response(
-				array(
-					'success' => false,
-					'message' => $this->get_messages( 'error' ),
-				)
-			);
 		}
 	}
 

@@ -328,7 +328,7 @@ abstract class WC_Payment_Gateway_Stripe_Local_Payment extends WC_Payment_Gatewa
 			} elseif ( 'specific' === $type ) {
 				$_available = in_array( $billing_country, $this->get_option( 'specific_countries', array() ) );
 			} else {
-				$_available = $this->limited_countries ? in_array( $billing_country, $this->limited_countries ) : true;
+				$_available = ! $this->limited_countries || in_array( $billing_country, $this->limited_countries );
 			}
 		}
 		if ( $_available && method_exists( $this, 'validate_local_payment_available' ) ) {

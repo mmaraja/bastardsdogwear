@@ -42,6 +42,26 @@ class WC_Stripe_Utils {
 	}
 
 	/**
+	 * @param \Stripe\BalanceTransaction $balance_transaction
+	 * @param \WC_Order                  $order
+	 *
+	 * @return void
+	 */
+	public static function create_payment_balance_from_balance_transaction( $balance_transaction, $order ) {
+		$display_order_currency    = stripe_wc()->advanced_settings->is_display_order_currency();
+		$exchange_rate             = $balance_transaction->exchange_rate === null ? 1 : $balance_transaction->exchange_rate;
+		$net                       = $display_order_currency ? wc_format_decimal( $balance_transaction->net / $exchange_rate, 4 ) : $balance_transaction->net;
+		$fee                       = $display_order_currency ? wc_format_decimal( $balance_transaction->fee / $exchange_rate, 4 ) : $balance_transaction->fee;
+		$currency                  = $display_order_currency ? $order->get_currency() : strtoupper( $balance_transaction->currency );
+		$payment_balance           = new WC_Stripe_Payment_Balance( $order );
+		$payment_balance->currency = $currency;
+		$payment_balance->fee      = wc_stripe_remove_number_precision( $fee, $currency, true, 4 );
+		$payment_balance->net      = wc_stripe_remove_number_precision( $net, $currency, true, 4 );
+
+		return $payment_balance;
+	}
+
+	/**
 	 * @param \Stripe\Charge $charge
 	 * @param \WC_Order      $order
 	 * @param bool           $save
@@ -61,6 +81,7 @@ class WC_Stripe_Utils {
 			$payment_balance->currency = $currency;
 			$payment_balance->fee      = wc_stripe_remove_number_precision( $fee, $currency, true, 4 );
 			$payment_balance->net      = wc_stripe_remove_number_precision( $net, $currency, true, 4 );
+			$payment_balance->refunded = wc_stripe_remove_number_precision( $amount_refunded, $currency, true, 4 );
 			if ( $charge->refunds->count() > 0 ) {
 				foreach ( $charge->refunds->data as $refund ) {
 					/**
@@ -72,6 +93,8 @@ class WC_Stripe_Utils {
 				}
 			}
 			$payment_balance->update_meta_data( $save );
+
+			return $payment_balance;
 		}
 	}
 
@@ -101,7 +124,7 @@ class WC_Stripe_Utils {
 	 *
 	 * @return \WC_Stripe_Payment_Balance|null
 	 */
-	private static function get_payment_balance( $order ) {
+	public static function get_payment_balance( $order ) {
 		return new WC_Stripe_Payment_Balance( $order );
 	}
 
@@ -233,6 +256,56 @@ class WC_Stripe_Utils {
 		}
 
 		return true;
+	}
+
+	public static function get_order_from_payment_intent( $payment_intent ) {
+		global $wpdb;
+
+		if ( isset( $payment_intent->metadata->order_id ) ) {
+			$order = wc_get_order( wc_stripe_filter_order_id( $payment_intent->metadata->order_id, $payment_intent ) );
+			if ( $order && $order->get_meta( WC_Stripe_Constants::PAYMENT_INTENT_ID ) === $payment_intent->id ) {
+				return $order;
+			}
+		}
+
+		if ( \PaymentPlugins\Stripe\Utilities\FeaturesUtil::is_custom_order_tables_enabled() ) {
+			$order_ids = wc_get_orders( [
+				'type'       => 'shop_order',
+				'limit'      => 1,
+				'return'     => 'ids',
+				'meta_query' => [
+					[
+						'key'   => WC_Stripe_Constants::PAYMENT_INTENT_ID,
+						'value' => $payment_intent->id
+					]
+				]
+			] );
+			$order_id  = ! empty( $order_ids ) ? $order_ids[0] : null;
+		} else {
+			$order_id =
+				$wpdb->get_var( $wpdb->prepare( "SELECT ID FROM $wpdb->posts AS posts LEFT JOIN $wpdb->postmeta AS postmeta ON posts.ID = postmeta.post_id WHERE posts.post_type = %s AND postmeta.meta_key = %s AND postmeta.meta_value = %s LIMIT 1",
+					'shop_order',
+					WC_Stripe_Constants::PAYMENT_INTENT_ID,
+					$payment_intent->id ) );
+		}
+
+		if ( $order_id ) {
+			return wc_get_order( $order_id );
+		}
+
+
+		return null;
+	}
+
+	public static function get_order_from_charge( $charge ) {
+		if ( isset( $charge->metadata['order_id'] ) ) {
+			$order = wc_get_order( absint( $charge->metadata['order_id'] ) );
+		} else {
+			// charge didn't have order ID for whatever reason, so get order from charge ID
+			$order = wc_stripe_get_order_from_transaction( $charge->id );
+		}
+
+		return $order;
 	}
 
 }

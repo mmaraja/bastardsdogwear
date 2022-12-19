@@ -159,8 +159,8 @@ $campaign_enable	= ! empty( $campaign_data->enable )			? 1								: 0;
 							</th>
 							<td>
 								<input type="text" name="<?php echo esc_attr( $prefix ); ?>behaviour[image_url]" value="<?php echo esc_url( $image_url ); ?>" class="paoc-url regular-text paoc-img-url paoc-img-upload-input" id="paoc-img-url" />
-								<input type="button" name="paoc_image_url" id="paoc_url" class="button-secondary paoc-image-upload" value="<?php esc_html_e( 'Upload Image', 'popup-anything-on-click'); ?>" /> 
-								<input type="button" name="paoc_image_url_clear" class="button button-secondary paoc-image-clear" value="<?php esc_html_e( 'Clear', 'popup-anything-on-click'); ?>" /><br />
+								<input type="button" name="paoc_image_url" id="paoc_url" class="button-secondary paoc-image-upload" value="<?php esc_attr_e( 'Upload Image', 'popup-anything-on-click'); ?>" /> 
+								<input type="button" name="paoc_image_url_clear" class="button button-secondary paoc-image-clear" value="<?php esc_attr_e( 'Clear', 'popup-anything-on-click'); ?>" /><br>
 								<span class="description"><?php esc_html_e('Upload popup image.', 'popup-anything-on-click'); ?></span><br />
 								<div class="paoc-img-view">
 									<?php if( $image_url != '' ) {

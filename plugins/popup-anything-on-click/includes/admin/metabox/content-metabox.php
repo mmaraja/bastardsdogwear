@@ -55,7 +55,7 @@ $security_note		= isset( $content['security_note'] )		? $content['security_note'
 				</th>
 				<td>
 					<?php wp_editor( $popup_content, 'paoc-popup-content', array('textarea_name' => 'content', 'editor_height' => 300, 'media_buttons' => true) ); ?>
-					<span class="description"><?php echo sprintf( esc_html__('Enter popup content which will display after respective `Call to Action` like email form etc. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_html__('Popup Tags', 'popup-anything-on-click').'" data-tags="general">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
+					<span class="description"><?php echo sprintf( esc_html__('Enter popup content which will display after respective `Call to Action` like email form etc. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_attr__('Popup Tags', 'popup-anything-on-click').'" data-tags="general">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
 				</td>
 			</tr>
 
@@ -65,7 +65,7 @@ $security_note		= isset( $content['security_note'] )		? $content['security_note'
 				</th>
 				<td>
 					<?php wp_editor( $secondary_content, 'paoc-secondary-con', array('textarea_name' => $prefix.'content[secondary_content]', 'editor_height' => 300, 'media_buttons' => true) ); ?>
-					<span class="description"><?php echo sprintf( esc_html__('Enter popup secondary content which will display after respective `Call to Action` like email form etc. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_html__('Popup Tags', 'popup-anything-on-click').'" data-tags="general">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
+					<span class="description"><?php echo sprintf( esc_html__('Enter popup secondary content which will display after respective `Call to Action` like email form etc. Available template tags are %s.', 'popup-anything-on-click'), '<a href="javascript:void(0)" class="paoc-show-popup-tags" title="'.esc_attr__('Popup Tags', 'popup-anything-on-click').'" data-tags="general">'.esc_html__('here', 'popup-anything-on-click').'</a>' ); ?></span>
 				</td>
 			</tr>
 

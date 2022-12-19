@@ -13,6 +13,10 @@ class Api {
 
 	private $styles = array();
 
+	protected $commons_script_name = 'wc-stripe-blocks-commons';
+
+	protected $commons_styles_name = 'wc-stripe-block-style';
+
 	/**
 	 * Api constructor.
 	 *
@@ -27,7 +31,7 @@ class Api {
 		foreach ( array( 'cart', 'checkout' ) as $page ) {
 			add_action( "woocommerce_blocks_enqueue_${page}_block_scripts_after", array( $this, 'enqueue_style' ) );
 		}
-		$this->register_script( 'wc-stripe-blocks-commons', 'build/commons.js' );
+		$this->register_script( $this->commons_script_name, 'build/commons.js' );
 	}
 
 	/**
@@ -57,14 +61,14 @@ class Api {
 	 *
 	 * @param string $handle
 	 * @param string $relative_path
-	 * @param array $deps
+	 * @param array  $deps
 	 */
 	public function register_script( $handle, $relative_path, $deps = array() ) {
 		$src = $this->get_asset_url( $relative_path );
 		// check if there is an assets.php file
 		$path = $this->get_path( str_replace( '.js', '.asset.php', $relative_path ) );
 
-		$default_deps = array( 'wc-stripe-blocks-commons' );
+		$default_deps = array( $this->commons_script_name );
 		if ( ! in_array( $handle, $default_deps ) ) {
 			$deps = wp_parse_args( $deps, $default_deps );
 		}
@@ -83,17 +87,18 @@ class Api {
 	}
 
 	public function register_external_script( $handle, $src, $deps, $version, $footer = true ) {
-		wp_enqueue_script( $handle, $src, $deps, $version, $footer );
+		wp_register_script( $handle, $src, $deps, $version, $footer );
 	}
 
 	public function enqueue_style() {
 		// always enqueue styles if there are scripts that have been registered.
-		if ( ! in_array( 'wc-stripe-block-style', $this->styles ) ) {
-			wp_enqueue_style( 'wc-stripe-block-style', $this->get_asset_url( 'build/style.css' ), array(), $this->config->get_version() );
-			wp_style_add_data( 'wc-stripe-block-style', 'rtl', 'replace' );
-			$this->styles[] = 'wc-stripe-block-style';
+		if ( ! in_array( $this->commons_styles_name, $this->styles ) ) {
+			wp_enqueue_style( $this->commons_styles_name, $this->get_asset_url( 'build/style.css' ), array(), $this->config->get_version() );
+			wp_style_add_data( $this->commons_styles_name, 'rtl', 'replace' );
+			$this->styles[] = $this->commons_styles_name;
 
 			do_action( 'wc_stripe_blocks_enqueue_styles', $this );
 		}
 	}
+
 }

@@ -24,7 +24,9 @@ class WC_Stripe_Update {
 			'3.3.20' => 'update-3.3.20.php',
 			'3.3.21' => 'update-3.3.21.php',
 			'3.3.23' => 'update-3.3.23.php',
-			'3.3.24' => 'update-3.3.24.php'
+			'3.3.24' => 'update-3.3.24.php',
+			'3.3.28' => 'update-3.3.28.php',
+			'3.3.34' => 'update-3.3.34.php'
 		);
 
 	public static function init() {

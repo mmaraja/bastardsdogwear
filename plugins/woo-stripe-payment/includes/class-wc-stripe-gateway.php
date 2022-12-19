@@ -95,7 +95,7 @@ class WC_Stripe_Gateway {
 	}
 
 	protected function get_client_config() {
-		return apply_filters( 'wc_stripe_client_config_params', array( 'stripe_version' => '2020-08-27' ), $this );
+		return apply_filters( 'wc_stripe_client_config_params', array( 'stripe_version' => '2022-08-01' ), $this );
 	}
 
 	public static function init() {

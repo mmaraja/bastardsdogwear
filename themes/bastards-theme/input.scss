@@ -1055,13 +1055,17 @@ footer {
     border-top: 1px solid black;
     .xoo-wsc-ft-amt.xoo-wsc-ft-amt-subtotal {
         display: flex;
+        padding: 0;
     }
     .xoo-wsc-ft-amt-label {
         font-weight: 400;
-        font-size: 14px;
+        font-size: 18px;
         &::after {
             content: "";
         }
+    }
+    .shipping-amount {
+        font-size: 16px;
     }
    
 }

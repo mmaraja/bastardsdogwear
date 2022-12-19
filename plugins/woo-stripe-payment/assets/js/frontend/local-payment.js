@@ -410,6 +410,12 @@
         window.addEventListener('hashchange', this.hashChange.bind(this));
     }
 
+    function Affirm(params) {
+        this.confirmation_method = 'confirmAffirmPayment';
+        LocalPayment.call(this, params);
+        window.addEventListener('hashchange', this.hashChange.bind(this));
+    }
+
     WeChat.prototype.updated_checkout = function () {
         if (!this.script_loaded && $(this.container).length) {
             this.load_external_script(this.params.qr_script);
@@ -567,6 +573,8 @@
 
     Sofort.prototype = $.extend({}, LocalPayment.prototype, Sofort.prototype);
 
+    Affirm.prototype = $.extend({}, LocalPayment.prototype, Affirm.prototype);
+
     /**
      * Local payment types that require JS integration
      * @type {Object}
@@ -587,7 +595,8 @@
         'bancontact': Bancontact,
         'eps': EPS,
         'alipay': Alipay,
-        'sofort': Sofort
+        'sofort': Sofort,
+        'affirm': Affirm
     }
 
     for (var i in wc_stripe_local_payment_params.gateways) {

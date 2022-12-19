@@ -25,3 +25,20 @@ ul {
     }
   }
 }
+
+li {
+  &#express-payment-method-stripe_link_checkout {
+    display: none;
+  }
+}
+
+.wc-block-components-express-payment--checkout {
+  .wc-block-components-express-payment__event-buttons {
+    & > li {
+      box-sizing: border-box;
+      &:nth-child(n+3) {
+        margin-top: 10px;
+      }
+    }
+  }
+}

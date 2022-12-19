@@ -16,30 +16,31 @@ class WC_Stripe_Admin_Order_Metaboxes {
 
 	/**
 	 *
-	 * @param string  $post_type
-	 * @param WP_Post $post
+	 * @param string            $post_type
+	 * @param WP_Post|\WC_Order $post
 	 */
 	public static function add_meta_boxes( $post_type, $post ) {
 		// only add meta box if shop_order and Stripe gateway was used.
-		if ( $post_type !== 'shop_order' ) {
-			return;
-		}
+		if ( ( \PaymentPlugins\Stripe\Utilities\FeaturesUtil::is_custom_order_tables_enabled() && $post instanceof \WC_Order )
+		     || $post_type === 'shop_order'
+		     || apply_filters( 'wc_stripe_show_admin_metaboxes', false, $post )
+		) {
+			add_action( 'woocommerce_admin_order_data_after_order_details', array( __CLASS__, 'pay_order_section' ) );
 
-		add_action( 'woocommerce_admin_order_data_after_order_details', array( __CLASS__, 'pay_order_section' ) );
-
-		$order          = wc_get_order( $post->ID );
-		$payment_method = $order->get_payment_method();
-		if ( $payment_method ) {
-			$gateways = WC()->payment_gateways()->payment_gateways();
-			if ( isset( $gateways[ $payment_method ] ) ) {
-				$gateway = WC()->payment_gateways()->payment_gateways()[ $payment_method ];
-				if ( $gateway instanceof WC_Payment_Gateway_Stripe ) {
-					add_action( 'woocommerce_admin_order_data_after_billing_address', array( __CLASS__, 'charge_data_view' ) );
-					add_action( 'woocommerce_admin_order_totals_after_total', array( __CLASS__, 'stripe_fee_view' ) );
+			$order          = $post instanceof \WC_Order ? $post : wc_get_order( $post->ID );
+			$payment_method = $order->get_payment_method();
+			if ( $payment_method ) {
+				$gateways = WC()->payment_gateways()->payment_gateways();
+				if ( isset( $gateways[ $payment_method ] ) ) {
+					$gateway = WC()->payment_gateways()->payment_gateways()[ $payment_method ];
+					if ( $gateway instanceof WC_Payment_Gateway_Stripe ) {
+						add_action( 'woocommerce_admin_order_data_after_billing_address', array( __CLASS__, 'charge_data_view' ) );
+						add_action( 'woocommerce_admin_order_totals_after_total', array( __CLASS__, 'stripe_fee_view' ) );
+					}
 				}
 			}
+			self::enqueue_scripts();
 		}
-		self::enqueue_scripts();
 	}
 
 	/**
@@ -57,11 +58,14 @@ class WC_Stripe_Admin_Order_Metaboxes {
 	 * @param WC_Order $order
 	 */
 	public static function pay_order_section( $order ) {
-		if ( $order->get_type() === 'shop_order'
-		     && $order->has_status( apply_filters( 'wc_stripe_pay_order_statuses', array(
-				'pending',
-				'auto-draft'
-			), $order ) )
+		if ( ( $order->get_type() === 'shop_order'
+		       && $order->has_status( apply_filters( 'wc_stripe_pay_order_statuses', array(
+					'pending',
+					'failed',
+					'auto-draft'
+				), $order ) )
+		     )
+		     || apply_filters( 'wc_stripe_show_pay_order_section', false, $order )
 		) {
 			include 'views/html-order-pay.php';
 			$payment_methods = array();

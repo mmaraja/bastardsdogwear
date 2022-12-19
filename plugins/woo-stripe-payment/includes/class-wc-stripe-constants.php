@@ -51,6 +51,11 @@ class WC_Stripe_Constants {
 	const PROCESSING_PAYMENT = 'processing_payment';
 
 	/**
+	 * @since 3.3.25
+	 */
+	const PROCESSING_ORDER_PAY = 'processing_order_pay';
+
+	/**
 	 * @since 3.3.3
 	 */
 	const REQUIRES_CONFIRMATION = 'requires_confirmation';

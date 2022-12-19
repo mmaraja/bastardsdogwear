@@ -44,11 +44,8 @@
         $(document.body).on('change', '#createaccount', this.handle_create_account_change.bind(this));
         this.setup_card();
 
-        if (this.can_create_setup_intent() && !this.is_payment_element_enabled()) {
+        if (this.can_create_setup_intent()) {
             this.create_setup_intent();
-        }
-        if (this.is_payment_element_enabled()) {
-            this.handleActionMethod = 'confirmCardPayment';
         }
         this.maybe_initialize_installments();
     }
@@ -201,8 +198,8 @@
     }
 
     CC.prototype.place_order = function (e) {
-        this.fields.syncCheckoutFieldsWithDOM();
         if (this.is_gateway_selected()) {
+            this.fields.syncCheckoutFieldsWithDOM();
             if (this.can_create_setup_intent() && !this.is_saved_method_selected() && this.checkout_fields_valid()) {
                 e.preventDefault();
                 if (this.confirmedSetupIntent) {
@@ -211,6 +208,7 @@
                 if (this.is_payment_element_enabled()) {
                     this.stripe.confirmSetup({
                         elements: this.elements,
+                        clientSecret: this.client_secret,
                         confirmParams: (function () {
                             var params = {return_url: ''};
                             if (this.is_current_page('checkout')) {
@@ -219,7 +217,8 @@
                                 };
                             }
                             return params;
-                        }.bind(this)()), redirect: 'if_required'
+                        }.bind(this)()),
+                        redirect: 'if_required'
                     }).then(function (result) {
                         if (result.error) {
                             return this.submit_card_error(result.error);
@@ -251,43 +250,17 @@
                 if (!this.payment_token_received && !this.is_saved_method_selected()) {
                     e.preventDefault();
                     if (this.checkout_fields_valid()) {
-                        if (this.is_payment_element_enabled()) {
+                        this.stripe.createPaymentMethod(this.get_create_payment_method_params()).then(function (result) {
+                            if (result.error) {
+                                return this.submit_card_error(result.error);
+                            }
                             if (this.is_current_page('order_pay')) {
+                                this.set_nonce(result.paymentMethod.id);
                                 this.process_order_pay();
                             } else {
-                                this.stripe.updatePaymentIntent({
-                                    elements: this.elements,
-                                    params: {
-                                        payment_method_data: {
-                                            billing_details: this.get_billing_details()
-                                        }
-                                    }
-                                }).then(function (result) {
-                                    if (result.error) {
-                                        return this.submit_card_error(result.error);
-                                    }
-                                    this.on_token_received(result.paymentIntent.payment_method);
-                                }.bind(this)).catch(function (error) {
-                                    return this.submit_card_error(error);
-                                }.bind(this));
+                                this.on_token_received(result.paymentMethod);
                             }
-                        } else {
-                            this.stripe.createPaymentMethod({
-                                type: 'card',
-                                card: this.is_custom_form() ? this.cardNumber : this.card,
-                                billing_details: this.get_billing_details()
-                            }).then(function (result) {
-                                if (result.error) {
-                                    return this.submit_card_error(result.error);
-                                }
-                                if (this.is_current_page('order_pay')) {
-                                    this.set_nonce(result.paymentMethod.id);
-                                    this.process_order_pay();
-                                } else {
-                                    this.on_token_received(result.paymentMethod);
-                                }
-                            }.bind(this))
-                        }
+                        }.bind(this))
                     }
                 }
             }
@@ -334,13 +307,20 @@
      *
      */
     CC.prototype.updated_checkout = function (e, data) {
-        if (typeof data !== 'undefined' && data.fragments && data.fragments.hasOwnProperty('.wc-stripe-intent-secret')) {
-            // if client secret has changed, update the elements
-            if (this.params.elementOptions.clientSecret !== data.fragments['.wc-stripe-intent-secret']) {
-                this.params.elementOptions.clientSecret = data.fragments['.wc-stripe-intent-secret'];
-                this.params.cardFormType = 'payment';
-                this.elements = this.create_stripe_elements();
-                this.setup_card();
+        if (typeof data !== 'undefined' && data.fragments && data.fragments.hasOwnProperty('.wc-stripe-element-options')) {
+            if (this.is_payment_element_enabled()) {
+                try {
+                    var options = JSON.parse(window.atob(decodeURIComponent(data.fragments['.wc-stripe-element-options'])));
+                    // if mode has changed, update elements
+                    if (this.params.elementOptions.mode !== options.mode) {
+                        this.params.elementOptions.mode = options.mode;
+                        this.params.cardFormType = 'payment';
+                        this.elements = this.create_stripe_elements();
+                        this.setup_card();
+                    }
+                } catch (error) {
+
+                }
             }
         }
         this.create_card_element();
@@ -525,40 +505,17 @@
                     this.hide_installment_loader();
                 }.bind(this));
             } else {
-                if (this.is_payment_element_enabled()) {
-                    this.stripe.updatePaymentIntent({
-                        elements: this.elements,
-                        params: {
-                            payment_method_data: {
-                                billing_details: this.get_billing_details()
-                            }
-                        }
-                    }).then(function (result) {
-                        if (!result.error) {
-                            this.show_installment_loader();
-                            this.fetch_installment_plans(result.paymentIntent.payment_method).finally(function () {
-                                this.hide_installment_loader();
-                            }.bind(this));
-                        } else {
+                this.stripe.createPaymentMethod(this.get_create_payment_method_params()).then(function (result) {
+                    if (!result.error) {
+                        this.show_installment_loader();
+                        this.fetch_installment_plans(result.paymentMethod.id).finally(function () {
                             this.hide_installment_loader();
-                        }
-                    }.bind(this)).catch(this.hide_installment_loader.bind(this));
-                } else {
-                    this.stripe.createPaymentMethod({
-                        type: 'card',
-                        card: this.is_custom_form() ? this.cardNumber : this.card,
-                        billing_details: this.get_billing_details()
-                    }).then(function (result) {
-                        if (!result.error) {
-                            this.show_installment_loader();
-                            this.fetch_installment_plans(result.paymentMethod.id).finally(function () {
-                                this.hide_installment_loader();
-                            }.bind(this));
-                        } else {
-                            this.hide_installment_loader();
-                        }
-                    }.bind(this)).catch(this.hide_installment_loader.bind(this));
-                }
+                        }.bind(this));
+                    } else {
+                        this.hide_installment_loader();
+                    }
+                }.bind(this)).catch(this.hide_installment_loader.bind(this));
+
             }
         }.bind(this, paymentMethodId), 250);
     }
@@ -632,33 +589,38 @@
         return this.params.cardFormType === 'payment'
     }
 
-    CC.prototype.handle_payment_method_setup = function (obj) {
+    CC.prototype.get_element_options = function () {
         if (this.is_payment_element_enabled()) {
-            this.stripe.confirmSetup({
+            var params = this.params.elementOptions.mode === 'payment' ? this.get_payment_element_params() : {};
+            return $.extend({}, this.params.elementOptions, params);
+        }
+        return this.params.elementOptions;
+    }
+
+    CC.prototype.get_payment_element_params = function () {
+        if (this.has_gateway_data()) {
+            return {
+                amount: this.get_total_price_cents(),
+                currency: this.get_currency().toLowerCase()
+            };
+        }
+        return {amount: 100, currency: this.params.currency.toLowerCase()};
+    }
+
+    CC.prototype.get_create_payment_method_params = function () {
+        if (this.is_payment_element_enabled()) {
+            return {
                 elements: this.elements,
-                confirmParams: {
-                    payment_method_data: {
-                        billing_details: this.get_billing_details()
-                    }
-                },
-                redirect: 'if_required'
-            }).then(function (result) {
-                if (result.error) {
-                    this.unblock();
-                    this.payment_token_received = false;
-                    this.submit_error(result.error);
-                } else {
-                    if (this.is_current_page('order_pay')) {
-                        this.get_form().trigger('submit');
-                    } else {
-                        this.set_nonce(result.setupIntent.payment_method);
-                        this.set_intent(result.setupIntent.id);
-                        this.process_payment(obj.order_id, obj.order_key);
-                    }
+                params: {
+                    billing_details: this.get_billing_details()
                 }
-            }.bind(this));
+            }
         } else {
-            wc_stripe.BaseGateway.prototype.handle_payment_method_setup.apply(this, arguments);
+            return {
+                type: 'card',
+                card: this.is_custom_form() ? this.cardNumber : this.card,
+                billing_details: this.get_billing_details()
+            }
         }
     }
 

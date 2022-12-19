@@ -1,15 +1,14 @@
 <?php
 
 return array(
-	'desc'               => array(
+	'desc'              => array(
 		'type'        => 'description',
-		'description' => sprintf( '<div>%s</div>', __( 'For US customers only.', 'woo-stripe-payment' ) ) .
-		                 sprintf( '<p>%s</p>',
-			                 sprintf( __( 'Read through our %1$sdocumentation%2$s to configure ACH payments', 'woo-stripe-payment' ),
-				                 '<a target="_blank" href="https://docs.paymentplugins.com/wc-stripe/config/#/stripe_ach">',
-				                 '</a>' ) ),
+		'description' => sprintf( '<p>%s %s</p>', __( 'For US customers only.', 'woo-stripe-payment' ),
+			sprintf( __( 'Read through our %1$sdocumentation%2$s to configure ACH payments', 'woo-stripe-payment' ),
+				'<a target="_blank" href="https://docs.paymentplugins.com/wc-stripe/config/#/stripe_ach">',
+				'</a>' ) )
 	),
-	'enabled'            => array(
+	'enabled'           => array(
 		'title'       => __( 'Enabled', 'woo-stripe-payment' ),
 		'type'        => 'checkbox',
 		'default'     => 'no',
@@ -17,87 +16,39 @@ return array(
 		'desc_tip'    => true,
 		'description' => __( 'If enabled, your site can accept ACH payments through Stripe.', 'woo-stripe-payment' ),
 	),
-	'environment'        => array(
-		'type'        => 'select',
-		'title'       => __( 'Plaid Environment', 'woo-stripe-payment' ),
-		'default'     => 'production',
-		'options'     => array(
-			'sandbox'     => __( 'Sandbox', 'woo-stripe-payment' ),
-			'development' => __( 'Development', 'woo-stripe-payment' ),
-			'production'  => __( 'Production', 'woo-stripe-payment' ),
-		),
-		'desc_tip'    => true,
-		'description' => __( 'The active Plaid environment. You must set API mode to live to use Plaid\'s development environment.', 'woo-stripe-payment' ),
-	),
-	'plaid_keys'         => array(
-		'type'  => 'title',
-		'title' => __( 'Plaid Keys', 'woo-stripe-payment' ),
-	),
-	'client_id'          => array(
-		'type'        => 'text',
-		'title'       => __( 'Client ID' ),
-		'default'     => '',
-		'description' => __( 'ID that identifies your Plaid account.', 'woo-stripe-payment' ),
-		'desc_tip'    => true,
-	),
-	'plaid_secrets'      => array(
-		'type'  => 'title',
-		'title' => __( 'Plaid Secrets', 'woo-stripe-payment' ),
-	),
-	'sandbox_secret'     => array(
-		'title'       => __( 'Sandbox Secret', 'woo-stripe-payment' ),
-		'type'        => 'password',
-		'default'     => '',
-		'description' => __( 'Key that acts as a password when connecting to Plaid\'s sandbox environment.', 'woo-stripe-payment' ),
-		'desc_tip'    => true,
-	),
-	'development_secret' => array(
-		'title'       => __( 'Development Secret', 'woo-stripe-payment' ),
-		'type'        => 'password',
-		'default'     => '',
-		'description' => __( 'Development allows you to test real bank credentials with test transactions.', 'woo-stripe-payment' ),
-		'desc_tip'    => true,
-	),
-	'production_secret'  => array(
-		'title'       => __( 'Production Secret', 'woo-stripe-payment' ),
-		'type'        => 'password',
-		'default'     => '',
-		'description' => __( 'Key that acts as a password when connecting to Plaid\'s production environment.', 'woo-stripe-payment' ),
-		'desc_tip'    => true,
-	),
-	'general_settings'   => array(
+	'general_settings'  => array(
 		'type'  => 'title',
 		'title' => __( 'General Settings', 'woo-stripe-payment' ),
 	),
-	'title_text'         => array(
+	'title_text'        => array(
 		'type'        => 'text',
 		'title'       => __( 'Title', 'woo-stripe-payment' ),
 		'default'     => __( 'ACH Payment', 'woo-stripe-payment' ),
 		'desc_tip'    => true,
 		'description' => __( 'Title of the ACH gateway' ),
 	),
-	'description'        => array(
+	'description'       => array(
 		'title'       => __( 'Description', 'woo-stripe-payment' ),
 		'type'        => 'text',
 		'default'     => '',
 		'description' => __( 'Leave blank if you don\'t want a description to show for the gateway.', 'woo-stripe-payment' ),
 		'desc_tip'    => true,
 	),
-	'order_button_text'  => array(
+	'order_button_text' => array(
 		'title'       => __( 'Order Button Text', 'woo-stripe-payment' ),
 		'type'        => 'text',
 		'default'     => __( 'Bank Payment', 'woo-stripe-payment' ),
 		'description' => __( 'The text on the Place Order button that displays when the gateway is selected on the checkout page.', 'woo-stripe-payment' ),
 		'desc_tip'    => true
 	),
-	'client_name'        => array(
+	'business_name'     => array(
 		'type'        => 'text',
-		'title'       => __( 'Client Name', 'woo-stripe-payment' ),
+		'title'       => __( 'Business Name', 'woo-stripe-payment' ),
 		'default'     => get_bloginfo( 'name' ),
-		'description' => __( 'The name that appears on the ACH payment screen.', 'woo-stripe-payment' ),
+		'description' => __( 'The name that appears in the ACH mandate.', 'woo-stripe-payment' ),
 		'desc_tip'    => true,
 	),
-	'method_format'      => array(
+	'method_format'     => array(
 		'title'       => __( 'ACH Display', 'woo-stripe-payment' ),
 		'type'        => 'select',
 		'class'       => 'wc-enhanced-select',
@@ -107,7 +58,7 @@ return array(
 		'desc_tip'    => true,
 		'description' => __( 'This option allows you to customize how the credit card will display for your customers on orders, subscriptions, etc.' ),
 	),
-	'order_status'       => array(
+	'order_status'      => array(
 		'type'        => 'select',
 		'title'       => __( 'Order Status', 'woo-stripe-payment' ),
 		'default'     => 'default',
@@ -117,7 +68,7 @@ return array(
 		'description' => __( 'This is the status of the order once payment is complete. If <b>Default</b> is selected, then WooCommerce will set the order status automatically based on internal logic which states if a product is virtual and downloadable then status is set to complete. Products that require shipping are set to Processing. Default is the recommended setting as it allows standard WooCommerce code to process the order status.',
 			'woo-stripe-payment' ),
 	),
-	'fee'                => array(
+	'fee'               => array(
 		'title'       => __( 'ACH Fee', 'woo-stripe-payment' ),
 		'type'        => 'ach_fee',
 		'class'       => '',

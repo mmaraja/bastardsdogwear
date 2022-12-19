@@ -1036,3 +1036,19 @@ function my_hide_shipping_when_free_is_available( $rates ) {
 	return ! empty( $free ) ? $free : $rates;
 }
 add_filter( 'woocommerce_package_rates', 'my_hide_shipping_when_free_is_available', 100 );
+
+
+/** GET FREE SHIPPING OVER 300 - CART NOTE */
+
+function cart_notice() {
+  $free_shipping_settings = get_option( 'woocommerce_free_shipping_settings' );
+  $maximum = 300;
+  $current = WC()->cart->subtotal;
+  $remainder = $maximum - $current;
+  if ( $current < $maximum ) {
+    echo "<div class='shipping-amount'>You're €" .  number_format((float)$remainder, 2, ',', '') . " away from free shipping.</div>";
+  }
+}
+ 
+add_action( 'xoo_wsc_totals_end', 'cart_notice' );
+ 

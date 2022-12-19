@@ -5,7 +5,7 @@
  */
 wc_stripe_hidden_field ( $gateway->metadata_key );
 ?>
-<div id="wc-stripe-ach-container">
+<div id="wc-stripe-plaid-container">
 	<?php if('sandbox' === $gateway->get_plaid_environment()):?>
 	<p><?php esc_html_e('sandbox testing credentials', 'woo-stripe-payment')?>:</p>
 	<p><strong><?php esc_html_e('username', 'woo-stripe-payment')?></strong>:&nbsp;user_good</p>

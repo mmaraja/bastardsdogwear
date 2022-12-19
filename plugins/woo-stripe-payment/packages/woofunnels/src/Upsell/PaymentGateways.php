@@ -12,6 +12,7 @@ class PaymentGateways {
 
 	public function __construct( AssetsApi $assets ) {
 		$this->assets = $assets;
+		new LinkIntegration();
 		$this->initialize();
 	}
 
@@ -24,6 +25,7 @@ class PaymentGateways {
 		add_action( 'wfocu_footer_before_print_scripts', [ $this, 'add_scripts' ] );
 		add_filter( 'wfocu_localized_data', [ $this, 'add_data' ] );
 		add_filter( 'wfocu_subscriptions_get_supported_gateways', [ $this, 'get_subscription_gateways' ] );
+		add_action( 'wc_stripe_process_refund_success', [ $this, 'process_refund_success' ] );
 	}
 
 	public function initialize_gateways() {
@@ -126,6 +128,83 @@ class PaymentGateways {
 			$this->assets->enqueue_script( 'wc-stripe-woofunnels-upsell', 'build/wc-stripe-woofunnels-upsell.js' );
 			$this->assets->do_script_items( 'wc-stripe-woofunnels-upsell' );
 		}
+	}
+
+	/**
+	 * @param \WC_Order $order
+	 *
+	 * @return void
+	 */
+	public function process_refund_success( $order ) {
+		$funnel_id = $order->get_meta( '_wfocu_funnel_id' );
+		if ( $funnel_id && stripe_wc()->advanced_settings->is_fee_enabled() ) {
+			/**
+			 * @var \PaymentPlugins\WooFunnels\Stripe\Upsell\PaymentGateways\BasePaymentGateway $payment_method
+			 */
+			$payment_method = $this->get_wfocu_payment_gateway( $order->get_payment_method() );
+			if ( $payment_method ) {
+				$charges = $this->get_charges_for_upsell( $order );
+				if ( ! empty( $charges ) ) {
+					$payment_method->process_refund_success( $order, $charges );
+				}
+			}
+		}
+	}
+
+	private function get_charges_for_upsell( $order ) {
+		$charges     = [];
+		$session_ids = WFOCU_Core()->track->query_results( array(
+			'data'          => array(
+				'id' => array(
+					'type'     => 'col',
+					'function' => '',
+					'name'     => 'session_id',
+				),
+			),
+			'where'         => array(
+				array(
+					'key'      => 'events.order_id',
+					'value'    => $order->get_id(),
+					'operator' => '=',
+				),
+			),
+			'query_type'    => 'get_results',
+			'session_table' => true,
+			'nocache'       => true,
+		) );
+		if ( is_array( $session_ids ) && count( $session_ids ) > 0 ) {
+			$session_ids = end( $session_ids );
+			if ( isset( $session_ids->session_id ) ) {
+				$session_id = $session_ids->session_id;
+
+				$eventsdb  = WFOCU_Core()->track->query_results( array(
+					'where'      => array(
+						array(
+							'key'      => 'events.sess_id',
+							'value'    => $session_id,
+							'operator' => '=',
+						),
+
+					),
+					'query_type' => 'get_results',
+					'order_by'   => 'events.timestamp',
+					'order'      => 'ASC',
+					'nocache'    => true,
+
+				) );
+				$event_ids = wc_list_pluck( $eventsdb, 'id' );
+				$eventmeta = WFOCU_Core()->track->get_meta( $event_ids );
+				if ( $eventmeta ) {
+					foreach ( $eventmeta as $meta ) {
+						if ( $meta['meta_key'] === '_transaction_id' && strpos( $meta['meta_value'], 'ch_' ) !== false ) {
+							$charges[] = $meta['meta_value'];
+						}
+					}
+				}
+			}
+		}
+
+		return $charges;
 	}
 
 }

@@ -1111,13 +1111,17 @@ footer .copyright-section .p-copyright {
 }
 .xoo-wsc-footer .xoo-wsc-ft-amt.xoo-wsc-ft-amt-subtotal {
   display: flex;
+  padding: 0;
 }
 .xoo-wsc-footer .xoo-wsc-ft-amt-label {
   font-weight: 400;
-  font-size: 14px;
+  font-size: 18px;
 }
 .xoo-wsc-footer .xoo-wsc-ft-amt-label::after {
   content: "";
+}
+.xoo-wsc-footer .shipping-amount {
+  font-size: 16px;
 }
 
 /*empty cart style*/

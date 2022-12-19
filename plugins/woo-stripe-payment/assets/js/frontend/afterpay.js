@@ -33,7 +33,7 @@
             qty = 0;
         }
         if (cents) {
-            return (this.get_product_data().price * Math.pow(10, 2)) * parseInt(qty);
+            return this.get_product_data().price_cents * parseInt(qty);
         }
         return this.get_product_data().price * parseInt(qty);
     }
@@ -101,7 +101,7 @@
             this.msgElement.update({
                 amount: this.get_total_price_cents(),
                 currency: this.get_currency(),
-                isEligible: this.is_eligible(parseFloat(this.get_total_price()))
+                isEligible: true
             })
         }
         var $el = $('#wc-stripe-afterpay-cart-container');

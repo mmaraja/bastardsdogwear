@@ -2,7 +2,7 @@ import {useState, useEffect, useCallback} from '@wordpress/element';
 import {__} from '@wordpress/i18n';
 import {registerPaymentMethod} from '@woocommerce/blocks-registry';
 import classnames from 'classnames';
-import {ensureErrorResponse, getSettings, isTestMode} from "../util";
+import {ensureErrorResponse, ensureSuccessResponse, getSettings, isTestMode} from "../util";
 import {LocalPaymentIntentContent} from './local-payment-method';
 import {PaymentMethodLabel, PaymentMethod} from "../../components/checkout";
 import {canMakePayment} from "./local-payment-method";
@@ -26,7 +26,13 @@ const BoletoPaymentMethodContainer = ({eventRegistration, ...props}) => {
             if (!taxId) {
                 return ensureErrorResponse(props.emitResponse.responseTypes, __('Please enter a valid CPF/CNPJ value', 'woo-stripe-payment'));
             }
-            return true;
+            return ensureSuccessResponse(props.emitResponse.responseTypes, {
+                meta: {
+                    paymentMethodData: {
+                        wc_stripe_boleto_tax_id: taxId
+                    }
+                }
+            });
         })
         return () => unsubscribe();
     }, [onPaymentProcessing, taxId]);
@@ -38,7 +44,7 @@ const BoletoPaymentMethodContainer = ({eventRegistration, ...props}) => {
                 <input
                     type='text'
                     id='wc-stripe-boleto-tax_id'
-                    onChange={(e) => setTaxId(e.target.value)}
+                    onChange={e => setTaxId(e.target.value)}
                     onFocus={() => setIsActive(true)}
                     onBlur={() => setIsActive(false)}/>
                 <label htmlFor='wc-stripe-boleto-tax_id'>{__(' CPF / CNPJ', ' woo-stripe-payment')}</label>

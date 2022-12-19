@@ -155,6 +155,7 @@ $medium-width: 475px;
     -ms-flex: 0 0 100%;
     flex: 0 0 100%;
     max-width: 100%;
+    box-sizing: border-box;
   }
 
   .wc-stripe-card {

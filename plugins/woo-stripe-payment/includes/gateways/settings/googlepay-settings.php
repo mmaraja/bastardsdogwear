@@ -147,8 +147,19 @@ return array(
 			'pay'       => __( 'Pay', 'woo-stripe-payment' ),
 			'subscribe' => __( 'subscribe', 'woo-stripe-payment' )
 		),
-		'default'     => 'long',
+		'default'     => 'buy',
 		'description' => __( 'The button style of the GPay button.', 'woo-stripe-payment' ),
+	),
+	'button_shape'     => array(
+		'title'       => __( 'Button Shape', 'woo-stripe-payment' ),
+		'type'        => 'select',
+		'class'       => 'gpay-button-option gpay-button-shape',
+		'default'     => 'rect',
+		'options'     => array(
+			'pill' => __( 'Pill shape', 'woo-stripe-payment' ),
+			'rect' => __( 'Rectangle', 'woo-stripe-payment' ),
+		),
+		'description' => __( 'The button shape', 'woo-stripe-payment' ),
 	),
 	'button_render'    => array(
 		'type'        => 'button_demo',

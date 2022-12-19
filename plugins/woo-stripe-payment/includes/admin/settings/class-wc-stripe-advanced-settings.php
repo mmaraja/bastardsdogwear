@@ -86,6 +86,17 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 					)
 				)
 			),
+			'capture_status'         => array(
+				'title'       => __( 'Capture Status', 'woo-stripe-payment' ),
+				'type'        => 'select',
+				'default'     => 'completed',
+				'options'     => array(
+					'completed'  => __( 'Completed', 'woo-stripe-payment' ),
+					'processing' => __( 'Processing', 'woo-stripe-payment' ),
+				),
+				'desc_tip'    => true,
+				'description' => __( 'For orders that are authorized, when the order is set to this status, it will trigger a capture.', 'woo-stripe-payment' ),
+			),
 			'refund_cancel'          => array(
 				'title'       => __( 'Refund On Cancel', 'woo-stripe-payment' ),
 				'type'        => 'checkbox',
@@ -103,7 +114,7 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 				'type'        => 'checkbox',
 				'default'     => 'no',
 				'value'       => 'yes',
-				'description' => __( 'Only available to US merchants: With Link enabled, Stripe will use your customer\'s email address to determine if they have used Stripe in the past. If yes, their payment info, billing and shipping information can be used to 
+				'description' => __( 'Available to US and EU based Stripe accounts. With Link enabled, Stripe will use your customer\'s email address to determine if they have used Stripe in the past. If yes, their payment info, billing and shipping information can be used to 
 				auto-populate the checkout page resulting in higher conversion rates and less customer friction. If enabled, the Stripe payment form will be used because it\'s the only card form compatible with Link.', 'woo-stripe-payment' )
 			),
 			'link_email'             => array(
@@ -202,15 +213,6 @@ class WC_Stripe_Advanced_Settings extends WC_Stripe_Settings_API {
 			$payment_method->update_option( 'form_type', 'payment' );
 			wc_stripe_log_info( 'Stripe payment form enabled for Link integration compatibility' );
 		}
-	}
-
-	public function get_form_fields() {
-		$fields = parent::get_form_fields();
-		if ( stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ) !== 'US' ) {
-			unset( $fields['link_title'], $fields['link_enabled'], $fields['link_email'], $fields['link_autoload'] );
-		}
-
-		return $fields;
 	}
 
 	public function is_fee_enabled() {

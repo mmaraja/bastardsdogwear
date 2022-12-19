@@ -1,11 +1,12 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 /**
  *
- * @since 3.0.0
+ * @since   3.0.0
  * @package Stripe/Classes
- * @author Payment Plugins
+ * @author  Payment Plugins
  *
  */
 class WC_Stripe_Field_Manager {
@@ -54,7 +55,7 @@ class WC_Stripe_Field_Manager {
 
 	public static function before_add_to_cart() {
 		global $product;
-		self::$_product_button_position = $product->get_meta( WC_Stripe_Constants::BUTTON_POSITION );
+		self::$_product_button_position = is_object( $product ) ? $product->get_meta( WC_Stripe_Constants::BUTTON_POSITION ) : null;
 		if ( empty( self::$_product_button_position ) ) {
 			self::$_product_button_position = 'bottom';
 		}
@@ -142,7 +143,6 @@ class WC_Stripe_Field_Manager {
 			}
 		}
 		if ( count( apply_filters( 'wc_stripe_mini_cart_payment_methods', $gateways ) ) > 0 ) {
-
 			wc_stripe_get_template(
 				'mini-cart/payment-methods.php',
 				array(
@@ -156,7 +156,6 @@ class WC_Stripe_Field_Manager {
 	 * @deprecated 3.1.8
 	 */
 	public static function change_payment_request() {
-
 	}
 
 	public static function add_payment_method_fields() {
@@ -174,12 +173,11 @@ class WC_Stripe_Field_Manager {
 	}
 
 	/**
-	 * @param string $page
+	 * @param string   $page
 	 * @param WC_Order $order
 	 */
 	public static function output_required_fields( $page, $order = null ) {
 		if ( in_array( $page, array( 'cart', 'checkout' ) ) ) {
-
 			if ( 'cart' === $page ) {
 				self::output_fields( 'billing' );
 
@@ -187,7 +185,6 @@ class WC_Stripe_Field_Manager {
 					self::output_fields( 'shipping' );
 				}
 			}
-
 		} elseif ( 'product' === $page ) {
 			global $product;
 
@@ -212,8 +209,8 @@ class WC_Stripe_Field_Manager {
 	 * @deprecated
 	 */
 	public static function output_needs_shipping( $needs_shipping ) {
-
 	}
+
 }
 
 if ( ! is_admin() ) {

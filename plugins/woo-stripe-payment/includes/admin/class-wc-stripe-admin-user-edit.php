@@ -1,11 +1,12 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 /**
  *
- * @since 3.0.0
+ * @since   3.0.0
  * @package Stripe/Admin
- * @author PaymentPlugins
+ * @author  PaymentPlugins
  *
  */
 class WC_Stripe_Admin_User_Edit {
@@ -69,6 +70,8 @@ class WC_Stripe_Admin_User_Edit {
 			wc_stripe_save_customer( wc_clean( $_POST['wc_stripe_test_id'] ), $user_id, 'test' );
 		}
 
+		$client = WC_Stripe_Gateway::load();
+
 		// check if admin want's to delete any payment methods
 		foreach ( $modes as $mode ) {
 			if ( isset( $_POST[ $mode . '_payment_method_actions' ] ) ) {
@@ -76,8 +79,11 @@ class WC_Stripe_Admin_User_Edit {
 					case 'delete':
 						if ( isset( $_POST['payment_methods'], $_POST['payment_methods'][ $mode ] ) ) {
 							$tokens = wc_clean( $_POST['payment_methods'][ $mode ] );
-							foreach ( $tokens as $token_id ) {
-								WC_Payment_Tokens::delete( absint( $token_id ) );
+							foreach ( $tokens as $identifer ) {
+								list( $id, $pm ) = explode( ':', $identifer );
+								WC_Payment_Tokens::delete( absint( $id ) );
+								$client->mode( $mode )->paymentMethods->detach( $pm );
+								wc_stripe_log_info( sprintf( 'Payment method %s detached within Stripe via WordPress Edit Profile page. Initiated by User ID: %s', $pm, get_current_user_id() ) );
 							}
 						}
 						break;
@@ -116,6 +122,7 @@ class WC_Stripe_Admin_User_Edit {
 			}
 		}
 	}
+
 }
 
 WC_Stripe_Admin_User_Edit::init();

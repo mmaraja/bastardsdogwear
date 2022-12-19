@@ -20,8 +20,8 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 
 	public function __construct() {
 		$this->local_payment_type = 'afterpay_clearpay';
-		$this->currencies         = array( 'AUD', 'CAD', 'NZD', 'GBP', 'USD' );
-		$this->countries          = array( 'AU', 'CA', 'NZ', 'GB', 'US' );
+		$this->currencies         = array( 'AUD', 'CAD', 'NZD', 'GBP', 'USD', 'EUR' );
+		$this->countries          = array( 'AU', 'CA', 'NZ', 'GB', 'US', 'FR', 'ES' );
 		$this->id                 = 'stripe_afterpay';
 		$this->tab_title          = __( 'Afterpay', 'woo-stripe-payment' );
 		$this->method_title       = __( 'Afterpay', 'woo-stripe-payment' );
@@ -258,7 +258,13 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 		), parent::get_local_payment_settings() );
 
 		// @todo maybe add this option back in a future version.
-		unset( $settings['title_text'] );
+		//unset( $settings['title_text'] );
+
+		if ( $this->is_restricted_account_country() ) {
+			$account_country                           = stripe_wc()->account_settings->get_account_country( wc_stripe_mode() );
+			$settings['specific_countries']['options'] = array( strtoupper( $account_country ) );
+			unset( $settings['allowed_countries']['options']['all_except'] );
+		}
 
 		return $settings;
 	}
@@ -297,7 +303,8 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 			'CAD' => array( 'CA', 1, 2000 ),
 			'NZD' => array( 'NZ', 1, 2000 ),
 			'GBP' => array( 'GB', 1, 1000 ),
-			'USD' => array( 'US', 1, 2000 )
+			'USD' => array( 'US', 1, 2000 ),
+			'EUR' => array( [ 'FR', 'ES' ], 1, 1000 )
 		), $this );
 	}
 
@@ -320,8 +327,16 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 		$filtered_params = isset( $params[ $currency ] ) ? $params[ $currency ] : false;
 		if ( $filtered_params ) {
 			list( $country, $min_amount, $max_amount ) = $filtered_params;
-			// country associated with currency must match the Stripe account's registered country
-			$_available = $account_country === $country && $min_amount <= $total && $total <= $max_amount;
+			if ( ! is_array( $country ) ) {
+				$country = array( $country );
+			}
+			// 1. Country associated with currency must match the Stripe account's registered country
+			// 2. Stripe docs state the customer billing country must match the Stripe account country. This rule
+			// only pertains to EUR. All currencies do not enforce this requirement.
+			// https://stripe.com/docs/payments/afterpay-clearpay#collection-schedule
+			$_available = in_array( $account_country, $country, true )
+			              && ( $currency !== 'EUR' || ! $billing_country || $account_country === $billing_country )
+			              && ( $min_amount <= $total && $total <= $max_amount );
 		}
 
 		return $_available;
@@ -365,45 +380,52 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 			'introText'        => $this->get_option( "intro_text_{$context}" ),
 			'showInterestFree' => $this->is_active( "show_interest_free_{$context}" ),
 			'modalTheme'       => $this->get_option( "modal_theme_{$context}" ),
-			'modalLinkStyle'   => $this->get_option( "modal_link_style_{$context}" )
+			'modalLinkStyle'   => $this->get_option( "modal_link_style_{$context}" ),
+			'isEligible'       => true
 		);
+
 		if ( in_array( $context, array( 'cart', 'checkout' ) ) ) {
-			$options['isEligible'] = WC()->cart && WC()->cart->needs_shipping();
-		} elseif ( $context === 'product' ) {
-			global $product;
-			if ( $product ) {
-				$options['isEligible'] = $product->needs_shipping();
-			}
+			unset( $options['isEligible'] );
+			$options['isCartEligible'] = true;
 		}
 
 		return apply_filters( 'wc_stripe_afterpay_message_options', $options, $context, $this );
 	}
 
-	public function get_title() {
-		// override because design guidelines state the title should consist of the
-		// Afterpay pay in 4 text
-		if ( is_checkout() ) {
-			$this->title = '';
-		}
+	public function get_payment_token( $method_id, $method_details = array() ) {
+		/**
+		 *
+		 * @var WC_Payment_Token_Stripe_Local $token
+		 */
+		$token = parent::get_payment_token( $method_id, $method_details );
+		$token->set_gateway_title( __( 'Afterpay', 'woo-stripe-payment' ) );
 
-		return parent::get_title();
+		return $token;
 	}
 
 	protected function get_payment_description() {
-		$desc = parent::get_payment_description();
-		if ( ( $country = stripe_wc()->account_settings->get_option( 'country' ) ) ) {
+		$desc = '<p>' . __( 'Stripe accounts in the following countries can accept Afterpay payments with local currency settlement', 'woo-stripe-payment' ) . ': ' . implode( ',', $this->countries ) . '</p>';
+		if ( ( $country = stripe_wc()->account_settings->get_account_country( wc_stripe_mode() ) ) ) {
 			$params = $this->get_required_parameters();
 			// get currency for country
 			foreach ( $params as $currency => $param ) {
-				if ( $param[0] === $country ) {
-					$desc = sprintf( __( 'Store currency must be %s for Afterpay to show because your Stripe account is registered in %s. This is a requirement of Afterpay.',
+				$account_country = ! is_array( $param[0] ) ? array( $param[0] ) : $param[0];
+				if ( in_array( $country, $account_country, true ) ) {
+					$desc .= sprintf( __( 'Store currency must be %s for Afterpay to show because your Stripe account is registered in %s. This is a requirement of Afterpay.',
 						'woo-stripe-payment' ),
 						$currency,
 						$country );
-					break;
+					if ( $this->is_restricted_account_country() ) {
+						$desc .= __( 'You can accept payments from customers in the same country that you registered your Stripe account in.', 'woo-stripe-payment' );
+					}
+
+					return $desc;
 				}
 			}
 		}
+
+		$desc .= __( 'You can accept payments from customers in the same country that you registered your Stripe account in. Payments must also match the local 
+			currency of the Stripe account country.', 'woo-stripe-payment' );
 
 		return $desc;
 	}
@@ -415,6 +437,37 @@ class WC_Payment_Gateway_Stripe_Afterpay extends WC_Payment_Gateway_Stripe_Local
 				apply_filters( 'wc_stripe_mini_cart_dependencies', array( $scripts->get_handle( 'wc-stripe' ) ), $scripts ) );
 		}
 		$scripts->localize_script( 'mini-cart', $this->get_localized_params( 'cart' ), 'wc_' . $this->id . '_mini_cart_params' );
+	}
+
+	public function add_stripe_order_args( &$args, $order ) {
+		if ( empty( $args['shipping'] ) ) {
+			// This ensures digital products can be processed
+			$args['shipping'] = array(
+				'address' => array(
+					'city'        => $order->get_billing_city(),
+					'country'     => $order->get_billing_country(),
+					'line1'       => $order->get_billing_address_1(),
+					'line2'       => $order->get_billing_address_2(),
+					'postal_code' => $order->get_billing_postcode(),
+					'state'       => $order->get_billing_state(),
+				),
+				'name'    => $this->payment_object->get_name_from_order( $order, 'billing' ),
+			);
+		}
+	}
+
+	private function is_restricted_account_country() {
+		$result          = false;
+		$account_country = stripe_wc()->account_settings->get_account_country( wc_stripe_mode() );
+		if ( $account_country ) {
+			$params = $this->get_required_parameters();
+			list( $countries ) = $params['EUR'];
+			if ( in_array( $account_country, $countries, true ) ) {
+				$result = true;
+			}
+		}
+
+		return $result;
 	}
 
 }

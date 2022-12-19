@@ -150,9 +150,9 @@ $loader_color		= isset( $design['loader_color'] )			? $design['loader_color']	: 
 								</th>
 								<td>
 									<input type="text" name="" value="" class="regular-text paoc-url paoc-popup-img paoc-img-upload-input" id="paoc-popup-img" disabled="disabled" />
-									<input type="button" name="" class="button-secondary paoc-image-upload" value="<?php esc_html_e( 'Upload Image', 'popup-anything-on-click'); ?>" disabled="disabled" />
-									<input type="button" name="" class="button button-secondary paoc-image-clear" value="<?php esc_html_e( 'Clear', 'popup-anything-on-click'); ?>" disabled="disabled" /> <br />
-									<span class="description"><?php esc_html_e('Set popup background image.', 'popup-anything-on-click'); ?></span><br />
+									<input type="button" name="" class="button-secondary paoc-image-upload" value="<?php esc_attr_e( 'Upload Image', 'popup-anything-on-click'); ?>" disabled="disabled" />
+									<input type="button" name="" class="button button-secondary paoc-image-clear" value="<?php esc_attr_e( 'Clear', 'popup-anything-on-click'); ?>" disabled="disabled" /> <br />
+									<span class="description"><?php esc_html_e('Set popup background image.', 'popup-anything-on-click'); ?></span><br>
 								</td>
 							</tr>
 
@@ -172,9 +172,9 @@ $loader_color		= isset( $design['loader_color'] )			? $design['loader_color']	: 
 								</th>
 								<td>
 									<input type="text" name="" value="" class="regular-text paoc-url paoc-overlay-img paoc-img-upload-input" id="paoc-overlay-img" disabled="disabled" />
-									<input type="button" name="" class="button-secondary paoc-image-upload" value="<?php esc_html_e( 'Upload Image', 'popup-anything-on-click'); ?>" disabled="disabled" />
-									<input type="button" name="" class="button button-secondary paoc-image-clear" value="<?php esc_html_e( 'Clear', 'popup-anything-on-click'); ?>" disabled="disabled" /> <br />
-									<span class="description"><?php esc_html_e('Set popup overlay background image.', 'popup-anything-on-click'); ?></span><br />
+									<input type="button" name="" class="button-secondary paoc-image-upload" value="<?php esc_attr_e( 'Upload Image', 'popup-anything-on-click'); ?>" disabled="disabled" />
+									<input type="button" name="" class="button button-secondary paoc-image-clear" value="<?php esc_attr_e( 'Clear', 'popup-anything-on-click'); ?>" disabled="disabled" /><br>
+									<span class="description"><?php esc_html_e('Set popup overlay background image.', 'popup-anything-on-click'); ?></span><br>
 								</td>
 							</tr>
 

@@ -96,8 +96,8 @@
         <?php if ( $save_button_available ) : ?>
             <p class="submit submitbox">
 
-                <button name="save" class="button-primary woocommerce-save-button" type="submit" value="<?php esc_attr_e( 'Save changes', 'woocommerce' ); ?>"><?php esc_html_e( 'Save changes', 'woocommerce' ); ?></button>
-                <a onclick="return confirm('<?php esc_html_e( 'Are you sure to reset?', 'woo-variation-gallery' ) ?>')" class="submitdelete" href="<?php echo esc_url( $reset_url ) ?>"><?php esc_attr_e( 'Reset all', 'woocommerce' ); ?></a>
+                <button name="save" class="button-primary woocommerce-save-button" type="submit" value="<?php esc_attr_e( 'Save changes', 'woo-variation-gallery' ); ?>"><?php esc_html_e( 'Save changes', 'woo-variation-gallery' ); ?></button>
+                <a onclick="return confirm('<?php esc_html_e( 'Are you sure to reset?', 'woo-variation-gallery' ) ?>')" class="submitdelete" href="<?php echo esc_url( $reset_url ) ?>"><?php esc_attr_e( 'Reset all', 'woo-variation-gallery' ); ?></a>
                 
                 <?php wp_nonce_field( 'getwooplugins-settings' ); ?>
             </p>

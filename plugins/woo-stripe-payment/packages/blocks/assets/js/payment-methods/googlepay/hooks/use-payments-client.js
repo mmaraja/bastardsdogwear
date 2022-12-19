@@ -1,5 +1,4 @@
 import {useState, useEffect, useCallback, useMemo, useRef} from '@wordpress/element';
-import isShallowEqual from "@wordpress/is-shallow-equal";
 import apiFetch from '@wordpress/api-fetch';
 import {
     getRoute,
@@ -8,18 +7,16 @@ import {
     getBillingDetailsFromAddress,
     isAddressValid,
     isEmpty,
-    StripeError,
-    getIntermediateAddress
+    StripeError
 } from "../../util";
 import {useStripe} from "@stripe/react-stripe-js";
 import {toCartAddress} from "../util";
-import {__} from "@wordpress/i18n";
 import {usePaymentEvents} from "../../hooks";
 
 export const usePaymentsClient = (
     {
         merchantInfo,
-        paymentRequest,
+        buildPaymentRequest,
         billing,
         shippingData,
         eventRegistration,
@@ -36,6 +33,7 @@ export const usePaymentsClient = (
     const [button, setButton] = useState(null);
     const currentBilling = useRef(billing);
     const currentShipping = useRef(shippingData);
+    const {needsShipping} = shippingData;
     const stripe = useStripe();
     const {addPaymentEvent} = usePaymentEvents({
         billing,
@@ -48,15 +46,16 @@ export const usePaymentsClient = (
     });
 
     const setAddressData = useCallback((paymentData) => {
+        let billingAddress;
         if (paymentData?.paymentMethodData?.info?.billingAddress) {
-            let billingAddress = paymentData.paymentMethodData.info.billingAddress;
+            billingAddress = paymentData.paymentMethodData.info.billingAddress;
             if (isAddressValid(currentBilling.current.billingData, ['phone', 'email']) && isEmpty(currentBilling.current.billingData?.phone)) {
                 billingAddress = {phoneNumber: billingAddress.phoneNumber};
             }
             exportedValues.billingData = currentBilling.current.billingData = toCartAddress(billingAddress, {email: paymentData.email});
         }
         if (paymentData?.shippingAddress) {
-            exportedValues.shippingAddress = toCartAddress(paymentData.shippingAddress);
+            exportedValues.shippingAddress = toCartAddress({...paymentData.shippingAddress, phoneNumber: billingAddress?.phoneNumber});
         }
     }, []);
 
@@ -68,7 +67,7 @@ export const usePaymentsClient = (
     const handleClick = useCallback(async () => {
         onClick();
         try {
-            let paymentData = await paymentsClient.loadPaymentData(paymentRequest);
+            let paymentData = await paymentsClient.loadPaymentData(buildPaymentRequest());
 
             // set the address data so it can be used during the checkout process
             setAddressData(paymentData);
@@ -97,24 +96,28 @@ export const usePaymentsClient = (
     }, [
         stripe,
         paymentsClient,
-        onClick
+        onClick,
+        buildPaymentRequest
     ]);
 
     const createButton = useCallback(async () => {
         try {
-            if (paymentsClient && !button && stripe) {
+            if (paymentsClient && stripe) {
                 await canMakePayment;
-                setButton(paymentsClient.createButton({
+                const button = paymentsClient.createButton({
                     onClick: handleClick,
                     ...getData('buttonStyle')
-                }));
+                });
+                if (getData('buttonShape') === 'rect') {
+                    button.querySelector('button')?.classList?.remove('new_style');
+                }
+                setButton(button);
             }
         } catch (err) {
             console.log(err);
         }
     }, [
         stripe,
-        button,
         paymentsClient,
         handleClick
     ]);
@@ -127,7 +130,7 @@ export const usePaymentsClient = (
                 onPaymentAuthorized: () => Promise.resolve({transactionState: "SUCCESS"})
             }
         }
-        if (paymentRequest.shippingAddressRequired) {
+        if (needsShipping) {
             options.paymentDataCallbacks.onPaymentDataChanged = (paymentData) => {
                 const shipping = currentShipping.current;
                 const {shippingAddress: address, shippingOptionData} = paymentData;
@@ -159,7 +162,7 @@ export const usePaymentsClient = (
             }
         }
         return options;
-    }, [paymentRequest]);
+    }, [needsShipping]);
 
     useEffect(() => {
         setPaymentsClient(new google.payments.api.PaymentsClient(paymentOptions));

@@ -163,6 +163,11 @@ abstract class WC_Stripe_Payment {
 			if ( ! is_wp_error( $result ) ) {
 				WC_Stripe_Utils::add_balance_transaction_to_order( $result->charge, $order, true );
 
+				/**
+				 * @since 3.3.35
+				 */
+				do_action( 'wc_stripe_process_refund_success', $order );
+
 				return true;
 			}
 

@@ -1,25 +1,25 @@
 <?php
+
 defined( 'ABSPATH' ) || exit();
 
 /**
  *
- * @since 3.0.5
+ * @since   3.0.5
  * @package Stripe/Tokens
- * @author Payment Plugins
+ * @author  Payment Plugins
  *
  */
 class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 
-	use WC_Payment_Token_Source_Trait;
+	use WC_Payment_Token_Payment_Method_Trait;
 
 	protected $type = 'Stripe_ACH';
-
-	protected $stripe_payment_type = 'source';
 
 	protected $stripe_data = array(
 		'bank_name'      => '',
 		'routing_number' => '',
 		'last4'          => '',
+		'account_type'   => ''
 	);
 
 	/**
@@ -29,7 +29,10 @@ class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 	 * @see WC_Payment_Token_Stripe::details_to_props()
 	 */
 	public function details_to_props( $details ) {
-		if ( isset( $details['ach_debit'] ) ) {
+		if ( isset( $details['us_bank_account'] ) ) {
+			$bank = $details['us_bank_account'];
+		} elseif ( isset( $details['ach_debit'] ) ) {
+			// Plaid used this property
 			$bank = $details['ach_debit'];
 		} elseif ( $details instanceof \Stripe\BankAccount ) {
 			$bank = $details;
@@ -38,6 +41,7 @@ class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 		$this->set_bank_name( $bank['bank_name'] );
 		$this->set_last4( $bank['last4'] );
 		$this->set_routing_number( $bank['routing_number'] );
+		$this->set_account_type( $bank['account_type'] );
 	}
 
 	public function get_bank_name( $context = 'view' ) {
@@ -52,6 +56,10 @@ class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 		return $this->get_prop( 'last4', $context );
 	}
 
+	public function get_account_type( $context = 'view' ) {
+		return $this->get_prop( 'account_type', $context );
+	}
+
 	public function set_bank_name( $value ) {
 		$this->set_prop( 'bank_name', $value );
 	}
@@ -62,6 +70,10 @@ class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 
 	public function set_last4( $value ) {
 		$this->set_prop( 'last4', $value );
+	}
+
+	public function set_account_type( $value ) {
+		$this->set_prop( 'account_type', $value );
 	}
 
 	public function get_formats() {
@@ -91,4 +103,5 @@ class WC_Payment_Token_Stripe_ACH extends WC_Payment_Token_Stripe {
 	public function get_basic_payment_method_title() {
 		return __( 'Bank Payment', 'woo-stripe-payment' );
 	}
+
 }

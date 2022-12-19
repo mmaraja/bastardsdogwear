@@ -68,7 +68,8 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 
 		<!-- Plugin reset settings form -->
 		<form action="" method="post" id="paoc-reset-sett-form" class="paoc-right paoc-reset-sett-form">
-			<input type="submit" class="button button-primary paoc-confirm paoc-btn paoc-reset-sett paoc-resett-sett-btn paoc-reset-sett" name="popupaoc_reset_settings" id="paoc-reset-sett" value="<?php esc_html_e( 'Reset All Settings', 'popup-anything-on-click' ); ?>" />
+			<input type="submit" class="button button-primary paoc-confirm paoc-btn paoc-reset-sett paoc-resett-sett-btn paoc-reset-sett" name="popupaoc_reset_settings" id="paoc-reset-sett" value="<?php esc_attr_e( 'Reset All Settings', 'popup-anything-on-click' ); ?>" />
+			<?php wp_nonce_field( 'popupaoc_reset_setting', 'popupaoc_reset_sett_nonce' ); ?>
 		</form>
 
 		<form action="options.php" method="POST" id="paoc-settings-form" class="paoc-settings-form">
@@ -76,7 +77,7 @@ if( $sett_tab[ $tab ] == 'Integration' ) {
 			<?php settings_fields( 'popupaoc_plugin_options' ); ?>
 
 			<div class="textright paoc-clearfix">
-				<input type="submit" name="<?php echo esc_attr( $save_btn_name ); ?>" class="button button-primary right paoc-btn paoc-sett-submit paoc-sett-submit" value="<?php esc_html_e('Save Changes', 'popup-anything-on-click'); ?>" />
+				<input type="submit" name="<?php echo esc_attr( $save_btn_name ); ?>" class="button button-primary right paoc-btn paoc-sett-submit paoc-sett-submit" value="<?php esc_attr_e('Save Changes', 'popup-anything-on-click'); ?>" />
 			</div>
 
 			<div class="metabox-holder">

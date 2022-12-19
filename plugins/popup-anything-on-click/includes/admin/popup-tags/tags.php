@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 <!-- Start General Tags -->
 <div class="paoc-popup-tags paoc-general-tags paoc-medium-popup-modal paoc-cnt-wrap">
 	<div class="paoc-popup-modal-act-btn-wrp">
-		<span class="paoc-popup-modal-act-btn paoc-popup-modal-close paoc-popup-close" title="<?php esc_html_e('Close', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-no-alt"></i></span>
+		<span class="paoc-popup-modal-act-btn paoc-popup-modal-close paoc-popup-close" title="<?php esc_attr_e('Close', 'popup-anything-on-click'); ?>"><i class="dashicons dashicons-no-alt"></i></span>
 	</div>
 
 	<div class="paoc-popup-modal-title-wrp">

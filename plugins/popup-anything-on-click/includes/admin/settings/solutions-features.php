@@ -19,26 +19,38 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 		<div class="popupaoc-sf-inr">
 			<!-- Start - Popup Anything - Features -->
 			<div class="popupaoc-features-section popupaoc-team popupaoc-center">
-				<h1 class="popupaoc-heading">Now get best value from <span class="popupaoc-blue">Annual</span> OR <span class="popupaoc-blue">Lifetime</span> deal</h1>
+				<!-- <h1 class="popupaoc-heading">Now get best value from <span class="popupaoc-blue">Annual</span> OR <span class="popupaoc-blue">Lifetime</span> deal</h1>
 				<h2>And Build <span class="bg-highlight">better websites</span>, <span class="bg-highlight">landing pages</span> & <span class="bg-highlight">conversion flow</span></h2>
 				<h2>With <span class="popupaoc-blue">35+ plugins</span>, <span class="popupaoc-blue">2000+ templates</span> & $600 saving in <span class="popupaoc-blue">Essential Plugin Bundle</span></h2>
-				<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now This Deal</a>
+				<a href="<?php //echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now This Deal</a> -->
+			
+			<!-- <h1 class="popupaoc-heading">Only <span class="popupaoc-blue">November 2022</span> Deal <span class="popupaoc-blue">40% OFF</span></h1>
+				<h2>Build <span class="bg-highlight">better websites</span>, <span class="bg-highlight">landing pages</span> & <span class="bg-highlight">conversion flow</span></h2>
+				<h2>With <span class="popupaoc-blue">35+ plugins</span>, <span class="popupaoc-blue">2000+ templates</span> & $600 saving in <span class="popupaoc-blue">Essential Plugin Bundle</span></h2>
+				<h3><span style="text-decoration:line-through; color: #FF1000;">$299</span> <span class="popupaoc-blue" style="font-size:30px;">$179</span> Unlimited Site License</h3>
+				<a href="<?php //echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> View Essential Plugin Bundle Deal</a>
+				<h4 style="font-weight: 700; font-size: 13px; color: #000;">(One time <span class="bg-highlight">Payment</span> & <span class="bg-highlight">Lifetime</span> update)</h4> -->
+				
+				<p style="font-weight: bold !important; font-size:20px !important;"><span style="color: #50c621;">Essential Plugin Bundle</span> + Any Leading Builders (Avada / Elementor / Divi /<br> VC-WPBakery / Site Origin / Beaver) = <span style="background: #50c621;color: #fff;padding: 2px 10px;">WordPress Magic</span></p>
+				<h4 style="color: #333; font-size: 14px; font-weight: 700;">Over 15K+ Customers Using <span style="color: #50c621 !important;">Essential Plugin Bundle</span></h4>
+				<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> View Essential Plugin Bundle</a>
+
 			</div>			
 			
 			<div class="popupaoc-features-section popupaoc-team popupaoc-center">
-				<h1 class="popupaoc-heading">Powerful Team Behind <span class="popupaoc-blue">PopupAnything</span></h1>
+				<h1 class="popupaoc-heading">Powerful Team Behind <span class="popupaoc-blue">PopupAnything</span> Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></h1>
 					<div class="popupaoc-sf-cont">Alone we can do so little; together we can do so much. Our love language is helping small businesses grow and compete with the big guys.  Every time you see growth in your business, our little hearts go flip-flop!</div>
 					<p></p>
-					<div class="popupaoc-sf-cont">This is why I wanted to introduce you to <span class="popupaoc-blue">Anoop Ranawat & Team</span> at EssentialPlugin.com</div>
+					<div class="popupaoc-sf-cont">This is why I wanted to introduce you to <span class="popupaoc-blue">Essential Plugin Team</span> at EssentialPlugin.com</div>
 					<img class="popupaoc-image" src="<?php echo POPUPAOC_URL; ?>/assets/images/wpos-team.png" alt="wpos team" />
 			</div>
-			<h1 class="popupaoc-heading">Boost Your Sales and Conversions with <span class="popupaoc-blue">PopupAnything</span></h1>
+			<h1 class="popupaoc-heading">Boost Your Sales and Conversions with <span class="popupaoc-blue">PopupAnything</span> Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></h1>
 			<!-- Start - Welcome Box -->
 			<div class="popupaoc-sf-welcome-wrap">
 				<div class="popupaoc-sf-welcome-inr popupaoc-center">					
 						<h5 class="popupaoc-sf-content">Instantly <span class="popupaoc-blue">grow your email list, get more leads and increase sales</span> with the #1 most powerful conversion optimization toolkit in the world.</h5>
 						<h5 class="popupaoc-sf-content"><span class="popupaoc-blue">50,000+ </span>websites are using <span class="popupaoc-blue">PopupAnything</span> to turn their traffic into subscribers, leads and sales.</h5>
-						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a> <br /><b>OR</b> <br /><a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
+						<a href="<?php echo esc_url( $popup_add_link ); ?>" class="popupaoc-sf-btn">Launch Popup With Free Features</a> <br /><b>OR</b> <br /><a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> View Essential Plugin Bundle</a>
 						<div class="popupaoc-rc-wrap">
 							<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 								<div class="popupaoc-rc-icon">
@@ -141,7 +153,8 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 							Popup Live Preview</li>
 						</ul>
 					</div>
-					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
+					<p style="font-size: 14px;"><span class="popupaoc-blue">PopupAnything </span>Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></p>
+					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>" target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span>  View Essential Plugin Bundle</a>
 					<div class="popupaoc-rc-wrap">
 						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">
@@ -168,7 +181,7 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 			
 			<!-- Start - Industry Wise Solutions -->
 			<div class="popupaoc-solutions-section popupaoc-top-rsn popupaoc-left">
-				<h1 class="popupaoc-heading">Top 4 Reasons Why People Love <span class="popupaoc-blue">PopupAnything</span></h1>
+				<h1 class="popupaoc-heading">Top 4 Reasons Why People Love <span class="popupaoc-blue">PopupAnything</span> Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></h1>
 				<div class="popupaoc-sf-cont popupaoc-center">Here's why business owners <span class="popupaoc-blue">love PopupAnything</span>, and you will too!</div>
 				<div class="popupaoc-solutions-section-inr">
 					<div class="popupaoc-solutions-box-wrap">
@@ -231,7 +244,8 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 					</div>
 				</div>
 				<div class="popupaoc-center">
-					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
+				<p style="font-size: 14px;"><span class="popupaoc-blue">PopupAnything </span>Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></p>
+					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span>  View Essential Plugin Bundle</a>
 				</div>	
 					<div class="popupaoc-rc-wrap">
 						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
@@ -273,7 +287,7 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 			<!-- Start - Testimonial Section -->
 			<div class="popupaoc-sf-testimonial-wrap">
 				<div class="paoc-center popupaoc-features-ttl">
-					<h1 class="popupaoc-heading">Looking for a Reason to Use <span class="popupaoc-blue">PopupAnything</span>?</h1>	
+					<h1 class="popupaoc-heading">Looking for a Reason to Use <span class="popupaoc-blue">Essential Plugin</span> with <span class="popupaoc-blue">PopupAnything</span>?</h1>	
 					<div class="popupaoc-sf-cont popupaoc-center"> Here are 40+...</div>	
 										
 				</div>
@@ -317,7 +331,9 @@ $popup_add_link = add_query_arg( array( 'post_type' => POPUPAOC_POST_TYPE ), adm
 								<div class="popupaoc-testimonial-rating"><img src="<?php echo POPUPAOC_URL; ?>/assets/images/rating.png" /></div>
 						</div>
 					</div>
-					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a> OR <a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> Grab Now With Essential Bundle</a>
+					<a href="https://wordpress.org/support/plugin/popup-anything-on-click/reviews/?filter=5" target="_blank" class="popupaoc-sf-btn"><span class="dashicons dashicons-star-filled"></span> View All Reviews</a>
+					<p style="font-size: 14px;"><span class="popupaoc-blue">PopupAnything </span>Including in <span class="popupaoc-blue">Essential Plugin Bundle</span></p>	
+					<a href="<?php echo POPUPAOC_PLUGIN_BUNDLE_LINK; ?>"  target="_blank" class="popupaoc-sf-btn popupaoc-sf-btn-orange"><span class="dashicons dashicons-cart"></span> View Essential Plugin Bundle</a>
 					<div class="popupaoc-rc-wrap">
 						<div class="popupaoc-rc-inr popupaoc-rc-bg-box">
 							<div class="popupaoc-rc-icon">

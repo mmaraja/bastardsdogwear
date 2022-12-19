@@ -2,8 +2,8 @@
 Contributors: wponlinesupport, anoopranawat, pratik-jain, piyushpatel123, ridhimashukla, patelketan
 Tags:  modal popup, popup, email marketing, modal, page load, newsletter, marketing popup, exit popup, full-screen popup, HTML popup, image popup, page load popup, popup on click, modal popup on click, full-screen popup on click, on-click popup
 Requires at least: 5.2
-Tested up to: 6.0
-Stable tag: 2.1.9
+Tested up to: 6.1.1
+Stable tag: 2.2.4
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -15,10 +15,10 @@ Modal popup on a page load or by clicking link, image and button. Create popups,
 
 [Popup anything](https://www.essentialplugin.com/wordpress-plugin/popup-anything-click/?utm_source=WP&utm_medium=Popup-Anything&utm_campaign=Read-Me) work with
 
-* On Page Load,
-* Link Click,
-* Image Click or
-* Button Click.
+* Popup on Page Load
+* Popup on Link Click
+* Popup on Image Click
+* Popup on Button Click
 * Element Click Popup
 * Inactivity Popup
 * Scroll Up & Down Popup
@@ -140,6 +140,19 @@ You can use <code>.paoc-popup-btn</code> class to change the button design as pe
 7) General Settings
 
 == Changelog ==
+
+= 2.2.4 (13, Dec 2022) =
+* [*] Fixed - Fixed one undefined PHP variable warning when we preview a 'draft' popup.
+
+= 2.2.3 (09, Dec 2022) =
+* [*] Tested up to: 6.1.1
+
+= 2.2.2 (23, Nov 2022) =
+* [*] Update - Improve escaping functions for better security.
+* [*] Update - Prevent CSRF attack for Popup reset settings.
+
+= 2.2.1 (03, Nov 2022) =
+* [*] Tested up to: 6.1
 
 = 2.2 (12, July 2022) =
 * [*] Fixed - Fixed Popup Custom CSS setting is not going to be save.

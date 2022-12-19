@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Popup Anything - A Marketing Popup\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2022-07-05 12:22+0000\n"
+"POT-Creation-Date: 2022-11-21 12:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,12 +16,12 @@ msgstr ""
 "X-Loco-Version: 2.5.4; wp-5.8.1\n"
 "X-Domain: popup-anything-on-click"
 
-#: includes/popupaoc-functions.php:651
+#: includes/popupaoc-functions.php:627
 #, php-format
 msgid "100% secure your website."
 msgstr ""
 
-#: includes/popupaoc-functions.php:595
+#: includes/popupaoc-functions.php:571
 msgid "404 Error Page"
 msgstr ""
 
@@ -84,12 +84,12 @@ msgstr ""
 msgid "After X times"
 msgstr ""
 
-#: includes/popupaoc-functions.php:582
+#: includes/popupaoc-functions.php:558
 #: includes/admin/metabox/advance-metabox.php:77
 msgid "All"
 msgstr ""
 
-#: includes/popupaoc-functions.php:596
+#: includes/popupaoc-functions.php:572
 msgid "All Archives"
 msgstr ""
 
@@ -113,7 +113,7 @@ msgstr ""
 msgid "API Key"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:211
+#: includes/admin/class-popupaoc-admin.php:176
 msgid "Appear On"
 msgstr ""
 
@@ -390,14 +390,12 @@ msgstr ""
 msgid "Clear"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:134
-#: includes/admin/paoc-db-upgrade.php:236
+#: includes/popupaoc-functions.php:672 includes/admin/paoc-db-upgrade.php:236
 #: includes/shortcode/popupaoc-popup-shortcode.php:88
 msgid "Click Here!!!"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:136
-#: includes/admin/paoc-db-upgrade.php:237
+#: includes/popupaoc-functions.php:674 includes/admin/paoc-db-upgrade.php:237
 #: includes/shortcode/popupaoc-popup-shortcode.php:62
 msgid "Click Me!!!"
 msgstr ""
@@ -420,10 +418,6 @@ msgstr ""
 
 #: includes/popupaoc-functions.php:288
 msgid "Collect Lead"
-msgstr ""
-
-#: includes/admin/settings/premium.php:92
-msgid "Compare \"Popup Anything - A Marketing Popup\" Free VS Pro"
 msgstr ""
 
 #: includes/admin/metabox/post-sett-metabox.php:45
@@ -875,7 +869,7 @@ msgstr ""
 msgid "Form Fields"
 msgstr ""
 
-#: includes/popupaoc-functions.php:593
+#: includes/popupaoc-functions.php:569
 msgid "Front Page"
 msgstr ""
 
@@ -903,7 +897,7 @@ msgstr ""
 msgid "General Tags"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:209
+#: includes/admin/class-popupaoc-admin.php:174
 msgid "Goal"
 msgstr ""
 
@@ -1010,7 +1004,7 @@ msgstr ""
 msgid "Integration Settings"
 msgstr ""
 
-#: popup-anything-on-click.php:203
+#: popup-anything-on-click.php:205
 #, php-format
 msgid ""
 "It looks like you had PRO version %s of this plugin activated. To avoid "
@@ -1079,7 +1073,7 @@ msgstr ""
 msgid "Main Heading Font Size"
 msgstr ""
 
-#: includes/popupaoc-functions.php:648
+#: includes/popupaoc-functions.php:624
 msgid "Main Heading Goes Here"
 msgstr ""
 
@@ -1128,7 +1122,7 @@ msgstr ""
 msgid "No Popup found in trash"
 msgstr ""
 
-#: includes/popupaoc-functions.php:650
+#: includes/popupaoc-functions.php:626
 msgid "No, thank you. I do not want."
 msgstr ""
 
@@ -1228,7 +1222,7 @@ msgstr ""
 msgid "Popup Anything - Settings"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:196
+#: includes/admin/class-popupaoc-admin.php:161
 msgid "Popup Anything database proccess has been updated."
 msgstr ""
 
@@ -1248,7 +1242,7 @@ msgid ""
 msgstr ""
 
 #: includes/admin/metabox/post-sett-metabox.php:157
-#: includes/admin/preview/preview.php:36
+#: includes/admin/preview/preview.php:35
 msgid "Popup Anything On Click - Preview"
 msgstr ""
 
@@ -1365,7 +1359,7 @@ msgstr ""
 msgid "Positive Number"
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:354
+#: includes/admin/class-popupaoc-admin.php:309
 #: includes/admin/settings/display-rule-settings.php:22
 msgid "Post"
 msgstr ""
@@ -1387,7 +1381,7 @@ msgstr ""
 msgid "Preview Popup"
 msgstr ""
 
-#: includes/popupaoc-functions.php:643
+#: includes/popupaoc-functions.php:619
 msgid "Primary Content – Primary Content Goes Here."
 msgstr ""
 
@@ -1470,7 +1464,7 @@ msgstr ""
 #: includes/admin/settings/display-rule-settings.php:188
 #: includes/admin/settings/general-settings.php:65
 #: includes/admin/settings/integration-settings.php:43
-#: includes/admin/settings/settings.php:79
+#: includes/admin/settings/settings.php:80
 msgid "Save Changes"
 msgstr ""
 
@@ -1486,7 +1480,7 @@ msgstr ""
 msgid "Search popup by its name or ID"
 msgstr ""
 
-#: includes/popupaoc-functions.php:594
+#: includes/popupaoc-functions.php:570
 msgid "Search Results"
 msgstr ""
 
@@ -1673,7 +1667,7 @@ msgid ""
 "preview restriction."
 msgstr ""
 
-#: includes/admin/preview/preview.php:50
+#: includes/admin/preview/preview.php:49
 msgid ""
 "Sorry, Some of the actions like link visit, form submission and etc will not "
 "work in popup preview."
@@ -1704,7 +1698,7 @@ msgstr ""
 msgid "Sub Heading Font Size"
 msgstr ""
 
-#: includes/popupaoc-functions.php:649
+#: includes/popupaoc-functions.php:625
 msgid "Sub Heading Goes Here"
 msgstr ""
 
@@ -1725,7 +1719,7 @@ msgstr ""
 msgid "Target URL"
 msgstr ""
 
-#: popup-anything-on-click.php:202
+#: popup-anything-on-click.php:204
 #, php-format
 msgid "Thank you for activating %s"
 msgstr ""
@@ -1742,7 +1736,7 @@ msgstr ""
 msgid "Total %d Popup found for update."
 msgstr ""
 
-#: includes/admin/class-popupaoc-admin.php:210
+#: includes/admin/class-popupaoc-admin.php:175
 msgid "Type"
 msgstr ""
 
@@ -1847,7 +1841,7 @@ msgstr ""
 msgid "When Page Scroll UP (PRO)"
 msgstr ""
 
-#: includes/popupaoc-functions.php:597
+#: includes/popupaoc-functions.php:573
 msgid "Whole Site"
 msgstr ""
 
